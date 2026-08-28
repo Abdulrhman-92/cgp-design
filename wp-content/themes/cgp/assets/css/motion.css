@@ -1,0 +1,140 @@
+/* CGP Motion — ALL shared animations (single source of truth).
+   Every animation that repeats site-wide lives here. No duplication in sections.
+   Keyframes: values in tokens.css; classes here. Durations/easings from tokens. */
+
+/* ============ Entrance — fade in ============ */
+/* 0.6s expo, translateY 15px — hero/panel entrance */
+.cgp-fade-in {
+  animation: cgp-fade-in 0.6s var(--cgp-ease-expo) both;
+}
+
+/* ============ Entrance — reveal + stagger ============ */
+/* Hidden until .cgp-reveal-visible added by main.js (IntersectionObserver).
+   Stagger via inline transition-delay; .cgp-stagger below keeps keyframe stagger. */
+.cgp-reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 0.4s var(--cgp-ease-expo),
+    transform 0.4s var(--cgp-ease-expo);
+}
+
+.cgp-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cgp-stagger > * {
+  animation: cgp-reveal 0.4s var(--cgp-ease-expo) both;
+}
+
+.cgp-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.cgp-stagger > *:nth-child(2) { animation-delay: 40ms; }
+.cgp-stagger > *:nth-child(3) { animation-delay: 80ms; }
+.cgp-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.cgp-stagger > *:nth-child(5) { animation-delay: 160ms; }
+.cgp-stagger > *:nth-child(6) { animation-delay: 200ms; }
+
+/* ============ Spin — slow ============ */
+/* 60s linear — hotwheel inner ring */
+.cgp-spin-slow {
+  animation: cgp-spin-slow 60s linear infinite;
+}
+
+/* ============ Scanline ============ */
+/* 3s linear — terminal scanner */
+.cgp-scanline {
+  animation: cgp-scanline 3s linear infinite;
+}
+
+/* ============ Custom cursor ============ */
+/* Fixed, transform follow (--mx/--my set by JS), mix-blend-difference */
+.cgp-cursor-dot,
+.cgp-cursor-ring {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
+  transform: translate(calc(var(--mx, 0px) - 50%), calc(var(--my, 0px) - 50%));
+}
+
+.cgp-cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cgp-accent-bright);
+}
+
+.cgp-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--cgp-accent-bright);
+  transition:
+    width var(--cgp-motion-fast) var(--cgp-ease-expo),
+    height var(--cgp-motion-fast) var(--cgp-ease-expo),
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* Grow ring over interactive elements (a, button, [data-cursor]) */
+.cgp-cursor-ring-grow {
+  width: 56px;
+  height: 56px;
+}
+
+/* ============ 3D tilt ============ */
+/* Perspective + rotateX/rotateY via --tilt-x/--tilt-y (set by JS) */
+.cgp-tilt {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+  will-change: transform;
+}
+
+/* ============ Magnetic ============ */
+/* Translate via --mx/--my (set by JS) */
+.cgp-magnetic {
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+  will-change: transform;
+}
+
+/* ============ Count up ============ */
+/* cgp-count-up: JS-only (IntersectionObserver + rAF). No CSS needed. */
+
+/* ============ Reduced motion ============ */
+/* Disable ALL animations, transitions and glows */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cgp-fade-in,
+  .cgp-reveal,
+  .cgp-reveal-visible,
+  .cgp-stagger > *,
+  .cgp-spin-slow,
+  .cgp-scanline,
+  .cgp-tilt,
+  .cgp-magnetic,
+  .animate-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cgp-cursor-dot,
+  .cgp-cursor-ring {
+    display: none;
+  }
+
+  /* Glows off */
+  .cgp-glow-text,
+  .cgp-btn-primary:hover,
+  .cgp-btn-ghost:hover,
+  .cgp-btn-outline:hover {
+    text-shadow: none;
+    box-shadow: none;
+  }
+}

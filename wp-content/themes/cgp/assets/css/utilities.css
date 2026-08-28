@@ -1,0 +1,308 @@
+/* CGP Utilities — composed classes from docs/design-system.md section 8.
+   All values reference tokens.css (single source of truth).
+   Logical properties only (AGENTS.md rule 14). */
+
+/* ============ Eyebrow (signature pattern) ============ */
+.cgp-eyebrow {
+  display: block;
+  margin-block-end: var(--cgp-space-4);
+  font-size: var(--cgp-text-xs);
+  font-weight: 600;
+  letter-spacing: var(--cgp-tracking-03em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+/* ============ Glass ============ */
+.cgp-glass {
+  background: var(--cgp-glass-bg);
+  -webkit-backdrop-filter: blur(var(--cgp-glass-blur));
+  backdrop-filter: blur(var(--cgp-glass-blur));
+  border: var(--cgp-glass-border);
+}
+
+/* ============ Nav — floating island (canonical, home.html) ============ */
+.cgp-nav-island {
+  background: var(--cgp-nav-bg);
+  -webkit-backdrop-filter: blur(var(--cgp-glass-blur));
+  backdrop-filter: blur(var(--cgp-glass-blur));
+  border: 1px solid var(--cgp-nav-border);
+  box-shadow: var(--cgp-glow-black);
+}
+
+/* scrolled state: bg #050505 at 0.9 + blur 10px + bottom border (fixed-top variant) */
+.cgp-nav-scrolled {
+  background: var(--cgp-nav-scrolled-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-block-end: 1px solid var(--cgp-border);
+}
+
+/* ============ Glow text ============ */
+.cgp-glow-text {
+  text-shadow: var(--cgp-glow-text);
+}
+
+/* ============ Containers ============ */
+.cgp-container-sm {
+  max-width: var(--cgp-container-sm);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-md {
+  max-width: var(--cgp-container-md);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-lg {
+  max-width: var(--cgp-container-lg);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-xl {
+  max-width: var(--cgp-container-xl);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+/* ============ Sections ============ */
+.cgp-section {
+  padding-block: var(--cgp-space-20); /* py-20 (80px) — reduced from py-32 per user feedback */
+}
+
+.cgp-section-secondary {
+  padding-block: var(--cgp-space-16); /* py-16 (64px) — reduced from py-24 per user feedback */
+}
+
+/* ============ Buttons (one component, 5 variants) ============ */
+.cgp-btn-primary,
+.cgp-btn-outline,
+.cgp-btn-ghost,
+.cgp-btn-white,
+.cgp-btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cgp-space-2);
+  padding-block: var(--cgp-space-3);
+  padding-inline: var(--cgp-space-6);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--cgp-radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo),
+    transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* primary: filled cyan pill, black text, glow hover, -translate-y-1 */
+.cgp-btn-primary {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+.cgp-btn-primary:hover {
+  background: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-strong);
+  transform: translateY(-4px);
+}
+
+/* outline: cyan border, cyan text, hover fills cyan */
+.cgp-btn-outline {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent);
+}
+
+.cgp-btn-outline:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* ghost: bg-cyan-500/10 + cyan border/50, hover fills */
+.cgp-btn-ghost {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.5);
+  color: var(--cgp-accent);
+}
+
+.cgp-btn-ghost:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* white: filled white, hover fills cyan (form submit) */
+.cgp-btn-white {
+  background: #ffffff;
+  color: #000000;
+}
+
+.cgp-btn-white:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* link: underline border-b zinc-500, cyan hover */
+.cgp-btn-link {
+  padding: 0;
+  border-radius: 0;
+  border-block-end: 1px solid var(--cgp-text-muted);
+  color: var(--cgp-text-secondary);
+}
+
+.cgp-btn-link:hover {
+  border-block-end-color: var(--cgp-accent);
+  color: var(--cgp-accent);
+}
+
+/* ============ Cards ============ */
+.cgp-card {
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+}
+
+.cgp-card-hover {
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-card-hover:hover {
+  border-color: var(--cgp-accent);
+}
+
+/* ============ Forms — underline input ============ */
+.cgp-input-underline {
+  width: 100%;
+  padding-block: 10px;
+  background: transparent;
+  border: 0;
+  border-block-end: 1px solid var(--cgp-text-disabled);
+  border-radius: var(--cgp-radius-none);
+  color: var(--cgp-text-primary);
+}
+
+.cgp-input-underline:focus {
+  outline: none;
+  border-block-end-color: var(--cgp-accent);
+}
+
+/* ============ Mono label (// NODE 01 style) ============ */
+.cgp-mono-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-accent);
+}
+
+/* ============ Media — image container (canonical, home.html) ============ */
+.cgp-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.cgp-image-container img {
+  transition: transform var(--cgp-motion-image) ease;
+}
+
+.cgp-image-container:hover img {
+  transform: scale(var(--cgp-image-hover-scale));
+}
+
+.cgp-image-overlay {
+  background: var(--cgp-image-fade);
+  opacity: 0;
+  transition: opacity var(--cgp-motion-fast) ease;
+}
+
+.cgp-image-container:hover .cgp-image-overlay {
+  opacity: 1;
+}
+
+/* ============ Media — archive reveal (3.html) ============ */
+.cgp-archive-media {
+  opacity: 0.4;
+  mix-blend-mode: luminosity;
+  transition:
+    opacity var(--cgp-motion-image) ease,
+    mix-blend-mode var(--cgp-motion-image) ease,
+    transform var(--cgp-motion-image) ease;
+}
+
+.cgp-archive-card:hover .cgp-archive-media {
+  opacity: 1;
+  mix-blend-mode: normal;
+  transform: scale(var(--cgp-archive-reveal-scale));
+}
+
+/* Touch devices: no hover state, keep archive images visible */
+@media (hover: none) {
+  .cgp-archive-media {
+    opacity: 0.7;
+    mix-blend-mode: normal;
+  }
+}
+
+/* ============ Terminal — grid overlay (CGP configuration.html) ============ */
+.cgp-bg-grid {
+  background-size: var(--cgp-grid-size) var(--cgp-grid-size);
+  background-image:
+    linear-gradient(to right, var(--cgp-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cgp-grid-line) 1px, transparent 1px);
+}
+
+/* ============ Terminal — custom scrollbar (3px cyan) ============ */
+.cgp-scrollbar::-webkit-scrollbar {
+  width: var(--cgp-scrollbar-size);
+}
+
+.cgp-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cgp-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--cgp-scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.cgp-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--cgp-scrollbar-thumb-hover);
+}
+
+/* ============ Ambient glow blobs (3.html, CGP configuration.html) ============ */
+.cgp-ambient-glow {
+  position: fixed;
+  width: var(--cgp-glow-ambient-size);
+  height: var(--cgp-glow-ambient-size);
+  border-radius: 50%;
+  filter: blur(var(--cgp-glow-ambient-blur));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ Selection card state (3.html, 111.html) ============ */
+.cgp-selection-card {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* ============ Accessibility — screen reader only ============ */
+.cgp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

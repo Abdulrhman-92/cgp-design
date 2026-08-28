@@ -1,0 +1,169 @@
+/**
+ * CGP Theme JS — shared kinetic layer + nav state (vanilla, zero deps).
+ * Alpine handles section interactivity separately; motion modules skip
+ * under prefers-reduced-motion.
+ */
+(function () {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. Custom cursor (fine pointers only)
+    if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) initCursor();
+    // 2. Magnetic buttons
+    if (!reducedMotion) initMagnetic();
+    // 3. 3D tilt
+    if (!reducedMotion) initTilt();
+    // 4. Scroll reveals (class toggle only — CSS owns the transition)
+    initReveals();
+    // 5. Count-up (instant when reduced motion)
+    initCountUp(reducedMotion);
+    // 6. Nav scroll state
+    initNavScroll();
+  });
+
+  /* 1. Custom cursor — dot direct, ring lerps (0.2). Position via --mx/--my. */
+  function initCursor() {
+    var dot = document.createElement('div');
+    var ring = document.createElement('div');
+    dot.className = 'cgp-cursor-dot';
+    ring.className = 'cgp-cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    var x = -100, y = -100, rx = -100, ry = -100;
+
+    document.addEventListener('mousemove', function (e) {
+      x = e.clientX; y = e.clientY;
+    }, { passive: true });
+
+    // Grow ring over interactive elements
+    var HOVER = 'a, button, [data-cursor]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(HOVER)) ring.classList.add('cgp-cursor-ring-grow');
+    }, { passive: true });
+    document.addEventListener('mouseout', function (e) {
+      var to = e.relatedTarget;
+      if (!to || !to.closest || !to.closest(HOVER)) ring.classList.remove('cgp-cursor-ring-grow');
+    }, { passive: true });
+
+    (function loop() {
+      rx += (x - rx) * 0.2;
+      ry += (y - ry) * 0.2;
+      dot.style.setProperty('--mx', x + 'px');
+      dot.style.setProperty('--my', y + 'px');
+      ring.style.setProperty('--mx', rx + 'px');
+      ring.style.setProperty('--my', ry + 'px');
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* 2. Magnetic — translate up to 6px toward pointer via --mx/--my. */
+  function initMagnetic() {
+    var MAX = 6;
+    document.querySelectorAll('[data-magnetic]').forEach(function (el) {
+      el.addEventListener('mousemove', function (e) {
+        var rect = el.getBoundingClientRect();
+        var hw = rect.width / 2, hh = rect.height / 2;
+        el.style.setProperty('--mx', clamp((e.clientX - rect.left - hw) / hw * MAX, MAX) + 'px');
+        el.style.setProperty('--my', clamp((e.clientY - rect.top - hh) / hh * MAX, MAX) + 'px');
+      }, { passive: true });
+      el.addEventListener('mouseleave', function () {
+        el.style.setProperty('--mx', '0px');
+        el.style.setProperty('--my', '0px');
+      });
+    });
+  }
+
+  /* 3. 3D tilt — max 6deg rotateX/rotateY via --tilt-x/--tilt-y. */
+  function initTilt() {
+    var MAX = 6;
+    document.querySelectorAll('[data-tilt]').forEach(function (el) {
+      el.addEventListener('mousemove', function (e) {
+        var rect = el.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width;
+        var py = (e.clientY - rect.top) / rect.height;
+        el.style.setProperty('--tilt-x', ((0.5 - py) * 2 * MAX) + 'deg');
+        el.style.setProperty('--tilt-y', ((px - 0.5) * 2 * MAX) + 'deg');
+      }, { passive: true });
+      el.addEventListener('mouseleave', function () {
+        el.style.setProperty('--tilt-x', '0deg');
+        el.style.setProperty('--tilt-y', '0deg');
+      });
+    });
+  }
+
+  /* 4. Scroll reveals — add .cgp-reveal-visible once in view. */
+  function initReveals() {
+    var items = document.querySelectorAll('.cgp-reveal');
+    if (!items.length || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('cgp-reveal-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, OPTS);
+
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* 5. Count-up — 0 → data-count over 1200ms easeOutExpo; instant if reduced. */
+  function initCountUp(reducedMotion) {
+    var items = document.querySelectorAll('[data-count]');
+    if (!items.length || !('IntersectionObserver' in window)) return;
+
+    function animate(el, target, suffix) {
+      var start = null;
+      function ease(t) {
+        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      }
+      function step(ts) {
+        if (start === null) start = ts;
+        var t = Math.min((ts - start) / 1200, 1);
+        el.textContent = Math.round(ease(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var m = String(el.dataset.count).match(/^([\d.]+)(.*)$/);
+        var target = m ? parseFloat(m[1]) : 0;
+        var suffix = m ? m[2] : '';
+        if (reducedMotion) el.textContent = target + suffix;
+        else animate(el, target, suffix);
+        io.unobserve(el);
+      });
+    }, OPTS);
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* 6. Nav scroll — toggle .cgp-nav-scrolled past 50px (rAF-throttled). */
+  function initNavScroll() {
+    var nav = document.querySelector('[data-nav-island]');
+    if (!nav) return;
+    var ticking = false;
+    function update() {
+      nav.classList.toggle('cgp-nav-scrolled', window.scrollY > 50);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) ticking = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  }
+
+  /* Shared observer options (reveals + count-up). */
+  var OPTS = { threshold: 0.15, rootMargin: '0px 0px -10% 0px' };
+
+  /* Clamp to ±max. */
+  function clamp(v, max) {
+    return Math.max(-max, Math.min(max, v));
+  }
+})();

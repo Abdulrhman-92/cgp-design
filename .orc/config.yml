@@ -1,0 +1,33 @@
+# ============================================
+# Sub-agent Configuration
+# ============================================
+
+sub_agent:
+  execution_mode: "use_subagents" # Built-in dispatch tool (no pi CLI configured)
+  cli_command: "pi"
+  model_tiers:
+    high: "opencode-go/deepseek-v4-pro"
+    medium: "opencode-go/deepseek-v4-flash"
+    low: "opencode-go/deepseek-v4-flash"
+  default_tier: "medium"
+
+# ============================================
+# Project-Specific Quality Gates
+# ============================================
+
+quality_gates:
+  require_tests: false
+  require_lint: true
+  require_types: false
+  require_build: true
+  require_a11y_check: true # User-facing UI
+
+# ============================================
+# Consultation Mode Configuration
+# ============================================
+
+consultation:
+  execution_mode: "use_subagents"
+  default_agents: 3
+  max_rounds: 5
+  model: "same_as_orchestrator"

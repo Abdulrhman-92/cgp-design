@@ -1,0 +1,191 @@
+/* CGP Base — typographic scale, body defaults, focus & selection.
+   Shared rules for every page. Values reference tokens.css ONLY (single source of truth).
+   Logical properties only. */
+
+/* ============ Fonts (self-hosted, font-display: swap) ============ */
+/* One file per weight — family-weight.woff2 convention. Critical weights are
+   preloaded in index.html; swap keeps text visible while fonts load. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/inter-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/inter-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/inter-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/space-grotesk-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/space-grotesk-700.woff2') format('woff2');
+}
+
+/* ============ Document ============ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--cgp-space-24); /* anchor offset for fixed nav island */
+}
+
+body {
+  font-family: var(--cgp-font-body);
+  font-size: var(--cgp-text-base);
+  line-height: 1.6;
+  color: var(--cgp-text-primary);
+  background-color: var(--cgp-bg-page);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* marquee + ambient glows must never scroll horizontally */
+}
+
+/* ============ Body texture overlay (breaks flat black — user idea) ============ */
+/* Subtle terminal grid + film-grain noise + vignette over the whole page.
+   Fixed, non-interactive. The noise is an inline SVG (feTurbulence) data URI. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--cgp-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cgp-grid-line) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: var(--cgp-grid-size) var(--cgp-grid-size), var(--cgp-grid-size) var(--cgp-grid-size), 160px 160px;
+  opacity: 0.9;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* ============ Typographic scale (h1-h6) ============ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--cgp-font-display);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+}
+
+/* h1 — hero: 72px mobile / 128px md+ (media query lives in tokens.css) */
+h1 {
+  font-size: var(--cgp-text-display-1);
+  text-transform: uppercase;
+  letter-spacing: var(--cgp-tracking-tighter);
+  line-height: 1.05;
+}
+
+/* h2 — section titles: 36px */
+h2 {
+  font-size: var(--cgp-text-display-4);
+  line-height: 1.1;
+}
+
+/* h3 — card titles: 24px */
+h3 {
+  font-size: var(--cgp-text-h3);
+}
+
+/* h4 — card sub-titles: 20px */
+h4 {
+  font-size: var(--cgp-text-h4);
+}
+
+/* h5 — detail headings: 18px */
+h5 {
+  font-size: var(--cgp-text-lg);
+}
+
+/* h6 — small headings: 16px */
+h6 {
+  font-size: var(--cgp-text-base);
+}
+
+/* ============ Selection ============ */
+::selection {
+  background: var(--cgp-selection-bg);
+  color: var(--cgp-selection-text);
+}
+
+/* ============ Focus ============ */
+:focus-visible {
+  outline: 2px solid var(--cgp-accent);
+  outline-offset: 2px;
+}
+
+/* ============ Skip link ============ */
+/* Visually hidden until keyboard focus */
+.cgp-skip-link {
+  position: absolute;
+  inset-block-start: var(--cgp-space-2);
+  inset-inline-start: var(--cgp-space-2);
+  z-index: 100;
+  padding-block: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  background: var(--cgp-accent);
+  color: #000000; /* black on cyan, matches .cgp-btn-primary */
+  border-radius: var(--cgp-radius-full);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ============ Utilities ============ */
+/* Alpine: hide elements until JS initializes. Also the no-JS fallback —
+   with scripts disabled, x-cloak elements stay hidden (boot overlay never shows). */
+[x-cloak] {
+  display: none !important;
+}
+
+/* Hero: full dynamic viewport height */
+.cgp-min-h-dvh {
+  min-height: 100dvh;
+}

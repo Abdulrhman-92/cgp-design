@@ -1,0 +1,6 @@
+/* CGP Tailwind input — compiled locally (no CDN).
+   Source config: wp-content/themes/cgp/tailwind.config.js (single source of truth).
+   Output: design/v1/css/tailwind.css (built by npx tailwindcss). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,12 @@
+/* ============================================================
+   CGP design/v1 — section-specific styles
+   ------------------------------------------------------------
+   Shared rules (tokens, base, utilities, motion) live in the
+   theme: wp-content/themes/cgp/assets/css/ — do NOT duplicate
+   them here.
+
+   Scope: section-specific styles ONLY — hotwheel, telemetry,
+   glows, and other one-off section treatments.
+
+   Use tokens via var(--cgp-*) — never hardcode values.
+   ============================================================ */

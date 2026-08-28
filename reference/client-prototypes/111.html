@@ -1,0 +1,225 @@
+import React, { useState, useMemo } from 'react';
+import { PC_PARTS } from '../constants';
+import { PCPart, BuildConfiguration } from '../types';
+import { Check, Info, ShoppingCart, Trash2, Droplets, Zap, ShieldCheck } from 'lucide-react';
+
+const Configurator: React.FC = () => {
+  const [config, setConfig] = useState<BuildConfiguration>({ isCustomLoop: false });
+  const [activeCategory, setActiveCategory] = useState<PCPart['category']>('CPU');
+
+  const standardCategories: PCPart['category'][] = ['CPU', 'GPU', 'RAM', 'Storage', 'Motherboard', 'Cooling', 'Case', 'PSU'];
+  const waterCoolingCategories: PCPart['category'][] = ['Block', 'Pump', 'Radiator', 'Fittings', 'Tubing', 'Coolant'];
+
+  const currentCategories = useMemo(() => {
+    if (config.isCustomLoop) {
+      // Replace standard Cooling with detailed water cooling steps
+      const cats = [...standardCategories];
+      const coolingIdx = cats.indexOf('Cooling');
+      if (coolingIdx !== -1) {
+        cats.splice(coolingIdx, 1, ...waterCoolingCategories);
+      }
+      return cats;
+    }
+    return standardCategories;
+  }, [config.isCustomLoop]);
+
+  const selectPart = (part: PCPart) => {
+    setConfig(prev => ({ ...prev, [part.category.toLowerCase()]: part }));
+  };
+
+  const removePart = (category: string) => {
+    const newConfig = { ...config };
+    delete (newConfig as any)[category.toLowerCase()];
+    setConfig(newConfig);
+  };
+
+  const toggleCustomLoop = (enabled: boolean) => {
+    setConfig(prev => {
+      const next = { ...prev, isCustomLoop: enabled };
+      // If switching modes, clear conflicting cooling parts
+      if (enabled) {
+        delete next.cooling;
+        setActiveCategory('Block');
+      } else {
+        waterCoolingCategories.forEach(cat => delete (next as any)[cat.toLowerCase()]);
+        setActiveCategory('Cooling');
+      }
+      return next;
+    });
+  };
+
+  const totalPrice = useMemo(() => {
+    return Object.entries(config).reduce((sum, [key, part]) => {
+      if (key === 'isCustomLoop') return sum;
+      const p = part as PCPart | undefined;
+      return sum + (p?.price || 0);
+    }, 0);
+  }, [config]);
+
+  return (
+    <div className="min-h-screen bg-black pt-28 pb-20">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        {/* Navigation & Selection (Left) */}
+        <div className="lg:col-span-8 space-y-8">
+          
+          {/* Mode Switcher */}
+          <div className="flex gap-4 p-1 bg-white/5 rounded-2xl border border-white/10 max-w-md">
+            <button 
+              onClick={() => toggleCustomLoop(false)}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold transition-all ${!config.isCustomLoop ? 'bg-white/10 text-white border border-white/20' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              <Zap className="w-4 h-4" />
+              STANDARD BUILD
+            </button>
+            <button 
+              onClick={() => toggleCustomLoop(true)}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold transition-all ${config.isCustomLoop ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              <Droplets className="w-4 h-4" />
+              BESPOKE WATER LOOP
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-hide border-b border-white/5">
+            {currentCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2 rounded-full whitespace-nowrap text-sm font-bold transition-all ${
+                  activeCategory === cat 
+                    ? (config.isCustomLoop && waterCoolingCategories.includes(cat) 
+                        ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/20' 
+                        : 'bg-blue-600 text-white shadow-lg shadow-blue-600/20')
+                    : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {cat}
+                { (config as any)[cat.toLowerCase()] && (
+                  <span className="ml-2 inline-flex items-center justify-center w-2 h-2 bg-green-500 rounded-full" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Water Cooling Banner */}
+          {config.isCustomLoop && waterCoolingCategories.includes(activeCategory) && (
+            <div className="bg-cyan-500/5 border border-cyan-500/10 rounded-3xl p-6 flex items-start gap-4 animate-in fade-in slide-in-from-top-4">
+              <div className="bg-cyan-500/20 p-3 rounded-2xl">
+                <ShieldCheck className="w-6 h-6 text-cyan-400" />
+              </div>
+              <div>
+                <h4 className="text-cyan-400 font-bold text-sm uppercase tracking-widest mb-1">Expert Craftsmanship</h4>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  Our custom loops are pressure tested for 48 hours and use only high-grade medical acrylic or surgical steel fittings. Every bend is handcrafted.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {PC_PARTS.filter(p => p.category === activeCategory).map((part) => (
+              <div 
+                key={part.id}
+                onClick={() => selectPart(part)}
+                className={`relative group p-6 rounded-2xl border transition-all cursor-pointer ${
+                  (config as any)[part.category.toLowerCase()]?.id === part.id
+                    ? (config.isCustomLoop && waterCoolingCategories.includes(activeCategory) ? 'border-cyan-500 bg-cyan-500/5' : 'border-blue-500 bg-blue-500/5')
+                    : 'border-white/5 bg-white/5 hover:border-white/20'
+                }`}
+              >
+                <div className="flex gap-4">
+                  <div className="relative">
+                    <img src={part.image} alt={part.name} className="w-24 h-24 object-cover rounded-xl" />
+                    {waterCoolingCategories.includes(part.category) && (
+                      <div className="absolute -top-2 -left-2 bg-cyan-600 p-1.5 rounded-lg border border-white/10">
+                        <Droplets className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-white mb-1">{part.name}</h3>
+                    <p className="text-gray-400 text-xs mb-3">{part.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className={`${config.isCustomLoop && waterCoolingCategories.includes(activeCategory) ? 'text-cyan-400' : 'text-blue-400'} font-mono font-bold`}>${part.price}</span>
+                      {(config as any)[part.category.toLowerCase()]?.id === part.id && (
+                        <div className={`${config.isCustomLoop && waterCoolingCategories.includes(activeCategory) ? 'bg-cyan-600' : 'bg-blue-600'} p-1 rounded-full`}>
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Summary (Right) */}
+        <div className="lg:col-span-4">
+          <div className="sticky top-28 bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm shadow-2xl">
+            <h2 className="text-2xl font-black text-white mb-8 tracking-tighter">BUILD SUMMARY</h2>
+            
+            <div className="space-y-4 mb-8 overflow-y-auto max-h-[40vh] pr-2 scrollbar-hide">
+              {currentCategories.map((cat) => {
+                const part = (config as any)[cat.toLowerCase()];
+                const isWaterCooling = waterCoolingCategories.includes(cat);
+                return (
+                  <div key={cat} className="flex items-center justify-between group">
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1.5">
+                        <span className={`text-[10px] uppercase tracking-widest font-bold ${isWaterCooling ? 'text-cyan-500' : 'text-gray-500'}`}>{cat}</span>
+                        {isWaterCooling && <Droplets className="w-2.5 h-2.5 text-cyan-500" />}
+                      </div>
+                      <span className={`text-sm ${part ? 'text-white' : 'text-gray-600 italic'}`}>
+                        {part ? part.name : 'Not Selected'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm font-mono text-gray-400">
+                        {part ? `$${part.price}` : '--'}
+                      </span>
+                      {part && (
+                        <button 
+                          onClick={() => removePart(cat)}
+                          className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="pt-8 border-t border-white/10 flex items-end justify-between mb-8">
+              <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Total Estimated</span>
+              <span className={`text-3xl font-black font-mono ${config.isCustomLoop ? 'text-cyan-400' : 'text-white'}`}>${totalPrice.toLocaleString()}</span>
+            </div>
+
+            <button 
+              disabled={Object.keys(config).length <= 1}
+              className={`w-full py-4 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-2xl flex items-center justify-center gap-2 transition-all shadow-lg ${
+                config.isCustomLoop 
+                  ? 'bg-cyan-600 hover:bg-cyan-500 shadow-cyan-600/20' 
+                  : 'bg-blue-600 hover:bg-blue-500 shadow-blue-600/20'
+              }`}
+            >
+              <ShoppingCart className="w-5 h-5" />
+              Finalize Order
+            </button>
+            <p className="mt-4 text-center text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">
+              {config.isCustomLoop 
+                ? 'Includes bespoke loop design, 48h pressure testing, and professional cable management.'
+                : 'Price includes precision building, OS installation, and stress testing.'
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Configurator;

@@ -1,0 +1,82 @@
+<!-- Showcase — interactive Gamemax Hotwheel (flagship, CGP.html) -->
+<section id="showcase" class="cgp-section bg-cgp-bg-page" aria-labelledby="showcase-title">
+  <div class="cgp-container-lg">
+    <!-- Section header -->
+    <div class="mb-cgp-20 text-center">
+      <p class="cgp-eyebrow">Case Study</p>
+      <h2 id="showcase-title" class="text-cgp-display-4 leading-tight md:text-cgp-display-3">The Gamemax Hotwheel</h2>
+      <p class="mx-auto mt-cgp-4 max-w-xl text-cgp-text-secondary">Interact with the schematic below to explore the architecture of this legendary build.</p>
+    </div>
+
+    <!-- Interactive grid: ring + detail panel. Auto-rotate pauses on hover/focus. -->
+    <div class="grid grid-cols-1 items-center gap-cgp-16 lg:grid-cols-2"
+         x-data="{
+           activeNode: 0,
+           swapping: false,
+           paused: false,
+           timer: null,
+           nodes: [
+             { id: '// NODE 01 : COOLANT LOOP', title: 'Vivid Liquid Cooling', text: 'The vibrant cyan coolant courses through meticulously hand-bent hardline tubing. We prioritize flow rate and aesthetic routing to create a mesmerizing visual centerpiece.' },
+             { id: '// NODE 02 : HARDWARE FITTINGS', title: 'Precision Metallic Fittings', text: 'Notice the pristine silver and black compression fittings. Each joint is mechanically secured to prevent leaks, creating sharp, industrial right angles that contrast the circular case.' },
+             { id: '// NODE 03 : MOTHERBOARD & GPU', title: 'ROG Elite Hardware', text: 'Built on an Asus ROG foundation. The motherboard and vertically mounted flagship GPU are seamlessly integrated into the water loop with custom CNC-milled acrylic blocks.' },
+             { id: '// NODE 04 : THE CHASSIS', title: 'Gamemax Hotwheel', text: 'An unconventional, gravity-defying circular chassis. The open-air frame design combined with dual high-static pressure fans at the base ensures ambient air continuously feeds the radiators.' }
+           ],
+           init() {
+             this.timer = setInterval(() => {
+               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
+             }, 4000);
+           },
+           destroy() { clearInterval(this.timer); },
+           selectNode(i) {
+             if (i === this.activeNode) return;
+             this.swapping = true;
+             // Reset the 4s auto-rotate timer after any manual selection
+             clearInterval(this.timer);
+             this.timer = setInterval(() => {
+               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
+             }, 4000);
+             setTimeout(() => { this.activeNode = i; this.swapping = false; }, 300);
+           }
+         }"
+         @mouseenter="paused = true"
+         @mouseleave="paused = false"
+         @pointerdown="paused = true"
+         @focusin="paused = true"
+         @focusout="paused = false">
+
+      <!-- Hotwheel ring (3D tilt via JS --tilt-x/--tilt-y) -->
+      <div class="relative flex justify-center">
+        <div data-tilt class="cgp-tilt relative h-[300px] w-[300px] rounded-full border-4 border-cgp-border-strong bg-[radial-gradient(circle_at_center,var(--cgp-bg-card)_0%,var(--cgp-bg-section)_100%)] shadow-cgp-glow-black md:h-[450px] md:w-[450px]">
+          <!-- dashed inner ring (60s spin) -->
+          <div class="cgp-spin-slow absolute inset-[10%] rounded-full border-2 border-dashed border-cgp-border-accent" aria-hidden="true"></div>
+          <!-- radial cyan glow overlay -->
+          <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,transparent_55%,var(--cgp-glow-ambient-cyan))]" aria-hidden="true"></div>
+
+          <!-- Hotspots: 44px touch targets, keyboard accessible, numbered 1-4 -->
+          <button type="button" class="absolute left-1/2 top-[20%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 0 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 0" aria-label="Node 1: Cooling" @click="selectNode(0)">1</button>
+          <button type="button" class="absolute left-[20%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 1 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 1" aria-label="Node 2: Fittings" @click="selectNode(1)">2</button>
+          <button type="button" class="absolute left-[80%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 2 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 2" aria-label="Node 3: Motherboard and GPU" @click="selectNode(2)">3</button>
+          <button type="button" class="absolute left-1/2 top-[80%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 3 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 3" aria-label="Node 4: Chassis" @click="selectNode(3)">4</button>
+        </div>
+      </div>
+
+      <!-- Detail panel: 300ms opacity swap protocol (design-system §9) -->
+      <div class="flex flex-col justify-center">
+        <div aria-live="polite" class="cgp-glass flex min-h-[300px] flex-col justify-center rounded-cgp-2xl p-cgp-8 transition-opacity duration-300 motion-reduce:transition-none md:p-cgp-12" :class="swapping ? 'opacity-0' : 'opacity-100'">
+          <p class="cgp-mono-label mb-cgp-4" x-text="nodes[activeNode].id">// NODE 01 : COOLANT LOOP</p>
+          <h3 class="mb-cgp-4" x-text="nodes[activeNode].title">Vivid Liquid Cooling</h3>
+          <p class="text-cgp-lg leading-relaxed text-cgp-text-secondary" x-text="nodes[activeNode].text">The vibrant cyan coolant courses through meticulously hand-bent hardline tubing. We prioritize flow rate and aesthetic routing to create a mesmerizing visual centerpiece.</p>
+        </div>
+
+        <!-- Progress readout + case study link -->
+        <div class="mt-cgp-6 flex items-center justify-between">
+          <span class="font-mono text-cgp-xs tracking-cgp-widest text-cgp-text-muted" x-text="'NODE ' + String(activeNode + 1).padStart(2, '0') + '/04'">NODE 01/04</span>
+          <a href="#gallery" class="cgp-btn-link">
+            View Full Case Study
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

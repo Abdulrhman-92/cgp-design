@@ -1,0 +1,56 @@
+<!-- Floating island navigation — canonical pattern from the client prototype (home.html).
+     Fixed bottom-6 on mobile / top-8 centered on desktop. Glass pill, CGP. + cyan dot,
+     links, Inquire CTA + MOBILE HAMBURGER MENU (Alpine toggle). -->
+<header>
+  <div class="fixed bottom-6 left-1/2 z-50 w-[90%] -translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+    <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
+      <!-- Logo: CGP. with cyan dot + divider (home.html) -->
+      <a href="#hero" class="border-r border-cgp-border-strong pr-4 font-display text-xl font-bold tracking-tighter text-white">
+        CGP<span class="text-cgp-accent">.</span>
+      </a>
+
+      <!-- Desktop links: hidden on mobile, visible md+ -->
+      <div class="hidden space-x-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+        <a href="#vision" class="transition-colors hover:text-cgp-accent-bright">Vision</a>
+        <a href="#showcase" class="transition-colors hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#metrics" class="transition-colors hover:text-cgp-accent-bright">Metrics</a>
+        <a href="#gallery" class="transition-colors hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#shop" class="transition-colors hover:text-cgp-accent-bright">Shop</a>
+        <a href="#blog" class="transition-colors hover:text-cgp-accent-bright">Blog</a>
+      </div>
+
+      <!-- Mobile hamburger toggle (44px touch target) -->
+      <button
+        @click="open = !open"
+        class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden"
+        aria-label="Toggle menu"
+        :aria-expanded="open.toString()"
+      >
+        <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
+        <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
+      </button>
+
+      <!-- Inquire CTA: always visible, 44px touch target -->
+      <a href="#inquiry" class="cgp-btn-primary ml-auto min-h-11 md:ml-0" data-magnetic>Inquire</a>
+    </nav>
+
+    <!-- Mobile dropdown menu (glass, slides under the island) -->
+    <div
+      x-cloak
+      x-show="open"
+      x-transition.opacity.duration.200ms
+      @click.outside="open = false"
+      class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden"
+      role="menu"
+    >
+      <div class="flex flex-col gap-1">
+        <a href="#vision" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Vision</a>
+        <a href="#showcase" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#metrics" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Metrics</a>
+        <a href="#gallery" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#shop" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
+        <a href="#blog" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
+      </div>
+    </div>
+  </div>
+</header>

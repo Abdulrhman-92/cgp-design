@@ -1,0 +1,14 @@
+{
+  "status": "success | error | needs_clarification",
+  "files_changed": ["string"],
+  "summary": "string (1-2 sentences)",
+  "verification_command": "string (exact, runnable command)",
+  "issues": [
+    {
+      "type": "string (e.g., 'missing_dependency', 'permission_denied', 'syntax_error')",
+      "severity": "low | medium | high",
+      "message": "string (human-readable)",
+      "repro": "string (how to reproduce)"
+    }
+  ]
+}

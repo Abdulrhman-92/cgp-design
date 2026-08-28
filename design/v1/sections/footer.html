@@ -1,0 +1,90 @@
+<!-- Footer — luxury redesign: giant watermark + CTA + 3 columns + bottom bar -->
+<footer class="relative overflow-hidden border-t border-cgp-border-subtle bg-cgp-bg-section">
+  <!-- Giant CGP. watermark (background text) with cyan glow overlay -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-10 select-none text-center font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.08] [text-shadow:0_0_40px_rgba(6,182,212,0.25),0_0_120px_rgba(6,182,212,0.15)]" aria-hidden="true">
+    CGP<span class="text-cgp-accent/[0.25] [text-shadow:0_0_30px_rgba(6,182,212,0.5)]">.</span>
+  </div>
+
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow right-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- CTA strip -->
+  <div class="relative border-b border-cgp-border-subtle">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-left">
+      <div>
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
+        <p class="mt-2 text-sm text-cgp-text-muted">Tell us your vision — our masters will engineer the rest.</p>
+      </div>
+      <a href="#inquiry" class="cgp-btn-primary shrink-0" data-magnetic>Summon The Masters</a>
+    </div>
+  </div>
+
+  <!-- Footer content — 3-column luxury layout -->
+  <div class="cgp-container-lg relative grid grid-cols-1 gap-12 py-16 md:grid-cols-3">
+    <!-- Brand column -->
+    <div class="flex flex-col items-start gap-4">
+      <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
+      <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
+      <div class="flex items-center gap-3">
+        <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: replace 9665XXXXXXXX with the real CGP WhatsApp number -->
+        <a href="https://wa.me/9665XXXXXXXX" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
+      <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <a href="#vision" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Vision
+        </a>
+        <a href="#showcase" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Hotwheel
+        </a>
+        <a href="#gallery" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Archives
+        </a>
+        <a href="#shop" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Hardware
+        </a>
+        <a href="#inquiry" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Commission a Build
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contact column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
+      </a>
+      <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
+      </a>
+      <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
+        <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
+      </p>
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-faint">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="relative border-t border-cgp-border-subtle py-6">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+      <p class="text-xs text-cgp-text-muted">© 2026 CGP. Precision Engineering. All rights reserved.</p>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
+    </div>
+  </div>
+</footer>

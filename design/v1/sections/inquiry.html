@@ -1,0 +1,78 @@
+<!-- Inquiry — commission form (terminal-framed). Alpine x-data scoped to the form only. -->
+<section id="inquiry" class="cgp-section" aria-labelledby="inquiry-title">
+  <div class="cgp-container-sm text-center">
+    <p class="cgp-eyebrow">Commission a Build</p>
+    <h2 id="inquiry-title" class="text-cgp-display-4 mb-6">Start Your Project</h2>
+    <p class="text-cgp-text-secondary text-sm mb-4">Tell us about your vision, your budget, and what you want to achieve. We'll get back to you to schedule a consultation.</p>
+    <p class="mb-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      <span>Commissions from 10,000 SAR</span>
+      <span class="text-cgp-accent" aria-hidden="true">//</span>
+      <span>We respond within 24 hours</span>
+    </p>
+
+    <!-- Terminal frame -->
+    <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-section shadow-cgp-glow-black text-left">
+      <!-- Top accent bar -->
+      <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+
+      <!-- Header row -->
+      <div class="flex items-center justify-between border-b border-cgp-border px-6 py-4">
+        <span class="cgp-mono-label tracking-cgp-04em">TRANSMIT REQUEST // SYS_INQUIRY</span>
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+        </span>
+      </div>
+
+      <!-- Scanline accent -->
+      <div class="cgp-scanline pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-cgp-accent/5 to-transparent" aria-hidden="true"></div>
+
+      <form x-data="{ sent: false, submit() { this.sent = true; }, reset() { this.sent = false; this.$refs.form.reset(); } }" @submit.prevent="submit" x-ref="form" class="relative space-y-8 p-6 md:p-8">
+        <!-- Honeypot (spam hygiene) -->
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;">
+
+        <!-- Fields -->
+        <div x-show="!sent" class="space-y-8">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div>
+              <label for="inquiry-name" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Name</label>
+              <input id="inquiry-name" name="name" type="text" required autocomplete="name" placeholder="John Doe" class="cgp-input-underline">
+            </div>
+            <div>
+              <label for="inquiry-email" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Email</label>
+              <input id="inquiry-email" name="email" type="email" required autocomplete="email" placeholder="john@example.com" class="cgp-input-underline">
+            </div>
+            <div>
+              <label for="inquiry-phone" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Phone / WhatsApp</label>
+              <input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX" class="cgp-input-underline">
+            </div>
+          </div>
+
+          <div>
+            <label for="inquiry-budget" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Estimated Budget (SAR)</label>
+            <select id="inquiry-budget" name="budget" class="cgp-input-underline">
+              <option value="" selected disabled>Select a range</option>
+              <option>10,000 - 15,000 SAR</option>
+              <option>15,000 - 25,000 SAR</option>
+              <option>25,000+ SAR</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="inquiry-details" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Project Details</label>
+            <textarea id="inquiry-details" name="details" rows="4" required placeholder="Describe the build you have in mind..." class="cgp-input-underline resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="cgp-btn-white w-full" style="min-height: 44px; border-radius: var(--cgp-radius-sm);">Summon The Masters</button>
+        </div>
+
+        <!-- Success state -->
+        <div x-show="sent" style="display: none;" aria-live="polite" class="space-y-6 py-8 text-center">
+          <p class="font-mono text-xs tracking-cgp-04em text-cgp-accent">// TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED</p>
+          <button type="button" @click="reset" class="cgp-btn-ghost" style="min-height: 44px;">Return to Forge</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
