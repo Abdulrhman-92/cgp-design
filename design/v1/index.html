@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary meta -->
+  <title>CGP | Bespoke Water-Cooled PC Builds — Riyadh, Saudi Arabia</title>
+  <meta name="description" content="CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh. Extreme performance, handcrafted to order.">
+  <!-- TODO: flip to index,follow before launch -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <!-- TODO: replace with the live URL before launch -->
+  <link rel="canonical" href="https://cgp.sa/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CGP">
+  <meta property="og:title" content="CGP | Bespoke Water-Cooled PC Builds — Riyadh, Saudi Arabia">
+  <meta property="og:description" content="CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh. Extreme performance, handcrafted to order.">
+  <meta property="og:url" content="https://cgp.sa/">
+  <meta property="og:image" content="assets/images/hotwheel.webp">
+  <meta property="og:locale" content="en_SA">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CGP | Bespoke Water-Cooled PC Builds — Riyadh, Saudi Arabia">
+  <meta name="twitter:description" content="CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.">
+  <meta name="twitter:image" content="assets/images/hotwheel.webp">
+
+  <!-- Geo (Saudi Arabia — Riyadh) -->
+  <meta name="geo.region" content="SA">
+  <meta name="geo.placename" content="Riyadh">
+  <meta name="geo.position" content="24.7136;46.6753">
+  <meta name="ICBM" content="24.7136, 46.6753">
+
+  <!-- Schema.org JSON-LD (Organization + LocalBusiness + Service) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://cgp.sa/#organization",
+        "name": "CGP",
+        "url": "https://cgp.sa/",
+        "logo": "https://cgp.sa/logo.png",
+        "description": "CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.",
+        "sameAs": [
+          "https://x.com/cgp",
+          "https://instagram.com/cgp.sa",
+          "https://wa.me/966500000000"
+        ]
+      },
+      {
+        "@type": ["ComputerStore", "LocalBusiness"],
+        "@id": "https://cgp.sa/#store",
+        "name": "CGP",
+        "url": "https://cgp.sa/",
+        "image": "assets/images/hotwheel.webp",
+        "description": "Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.",
+        "parentOrganization": { "@id": "https://cgp.sa/#organization" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Riyadh",
+          "addressRegion": "Riyadh Province",
+          "addressCountry": "SA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 24.7136,
+          "longitude": 46.6753
+        },
+        "openingHours": "Su-Th 10:00-22:00",
+        "priceRange": "SAR 10,000 - 25,000+"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://cgp.sa/#service",
+        "name": "Custom Water-Cooled PC Building",
+        "serviceType": "Custom PC Building",
+        "description": "Mastercrafted, water-cooled PC architecture engineered to order — bespoke loops, elite hardware, extreme performance.",
+        "provider": { "@id": "https://cgp.sa/#store" },
+        "areaServed": { "@type": "Country", "name": "Saudi Arabia" }
+      }
+    ]
+  }
+  </script>
+  <!-- TODO: replace sameAs handles + logo URL with real ones before launch -->
+
+  <!-- Fonts (self-hosted, preload critical weights — family-weight.woff2 convention) -->
+  <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/tailwind.css?v=2">
+  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/tokens.css">
+  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/utilities.css">
+  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/base.css">
+  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/motion.css">
+  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Scripts (deferred) -->
+  <script defer src="../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
+  <script defer src="../../wp-content/themes/cgp/assets/js/main.js?v=2"></script>
+</head>
+<body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
+  <a href="#main" class="cgp-skip-link">Skip to main content</a>
+
+  <main id="main">
+    <!-- Floating island navigation — canonical pattern from the client prototype (home.html).
+     Fixed bottom-6 on mobile / top-8 centered on desktop. Glass pill, CGP. + cyan dot,
+     links, Inquire CTA + MOBILE HAMBURGER MENU (Alpine toggle). -->
+<header>
+  <div class="fixed bottom-6 left-1/2 z-50 w-[90%] -translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+    <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
+      <!-- Logo: CGP. with cyan dot + divider (home.html) -->
+      <a href="#hero" class="border-r border-cgp-border-strong pr-4 font-display text-xl font-bold tracking-tighter text-white">
+        CGP<span class="text-cgp-accent">.</span>
+      </a>
+
+      <!-- Desktop links: hidden on mobile, visible md+ -->
+      <div class="hidden space-x-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+        <a href="#vision" class="transition-colors hover:text-cgp-accent-bright">Vision</a>
+        <a href="#showcase" class="transition-colors hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#metrics" class="transition-colors hover:text-cgp-accent-bright">Metrics</a>
+        <a href="#gallery" class="transition-colors hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#shop" class="transition-colors hover:text-cgp-accent-bright">Shop</a>
+        <a href="#blog" class="transition-colors hover:text-cgp-accent-bright">Blog</a>
+      </div>
+
+      <!-- Mobile hamburger toggle (44px touch target) -->
+      <button
+        @click="open = !open"
+        class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden"
+        aria-label="Toggle menu"
+        :aria-expanded="open.toString()"
+      >
+        <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
+        <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
+      </button>
+
+      <!-- Inquire CTA: always visible, 44px touch target -->
+      <a href="#inquiry" class="cgp-btn-primary ml-auto min-h-11 md:ml-0" data-magnetic>Inquire</a>
+    </nav>
+
+    <!-- Mobile dropdown menu (glass, slides under the island) -->
+    <div
+      x-cloak
+      x-show="open"
+      x-transition.opacity.duration.200ms
+      @click.outside="open = false"
+      class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden"
+      role="menu"
+    >
+      <div class="flex flex-col gap-1">
+        <a href="#vision" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Vision</a>
+        <a href="#showcase" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#metrics" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Metrics</a>
+        <a href="#gallery" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#shop" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
+        <a href="#blog" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero — Forge Boot Sequence + Hotwheel ring + dual CTA.
+     THE ONLY h1 on the page. Alpine boot overlay (terminal lines fade in sequence,
+     then the overlay fades out) resolves into the headline. Reduced motion:
+     boot is skipped entirely — headline shows immediately. -->
+<section
+  id="hero"
+  class="cgp-min-h-dvh relative flex flex-col items-center justify-center overflow-hidden px-4 text-center"
+  x-data="{ booted: false, reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches }"
+  x-init="reduced ? booted = true : setTimeout(() => booted = true, 2600)"
+>
+  <!-- Ambient radial backdrop (tokens only) -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--cgp-bg-card)_0%,var(--cgp-bg-page)_70%)]" aria-hidden="true"></div>
+
+  <!-- Hotwheel ring — decorative centerpiece (interactive version lives in #showcase) -->
+  <div class="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-cgp-border-strong bg-[radial-gradient(circle_at_center,var(--cgp-bg-card)_0%,var(--cgp-bg-section)_100%)] shadow-cgp-glow-soft md:h-[450px] md:w-[450px]" aria-hidden="true">
+    <div class="cgp-spin-slow absolute inset-[10%] rounded-full border-2 border-dashed border-cgp-accent/30"></div>
+  </div>
+
+  <!-- Boot overlay: terminal lines fade in sequence, then the overlay fades out.
+       x-cloak hides it until Alpine inits (and forever when JS is disabled). -->
+  <div
+    x-cloak
+    x-show="!booted"
+    x-transition:leave="transition-opacity duration-500"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="cgp-bg-grid absolute inset-0 z-20 flex items-center justify-center bg-cgp-bg-page"
+    aria-hidden="true"
+  >
+    <div class="space-y-2 font-mono text-left text-cgp-xs tracking-cgp-widest text-cgp-accent">
+      <p class="cgp-fade-in" style="animation-delay: 0.1s">// CGP FORGE v2.0</p>
+      <p class="cgp-fade-in" style="animation-delay: 0.5s">SYS_INIT: ARCHITECTURE LOAD</p>
+      <p class="cgp-fade-in" style="animation-delay: 0.9s">THERMAL CORE: ONLINE</p>
+      <p class="cgp-fade-in" style="animation-delay: 1.3s">FORGE STATUS: OPERATIONAL</p>
+    </div>
+  </div>
+
+  <!-- Headline content (revealed as the boot overlay fades) -->
+  <div class="relative z-10 flex flex-col items-center">
+    <!-- clamp keeps 'THE IMPOSSIBLE.' on one line (2 lines total) at 375/768/1024/1440.
+         Measured: Space Grotesk Bold 7.205em wide; 44px min fits the 343px container at 375px. -->
+    <h1 class="mb-6" style="font-size: clamp(44px, 11vw, 128px)">
+      Engineer<br>
+      <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">The Impossible.</span>
+    </h1>
+    <p class="mb-12 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+      We build machines that blur the line between extreme performance and modern art — handcrafted, water-cooled, and built to order for the elite.
+    </p>
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="#showcase" class="cgp-btn-outline" data-magnetic>Explore The Legendary Build</a>
+      <a href="#inquiry" class="cgp-btn-primary" data-magnetic>Commission a Build</a>
+    </div>
+  </div>
+
+  <!-- Scroll cue: mono label + animated line (shared .cgp-scanline) -->
+  <div class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2" aria-hidden="true">
+    <span class="font-mono text-cgp-micro tracking-cgp-04em text-cgp-text-muted">SCROLL //</span>
+    <div class="relative h-10 w-px overflow-hidden bg-cgp-border">
+      <span class="cgp-scanline absolute inset-x-0 top-0 h-3 bg-cgp-accent"></span>
+    </div>
+  </div>
+</section>
+
+<!-- Vision — philosophy pillars + offset cards (CGP.html + home.html) -->
+<section id="vision" class="cgp-section bg-cgp-bg-section" aria-labelledby="vision-title">
+  <div class="cgp-container-md">
+    <!-- Section header: eyebrow + 2-line headline (gradient second line) -->
+    <div class="mb-cgp-16 max-w-2xl">
+      <p class="cgp-eyebrow">Our Philosophy</p>
+      <h2 id="vision-title" class="text-cgp-display-4 leading-tight md:text-cgp-display-3">
+        Complexity distilled into<br>
+        <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,var(--cgp-accent-bright),var(--cgp-accent-deep))]">absolute simplicity.</span>
+      </h2>
+    </div>
+
+    <!-- Philosophy pillars (border-t cards, phosphor icons) -->
+    <div class="grid grid-cols-1 gap-cgp-16 md:grid-cols-3">
+      <div class="border-t border-cgp-border pt-cgp-6">
+        <i class="ph ph-fill ph-gear-six mb-cgp-4 block text-3xl text-cgp-accent" aria-hidden="true"></i>
+        <h3 class="mb-cgp-3">Precision Fittings</h3>
+        <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Every joint, every tube, every millimeter is calculated. We use only aerospace-grade fittings to ensure absolute seal integrity and flawless aesthetic lines.</p>
+      </div>
+      <div class="border-t border-cgp-border pt-cgp-6">
+        <i class="ph ph-fill ph-snowflake mb-cgp-4 block text-3xl text-cgp-accent" aria-hidden="true"></i>
+        <h3 class="mb-cgp-3">Cryo Loops</h3>
+        <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Custom hard-line water cooling isn't just about temperatures; it's the lifeblood of the system. Visually striking, acoustically silent.</p>
+      </div>
+      <div class="border-t border-cgp-border pt-cgp-6">
+        <i class="ph ph-fill ph-lightning mb-cgp-4 block text-3xl text-cgp-accent" aria-hidden="true"></i>
+        <h3 class="mb-cgp-3">Elite Hardware</h3>
+        <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Housing flagship ROG components within radically designed chassis, we push silicon to its absolute limit without compromising the minimalist ethos.</p>
+      </div>
+    </div>
+
+    <!-- Offset cards (home.html: Bespoke Loops / Elite Hardware, mt-8 offset) -->
+    <div class="cgp-stagger mt-cgp-20 grid grid-cols-1 gap-cgp-4 sm:grid-cols-2">
+      <div class="cgp-card p-cgp-6">
+        <i class="ph ph-fill ph-drop mb-cgp-4 block text-3xl text-cgp-accent" aria-hidden="true"></i>
+        <h3 class="mb-cgp-2">Bespoke Loops</h3>
+        <p class="text-cgp-xs text-cgp-text-muted">Hand-bent hardline tubing designed specifically for your hardware.</p>
+      </div>
+      <div class="cgp-card p-cgp-6 sm:mt-cgp-8">
+        <i class="ph ph-fill ph-cpu mb-cgp-4 block text-3xl text-cgp-accent" aria-hidden="true"></i>
+        <h3 class="mb-cgp-2">Elite Hardware</h3>
+        <p class="text-cgp-xs text-cgp-text-muted">Only the highest binned processors and flagship GPUs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase — interactive Gamemax Hotwheel (flagship, CGP.html) -->
+<section id="showcase" class="cgp-section bg-cgp-bg-page" aria-labelledby="showcase-title">
+  <div class="cgp-container-lg">
+    <!-- Section header -->
+    <div class="mb-cgp-20 text-center">
+      <p class="cgp-eyebrow">Case Study</p>
+      <h2 id="showcase-title" class="text-cgp-display-4 leading-tight md:text-cgp-display-3">The Gamemax Hotwheel</h2>
+      <p class="mx-auto mt-cgp-4 max-w-xl text-cgp-text-secondary">Interact with the schematic below to explore the architecture of this legendary build.</p>
+    </div>
+
+    <!-- Interactive grid: ring + detail panel. Auto-rotate pauses on hover/focus. -->
+    <div class="grid grid-cols-1 items-center gap-cgp-16 lg:grid-cols-2"
+         x-data="{
+           activeNode: 0,
+           swapping: false,
+           paused: false,
+           timer: null,
+           nodes: [
+             { id: '// NODE 01 : COOLANT LOOP', title: 'Vivid Liquid Cooling', text: 'The vibrant cyan coolant courses through meticulously hand-bent hardline tubing. We prioritize flow rate and aesthetic routing to create a mesmerizing visual centerpiece.' },
+             { id: '// NODE 02 : HARDWARE FITTINGS', title: 'Precision Metallic Fittings', text: 'Notice the pristine silver and black compression fittings. Each joint is mechanically secured to prevent leaks, creating sharp, industrial right angles that contrast the circular case.' },
+             { id: '// NODE 03 : MOTHERBOARD & GPU', title: 'ROG Elite Hardware', text: 'Built on an Asus ROG foundation. The motherboard and vertically mounted flagship GPU are seamlessly integrated into the water loop with custom CNC-milled acrylic blocks.' },
+             { id: '// NODE 04 : THE CHASSIS', title: 'Gamemax Hotwheel', text: 'An unconventional, gravity-defying circular chassis. The open-air frame design combined with dual high-static pressure fans at the base ensures ambient air continuously feeds the radiators.' }
+           ],
+           init() {
+             this.timer = setInterval(() => {
+               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
+             }, 4000);
+           },
+           destroy() { clearInterval(this.timer); },
+           selectNode(i) {
+             if (i === this.activeNode) return;
+             this.swapping = true;
+             // Reset the 4s auto-rotate timer after any manual selection
+             clearInterval(this.timer);
+             this.timer = setInterval(() => {
+               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
+             }, 4000);
+             setTimeout(() => { this.activeNode = i; this.swapping = false; }, 300);
+           }
+         }"
+         @mouseenter="paused = true"
+         @mouseleave="paused = false"
+         @pointerdown="paused = true"
+         @focusin="paused = true"
+         @focusout="paused = false">
+
+      <!-- Hotwheel ring (3D tilt via JS --tilt-x/--tilt-y) -->
+      <div class="relative flex justify-center">
+        <div data-tilt class="cgp-tilt relative h-[300px] w-[300px] rounded-full border-4 border-cgp-border-strong bg-[radial-gradient(circle_at_center,var(--cgp-bg-card)_0%,var(--cgp-bg-section)_100%)] shadow-cgp-glow-black md:h-[450px] md:w-[450px]">
+          <!-- dashed inner ring (60s spin) -->
+          <div class="cgp-spin-slow absolute inset-[10%] rounded-full border-2 border-dashed border-cgp-border-accent" aria-hidden="true"></div>
+          <!-- radial cyan glow overlay -->
+          <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,transparent_55%,var(--cgp-glow-ambient-cyan))]" aria-hidden="true"></div>
+
+          <!-- Hotspots: 44px touch targets, keyboard accessible, numbered 1-4 -->
+          <button type="button" class="absolute left-1/2 top-[20%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 0 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 0" aria-label="Node 1: Cooling" @click="selectNode(0)">1</button>
+          <button type="button" class="absolute left-[20%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 1 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 1" aria-label="Node 2: Fittings" @click="selectNode(1)">2</button>
+          <button type="button" class="absolute left-[80%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 2 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 2" aria-label="Node 3: Motherboard and GPU" @click="selectNode(2)">3</button>
+          <button type="button" class="absolute left-1/2 top-[80%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 3 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 3" aria-label="Node 4: Chassis" @click="selectNode(3)">4</button>
+        </div>
+      </div>
+
+      <!-- Detail panel: 300ms opacity swap protocol (design-system §9) -->
+      <div class="flex flex-col justify-center">
+        <div aria-live="polite" class="cgp-glass flex min-h-[300px] flex-col justify-center rounded-cgp-2xl p-cgp-8 transition-opacity duration-300 motion-reduce:transition-none md:p-cgp-12" :class="swapping ? 'opacity-0' : 'opacity-100'">
+          <p class="cgp-mono-label mb-cgp-4" x-text="nodes[activeNode].id">// NODE 01 : COOLANT LOOP</p>
+          <h3 class="mb-cgp-4" x-text="nodes[activeNode].title">Vivid Liquid Cooling</h3>
+          <p class="text-cgp-lg leading-relaxed text-cgp-text-secondary" x-text="nodes[activeNode].text">The vibrant cyan coolant courses through meticulously hand-bent hardline tubing. We prioritize flow rate and aesthetic routing to create a mesmerizing visual centerpiece.</p>
+        </div>
+
+        <!-- Progress readout + case study link -->
+        <div class="mt-cgp-6 flex items-center justify-between">
+          <span class="font-mono text-cgp-xs tracking-cgp-widest text-cgp-text-muted" x-text="'NODE ' + String(activeNode + 1).padStart(2, '0') + '/04'">NODE 01/04</span>
+          <a href="#gallery" class="cgp-btn-link">
+            View Full Case Study
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics — live telemetry + static SVG comparison (no Chart.js) -->
+<section id="metrics" class="cgp-section bg-cgp-bg-section" aria-labelledby="metrics-title">
+  <div class="cgp-container-md">
+    <!-- Section header -->
+    <div class="mb-cgp-16 max-w-2xl">
+      <p class="cgp-eyebrow">Metrics</p>
+      <h2 id="metrics-title" class="mb-cgp-6 text-cgp-display-4 leading-tight md:text-cgp-display-3">Thermal Superiority</h2>
+      <p class="text-cgp-lg leading-relaxed text-cgp-text-secondary">Aesthetic design means nothing without raw performance. Our custom cooling loops run up to 34°C cooler under maximum synthetic loads compared to premium air coolers.</p>
+    </div>
+
+    <!-- Delta headline — headline number above the telemetry panel -->
+    <p class="mb-cgp-6 text-center font-display text-2xl font-bold text-cgp-accent-bright md:text-3xl">Up to 34°C cooler under full load</p>
+
+    <!-- LIVE TELEMETRY panel (terminal style, CGP configuration.html) -->
+    <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-elevated shadow-cgp-glow-black">
+      <!-- scanline sweep overlay -->
+      <div class="cgp-scanline pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,var(--cgp-accent)_0%,transparent_18%)] opacity-25" aria-hidden="true"></div>
+
+      <!-- panel header -->
+      <div class="relative flex items-center justify-between border-b border-cgp-border px-cgp-6 py-cgp-4">
+        <div class="flex items-center gap-cgp-3">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-cgp-accent motion-reduce:animate-none" aria-hidden="true"></span>
+          <span class="font-mono text-cgp-micro uppercase tracking-cgp-widest text-cgp-accent">SYS_THERMAL // LIVE TELEMETRY STREAM</span>
+        </div>
+        <span class="font-mono text-cgp-micro uppercase tracking-cgp-widest text-cgp-text-disabled">RENDER_STAGE: ACTIVE</span>
+      </div>
+
+      <!-- telemetry rows: Standard Air vs CGP Loop (count-up on scroll into view) -->
+      <div class="relative px-cgp-6 py-cgp-2">
+        <div class="flex items-center justify-between gap-cgp-4 border-b border-cgp-border-subtle py-cgp-4">
+          <span class="text-cgp-xs font-bold uppercase tracking-cgp-wider text-cgp-text-muted">CPU Idle</span>
+          <div class="flex items-center gap-cgp-8 font-mono text-cgp-sm">
+            <span class="text-cgp-text-muted"><span class="cgp-count-up" data-count="35">0</span>°C <span class="text-cgp-micro uppercase text-cgp-text-faint">Standard Air</span></span>
+            <span class="text-cgp-accent-bright"><span class="cgp-count-up" data-count="28">0</span>°C <span class="text-cgp-micro uppercase text-cgp-accent">CGP Loop</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-cgp-4 border-b border-cgp-border-subtle py-cgp-4">
+          <span class="text-cgp-xs font-bold uppercase tracking-cgp-wider text-cgp-text-muted">CPU 100% Load</span>
+          <div class="flex items-center gap-cgp-8 font-mono text-cgp-sm">
+            <span class="text-cgp-text-muted"><span class="cgp-count-up" data-count="85">0</span>°C <span class="text-cgp-micro uppercase text-cgp-text-faint">Standard Air</span></span>
+            <span class="text-cgp-accent-bright"><span class="cgp-count-up" data-count="55">0</span>°C <span class="text-cgp-micro uppercase text-cgp-accent">CGP Loop</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-cgp-4 border-b border-cgp-border-subtle py-cgp-4">
+          <span class="text-cgp-xs font-bold uppercase tracking-cgp-wider text-cgp-text-muted">GPU Idle</span>
+          <div class="flex items-center gap-cgp-8 font-mono text-cgp-sm">
+            <span class="text-cgp-text-muted"><span class="cgp-count-up" data-count="40">0</span>°C <span class="text-cgp-micro uppercase text-cgp-text-faint">Standard Air</span></span>
+            <span class="text-cgp-accent-bright"><span class="cgp-count-up" data-count="32">0</span>°C <span class="text-cgp-micro uppercase text-cgp-accent">CGP Loop</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-cgp-4 py-cgp-4">
+          <span class="text-cgp-xs font-bold uppercase tracking-cgp-wider text-cgp-text-muted">GPU 100% Load</span>
+          <div class="flex items-center gap-cgp-8 font-mono text-cgp-sm">
+            <span class="text-cgp-text-muted"><span class="cgp-count-up" data-count="82">0</span>°C <span class="text-cgp-micro uppercase text-cgp-text-faint">Standard Air</span></span>
+            <span class="text-cgp-accent-bright"><span class="cgp-count-up" data-count="48">0</span>°C <span class="text-cgp-micro uppercase text-cgp-accent">CGP Loop</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static SVG bar comparison (4 groups x 2 bars, values labeled) -->
+    <div class="mt-cgp-16 rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card p-cgp-6 shadow-cgp-glow-black md:p-cgp-10">
+      <!-- legend -->
+      <div class="mb-cgp-6 flex flex-wrap items-center justify-center gap-cgp-8">
+        <span class="flex items-center gap-cgp-2 text-cgp-xs text-cgp-text-muted"><span class="h-3 w-3 rounded-sm bg-cgp-text-disabled" aria-hidden="true"></span>Standard Premium Air</span>
+        <span class="flex items-center gap-cgp-2 text-cgp-xs text-cgp-text-muted"><span class="h-3 w-3 rounded-sm bg-cgp-accent" aria-hidden="true"></span>CGP Custom Loop</span>
+      </div>
+
+      <svg viewBox="0 0 640 300" role="img" aria-label="Bar chart comparing thermal temperatures in degrees Celsius: Standard Premium Air versus CGP Custom Loop across CPU and GPU idle and full load states." class="mx-auto w-full max-w-2xl">
+        <title>Thermal comparison — Standard Air vs CGP Loop (°C)</title>
+        <!-- baseline -->
+        <line x1="72" y1="240" x2="558" y2="240" stroke="var(--cgp-border)" stroke-width="1" />
+        <!-- CPU Idle: Air 35 / CGP 28 -->
+        <g>
+          <title>CPU Idle: Standard Air 35°C, CGP Loop 28°C</title>
+          <rect x="94" y="149" width="44" height="91" rx="4" fill="var(--cgp-text-disabled)" />
+          <text x="116" y="141" class="font-mono" fill="var(--cgp-text-faint)" font-size="10" text-anchor="middle">35°C</text>
+          <rect x="146" y="168" width="44" height="72" rx="4" fill="var(--cgp-accent)" />
+          <text x="168" y="160" class="font-mono" fill="var(--cgp-accent-bright)" font-size="10" text-anchor="middle">28°C</text>
+        </g>
+        <!-- CPU 100% Load: Air 85 / CGP 55 -->
+        <g>
+          <title>CPU 100% Load: Standard Air 85°C, CGP Loop 55°C</title>
+          <rect x="224" y="20" width="44" height="220" rx="4" fill="var(--cgp-text-disabled)" />
+          <text x="246" y="12" class="font-mono" fill="var(--cgp-text-faint)" font-size="10" text-anchor="middle">85°C</text>
+          <rect x="276" y="98" width="44" height="142" rx="4" fill="var(--cgp-accent)" />
+          <text x="298" y="90" class="font-mono" fill="var(--cgp-accent-bright)" font-size="10" text-anchor="middle">55°C</text>
+        </g>
+        <!-- GPU Idle: Air 40 / CGP 32 -->
+        <g>
+          <title>GPU Idle: Standard Air 40°C, CGP Loop 32°C</title>
+          <rect x="354" y="136" width="44" height="104" rx="4" fill="var(--cgp-text-disabled)" />
+          <text x="376" y="128" class="font-mono" fill="var(--cgp-text-faint)" font-size="10" text-anchor="middle">40°C</text>
+          <rect x="406" y="157" width="44" height="83" rx="4" fill="var(--cgp-accent)" />
+          <text x="428" y="149" class="font-mono" fill="var(--cgp-accent-bright)" font-size="10" text-anchor="middle">32°C</text>
+        </g>
+        <!-- GPU 100% Load: Air 82 / CGP 48 -->
+        <g>
+          <title>GPU 100% Load: Standard Air 82°C, CGP Loop 48°C</title>
+          <rect x="484" y="28" width="44" height="212" rx="4" fill="var(--cgp-text-disabled)" />
+          <text x="506" y="20" class="font-mono" fill="var(--cgp-text-faint)" font-size="10" text-anchor="middle">82°C</text>
+          <rect x="536" y="116" width="44" height="124" rx="4" fill="var(--cgp-accent)" />
+          <text x="558" y="108" class="font-mono" fill="var(--cgp-accent-bright)" font-size="10" text-anchor="middle">48°C</text>
+        </g>
+        <!-- group labels -->
+        <g class="font-mono" fill="var(--cgp-text-muted)" font-size="11" text-anchor="middle">
+          <text x="120" y="262">CPU Idle</text>
+          <text x="250" y="262">CPU 100% Load</text>
+          <text x="380" y="262">GPU Idle</text>
+          <text x="510" y="262">GPU 100% Load</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE — The CGP Guarantee (NEW signature section) ============ -->
+<!-- New section (not in client's home.html): the trust inversion from 3.html
+     promoted to a full signature moment with data points + CTA. -->
+<section id="guarantee" class="cgp-section relative overflow-hidden bg-cgp-bg-section" aria-labelledby="guarantee-title">
+  <!-- Ambient glow (max 2 per viewport — design-system rule) -->
+  <div class="cgp-ambient-glow left-[-10%] top-[-20%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <div class="cgp-container-md relative">
+    <!-- Terminal header -->
+    <div class="mb-cgp-16 text-center">
+      <p class="cgp-eyebrow">The CGP Guarantee</p>
+      <h2 id="guarantee-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">
+        Select what you desire.<br>
+        <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">We'll engineer the rest.</span>
+      </h2>
+      <p class="mx-auto mt-cgp-6 max-w-xl text-cgp-text-secondary">
+        Do not worry about physics, thermodynamics, or compatibility. Our elite masters will construct the framework to make it reality.
+      </p>
+    </div>
+
+    <!-- Data points — mono readouts (craftsmanship proof) -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_TEST</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">48h</p>
+        <p class="mt-1 text-cgp-xs text-cgp-text-muted uppercase tracking-cgp-wider">Pressure Testing</p>
+      </div>
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_MATL</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">0.01mm</p>
+        <p class="mt-1 text-cgp-xs text-cgp-text-muted uppercase tracking-cgp-wider">Machining Tolerance</p>
+      </div>
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_ACRY</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">100%</p>
+        <p class="mt-1 text-cgp-xs text-cgp-text-muted uppercase tracking-cgp-wider">Leak Tested</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-cgp-16 text-center">
+      <a href="#inquiry" class="cgp-btn-primary">Summon The Masters</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY — The Archives (redesigned: mono index + stronger hover) ============ -->
+<!-- Archive cards: luminosity reveal (3.html treatment) + chip badges + mono index numbers. -->
+<section id="gallery" class="py-32" aria-labelledby="gallery-heading">
+  <div class="max-w-cgp-container-lg mx-auto px-4">
+    <!-- Section header -->
+    <div class="flex flex-col md:flex-row justify-between items-end gap-4 mb-10">
+      <div>
+        <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">The Archives</p>
+        <h2 id="gallery-heading" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight">Previously forged masterpieces.</h2>
+      </div>
+      <a href="#" class="cgp-btn-link">View Full Gallery <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Card 1: The Hotwheel (large) -->
+      <a href="#" class="block md:col-span-2">
+      <article class="cgp-archive-card group relative h-96 rounded-xl overflow-hidden bg-cgp-bg-card border border-cgp-border cursor-pointer transition-colors duration-300 hover:border-cgp-accent">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="assets/images/hotwheel.webp" alt="The Hotwheel — tilted 45-degree chassis with custom water cooling loop" class="cgp-archive-media absolute inset-0 w-full h-full object-cover" width="1280" height="882" loading="lazy" decoding="async">
+        <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+        <span class="absolute top-4 left-4 bg-cgp-bg-overlay backdrop-blur-md border border-cgp-border-strong px-3 py-1 rounded-full">
+          <span class="text-cgp-micro font-bold text-cgp-accent uppercase tracking-cgp-03em">Open-Air Architecture</span>
+        </span>
+        <span class="absolute top-4 right-4 font-mono text-cgp-xs text-cgp-text-faint group-hover:text-cgp-accent transition-colors" aria-hidden="true">01</span>
+        <div class="absolute inset-x-0 bottom-0 p-8">
+          <h3 class="text-cgp-h3 font-bold text-cgp-text-heading uppercase tracking-cgp-03em mb-1 group-hover:text-cgp-accent-bright transition-colors">The Hotwheel</h3>
+          <p class="text-cgp-micro text-cgp-accent tracking-wider uppercase">Tilted 45° Chassis &amp; SFX Power</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- Card 2: Project Obsidian (small) -->
+      <a href="#" class="block">
+      <article class="cgp-archive-card group relative h-96 rounded-xl overflow-hidden bg-cgp-bg-card border border-cgp-border cursor-pointer transition-colors duration-300 hover:border-cgp-accent">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="assets/images/obsidian.webp" alt="Project Obsidian — dual loop workstation build" class="cgp-archive-media absolute inset-0 w-full h-full object-cover" width="800" height="1200" loading="lazy" decoding="async">
+        <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+        <span class="absolute top-4 left-4 bg-cgp-bg-overlay backdrop-blur-md border border-cgp-border-strong px-3 py-1 rounded-full">
+          <span class="text-cgp-micro font-bold text-cgp-accent uppercase tracking-cgp-03em">Mechanical Horology</span>
+        </span>
+        <span class="absolute top-4 right-4 font-mono text-cgp-xs text-cgp-text-faint group-hover:text-cgp-accent transition-colors" aria-hidden="true">02</span>
+        <div class="absolute inset-x-0 bottom-0 p-8">
+          <h3 class="text-cgp-h3 font-bold text-cgp-text-heading uppercase tracking-cgp-03em mb-1 group-hover:text-cgp-accent-bright transition-colors">Project Obsidian</h3>
+          <p class="text-cgp-micro text-cgp-accent tracking-wider uppercase">Dual Loop / Workstation</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- Card 3: Titanium Core (small) -->
+      <a href="#" class="block">
+      <article class="cgp-archive-card group relative h-96 rounded-xl overflow-hidden bg-cgp-bg-card border border-cgp-border cursor-pointer transition-colors duration-300 hover:border-cgp-accent">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="assets/images/titanium-core.webp" alt="Titanium Core — mini-ITX watercooled build" class="cgp-archive-media absolute inset-0 w-full h-full object-cover" width="800" height="533" loading="lazy" decoding="async">
+        <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+        <span class="absolute top-4 left-4 bg-cgp-bg-overlay backdrop-blur-md border border-cgp-border-strong px-3 py-1 rounded-full">
+          <span class="text-cgp-micro font-bold text-cgp-accent uppercase tracking-cgp-03em">Extreme Scale</span>
+        </span>
+        <span class="absolute top-4 right-4 font-mono text-cgp-xs text-cgp-text-faint group-hover:text-cgp-accent transition-colors" aria-hidden="true">03</span>
+        <div class="absolute inset-x-0 bottom-0 p-8">
+          <h3 class="text-cgp-h3 font-bold text-cgp-text-heading uppercase tracking-cgp-03em mb-1 group-hover:text-cgp-accent-bright transition-colors">Titanium Core</h3>
+          <p class="text-cgp-micro text-cgp-accent tracking-wider uppercase">Mini-ITX Watercooled</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- Card 4: Neon Genesis (large) -->
+      <a href="#" class="block md:col-span-2">
+      <article class="cgp-archive-card group relative h-96 rounded-xl overflow-hidden bg-cgp-bg-card border border-cgp-border cursor-pointer transition-colors duration-300 hover:border-cgp-accent">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="assets/images/neon-genesis.webp" alt="Neon Genesis — UV reactive loop with glowing coolant" class="cgp-archive-media absolute inset-0 w-full h-full object-cover" width="1280" height="720" loading="lazy" decoding="async">
+        <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+        <span class="absolute top-4 left-4 bg-cgp-bg-overlay backdrop-blur-md border border-cgp-border-strong px-3 py-1 rounded-full">
+          <span class="text-cgp-micro font-bold text-cgp-accent uppercase tracking-cgp-03em">UV Reactive</span>
+        </span>
+        <span class="absolute top-4 right-4 font-mono text-cgp-xs text-cgp-text-faint group-hover:text-cgp-accent transition-colors" aria-hidden="true">04</span>
+        <div class="absolute inset-x-0 bottom-0 p-8">
+          <h3 class="text-cgp-h3 font-bold text-cgp-text-heading uppercase tracking-cgp-03em mb-1 group-hover:text-cgp-accent-bright transition-colors">Neon Genesis</h3>
+          <p class="text-cgp-micro text-cgp-accent tracking-wider uppercase">UV Reactive Loop</p>
+        </div>
+      </article>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP — Hardware ============ -->
+<!-- WooCommerce-ready markup: rows will become product cards in WP. -->
+<section id="shop" class="py-24 bg-cgp-bg-page" aria-labelledby="shop-title">
+  <div class="max-w-cgp-container-lg mx-auto px-4">
+    <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">Hardware</p>
+    <h2 id="shop-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">The Shop</h2>
+
+    <div class="space-y-4">
+      <!-- Product row 1 -->
+      <a href="#" class="cgp-card-hover flex items-center justify-between gap-4 p-4 bg-cgp-bg-card border border-cgp-border rounded-lg hover:border-cgp-accent transition-colors cursor-pointer">
+        <div class="flex items-center gap-4">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="assets/images/distro-plate.webp" alt="CGP Custom Distro Plate — acrylic reservoir with D5 pump mount" class="w-14 h-14 rounded-lg object-cover" width="560" height="373" loading="lazy" decoding="async">
+          <div>
+            <h3 class="font-bold text-cgp-text-heading">CGP Custom Distro Plate</h3>
+            <p class="text-cgp-xs text-cgp-text-secondary">Acrylic / D5 Pump Mount</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-end gap-1.5">
+          <span class="font-mono text-cgp-xs text-cgp-accent">From 1,200 SAR</span>
+          <span class="text-cgp-accent font-mono text-cgp-xs">View Product</span>
+        </div>
+      </a>
+
+      <!-- Product row 2 -->
+      <a href="#" class="cgp-card-hover flex items-center justify-between gap-4 p-4 bg-cgp-bg-card border border-cgp-border rounded-lg hover:border-cgp-accent transition-colors cursor-pointer">
+        <div class="flex items-center gap-4">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="assets/images/wraith.webp" alt="Pre-Built: The Wraith — ready to ship custom system" class="w-14 h-14 rounded-lg object-cover" width="560" height="420" loading="lazy" decoding="async">
+          <div>
+            <h3 class="font-bold text-cgp-text-heading">Pre-Built: The Wraith</h3>
+            <p class="text-cgp-xs text-cgp-text-secondary">Ready to ship system</p>
+            <span class="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-cgp-accent/30 bg-cgp-accent/10 px-2 py-0.5 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">
+              <span class="h-1 w-1 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>
+              Only 2 remaining — ready to ship
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col items-end gap-1.5">
+          <span class="font-mono text-cgp-xs text-cgp-accent">From 18,000 SAR</span>
+          <span class="text-cgp-accent font-mono text-cgp-xs">View Product</span>
+        </div>
+      </a>
+    </div>
+
+    <a href="#" class="cgp-btn-link mt-6">Browse All Products <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ============ BLOG — Logbook (with thumbnails for SEO + visual richness) ============ -->
+<!-- Semantic articles with <time> + images (alt text) — better SEO + richer look. -->
+<section id="blog" class="py-24 bg-cgp-bg-section" aria-labelledby="blog-title">
+  <div class="max-w-cgp-container-lg mx-auto px-4">
+    <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">Logbook</p>
+    <h2 id="blog-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">Latest Articles</h2>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <!-- Article 1 -->
+      <article class="group cursor-pointer">
+        <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="assets/images/distro-plate.webp" alt="Custom acrylic distro plate with coolant channels" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <time datetime="2026-08-20" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 20, 2026</time>
+        <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Choosing the right coolant for long-term loops</h3>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="group cursor-pointer">
+        <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="assets/images/hotwheel.webp" alt="Hand-bent hardline tubing on the Hotwheel build" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <time datetime="2026-08-12" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 12, 2026</time>
+        <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Behind the build: Bending tubing for the Hotwheel</h3>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="group cursor-pointer">
+        <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="assets/images/obsidian.webp" alt="Custom water cooling loop in a dark workstation build" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <time datetime="2026-07-30" class="block text-cgp-xs text-cgp-text-muted mb-1">Jul 30, 2026</time>
+        <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Air vs. Custom Water Cooling in harsh climates</h3>
+      </article>
+    </div>
+
+    <a href="#" class="cgp-btn-link mt-8">Read the Blog <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- Inquiry — commission form (terminal-framed). Alpine x-data scoped to the form only. -->
+<section id="inquiry" class="cgp-section" aria-labelledby="inquiry-title">
+  <div class="cgp-container-sm text-center">
+    <p class="cgp-eyebrow">Commission a Build</p>
+    <h2 id="inquiry-title" class="text-cgp-display-4 mb-6">Start Your Project</h2>
+    <p class="text-cgp-text-secondary text-sm mb-4">Tell us about your vision, your budget, and what you want to achieve. We'll get back to you to schedule a consultation.</p>
+    <p class="mb-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      <span>Commissions from 10,000 SAR</span>
+      <span class="text-cgp-accent" aria-hidden="true">//</span>
+      <span>We respond within 24 hours</span>
+    </p>
+
+    <!-- Terminal frame -->
+    <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-section shadow-cgp-glow-black text-left">
+      <!-- Top accent bar -->
+      <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+
+      <!-- Header row -->
+      <div class="flex items-center justify-between border-b border-cgp-border px-6 py-4">
+        <span class="cgp-mono-label tracking-cgp-04em">TRANSMIT REQUEST // SYS_INQUIRY</span>
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+          <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+        </span>
+      </div>
+
+      <!-- Scanline accent -->
+      <div class="cgp-scanline pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-cgp-accent/5 to-transparent" aria-hidden="true"></div>
+
+      <form x-data="{ sent: false, submit() { this.sent = true; }, reset() { this.sent = false; this.$refs.form.reset(); } }" @submit.prevent="submit" x-ref="form" class="relative space-y-8 p-6 md:p-8">
+        <!-- Honeypot (spam hygiene) -->
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;">
+
+        <!-- Fields -->
+        <div x-show="!sent" class="space-y-8">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div>
+              <label for="inquiry-name" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Name</label>
+              <input id="inquiry-name" name="name" type="text" required autocomplete="name" placeholder="John Doe" class="cgp-input-underline">
+            </div>
+            <div>
+              <label for="inquiry-email" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Email</label>
+              <input id="inquiry-email" name="email" type="email" required autocomplete="email" placeholder="john@example.com" class="cgp-input-underline">
+            </div>
+            <div>
+              <label for="inquiry-phone" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Phone / WhatsApp</label>
+              <input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX" class="cgp-input-underline">
+            </div>
+          </div>
+
+          <div>
+            <label for="inquiry-budget" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Estimated Budget (SAR)</label>
+            <select id="inquiry-budget" name="budget" class="cgp-input-underline">
+              <option value="" selected disabled>Select a range</option>
+              <option>10,000 - 15,000 SAR</option>
+              <option>15,000 - 25,000 SAR</option>
+              <option>25,000+ SAR</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="inquiry-details" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Project Details</label>
+            <textarea id="inquiry-details" name="details" rows="4" required placeholder="Describe the build you have in mind..." class="cgp-input-underline resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="cgp-btn-white w-full" style="min-height: 44px; border-radius: var(--cgp-radius-sm);">Summon The Masters</button>
+        </div>
+
+        <!-- Success state -->
+        <div x-show="sent" style="display: none;" aria-live="polite" class="space-y-6 py-8 text-center">
+          <p class="font-mono text-xs tracking-cgp-04em text-cgp-accent">// TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED</p>
+          <button type="button" @click="reset" class="cgp-btn-ghost" style="min-height: 44px;">Return to Forge</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer — luxury redesign: giant watermark + CTA + 3 columns + bottom bar -->
+<footer class="relative overflow-hidden border-t border-cgp-border-subtle bg-cgp-bg-section">
+  <!-- Giant CGP. watermark (background text) with cyan glow overlay -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-10 select-none text-center font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.08] [text-shadow:0_0_40px_rgba(6,182,212,0.25),0_0_120px_rgba(6,182,212,0.15)]" aria-hidden="true">
+    CGP<span class="text-cgp-accent/[0.25] [text-shadow:0_0_30px_rgba(6,182,212,0.5)]">.</span>
+  </div>
+
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow right-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- CTA strip -->
+  <div class="relative border-b border-cgp-border-subtle">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-left">
+      <div>
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
+        <p class="mt-2 text-sm text-cgp-text-muted">Tell us your vision — our masters will engineer the rest.</p>
+      </div>
+      <a href="#inquiry" class="cgp-btn-primary shrink-0" data-magnetic>Summon The Masters</a>
+    </div>
+  </div>
+
+  <!-- Footer content — 3-column luxury layout -->
+  <div class="cgp-container-lg relative grid grid-cols-1 gap-12 py-16 md:grid-cols-3">
+    <!-- Brand column -->
+    <div class="flex flex-col items-start gap-4">
+      <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
+      <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
+      <div class="flex items-center gap-3">
+        <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: replace 9665XXXXXXXX with the real CGP WhatsApp number -->
+        <a href="https://wa.me/9665XXXXXXXX" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
+      <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <a href="#vision" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Vision
+        </a>
+        <a href="#showcase" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Hotwheel
+        </a>
+        <a href="#gallery" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Archives
+        </a>
+        <a href="#shop" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Hardware
+        </a>
+        <a href="#inquiry" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Commission a Build
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contact column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
+      </a>
+      <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
+      </a>
+      <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
+        <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
+      </p>
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-faint">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="relative border-t border-cgp-border-subtle py-6">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+      <p class="text-xs text-cgp-text-muted">© 2026 CGP. Precision Engineering. All rights reserved.</p>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
+    </div>
+  </div>
+</footer>
+    <!-- SECTIONS -->
+  </main>
+</body>
+</html>
