@@ -14,13 +14,31 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 
 ## Current State
 
-- **Last completed:** Phase 2 (sections) + Phase 3 (assembly) + Phase 4 (verification) ✅
-- **In progress:** — (design ready for client presentation)
+- **Last completed:** Phase 2 (sections) + Phase 3 (assembly) + Phase 4 (verification) ✅ + homepage refactor per designer-guide rules (commit 3cb7772)
+- **In progress:** Configurator page (design/v1/configurator/) — consultation done, implementation started
 - **Blocked:** —
 
 ## Next Step
 
-> "Present design/v1/index.html to client. Next: client feedback → v2 revisions, or start Commission/Forge/Archives pages."
+> Build the Configurator page per the consolidated consultation design (below). Then: shop, product, archives, logbook, vision, contact pages.
+
+## Configurator Consultation Decisions (2026-08-29, /go-cons Round 1 — converged)
+
+- **Fusion design:** 111.html functional skeleton (mode switcher, category pills, sticky summary) + 3.html luxury matrix (DNA/materials/architecture) + CGP configuration.html terminal voice (SYS_*, amber GPU)
+- **Page title:** "Master Configuration Matrix" (client's own term) — `// SYS_COMMISSION`
+- **Structure:** hero (branding + guarantee strip) → matrix (Phase 0 vision collapsed + mode switcher + pills + cards + sticky blueprint) → commission (blueprint handoff + inquiry form)
+- **Amber scope:** GPU category + GPU part selection + Bespoke Water Loop mode active state; cyan everywhere else
+- **No compatibility warnings:** guarantee copy is the UX — `SYS_CHECK // FORGE VERIFIED` readout + amber master-note badges, never blocks
+- **CTA:** "Summon The Masters" → commission section with blueprint attached (NOT cart/checkout — quote request model)
+- **Pricing:** Total = Σ(parts) + labor (visible line: standard 1,500 / bespoke 3,500 SAR) + Σ(luxury options); SAR only; soft nudge below 10,000 SAR minimum
+- **Data model:** window.CGP_PARTS = { parts[], options[], labor{}, minimum } — flat JSON, WP-absorbable (commission CPT + JSON post meta, no premium plugins)
+- **Alpine:** Alpine.store('cgpConfig') + thin Alpine.data('cgpConfigurator') proxy; parts-data.js separate file; localStorage persistence; WhatsApp share
+- **Mode switch:** NEVER clears selections (111.html bug fixed) — both cooling states coexist, visibility toggles
+- **Mobile:** sticky bottom bar (total + progress + CTA, expandable) — the #1 mobile conversion fix
+- **Images:** typographic part cards (no per-part images — performance); category icons via Phosphor; REPLACE markers for future product photos
+- **Entry points:** "Commission" link in shared header ({{CONFIG_URL}} token) + configurator-specific header + shared footer via {{HOME_URL}} token
+- **Business controls in mockup:** lead-time + stock badges, labor line, minimum-commission nudge, upsell nudge, simulated commission-received modal
+- **Deferred:** Compatibility Forge terminal (separate page later), concierge path (later), auto-advance (matches client's own prototype — no)
 
 ## Critical Files (paths the orchestrator MUST read for context)
 

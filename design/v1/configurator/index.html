@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Primary meta -->
+  <title>CGP | Master Configuration Matrix — Build Your Bespoke PC | Riyadh</title>
+  <meta name="description" content="Configure your bespoke water-cooled PC at CGP — The Bespoke Forge. Select elite hardware, exotic materials, and thermodynamic architecture. Commissioned in Riyadh.">
+  <!-- TODO: flip to index,follow before launch -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <!-- TODO: replace with the live URL before launch -->
+  <link rel="canonical" href="https://cgp.sa/configurator/">
+  <link rel="alternate" hreflang="en" href="https://cgp.sa/configurator/">
+  <link rel="alternate" hreflang="x-default" href="https://cgp.sa/configurator/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CGP">
+  <meta property="og:title" content="CGP | Master Configuration Matrix — Build Your Bespoke PC | Riyadh">
+  <meta property="og:description" content="Configure your bespoke water-cooled PC at CGP — The Bespoke Forge. Select elite hardware, exotic materials, and thermodynamic architecture. Commissioned in Riyadh.">
+  <meta property="og:url" content="https://cgp.sa/configurator/">
+  <meta property="og:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <meta property="og:locale" content="en_SA">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CGP | Master Configuration Matrix — Build Your Bespoke PC | Riyadh">
+  <meta name="twitter:description" content="Configure your bespoke water-cooled PC at CGP — The Bespoke Forge. Select elite hardware, exotic materials, and thermodynamic architecture. Commissioned in Riyadh.">
+  <meta name="twitter:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <!-- Geo (Saudi Arabia — Riyadh) -->
+  <meta name="geo.region" content="SA">
+  <meta name="geo.placename" content="Riyadh">
+  <meta name="geo.position" content="24.7136;46.6753">
+  <meta name="ICBM" content="24.7136, 46.6753">
+  <!-- Schema.org JSON-LD (Organization + LocalBusiness + Service) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cgp.sa/#organization",
+      "name": "CGP",
+      "url": "https://cgp.sa/",
+      "logo": "https://cgp.sa/logo.png",
+      "description": "CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.",
+      "sameAs": [
+        "https://x.com/cgp",
+        "https://instagram.com/cgp.sa",
+        "https://wa.me/966500000000"
+      ]
+    },
+    {
+      "@type": [
+        "ComputerStore",
+        "LocalBusiness"
+      ],
+      "@id": "https://cgp.sa/#store",
+      "name": "CGP",
+      "url": "https://cgp.sa/",
+      "image": "https://cgp.sa/assets/images/hotwheel.webp",
+      "description": "Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.",
+      "parentOrganization": {
+        "@id": "https://cgp.sa/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Riyadh",
+        "addressRegion": "Riyadh Province",
+        "addressCountry": "SA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.7136,
+        "longitude": 46.6753
+      },
+      "openingHours": "Su-Th 10:00-22:00",
+      "priceRange": "SAR 10,000 - 25,000+"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://cgp.sa/#service",
+      "name": "Custom Water-Cooled PC Building",
+      "serviceType": "Custom PC Building",
+      "description": "Mastercrafted, water-cooled PC architecture engineered to order — bespoke loops, elite hardware, extreme performance.",
+      "provider": {
+        "@id": "https://cgp.sa/#store"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Saudi Arabia"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- Fonts (self-hosted, preload critical weights — family-weight.woff2 convention) -->
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
+  <link rel="stylesheet" href="../css/tailwind.css?v=1788032655">
+  <link rel="stylesheet" href="../css/theme.css?v=1788034770">
+  <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
+  <link rel="stylesheet" href="css/configurator.css">
+  <!-- Scripts (deferred — ONE bundle per page, minified) -->
+  <script defer src="../js/bundles/configurator.min.js?v=1788034770"></script>
+  <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
+  <!-- HEAD -->
+</head>
+<body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
+  <a href="#main" class="cgp-skip-link">Skip to main content</a>
+
+  <!-- Configurator header — page-specific (mirrors WP header-configurator.php).
+     Links point back to the homepage (../index.html) + own-page anchors. -->
+<header>
+  <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+    <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
+      <!-- Logo: CGP. with cyan dot + divider -->
+      <a href="../index.html#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
+        CGP<span class="text-cgp-accent">.</span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden gap-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+        <a href="../index.html" class="transition-colors hover:text-cgp-accent-bright">Home</a>
+        <a href="../index.html#showcase" class="transition-colors hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#matrix" class="transition-colors hover:text-cgp-accent-bright">The Matrix</a>
+        <a href="#commission" class="transition-colors hover:text-cgp-accent-bright">Commission</a>
+      </div>
+
+      <!-- Mobile hamburger toggle (44px touch target) -->
+      <button
+        @click="open = !open"
+        class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden"
+        aria-label="Toggle menu"
+        :aria-expanded="open.toString()"
+      >
+        <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
+        <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
+      </button>
+
+      <!-- Inquire CTA -->
+      <a href="#commission" class="cgp-btn-primary cgp-magnetic ms-auto min-h-11 md:ms-0" data-magnetic>Inquire</a>
+    </nav>
+
+    <!-- Mobile dropdown menu -->
+    <div
+      x-cloak
+      x-show="open"
+      x-transition.opacity.duration.200ms
+      @click.outside="open = false"
+      class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden"
+    >
+      <div class="flex flex-col gap-1">
+        <a href="../index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Home</a>
+        <a href="../index.html#showcase" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#matrix" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Matrix</a>
+        <a href="#commission" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Commission</a>
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- HEADER -->
+  <main id="main">
+    <!-- Configurator hero — terminal branding + guarantee strip (THE ONLY h1) -->
+<section id="configurator-hero" class="cgp-section relative overflow-hidden bg-cgp-bg-page" aria-labelledby="configurator-hero-title">
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <div class="cgp-container-xl relative text-center">
+    <p class="cgp-eyebrow">// SYS_COMMISSION</p>
+    <h1 id="configurator-hero-title" class="cgp-configurator-hero-title mb-6">
+      Manifest<br>
+      <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">The Impossible.</span>
+    </h1>
+    <p class="mx-auto mb-10 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+      Select what you desire. Our elite masters will construct the framework to make it reality — every component verified, every loop pressure-tested, every detail forged in-house.
+    </p>
+
+    <!-- Guarantee strip (trust inversion — the configurator's UX principle) -->
+    <div class="mx-auto flex max-w-2xl flex-col items-center justify-center gap-3 rounded-2xl border border-cgp-border-accent bg-cgp-bg-card px-6 py-4 sm:flex-row sm:gap-6">
+      <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_GUARANTEE</span>
+      <p class="text-cgp-xs text-cgp-text-muted">No physics, thermodynamics, or compatibility worries — the forge absorbs them.</p>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="mt-12 flex flex-col items-center gap-2" aria-hidden="true">
+      <span class="font-mono text-cgp-micro tracking-cgp-04em text-cgp-text-muted">ENTER THE MATRIX //</span>
+      <div class="relative h-10 w-px overflow-hidden bg-cgp-border">
+        <span class="cgp-scanline absolute inset-x-0 top-0 h-3 bg-cgp-accent"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Matrix — the configurator core: Phase 0 vision + mode switcher + pills + part cards + sticky Blueprint -->
+<section id="matrix" class="cgp-section bg-cgp-bg-elevated" aria-labelledby="matrix-title" x-data="cgpConfigurator">
+  <div class="cgp-container-xl">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">Master Configuration Matrix</p>
+        <h2 id="matrix-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">The Blueprint</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// RENDER_STAGE: ACTIVE</p>
+    </div>
+
+    <!-- ============ Phase 0: Aesthetic Vision (collapsed by default) ============ -->
+    <div class="mb-8">
+      <button type="button" @click="c.visionOpen = !c.visionOpen" class="cgp-vision-toggle" :aria-expanded="c.visionOpen.toString()" aria-controls="vision-panel">
+        <span>PHASE 0 // AESTHETIC VISION</span>
+        <span x-text="c.visionOpen ? '−' : '+'"></span>
+      </button>
+
+      <div id="vision-panel" x-cloak x-show="c.visionOpen" x-transition.opacity.duration.200ms class="mt-4 space-y-8 rounded-2xl border border-cgp-border bg-cgp-bg-card p-6 md:p-8">
+        <!-- Aesthetic DNA (single-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Aesthetic DNA</p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- REPEAT: DNA card — loop over CGP_PARTS.options (group='dna') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'dna')" :key="opt.id">
+              <button type="button" @click="c.selectDNA(opt.id)" :class="c.isDNA(opt.id) ? 'cgp-dna-card-selected' : ''" class="cgp-dna-card">
+                <span class="cgp-dna-icon" aria-hidden="true"><i :class="'ph ph-fill ph-' + opt.icon"></i></span>
+                <span class="cgp-dna-name" x-text="opt.name"></span>
+                <span class="cgp-dna-desc" x-text="opt.description"></span>
+                <span class="cgp-dna-price" x-text="opt.price.toLocaleString() + ' SAR'"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Exotic Materials (multi-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Exotic Materials</p>
+          <div class="flex flex-wrap gap-3">
+            <!-- REPEAT: material chip — loop over CGP_PARTS.options (group='materials') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'materials')" :key="opt.id">
+              <button type="button" @click="c.toggleMaterial(opt.id)" :class="c.hasMaterial(opt.id) ? 'cgp-material-chip-selected' : ''" class="cgp-material-chip">
+                <span x-text="opt.name"></span>
+                <span class="cgp-material-chip-price" x-text="'+' + opt.price.toLocaleString()"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Thermodynamic Architecture (single-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Thermodynamic Architecture</p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <!-- REPEAT: architecture card — loop over CGP_PARTS.options (group='architecture') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'architecture')" :key="opt.id">
+              <button type="button" @click="c.selectArchitecture(opt.id)" :class="c.isArchitecture(opt.id) ? 'cgp-dna-card-selected' : ''" class="cgp-dna-card">
+                <span class="cgp-dna-icon" aria-hidden="true"><i class="ph ph-fill ph-stack"></i></span>
+                <span class="cgp-dna-name" x-text="opt.name"></span>
+                <span class="cgp-dna-desc" x-text="opt.description"></span>
+                <span class="cgp-dna-price" x-text="opt.price.toLocaleString() + ' SAR'"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 12-col grid: 8 (selection) / 4 (blueprint) ============ -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <!-- Left: mode switcher + pills + cards -->
+      <div class="lg:col-span-8">
+        <!-- Mode switcher (never clears selections) -->
+        <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="cgp-mode-switch" role="group" aria-label="Build mode">
+            <button type="button" @click="c.toggleMode('standard')" :class="c.mode === 'standard' ? 'cgp-mode-btn-active' : ''" class="cgp-mode-btn">
+              <i class="ph ph-fill ph-lightning" aria-hidden="true"></i>SYS_AIR // Standard
+            </button>
+            <button type="button" @click="c.toggleMode('bespoke')" :class="c.mode === 'bespoke' ? 'cgp-mode-btn-active' : ''" class="cgp-mode-btn cgp-mode-btn-loop">
+              <i class="ph ph-fill ph-drop" aria-hidden="true"></i>SYS_LOOP // Bespoke
+            </button>
+          </div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted" x-text="c.mode === 'bespoke' ? 'Hand-bent hardline · 48h pressure tested' : 'Air-cooled precision build'"></p>
+        </div>
+
+        <!-- Category pills (wrap on desktop, scroll + fade edge on mobile) -->
+        <div class="cgp-pill-scroll-wrap mb-3">
+          <div class="cgp-pill-row" role="tablist" aria-label="Component categories">
+            <template x-for="cat in c.categories" :key="cat">
+              <button type="button" role="tab" :aria-selected="c.activeCategory === cat" @click="c.activeCategory = cat" :class="c.activeCategory === cat ? 'cgp-pill-active' : ''" class="cgp-pill" :class="cat === 'GPU' ? 'cgp-pill-gpu' : ''">
+                <span x-text="cat"></span>
+                <span x-show="c.selections[cat.toLowerCase()]" class="cgp-pill-dot" aria-hidden="true"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Progress + SYS_CHECK readout -->
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-2">
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+            // PROGRESS: <span class="text-cgp-accent" x-text="c.progress"></span>/<span x-text="c.totalCategories"></span> COMPONENTS
+          </p>
+          <p class="cgp-sys-check">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent motion-reduce:animate-none" aria-hidden="true"></span>
+            <span x-text="c.sysCheck"></span>
+          </p>
+        </div>
+
+        <!-- Part cards -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <!-- REPEAT: part card — loop over CGP_PARTS.parts (WP: CPT/JSON endpoint) -->
+          <template x-for="part in c.partsForCategory" :key="part.id">
+            <button type="button" @click="c.selectPart(part)" :class="c.isSelected(part) ? 'cgp-part-card-selected' : ''" class="cgp-part-card" :class="part.category === 'GPU' ? 'cgp-part-card-gpu' : ''">
+              <span class="cgp-part-card-icon" aria-hidden="true"><i :class="'ph ph-fill ph-' + part.icon"></i></span>
+              <span class="cgp-part-card-name" x-text="part.name"></span>
+              <span class="cgp-part-card-desc" x-text="part.description"></span>
+              <span class="cgp-part-card-price" x-text="part.price.toLocaleString() + ' SAR'"></span>
+              <span class="cgp-part-card-meta">
+                <span :class="'cgp-stock-' + part.stock" x-text="part.stock === 'in' ? 'In Stock' : part.stock === 'low' ? 'Low Stock' : 'Special Order'"></span>
+                <span x-text="part.leadTime"></span>
+              </span>
+              <span x-show="part.note" class="cgp-master-note" x-text="'// MASTER NOTE'"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <!-- Right: The Blueprint (sticky on desktop) -->
+      <aside class="lg:col-span-4" aria-label="Build blueprint">
+        <div class="cgp-blueprint lg:sticky lg:top-24 p-6 md:p-8">
+          <h3 class="mb-6 font-display text-xl font-bold tracking-tighter text-cgp-text-heading">The Blueprint</h3>
+
+          <!-- Selected parts -->
+          <div class="mb-4 max-h-[30vh] overflow-y-auto pe-2">
+            <template x-for="row in c.selectedParts" :key="row.category">
+              <div class="cgp-blueprint-row">
+                <div class="flex flex-col">
+                  <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+                  <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+                  <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
+                </div>
+              </div>
+            </template>
+            <p x-show="c.selectedParts.length === 0" class="py-4 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+          </div>
+
+          <!-- Luxury options -->
+          <template x-for="row in c.selectedOptions" :key="row.option.id">
+            <div class="cgp-blueprint-row">
+              <div class="flex flex-col">
+                <span class="cgp-blueprint-cat" x-text="row.group.toUpperCase()"></span>
+                <span class="cgp-blueprint-name" x-text="row.option.name"></span>
+              </div>
+              <span class="cgp-blueprint-price" x-text="row.option.price.toLocaleString() + ' SAR'"></span>
+            </div>
+          </template>
+
+          <!-- Labor line (visible value prop) -->
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat">LABOR</span>
+              <span class="cgp-blueprint-name" x-text="c.laborLabel"></span>
+            </div>
+            <span class="cgp-blueprint-price" x-text="c.labor.toLocaleString() + ' SAR'"></span>
+          </div>
+
+          <!-- Total -->
+          <div class="mt-6 border-t border-cgp-border pt-6">
+            <div class="flex items-end justify-between">
+              <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+              <span class="cgp-blueprint-total" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
+            </div>
+            <p class="mt-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// FORGE TIME: <span x-text="c.leadTime"></span></p>
+            <p x-show="c.belowMinimum" class="cgp-minimum-nudge mt-2">// Bespoke commissions start at 10,000 SAR — our masters will refine your selection</p>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-6 flex flex-col gap-3">
+            <a href="#commission" class="cgp-btn-primary cgp-magnetic w-full" data-magnetic>Summon The Masters</a>
+            <button type="button" @click="c.shareWhatsApp()" class="cgp-btn-ghost w-full">
+              <i class="ph ph-fill ph-whatsapp-logo" aria-hidden="true"></i>Share Blueprint
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Mobile sticky bar (the #1 mobile conversion fix) -->
+  <div class="cgp-mobile-bar lg:hidden" x-data>
+    <div class="cgp-container-sm flex items-center justify-between gap-3 px-4 py-3">
+      <div class="flex flex-col">
+        <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+        <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" @click="c.summaryOpen = !c.summaryOpen" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary" :aria-expanded="c.summaryOpen.toString()" aria-label="Toggle blueprint">
+          <i class="ph ph-fill ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="#commission" class="cgp-btn-primary min-h-11">Summon</a>
+      </div>
+    </div>
+    <!-- Expandable full summary -->
+    <div x-cloak x-show="c.summaryOpen" x-transition.opacity.duration.200ms class="max-h-[50vh] overflow-y-auto border-t border-cgp-border px-4 py-4">
+      <template x-for="row in c.selectedParts" :key="row.category">
+        <div class="cgp-blueprint-row">
+          <div class="flex flex-col">
+            <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+            <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+            <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
+          </div>
+        </div>
+      </template>
+      <p x-show="c.selectedParts.length === 0" class="py-3 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+    </div>
+  </div>
+</section>
+
+<!-- Commission — blueprint handoff + inquiry form (the conversion point) -->
+<section id="commission" class="cgp-section bg-cgp-bg-section" aria-labelledby="commission-title" x-data="cgpConfigurator">
+  <div class="cgp-container-md">
+    <div class="text-center">
+      <p class="cgp-eyebrow">// TRANSMIT REQUEST</p>
+      <h2 id="commission-title" class="text-cgp-display-4 mb-6">Summon The Masters</h2>
+      <p class="mx-auto mb-12 max-w-xl text-sm text-cgp-text-secondary">
+        Your blueprint travels with your request — the masters review every selection before the first cut.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <!-- Your Blueprint (from configurator state) -->
+      <div class="cgp-commission-blueprint p-6 md:p-8">
+        <p class="mb-6 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// YOUR BLUEPRINT</p>
+
+        <template x-for="row in c.selectedParts" :key="row.category">
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+              <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+            </div>
+            <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+          </div>
+        </template>
+
+        <template x-for="row in c.selectedOptions" :key="row.option.id">
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat" x-text="row.group.toUpperCase()"></span>
+              <span class="cgp-blueprint-name" x-text="row.option.name"></span>
+            </div>
+            <span class="cgp-blueprint-price" x-text="row.option.price.toLocaleString() + ' SAR'"></span>
+          </div>
+        </template>
+
+        <div class="cgp-blueprint-row">
+          <div class="flex flex-col">
+            <span class="cgp-blueprint-cat">LABOR</span>
+            <span class="cgp-blueprint-name" x-text="c.laborLabel"></span>
+          </div>
+          <span class="cgp-blueprint-price" x-text="c.labor.toLocaleString() + ' SAR'"></span>
+        </div>
+
+        <div class="mt-6 flex items-end justify-between border-t border-cgp-border pt-6">
+          <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+          <span class="cgp-blueprint-total" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
+        </div>
+        <p class="mt-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// FORGE TIME: <span x-text="c.leadTime"></span></p>
+        <p x-show="c.belowMinimum" class="cgp-minimum-nudge mt-2">// Bespoke commissions start at 10,000 SAR — our masters will refine your selection</p>
+      </div>
+
+      <!-- Inquiry form (terminal-framed, simulated success) -->
+      <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-elevated shadow-cgp-glow-black text-start">
+        <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+
+        <div class="flex items-center justify-between border-b border-cgp-border px-6 py-4">
+          <span class="cgp-mono-label tracking-cgp-04em">TRANSMIT REQUEST // SYS_INQUIRY</span>
+          <span class="flex gap-1.5" aria-hidden="true">
+            <span class="h-2 w-2 rounded-full bg-cgp-text-muted"></span>
+            <span class="h-2 w-2 rounded-full bg-cgp-text-muted"></span>
+            <span class="h-2 w-2 rounded-full bg-cgp-text-muted"></span>
+          </span>
+        </div>
+
+        <div class="cgp-scanline pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-cgp-accent/5 to-transparent" aria-hidden="true"></div>
+
+        <form x-data="{ sent: false, submit() { this.sent = true; }, reset() { this.sent = false; this.$refs.form.reset(); } }" @submit.prevent="submit" x-ref="form" class="relative space-y-8 p-6 md:p-8">
+          <!-- Honeypot (spam hygiene) -->
+          <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="cgp-honeypot">
+
+          <div x-show="!sent" class="space-y-8">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <label for="config-name" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Name</label>
+                <input id="config-name" name="name" type="text" required autocomplete="name" placeholder="John Doe" class="cgp-input-underline">
+              </div>
+              <div>
+                <label for="config-email" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Email</label>
+                <input id="config-email" name="email" type="email" required autocomplete="email" placeholder="john@example.com" class="cgp-input-underline">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <label for="config-phone" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Phone / WhatsApp</label>
+                <input id="config-phone" name="phone" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX" class="cgp-input-underline">
+              </div>
+              <div>
+                <label for="config-budget" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Estimated Budget (SAR)</label>
+                <select id="config-budget" name="budget" class="cgp-input-underline">
+                  <option value="" selected disabled>Select a range</option>
+                  <option>10,000 - 15,000 SAR</option>
+                  <option>15,000 - 25,000 SAR</option>
+                  <option>25,000+ SAR</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="config-details" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Project Details</label>
+              <textarea id="config-details" name="details" rows="4" required placeholder="Anything the masters should know about your vision..." class="cgp-input-underline resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="cgp-btn-white cgp-btn-submit w-full">Summon The Masters</button>
+          </div>
+
+          <!-- Success state -->
+          <div x-show="sent" x-cloak aria-live="polite" class="space-y-6 py-8 text-center">
+            <p class="font-mono text-xs tracking-cgp-04em text-cgp-accent">// TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED</p>
+            <p class="text-sm text-cgp-text-secondary">Your blueprint is in the forge queue. Expect a consultation within 24 hours.</p>
+            <button type="button" @click="reset" class="cgp-btn-ghost">Return to Forge</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- SECTIONS -->
+  </main>
+
+  <!-- Footer — luxury redesign: giant watermark + CTA + 3 columns + bottom bar -->
+<footer class="relative overflow-hidden border-t border-cgp-border-subtle bg-cgp-bg-section">
+  <!-- Giant CGP. watermark (background text) with cyan glow overlay -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-10 select-none text-center font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.08] [text-shadow:0_0_40px_rgba(6,182,212,0.25),0_0_120px_rgba(6,182,212,0.15)]" aria-hidden="true">
+    CGP<span class="text-cgp-accent/[0.25] [text-shadow:0_0_30px_rgba(6,182,212,0.5)]">.</span>
+  </div>
+
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- CTA strip -->
+  <div class="relative border-b border-cgp-border-subtle">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-start">
+      <div>
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
+        <p class="mt-2 text-sm text-cgp-text-muted">Tell us your vision — our masters will engineer the rest.</p>
+      </div>
+      <a href="#inquiry" class="cgp-btn-primary shrink-0" data-magnetic>Summon The Masters</a>
+    </div>
+  </div>
+
+  <!-- Footer content — 3-column luxury layout -->
+  <div class="cgp-container-lg relative grid grid-cols-1 gap-12 py-16 md:grid-cols-3">
+    <!-- Brand column -->
+    <div class="flex flex-col items-start gap-4">
+      <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
+      <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
+      <div class="flex items-center gap-3">
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: replace 9665XXXXXXXX with the real CGP WhatsApp number -->
+        <a href="https://wa.me/9665XXXXXXXX" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
+      <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <!-- RTL: mirror arrow direction (group-hover:translate-x-0.5) -->
+        <a href="../index.html#vision" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Vision
+        </a>
+        <a href="../index.html#showcase" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Hotwheel
+        </a>
+        <a href="../index.html#gallery" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Archives
+        </a>
+        <a href="../index.html#shop" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Hardware
+        </a>
+        <a href="index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Commission a Build
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contact column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <!-- TODO: from site settings -->
+      <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
+      </a>
+      <!-- TODO: from site settings -->
+      <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
+      </a>
+      <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
+        <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
+      </p>
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-muted">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="relative border-t border-cgp-border-subtle py-6">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-start">
+      <p class="text-xs text-cgp-text-muted">© <!-- YEAR --> CGP. Precision Engineering. All rights reserved.</p>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
+    </div>
+  </div>
+</footer>
+  <!-- FOOTER -->
+</body>
+</html>

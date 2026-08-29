@@ -103,6 +103,60 @@ const PAGES = {
       footer: 'shared',
     },
   },
+  configurator: {
+    output: 'configurator/index.html',
+    title: 'CGP | Master Configuration Matrix — Build Your Bespoke PC | Riyadh',
+    description: 'Configure your bespoke water-cooled PC at CGP — The Bespoke Forge. Select elite hardware, exotic materials, and thermodynamic architecture. Commissioned in Riyadh.',
+    canonical: 'https://cgp.sa/configurator/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': 'Service',
+          '@id': 'https://cgp.sa/#service',
+          name: 'Custom Water-Cooled PC Building',
+          serviceType: 'Custom PC Building',
+          description: 'Mastercrafted, water-cooled PC architecture engineered to order — bespoke loops, elite hardware, extreme performance.',
+          provider: { '@id': 'https://cgp.sa/#store' },
+          areaServed: { '@type': 'Country', name: 'Saudi Arabia' },
+        },
+      ],
+    },
+    css: ['configurator/css/configurator.css'],
+    js: ['main.js', 'configurator/js/parts-data.js', 'configurator/js/configurator.js'],
+    sections: {
+      header: 'configurator/sections/header.html', // page-specific (mirrors WP header-configurator.php)
+      main: [
+        'configurator/sections/hero.html',
+        'configurator/sections/matrix.html',
+        'configurator/sections/commission.html',
+      ],
+      footer: 'shared',
+    },
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -112,10 +166,19 @@ const PAGES = {
 // ---------------------------------------------------------------------------
 function buildHead(page) {
   const origin = page.canonical.replace(/\/$/, '');
-  const ogImage = origin + '/' + page.ogImage;
-  const theme = path.relative(DESIGN_DIR, THEME_ASSETS_DIR).split(path.sep).join('/');
-  const css = page.css.map((c) => `  <link rel="stylesheet" href="${c}">`).join('\n');
-  const js = page.js.map((s) => `  <script defer src="${s}"></script>`).join('\n');
+  // ogImage may be absolute (deep pages) or relative (homepage root)
+  const ogImage = /^https?:\/\//.test(page.ogImage) ? page.ogImage : origin + '/' + page.ogImage;
+  // ALL asset paths resolve relative to the OUTPUT page's directory (pageRoot),
+  // not to design/v1 — deep pages (configurator/) need ../ prefixes.
+  const pageRoot = path.dirname(path.join(DESIGN_DIR, page.output));
+  const rel = (p) => path.relative(pageRoot, p).split(path.sep).join('/');
+  const theme = rel(THEME_ASSETS_DIR);
+  const css = page.css.map((c) => `  <link rel="stylesheet" href="${rel(path.join(DESIGN_DIR, c))}">`).join('\n');
+  const js = page.js.map((s) => `  <script defer src="${rel(s === 'main.js' ? path.join(THEME_ASSETS_DIR, 'js', 'main.js') : path.join(DESIGN_DIR, s))}"></script>`).join('\n');
+  const favicon = rel(path.join(DESIGN_DIR, 'favicon.svg'));
+  const tailwindCss = rel(path.join(DESIGN_DIR, 'css', 'tailwind.css'));
+  const themeCss = rel(path.join(DESIGN_DIR, 'css', 'theme.css'));
+  const bundleJs = rel(path.join(DESIGN_DIR, 'js', 'bundles', page.bundle + '.min.js'));
   return [
     '  <meta charset="UTF-8">',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
@@ -126,7 +189,7 @@ function buildHead(page) {
     '  <!-- TODO: flip to index,follow before launch -->',
     '  <meta name="robots" content="noindex, nofollow">',
     '  <meta name="theme-color" content="#050505">',
-    '  <link rel="icon" type="image/svg+xml" href="favicon.svg">',
+    `  <link rel="icon" type="image/svg+xml" href="${favicon}">`,
     '  <!-- TODO: replace with the live URL before launch -->',
     `  <link rel="canonical" href="${page.canonical}">`,
     `  <link rel="alternate" hreflang="en" href="${page.canonical}">`,
@@ -163,8 +226,8 @@ function buildHead(page) {
     `  <link rel="preload" href="${theme}/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>`,
     '',
     '  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->',
-    `  <link rel="stylesheet" href="css/tailwind.css?v=${assetVersion('css/tailwind.css')}">`,
-    `  <link rel="stylesheet" href="css/theme.css?v=${assetVersion('css/theme.css')}">`,
+    `  <link rel="stylesheet" href="${tailwindCss}?v=${assetVersion('css/tailwind.css')}">`,
+    `  <link rel="stylesheet" href="${themeCss}?v=${assetVersion('css/theme.css')}">`,
     `  <link rel="stylesheet" href="${theme}/vendor/phosphor/style.css">`,
     css,
     '',
@@ -173,7 +236,7 @@ function buildHead(page) {
     // (queueMicrotask) right after its own script — NOT on DOMContentLoaded.
     // The bundle must register its alpine:init listeners before that microtask
     // runs, or Alpine.data() components are never registered.
-    `  <script defer src="js/bundles/${page.bundle}.min.js?v=${assetVersion('js/bundles/' + page.bundle + '.min.js')}"></script>`,
+    `  <script defer src="${bundleJs}?v=${assetVersion('js/bundles/' + page.bundle + '.min.js')}"></script>`,
     `  <script defer src="${theme}/vendor/alpine.min.js"></script>`,
   ].filter(Boolean).join('\n');
 }
@@ -245,10 +308,17 @@ function resolveSection(relPath, pageRoot) {
   if (!fs.existsSync(file)) throw new Error(`missing section: ${relPath}`);
   const theme = path.relative(pageRoot, THEME_ASSETS_DIR).split(path.sep).join('/');
   const page = path.relative(pageRoot, pageRoot).split(path.sep).join('/') || '.';
+  // Cross-page link tokens: '' for the homepage itself, relative path otherwise
+  const homeRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'index.html')).split(path.sep).join('/');
+  const homeUrl = homeRel === 'index.html' ? '' : homeRel;
+  const configRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'configurator', 'index.html')).split(path.sep).join('/');
+  const configUrl = configRel === 'configurator/index.html' ? 'configurator/index.html' : configRel;
   return fs
     .readFileSync(file, 'utf8')
     .replace(/\{\{THEME_ASSETS\}\}/g, theme)
-    .replace(/\{\{PAGE_ASSETS\}\}/g, page);
+    .replace(/\{\{PAGE_ASSETS\}\}/g, page)
+    .replace(/\{\{HOME_URL\}\}/g, homeUrl)
+    .replace(/\{\{CONFIG_URL\}\}/g, configUrl);
 }
 
 // ---------------------------------------------------------------------------

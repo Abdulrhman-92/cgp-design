@@ -1,0 +1,222 @@
+<!-- Matrix — the configurator core: Phase 0 vision + mode switcher + pills + part cards + sticky Blueprint -->
+<section id="matrix" class="cgp-section bg-cgp-bg-elevated" aria-labelledby="matrix-title" x-data="cgpConfigurator">
+  <div class="cgp-container-xl">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">Master Configuration Matrix</p>
+        <h2 id="matrix-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">The Blueprint</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// RENDER_STAGE: ACTIVE</p>
+    </div>
+
+    <!-- ============ Phase 0: Aesthetic Vision (collapsed by default) ============ -->
+    <div class="mb-8">
+      <button type="button" @click="c.visionOpen = !c.visionOpen" class="cgp-vision-toggle" :aria-expanded="c.visionOpen.toString()" aria-controls="vision-panel">
+        <span>PHASE 0 // AESTHETIC VISION</span>
+        <span x-text="c.visionOpen ? '−' : '+'"></span>
+      </button>
+
+      <div id="vision-panel" x-cloak x-show="c.visionOpen" x-transition.opacity.duration.200ms class="mt-4 space-y-8 rounded-2xl border border-cgp-border bg-cgp-bg-card p-6 md:p-8">
+        <!-- Aesthetic DNA (single-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Aesthetic DNA</p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- REPEAT: DNA card — loop over CGP_PARTS.options (group='dna') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'dna')" :key="opt.id">
+              <button type="button" @click="c.selectDNA(opt.id)" :class="c.isDNA(opt.id) ? 'cgp-dna-card-selected' : ''" class="cgp-dna-card">
+                <span class="cgp-dna-icon" aria-hidden="true"><i :class="'ph ph-fill ph-' + opt.icon"></i></span>
+                <span class="cgp-dna-name" x-text="opt.name"></span>
+                <span class="cgp-dna-desc" x-text="opt.description"></span>
+                <span class="cgp-dna-price" x-text="opt.price.toLocaleString() + ' SAR'"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Exotic Materials (multi-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Exotic Materials</p>
+          <div class="flex flex-wrap gap-3">
+            <!-- REPEAT: material chip — loop over CGP_PARTS.options (group='materials') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'materials')" :key="opt.id">
+              <button type="button" @click="c.toggleMaterial(opt.id)" :class="c.hasMaterial(opt.id) ? 'cgp-material-chip-selected' : ''" class="cgp-material-chip">
+                <span x-text="opt.name"></span>
+                <span class="cgp-material-chip-price" x-text="'+' + opt.price.toLocaleString()"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Thermodynamic Architecture (single-select) -->
+        <div>
+          <p class="cgp-vision-group-label mb-4">Thermodynamic Architecture</p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <!-- REPEAT: architecture card — loop over CGP_PARTS.options (group='architecture') -->
+            <template x-for="opt in window.CGP_PARTS.options.filter(o => o.group === 'architecture')" :key="opt.id">
+              <button type="button" @click="c.selectArchitecture(opt.id)" :class="c.isArchitecture(opt.id) ? 'cgp-dna-card-selected' : ''" class="cgp-dna-card">
+                <span class="cgp-dna-icon" aria-hidden="true"><i class="ph ph-fill ph-stack"></i></span>
+                <span class="cgp-dna-name" x-text="opt.name"></span>
+                <span class="cgp-dna-desc" x-text="opt.description"></span>
+                <span class="cgp-dna-price" x-text="opt.price.toLocaleString() + ' SAR'"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 12-col grid: 8 (selection) / 4 (blueprint) ============ -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <!-- Left: mode switcher + pills + cards -->
+      <div class="lg:col-span-8">
+        <!-- Mode switcher (never clears selections) -->
+        <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="cgp-mode-switch" role="group" aria-label="Build mode">
+            <button type="button" @click="c.toggleMode('standard')" :class="c.mode === 'standard' ? 'cgp-mode-btn-active' : ''" class="cgp-mode-btn">
+              <i class="ph ph-fill ph-lightning" aria-hidden="true"></i>SYS_AIR // Standard
+            </button>
+            <button type="button" @click="c.toggleMode('bespoke')" :class="c.mode === 'bespoke' ? 'cgp-mode-btn-active' : ''" class="cgp-mode-btn cgp-mode-btn-loop">
+              <i class="ph ph-fill ph-drop" aria-hidden="true"></i>SYS_LOOP // Bespoke
+            </button>
+          </div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted" x-text="c.mode === 'bespoke' ? 'Hand-bent hardline · 48h pressure tested' : 'Air-cooled precision build'"></p>
+        </div>
+
+        <!-- Category pills (wrap on desktop, scroll + fade edge on mobile) -->
+        <div class="cgp-pill-scroll-wrap mb-3">
+          <div class="cgp-pill-row" role="tablist" aria-label="Component categories">
+            <template x-for="cat in c.categories" :key="cat">
+              <button type="button" role="tab" :aria-selected="c.activeCategory === cat" @click="c.activeCategory = cat" :class="c.activeCategory === cat ? 'cgp-pill-active' : ''" class="cgp-pill" :class="cat === 'GPU' ? 'cgp-pill-gpu' : ''">
+                <span x-text="cat"></span>
+                <span x-show="c.selections[cat.toLowerCase()]" class="cgp-pill-dot" aria-hidden="true"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Progress + SYS_CHECK readout -->
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-2">
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+            // PROGRESS: <span class="text-cgp-accent" x-text="c.progress"></span>/<span x-text="c.totalCategories"></span> COMPONENTS
+          </p>
+          <p class="cgp-sys-check">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent motion-reduce:animate-none" aria-hidden="true"></span>
+            <span x-text="c.sysCheck"></span>
+          </p>
+        </div>
+
+        <!-- Part cards -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <!-- REPEAT: part card — loop over CGP_PARTS.parts (WP: CPT/JSON endpoint) -->
+          <template x-for="part in c.partsForCategory" :key="part.id">
+            <button type="button" @click="c.selectPart(part)" :class="c.isSelected(part) ? 'cgp-part-card-selected' : ''" class="cgp-part-card" :class="part.category === 'GPU' ? 'cgp-part-card-gpu' : ''">
+              <span class="cgp-part-card-icon" aria-hidden="true"><i :class="'ph ph-fill ph-' + part.icon"></i></span>
+              <span class="cgp-part-card-name" x-text="part.name"></span>
+              <span class="cgp-part-card-desc" x-text="part.description"></span>
+              <span class="cgp-part-card-price" x-text="part.price.toLocaleString() + ' SAR'"></span>
+              <span class="cgp-part-card-meta">
+                <span :class="'cgp-stock-' + part.stock" x-text="part.stock === 'in' ? 'In Stock' : part.stock === 'low' ? 'Low Stock' : 'Special Order'"></span>
+                <span x-text="part.leadTime"></span>
+              </span>
+              <span x-show="part.note" class="cgp-master-note" x-text="'// MASTER NOTE'"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <!-- Right: The Blueprint (sticky on desktop) -->
+      <aside class="lg:col-span-4" aria-label="Build blueprint">
+        <div class="cgp-blueprint lg:sticky lg:top-24 p-6 md:p-8">
+          <h3 class="mb-6 font-display text-xl font-bold tracking-tighter text-cgp-text-heading">The Blueprint</h3>
+
+          <!-- Selected parts -->
+          <div class="mb-4 max-h-[30vh] overflow-y-auto pe-2">
+            <template x-for="row in c.selectedParts" :key="row.category">
+              <div class="cgp-blueprint-row">
+                <div class="flex flex-col">
+                  <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+                  <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+                  <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
+                </div>
+              </div>
+            </template>
+            <p x-show="c.selectedParts.length === 0" class="py-4 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+          </div>
+
+          <!-- Luxury options -->
+          <template x-for="row in c.selectedOptions" :key="row.option.id">
+            <div class="cgp-blueprint-row">
+              <div class="flex flex-col">
+                <span class="cgp-blueprint-cat" x-text="row.group.toUpperCase()"></span>
+                <span class="cgp-blueprint-name" x-text="row.option.name"></span>
+              </div>
+              <span class="cgp-blueprint-price" x-text="row.option.price.toLocaleString() + ' SAR'"></span>
+            </div>
+          </template>
+
+          <!-- Labor line (visible value prop) -->
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat">LABOR</span>
+              <span class="cgp-blueprint-name" x-text="c.laborLabel"></span>
+            </div>
+            <span class="cgp-blueprint-price" x-text="c.labor.toLocaleString() + ' SAR'"></span>
+          </div>
+
+          <!-- Total -->
+          <div class="mt-6 border-t border-cgp-border pt-6">
+            <div class="flex items-end justify-between">
+              <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+              <span class="cgp-blueprint-total" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
+            </div>
+            <p class="mt-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// FORGE TIME: <span x-text="c.leadTime"></span></p>
+            <p x-show="c.belowMinimum" class="cgp-minimum-nudge mt-2">// Bespoke commissions start at 10,000 SAR — our masters will refine your selection</p>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-6 flex flex-col gap-3">
+            <a href="#commission" class="cgp-btn-primary cgp-magnetic w-full" data-magnetic>Summon The Masters</a>
+            <button type="button" @click="c.shareWhatsApp()" class="cgp-btn-ghost w-full">
+              <i class="ph ph-fill ph-whatsapp-logo" aria-hidden="true"></i>Share Blueprint
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Mobile sticky bar (the #1 mobile conversion fix) -->
+  <div class="cgp-mobile-bar lg:hidden" x-data>
+    <div class="cgp-container-sm flex items-center justify-between gap-3 px-4 py-3">
+      <div class="flex flex-col">
+        <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+        <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" @click="c.summaryOpen = !c.summaryOpen" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary" :aria-expanded="c.summaryOpen.toString()" aria-label="Toggle blueprint">
+          <i class="ph ph-fill ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="#commission" class="cgp-btn-primary min-h-11">Summon</a>
+      </div>
+    </div>
+    <!-- Expandable full summary -->
+    <div x-cloak x-show="c.summaryOpen" x-transition.opacity.duration.200ms class="max-h-[50vh] overflow-y-auto border-t border-cgp-border px-4 py-4">
+      <template x-for="row in c.selectedParts" :key="row.category">
+        <div class="cgp-blueprint-row">
+          <div class="flex flex-col">
+            <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+            <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+            <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
+          </div>
+        </div>
+      </template>
+      <p x-show="c.selectedParts.length === 0" class="py-3 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+    </div>
+  </div>
+</section>

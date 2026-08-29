@@ -1,0 +1,504 @@
+/* ============================================================
+   CGP design/v1 — configurator page-level styles
+   ------------------------------------------------------------
+   Shared rules live in the theme (tokens/base/utilities/motion).
+   Scope: configurator-only — part cards, pills, blueprint,
+   vision matrix, mobile sticky bar.
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   ============================================================ */
+
+/* ============ Hero ============ */
+.cgp-configurator-hero-title {
+  font-size: clamp(44px, 11vw, 128px);
+}
+
+/* ============ Mode switcher ============ */
+.cgp-mode-switch {
+  display: inline-flex;
+  gap: var(--cgp-space-1);
+  padding: var(--cgp-space-1);
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-full);
+}
+
+.cgp-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  padding-block: var(--cgp-space-3);
+  padding-inline: var(--cgp-space-6);
+  min-height: 44px;
+  border-radius: var(--cgp-radius-full);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+  transition: background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-mode-btn:hover {
+  color: var(--cgp-text-primary);
+}
+
+.cgp-mode-btn-active {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+.cgp-mode-btn-active:hover {
+  color: #000000;
+}
+
+/* Bespoke Water Loop = amber (configurator signature state) */
+.cgp-mode-btn-loop.cgp-mode-btn-active {
+  background: var(--cgp-accent-warm);
+}
+
+/* ============ Category pills ============ */
+/* Mobile: horizontal scroll with fade edge (affordance). Desktop: wrap to 2 lines. */
+.cgp-pill-scroll-wrap {
+  position: relative;
+}
+
+.cgp-pill-scroll-wrap::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 48px;
+  background: linear-gradient(to left, var(--cgp-bg-elevated), transparent);
+  pointer-events: none;
+}
+
+.cgp-pill-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--cgp-space-3);
+  overflow-x: auto;
+  padding-block-end: var(--cgp-space-3);
+  scrollbar-width: none;
+}
+
+.cgp-pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .cgp-pill-scroll-wrap::after {
+    display: none;
+  }
+
+  .cgp-pill-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    /* Cap at 2 lines — if more categories exist, scroll vertically */
+    max-height: calc(44px * 2 + var(--cgp-space-3) * 2);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cgp-border-strong) transparent;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar {
+    display: block;
+    width: 4px;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar-thumb {
+    background: var(--cgp-border-strong);
+    border-radius: 9999px;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.cgp-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-6);
+  min-height: 44px;
+  border-radius: var(--cgp-radius-full);
+  border: 1px solid var(--cgp-border);
+  background: var(--cgp-bg-card);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-text-secondary);
+  transition: all var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-pill:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-pill-active {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* GPU pill = amber */
+.cgp-pill-gpu.cgp-pill-active {
+  border-color: var(--cgp-accent-warm);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--cgp-accent-warm);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}
+
+/* selected dot on pill */
+.cgp-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--cgp-accent);
+}
+
+.cgp-pill-gpu .cgp-pill-dot {
+  background: var(--cgp-accent-warm);
+}
+
+/* ============ Part cards ============ */
+.cgp-part-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cgp-space-3);
+  padding: var(--cgp-space-6);
+  min-height: 44px;
+  text-align: start;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  cursor: pointer;
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo),
+              transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-part-card:hover {
+  border-color: var(--cgp-accent);
+  transform: translateY(-2px);
+}
+
+.cgp-part-card-selected {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.08);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* GPU cards = amber selection */
+.cgp-part-card-gpu.cgp-part-card-selected {
+  border-color: var(--cgp-accent-warm);
+  background: rgba(245, 158, 11, 0.08);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}
+
+.cgp-part-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--cgp-radius-xl);
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  color: var(--cgp-accent);
+  font-size: var(--cgp-text-lg);
+}
+
+.cgp-part-card-gpu .cgp-part-card-icon {
+  color: var(--cgp-accent-warm);
+}
+
+.cgp-part-card-name {
+  font-size: var(--cgp-text-base);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+  line-height: 1.3;
+}
+
+.cgp-part-card-desc {
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+  line-height: 1.5;
+}
+
+.cgp-part-card-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-sm);
+  font-weight: 700;
+  color: var(--cgp-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.cgp-part-card-gpu .cgp-part-card-price {
+  color: var(--cgp-accent-warm);
+}
+
+.cgp-part-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-2);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--cgp-tracking-wider);
+  color: var(--cgp-text-muted);
+}
+
+.cgp-stock-in { color: var(--cgp-accent); }
+.cgp-stock-low { color: var(--cgp-accent-warm); }
+.cgp-stock-order { color: var(--cgp-text-muted); }
+
+/* master note badge (soft compatibility — never a block) */
+.cgp-master-note {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-1);
+  padding-inline: var(--cgp-space-2);
+  padding-block: 2px;
+  border-radius: var(--cgp-radius-full);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--cgp-accent-warm);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--cgp-tracking-wider);
+}
+
+/* ============ Vision matrix (Phase 0) ============ */
+.cgp-vision-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--cgp-space-4) var(--cgp-space-6);
+  min-height: 44px;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-vision-toggle:hover {
+  border-color: var(--cgp-accent);
+}
+
+.cgp-vision-group-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+.cgp-dna-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--cgp-space-3);
+  padding: var(--cgp-space-6);
+  text-align: start;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  cursor: pointer;
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-dna-card:hover {
+  border-color: var(--cgp-accent);
+}
+
+.cgp-dna-card-selected {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.08);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+.cgp-dna-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  color: var(--cgp-accent);
+  font-size: var(--cgp-text-lg);
+}
+
+.cgp-dna-name {
+  font-size: var(--cgp-text-base);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+}
+
+.cgp-dna-desc {
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+  line-height: 1.5;
+}
+
+.cgp-dna-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  color: var(--cgp-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* material chips (multi-select) */
+.cgp-material-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  min-height: 44px;
+  border-radius: var(--cgp-radius-full);
+  border: 1px solid var(--cgp-border);
+  background: var(--cgp-bg-card);
+  font-size: var(--cgp-text-xs);
+  font-weight: 600;
+  color: var(--cgp-text-secondary);
+  transition: all var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-material-chip:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-material-chip-selected {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-material-chip-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  color: var(--cgp-text-muted);
+}
+
+/* ============ The Blueprint (sticky summary) ============ */
+.cgp-blueprint {
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-3xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+.cgp-blueprint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-3);
+  padding-block: var(--cgp-space-3);
+  border-block-end: 1px solid var(--cgp-border-subtle);
+}
+
+.cgp-blueprint-cat {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+.cgp-blueprint-name {
+  font-size: var(--cgp-text-sm);
+  font-weight: 600;
+  color: var(--cgp-text-primary);
+}
+
+.cgp-blueprint-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cgp-blueprint-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--cgp-radius-full);
+  color: var(--cgp-text-muted);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  transition: color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-blueprint-remove:hover {
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-blueprint-total {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-display-4);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.cgp-sys-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  color: var(--cgp-accent);
+}
+
+.cgp-minimum-nudge {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-accent-warm);
+}
+
+/* ============ Mobile sticky bar ============ */
+.cgp-mobile-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--cgp-bg-elevated);
+  border-block-start: 1px solid var(--cgp-border);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ============ Commission blueprint card ============ */
+.cgp-commission-blueprint {
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-2xl);
+}
