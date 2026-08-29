@@ -11,6 +11,35 @@
    Use tokens via var(--cgp-*) — never hardcode values.
    ============================================================ */
 
+/* ============ Hero — boot sequence + title ============ */
+/* clamp keeps 'THE IMPOSSIBLE.' on one line (2 lines total) at 375/768/1024/1440.
+   Measured: Space Grotesk Bold 7.205em wide; 44px min fits the 343px container at 375px. */
+.cgp-hero-title {
+  font-size: clamp(44px, 11vw, 128px);
+}
+
+/* Boot terminal lines — staggered fade-in (total boot ≤ 1.2s, LCP budget) */
+.cgp-boot-line:nth-child(1) { animation-delay: 0.1s; }
+.cgp-boot-line:nth-child(2) { animation-delay: 0.4s; }
+.cgp-boot-line:nth-child(3) { animation-delay: 0.7s; }
+.cgp-boot-line:nth-child(4) { animation-delay: 1.0s; }
+
+/* ============ Inquiry — honeypot + submit ============ */
+/* Honeypot: visually hidden off-screen (spam hygiene, no inline styles) */
+.cgp-honeypot {
+  position: absolute;
+  inset-inline-start: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Submit: 44px touch target + squared radius (form CTA, per design-system) */
+.cgp-btn-submit {
+  min-height: 44px;
+  border-radius: var(--cgp-radius-sm);
+}
+
 /* ============ Shop — premium "Terminal Spec Sheet" cards ============ */
 /* Glass panel + terminal bar + image stage (spotlight) + spec panel.
    Tilt handled by main.js via data-tilt (transform only, reduced-motion safe). */
@@ -26,6 +55,16 @@
 /* Price glow on hover (subtle — max 2 glows per viewport rule) */
 .cgp-shop-card:hover .tabular-nums {
   text-shadow: var(--cgp-glow-text);
+}
+
+/* ============ Shop — slider active card ============ */
+/* The center card gets a STRONG cyan glow (visible, not subtle).
+   !important beats Tailwind's shadow-none (--tw-shadow vars). */
+.cgp-slider-card-active {
+  box-shadow:
+    0 0 25px rgba(6, 182, 212, 0.35),
+    0 0 60px rgba(6, 182, 212, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* ============ Shop — product stage (spotlight) ============ */

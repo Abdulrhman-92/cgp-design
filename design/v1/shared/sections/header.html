@@ -2,15 +2,15 @@
      Fixed bottom-6 on mobile / top-8 centered on desktop. Glass pill, CGP. + cyan dot,
      links, Inquire CTA + MOBILE HAMBURGER MENU (Alpine toggle). -->
 <header>
-  <div class="fixed bottom-6 left-1/2 z-50 w-[90%] -translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+  <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
     <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
       <!-- Logo: CGP. with cyan dot + divider (home.html) -->
-      <a href="#hero" class="border-r border-cgp-border-strong pr-4 font-display text-xl font-bold tracking-tighter text-white">
+      <a href="#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
         CGP<span class="text-cgp-accent">.</span>
       </a>
 
       <!-- Desktop links: hidden on mobile, visible md+ -->
-      <div class="hidden space-x-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+      <div class="hidden gap-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
         <a href="#vision" class="transition-colors hover:text-cgp-accent-bright">Vision</a>
         <a href="#showcase" class="transition-colors hover:text-cgp-accent-bright">The Hotwheel</a>
         <a href="#metrics" class="transition-colors hover:text-cgp-accent-bright">Metrics</a>
@@ -31,7 +31,7 @@
       </button>
 
       <!-- Inquire CTA: always visible, 44px touch target -->
-      <a href="#inquiry" class="cgp-btn-primary ml-auto min-h-11 md:ml-0" data-magnetic>Inquire</a>
+      <a href="#inquiry" class="cgp-btn-primary cgp-magnetic ms-auto min-h-11 md:ms-0" data-magnetic>Inquire</a>
     </nav>
 
     <!-- Mobile dropdown menu (glass, slides under the island) -->
@@ -41,15 +41,14 @@
       x-transition.opacity.duration.200ms
       @click.outside="open = false"
       class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden"
-      role="menu"
     >
       <div class="flex flex-col gap-1">
-        <a href="#vision" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Vision</a>
-        <a href="#showcase" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
-        <a href="#metrics" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Metrics</a>
-        <a href="#gallery" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Gallery</a>
-        <a href="#shop" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
-        <a href="#blog" @click="open = false" role="menuitem" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
+        <a href="#vision" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Vision</a>
+        <a href="#showcase" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
+        <a href="#metrics" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Metrics</a>
+        <a href="#gallery" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#shop" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
+        <a href="#blog" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
       </div>
     </div>
   </div>

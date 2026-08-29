@@ -10,34 +10,7 @@
 
     <!-- Interactive grid: ring + detail panel. Auto-rotate pauses on hover/focus. -->
     <div class="grid grid-cols-1 items-center gap-cgp-16 lg:grid-cols-2"
-         x-data="{
-           activeNode: 0,
-           swapping: false,
-           paused: false,
-           timer: null,
-           nodes: [
-             { id: '// NODE 01 : COOLANT LOOP', title: 'Vivid Liquid Cooling', text: 'The vibrant cyan coolant courses through meticulously hand-bent hardline tubing. We prioritize flow rate and aesthetic routing to create a mesmerizing visual centerpiece.' },
-             { id: '// NODE 02 : HARDWARE FITTINGS', title: 'Precision Metallic Fittings', text: 'Notice the pristine silver and black compression fittings. Each joint is mechanically secured to prevent leaks, creating sharp, industrial right angles that contrast the circular case.' },
-             { id: '// NODE 03 : MOTHERBOARD & GPU', title: 'ROG Elite Hardware', text: 'Built on an Asus ROG foundation. The motherboard and vertically mounted flagship GPU are seamlessly integrated into the water loop with custom CNC-milled acrylic blocks.' },
-             { id: '// NODE 04 : THE CHASSIS', title: 'Gamemax Hotwheel', text: 'An unconventional, gravity-defying circular chassis. The open-air frame design combined with dual high-static pressure fans at the base ensures ambient air continuously feeds the radiators.' }
-           ],
-           init() {
-             this.timer = setInterval(() => {
-               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
-             }, 4000);
-           },
-           destroy() { clearInterval(this.timer); },
-           selectNode(i) {
-             if (i === this.activeNode) return;
-             this.swapping = true;
-             // Reset the 4s auto-rotate timer after any manual selection
-             clearInterval(this.timer);
-             this.timer = setInterval(() => {
-               if (!this.paused) this.selectNode((this.activeNode + 1) % this.nodes.length);
-             }, 4000);
-             setTimeout(() => { this.activeNode = i; this.swapping = false; }, 300);
-           }
-         }"
+         x-data="cgpShowcase"
          @mouseenter="paused = true"
          @mouseleave="paused = false"
          @pointerdown="paused = true"
@@ -53,10 +26,10 @@
           <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,transparent_55%,var(--cgp-glow-ambient-cyan))]" aria-hidden="true"></div>
 
           <!-- Hotspots: 44px touch targets, keyboard accessible, numbered 1-4 -->
-          <button type="button" class="absolute left-1/2 top-[20%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 0 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 0" aria-label="Node 1: Cooling" @click="selectNode(0)">1</button>
-          <button type="button" class="absolute left-[20%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 1 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 1" aria-label="Node 2: Fittings" @click="selectNode(1)">2</button>
-          <button type="button" class="absolute left-[80%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 2 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 2" aria-label="Node 3: Motherboard and GPU" @click="selectNode(2)">3</button>
-          <button type="button" class="absolute left-1/2 top-[80%] z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 3 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 3" aria-label="Node 4: Chassis" @click="selectNode(3)">4</button>
+          <button type="button" class="absolute start-1/2 top-[20%] z-10 flex h-11 w-11 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 0 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 0" aria-label="Node 1: Cooling" @click="selectNode(0)">1</button>
+          <button type="button" class="absolute start-[20%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 1 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 1" aria-label="Node 2: Fittings" @click="selectNode(1)">2</button>
+          <button type="button" class="absolute start-[80%] top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 2 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 2" aria-label="Node 3: Motherboard and GPU" @click="selectNode(2)">3</button>
+          <button type="button" class="absolute start-1/2 top-[80%] z-10 flex h-11 w-11 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-cgp-xs font-bold text-black transition-all duration-300 hover:scale-110 motion-reduce:transition-none" :class="activeNode === 3 ? 'bg-cgp-text-heading shadow-cgp-glow-strong' : 'bg-cgp-accent shadow-cgp-glow-strong'" :aria-pressed="activeNode === 3" aria-label="Node 4: Chassis" @click="selectNode(3)">4</button>
         </div>
       </div>
 

@@ -6,11 +6,11 @@
   </div>
 
   <!-- Ambient glow (max 2 per viewport) -->
-  <div class="cgp-ambient-glow right-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
 
   <!-- CTA strip -->
   <div class="relative border-b border-cgp-border-subtle">
-    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-left">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-start">
       <div>
         <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
         <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
@@ -27,9 +27,11 @@
       <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
       <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
       <div class="flex items-center gap-3">
+        <!-- TODO: from site settings -->
         <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
           <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
         </a>
+        <!-- TODO: from site settings -->
         <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
           <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
         </a>
@@ -44,6 +46,7 @@
     <div class="flex flex-col items-start gap-4">
       <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
       <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <!-- RTL: mirror arrow direction (group-hover:translate-x-0.5) -->
         <a href="#vision" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
           <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Vision
         </a>
@@ -65,16 +68,18 @@
     <!-- Contact column -->
     <div class="flex flex-col items-start gap-4">
       <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <!-- TODO: from site settings -->
       <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
         <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
       </a>
+      <!-- TODO: from site settings -->
       <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
         <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
       </a>
       <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
         <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
       </p>
-      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-faint">
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-muted">
         <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
       </p>
     </div>
@@ -82,8 +87,8 @@
 
   <!-- Bottom bar -->
   <div class="relative border-t border-cgp-border-subtle py-6">
-    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
-      <p class="text-xs text-cgp-text-muted">© 2026 CGP. Precision Engineering. All rights reserved.</p>
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-start">
+      <p class="text-xs text-cgp-text-muted">© <!-- YEAR --> CGP. Precision Engineering. All rights reserved.</p>
       <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
     </div>
   </div>

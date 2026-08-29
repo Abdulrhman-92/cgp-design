@@ -10,8 +10,9 @@
 
 ## Technical Decisions
 
-- Icons: Phosphor (local — js + css + woff2 vendored together)
+- Icons: Phosphor (local — js + css + woff2 vendored together) in mockups; convert to inline SVG sprite from the same icons at WordPress implementation (~3KB, WP-native, no icon font in production)
 - Libraries: Tailwind (compiled locally, pinned 3.4.x) + Alpine.js (local)
+- Alpine state: inline `x-data` ≤ ~5 lines; larger state → `Alpine.data()` modules in `<page>/js/<page>.js` (registered on `alpine:init`); auto-rotate timers check `prefers-reduced-motion`
 - Fonts source: self-hosted woff2 in theme assets (`assets/fonts/`)
 - Images: webp, lazy loaded (`loading="lazy"` + `decoding="async"` + width/height for CLS)
 - Single source of truth: `wp-content/themes/cgp/assets/` — all shared code lives there, no duplication in `design/v1`
@@ -19,6 +20,10 @@
 - Metrics: live telemetry (SVG/CSS) — no Chart.js in production
 - `{{THEME_ASSETS}}` token convention in section files → build.js resolves relative; WP later resolves `get_template_directory_uri()`
 - Performance budget: ≤1.5MB raw / ≤700KB gzip; images ≤1MB
+- Logical properties only (RTL-ready): `start-*`/`end-*`, `ms-*`/`me-*`, `ps-*`/`pe-*`, `text-start`, `gap`; centering = `start-1/2 -translate-x-1/2 rtl:translate-x-1/2`
+- No inline styles — custom values become page-CSS classes
+- Repeated blocks (3+) marked `<!-- REPEAT: ... -->`; placeholder links `href="#"` + `<!-- TODO: real permalink -->`; year = `<!-- YEAR -->`; contact data = `<!-- TODO: from site settings -->`
+- backdrop-blur: max 1-2 per viewport; boot overlays ≤ 1.2s
 
 ## Client-specific Rules
 

@@ -86,7 +86,7 @@ const PAGES = {
       ],
     },
     css: ['home/css/home.css'],
-    js: ['main.js'], // 'main.js' = theme assets/js/main.js; '<path>.js' = relative to design/v1
+    js: ['main.js', 'home/js/home.js'], // 'main.js' = theme assets/js/main.js; '<path>.js' = relative to design/v1
     sections: {
       header: 'shared',
       main: [
@@ -169,8 +169,12 @@ function buildHead(page) {
     css,
     '',
     '  <!-- Scripts (deferred — ONE bundle per page, minified) -->',
-    `  <script defer src="${theme}/vendor/alpine.min.js"></script>`,
+    // Bundle FIRST, Alpine AFTER: Alpine 3.14+ auto-starts on a microtask
+    // (queueMicrotask) right after its own script — NOT on DOMContentLoaded.
+    // The bundle must register its alpine:init listeners before that microtask
+    // runs, or Alpine.data() components are never registered.
     `  <script defer src="js/bundles/${page.bundle}.min.js?v=${assetVersion('js/bundles/' + page.bundle + '.min.js')}"></script>`,
+    `  <script defer src="${theme}/vendor/alpine.min.js"></script>`,
   ].filter(Boolean).join('\n');
 }
 
@@ -286,7 +290,7 @@ function lint(html, name) {
 function main() {
   buildThemeCss();
   buildRobotsTxt();
-  const template = fs.readFileSync(path.join(DESIGN_DIR, 'index.html'), 'utf8');
+  const template = fs.readFileSync(path.join(DESIGN_DIR, 'template.html'), 'utf8');
   for (const [name, page] of Object.entries(PAGES)) {
     page.bundle = name; // bundle filename = page name
     buildJsBundle(name, page);

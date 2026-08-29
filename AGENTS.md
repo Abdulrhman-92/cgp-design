@@ -65,7 +65,13 @@ design/v1/
 - **Values:** ONLY from `tokens.css` via `var(--cgp-*)` or Tailwind `cgp-*` utilities — NEVER hardcode hex/px
 - **Layout carve-out:** layout-only values NOT in the token scale (sizes, widths, positions, clamp()) MAY be hardcoded (e.g. `h-[300px]`, `clamp(44px, 11vw, 128px)`) — colors/fonts/spacing/radii/shadows must use tokens
 - **Prefix:** all custom classes use `cgp-`
-- **Properties:** logical properties (margin-block, padding-inline)
+- **Properties:** logical properties ONLY (margin-block, padding-inline, `start-*`/`end-*`, `ms-*`/`me-*`, `ps-*`/`pe-*`, `border-s`/`border-e`, `text-start`/`text-end`, `gap` instead of `space-x`) — the site ships Arabic/RTL. Centering: `start-1/2 -translate-x-1/2 rtl:translate-x-1/2`. `top-*`/`bottom-*` are fine (vertical = direction-neutral)
+- **No inline styles:** every custom value becomes a class in the page CSS (e.g. `style="font-size: clamp(...)"` → `.cgp-hero-title`; `style="animation-delay: 0.1s"` → `.cgp-boot-line:nth-child(1)`; honeypot → `.cgp-honeypot`)
+- **Alpine state:** inline `x-data` objects ≤ ~5 lines only — anything bigger becomes an `Alpine.data()` module in the page JS (`<page>/js/<page>.js`), registered on `alpine:init`. Any `setInterval` auto-rotate MUST check `prefers-reduced-motion` in its init
+- **Repeated blocks:** 3+ identical cards (products, articles, gallery items, stats) → write ONE card as visual reference + `<!-- REPEAT: <what> — loop over <source> -->` comment (developer converts to WP loop)
+- **Placeholder links:** `href="#"` allowed in mockups but MUST be preceded by `<!-- TODO: real permalink -->`
+- **Year:** never hardcode — use `<!-- YEAR -->` (developer outputs `date_i18n('Y')`)
+- **Contact data:** never hardcode phone/email/socials — use `<!-- TODO: from site settings -->`
 - **Language:** English only in code/comments/docs
 - **No CDN:** all libraries/fonts local (assets/vendor/, assets/fonts/)
 - **{{THEME_ASSETS}} token:** theme asset paths (build.js computes depth per page — never hardcode `../../`)
@@ -77,19 +83,23 @@ design/v1/
 - **Copy anatomy:** eyebrow (cyan, tracked uppercase) → 2-line headline (gradient 2nd line) → zinc-400 paragraph
 - **Colors:** `#050505` bg, zinc grays, cyan `#06b6d4` accent (amber = configurator/GPU only)
 - **Fonts:** Space Grotesk (display) + Inter (body) + IBM Plex Sans Arabic (fallback)
-- **Buttons:** 5 variants from utilities.css (primary/outline/ghost/white/link) — never invent new
+- **Icons:** Phosphor (vendored, local) in mockups — approved set only: `list, x, gear-six, snowflake, lightning, drop, cpu, arrow-up-right, caret-left, caret-right, instagram-logo, twitter-logo, whatsapp-logo, envelope-simple, map-pin`. At WordPress implementation, convert to an inline SVG sprite from the SAME Phosphor icons (~3KB) — never load a new icon font
+- **Buttons:** 5 variants from utilities.css (primary/outline/ghost/white/link) — never invent new; all ≥ 44px touch targets
 - **Section rhythm:** `.cgp-section` (py-20) / `.cgp-section-secondary` (py-16)
 - **Terminal voice:** mono labels (`// NODE`, `SYS_*`, `RENDER_STAGE`) — configurator pages only for nano type
 - **Max 2 ambient glows per viewport**
+- **backdrop-blur budget:** max 1-2 elements per viewport (nav island + one card max) — badges use solid `bg-cgp-bg-overlay` instead
+- **Boot/loading overlays:** max ~1.2s delay (LCP budget 2.5s)
 
 ## 7. Accessibility (MANDATORY)
 
-- Contrast ≥ 4.5:1 for text (zinc-400+ on #050505; never zinc-600 for readable text)
+- Contrast ≥ 4.5:1 for text (zinc-400+ on #050505; never zinc-600 for readable text — `text-cgp-text-faint`/`text-cgp-text-disabled` are decorative-only, use `text-cgp-text-muted` minimum for real text)
 - Touch targets ≥ 44×44px
 - Visible focus states (base.css handles)
 - Single h1 per page (hero only)
 - `aria-labelledby` on sections, `aria-label` on icon-only elements
-- `prefers-reduced-motion: reduce` — ALL animations disabled (motion.css handles)
+- **No `role="menu"`/`role="menuitem"` on navigation** (it's a nav, not a menu widget)
+- `prefers-reduced-motion: reduce` — ALL animations disabled (motion.css handles); JS timers (auto-rotate, boot) must check it too
 - Semantic HTML (header/main/section/article/time/nav)
 - Alt text on ALL images
 - `x-cloak` on all x-show elements (no FOUC)
@@ -137,7 +147,8 @@ design/v1/
 
 - NO lorem ipsum — real forge-voice copy only
 - Placeholder images: `<!-- REPLACE WITH CLIENT PHOTOS -->` convention
-- Placeholder links: `href="#"` acceptable in mockup (note in issues[])
+- Placeholder links: `href="#"` acceptable in mockup, MUST be preceded by `<!-- TODO: real permalink -->` (note in issues[])
+- Repeated cards: `<!-- REPEAT: ... -->` marker on the first card (developer converts to WP loop)
 - Mockup forms: simulated success state (no real submission)
 - "Client-ready" = lint passes + 0 console errors + screenshots captured + copy is on-brand
 

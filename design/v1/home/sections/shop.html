@@ -1,104 +1,141 @@
 <!-- ============ SHOP — Hardware ============ -->
-<!-- WooCommerce-ready markup. Premium "Terminal Spec Sheet" cards:
-     terminal bar + lit stage (spotlight) + nested spec panel + full-width CTA.
-     Tilt via data-tilt (main.js). Page-level styles in home/css/home.css. -->
-<section id="shop" class="py-24 bg-cgp-bg-page" aria-labelledby="shop-title">
+<!-- WooCommerce-ready markup. Horizontal slider (3 cards visible on desktop,
+     scroll-snap + Alpine arrows). The CENTER card is always the highlighted
+     one — the accent frame follows the slider (active index on scroll). -->
+<section id="shop" class="py-24 bg-cgp-bg-page" aria-labelledby="shop-title" x-data="cgpShop">
   <div class="max-w-cgp-container-lg mx-auto px-4">
-    <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">Hardware</p>
-    <h2 id="shop-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">The Shop</h2>
+    <!-- Section header + slider arrows -->
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <div>
+        <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">Hardware</p>
+        <h2 id="shop-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight">The Shop</h2>
+      </div>
+      <div class="hidden items-center gap-2 md:flex">
+        <button @click="step(-1)" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-colors hover:border-cgp-accent hover:text-cgp-accent" aria-label="Previous products">
+          <i class="ph ph-bold ph-caret-left text-lg" aria-hidden="true"></i>
+        </button>
+        <button @click="step(1)" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-colors hover:border-cgp-accent hover:text-cgp-accent" aria-label="Next products">
+          <i class="ph ph-bold ph-caret-right text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
 
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <!-- Slider: scroll-snap, 3 cards visible on desktop. Center card = active. -->
+    <div x-ref="slider" @scroll.passive="onScroll()" class="flex snap-x snap-proximity gap-6 overflow-x-auto py-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <!-- REPEAT: product card — loop over wc_get_products() -->
       <!-- Product card 1: CGP Custom Distro Plate -->
-      <a href="#" class="cgp-shop-card group relative flex flex-col overflow-hidden rounded-2xl border border-cgp-border bg-cgp-bg-card-glass backdrop-blur-md transition-all duration-300 hover:border-cgp-accent hover:shadow-cgp-glow-soft" data-tilt>
-        <!-- Terminal bar: mono index + SYS_ label -->
-        <div class="flex items-center justify-between border-b border-cgp-border/60 px-5 py-2.5">
-          <span class="font-mono text-cgp-xs text-cgp-text-faint" aria-hidden="true">01</span>
-          <span class="font-mono text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent">SYS_DISTRO_PLATE</span>
-        </div>
-        <!-- Lit stage: spotlight + image + bottom fade -->
-        <div class="cgp-card-stage relative overflow-hidden">
-          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 0 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
           <!-- REPLACE WITH CLIENT PHOTOS -->
-          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="CGP Custom Distro Plate — acrylic reservoir with D5 pump mount" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" width="560" height="373" loading="lazy" decoding="async">
-          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-card via-transparent to-transparent opacity-60" aria-hidden="true"></div>
+          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="CGP Custom Distro Plate — acrylic reservoir with D5 pump mount" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="560" height="373" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">New</span>
         </div>
-        <!-- Spec panel: nested card-within-card -->
-        <div class="relative flex flex-1 flex-col rounded-t-2xl border-t border-cgp-border bg-cgp-bg-card p-6">
-          <p class="font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-text-faint">// Hardware</p>
-          <h3 class="mt-1 text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">CGP Custom Distro Plate</h3>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">CGP Custom Distro Plate</h3>
           <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Acrylic / D5 Pump Mount</p>
-          <dl class="mt-4 space-y-2 border-t border-cgp-border-subtle pt-4">
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Material</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Medical Acrylic</dd>
-            </div>
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Pump</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">D5 Mount</dd>
-            </div>
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Tested</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">48h Pressure</dd>
-            </div>
-          </dl>
-          <div class="mt-auto flex items-end justify-between pt-5">
-            <div>
-              <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">From</p>
-              <p class="font-mono text-cgp-h4 font-bold text-cgp-accent tabular-nums">1,200 SAR</p>
-            </div>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">1,200 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
           </div>
-          <span class="cgp-btn-primary mt-5 w-full">Add to Cart</span>
         </div>
       </a>
 
       <!-- Product card 2: Pre-Built: The Wraith -->
-      <a href="#" class="cgp-shop-card group relative flex flex-col overflow-hidden rounded-2xl border border-cgp-border bg-cgp-bg-card-glass backdrop-blur-md transition-all duration-300 hover:border-cgp-accent hover:shadow-cgp-glow-soft" data-tilt>
-        <!-- Terminal bar: mono index + SYS_ label -->
-        <div class="flex items-center justify-between border-b border-cgp-border/60 px-5 py-2.5">
-          <span class="font-mono text-cgp-xs text-cgp-text-faint" aria-hidden="true">02</span>
-          <span class="font-mono text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent">SYS_THE_WRAITH</span>
-        </div>
-        <!-- Lit stage: spotlight + image + stock chip + bottom fade -->
-        <div class="cgp-card-stage relative overflow-hidden">
-          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 1 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
           <!-- REPLACE WITH CLIENT PHOTOS -->
-          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="Pre-Built: The Wraith — ready to ship custom system" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" width="560" height="420" loading="lazy" decoding="async">
-          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-card via-transparent to-transparent opacity-60" aria-hidden="true"></div>
-          <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay/80 px-3 py-1 font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-accent backdrop-blur-md">
+          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="Pre-Built: The Wraith — ready to ship custom system" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="560" height="420" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">
             <span class="h-1 w-1 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>
-            Stock: 2 Units
+            Only 2 Left
           </span>
         </div>
-        <!-- Spec panel: nested card-within-card -->
-        <div class="relative flex flex-1 flex-col rounded-t-2xl border-t border-cgp-border bg-cgp-bg-card p-6">
-          <p class="font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-text-faint">// Pre-Built</p>
-          <h3 class="mt-1 text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Pre-Built: The Wraith</h3>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Pre-Built: The Wraith</h3>
           <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Ready to ship system</p>
-          <dl class="mt-4 space-y-2 border-t border-cgp-border-subtle pt-4">
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Chassis</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Custom Forge</dd>
-            </div>
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Loop</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Cryo-Loop</dd>
-            </div>
-            <div class="flex items-center justify-between">
-              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Status</dt>
-              <dd class="font-mono text-cgp-xs text-cgp-accent">Ready to Ship</dd>
-            </div>
-          </dl>
-          <div class="mt-auto flex items-end justify-between pt-5">
-            <div>
-              <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">From</p>
-              <p class="font-mono text-cgp-h4 font-bold text-cgp-accent tabular-nums">18,000 SAR</p>
-            </div>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">18,000 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
           </div>
-          <span class="cgp-btn-primary mt-5 w-full">Add to Cart</span>
+        </div>
+      </a>
+
+      <!-- Product card 3: The Hotwheel (flagship) -->
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 2 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — legendary circular chassis build" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="1280" height="853" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Flagship</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">The Hotwheel</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Legendary circular chassis</p>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">25,000 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Product card 4: Titanium Core -->
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 3 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/titanium-core.webp" alt="Titanium Core — mini-ITX watercooled build" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="800" height="533" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">SFF</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Titanium Core</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Mini-ITX Watercooled</p>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">14,000 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Product card 5: Neon Genesis -->
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 4 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/neon-genesis.webp" alt="Neon Genesis — UV reactive loop with glowing coolant" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="1280" height="720" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">UV</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Neon Genesis</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">UV Reactive Loop</p>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">22,000 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Product card 6: Project Obsidian -->
+      <!-- TODO: real permalink -->
+      <a href="#" :class="active === 5 ? 'border-cgp-accent cgp-slider-card-active lg:scale-[1.05] lg:z-10' : 'border-cgp-border shadow-none'" class="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-cgp-bg-card transition-all duration-300 hover:border-cgp-accent sm:w-[45%] lg:w-[38%]">
+        <div class="relative overflow-hidden">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/obsidian.webp" alt="Project Obsidian — dual loop workstation build" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-64" width="800" height="1200" loading="lazy" decoding="async">
+          <span class="absolute start-3 top-3 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay px-3 py-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Workstation</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Project Obsidian</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Dual Loop / Workstation</p>
+          <div class="mt-auto flex items-center justify-between pt-4">
+            <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums">19,000 SAR</span>
+            <span class="cgp-btn-ghost px-4 py-2 text-cgp-xs">View Product</span>
+          </div>
         </div>
       </a>
     </div>
 
+    <!-- TODO: real permalink -->
     <a href="#" class="cgp-btn-link mt-6">Browse All Products <span aria-hidden="true">&rarr;</span></a>
   </div>
 </section>

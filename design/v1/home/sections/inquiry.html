@@ -11,7 +11,7 @@
     </p>
 
     <!-- Terminal frame -->
-    <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-section shadow-cgp-glow-black text-left">
+    <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-section shadow-cgp-glow-black text-start">
       <!-- Top accent bar -->
       <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
 
@@ -30,7 +30,7 @@
 
       <form x-data="{ sent: false, submit() { this.sent = true; }, reset() { this.sent = false; this.$refs.form.reset(); } }" @submit.prevent="submit" x-ref="form" class="relative space-y-8 p-6 md:p-8">
         <!-- Honeypot (spam hygiene) -->
-        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;">
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="cgp-honeypot">
 
         <!-- Fields -->
         <div x-show="!sent" class="space-y-8">
@@ -64,13 +64,13 @@
             <textarea id="inquiry-details" name="details" rows="4" required placeholder="Describe the build you have in mind..." class="cgp-input-underline resize-none"></textarea>
           </div>
 
-          <button type="submit" class="cgp-btn-white w-full" style="min-height: 44px; border-radius: var(--cgp-radius-sm);">Summon The Masters</button>
+          <button type="submit" class="cgp-btn-white cgp-btn-submit w-full">Summon The Masters</button>
         </div>
 
         <!-- Success state -->
-        <div x-show="sent" style="display: none;" aria-live="polite" class="space-y-6 py-8 text-center">
+        <div x-show="sent" x-cloak aria-live="polite" class="space-y-6 py-8 text-center">
           <p class="font-mono text-xs tracking-cgp-04em text-cgp-accent">// TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED</p>
-          <button type="button" @click="reset" class="cgp-btn-ghost" style="min-height: 44px;">Return to Forge</button>
+          <button type="button" @click="reset" class="cgp-btn-ghost">Return to Forge</button>
         </div>
       </form>
     </div>
