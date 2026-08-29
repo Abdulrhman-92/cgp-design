@@ -25,6 +25,19 @@ const THEME_ASSETS_DIR = path.join(ROOT, 'wp-content', 'themes', 'cgp', 'assets'
 const MARKERS = { head: '<!-- HEAD -->', header: '<!-- HEADER -->', sections: '<!-- SECTIONS -->', footer: '<!-- FOOTER -->' };
 
 // ---------------------------------------------------------------------------
+// Cache-busting — auto version from file mtime (never manual ?v=N).
+// Every asset gets ?v=<mtime-ms> so the browser refetches ONLY when changed.
+// ---------------------------------------------------------------------------
+function assetVersion(relPath) {
+  const full = path.join(DESIGN_DIR, relPath);
+  try {
+    return String(fs.statSync(full).mtimeMs).slice(0, 10);
+  } catch {
+    return '1';
+  }
+}
+
+// ---------------------------------------------------------------------------
 // PAGES manifest — owns the <head> and section order per page.
 // sections.header/footer: 'shared' → shared/sections/<name>.html, or a
 // page-specific path (mirrors WP header-{slug}.php overrides).
@@ -113,6 +126,7 @@ function buildHead(page) {
     '  <!-- TODO: flip to index,follow before launch -->',
     '  <meta name="robots" content="noindex, nofollow">',
     '  <meta name="theme-color" content="#050505">',
+    '  <link rel="icon" type="image/svg+xml" href="favicon.svg">',
     '  <!-- TODO: replace with the live URL before launch -->',
     `  <link rel="canonical" href="${page.canonical}">`,
     `  <link rel="alternate" hreflang="en" href="${page.canonical}">`,
@@ -149,13 +163,14 @@ function buildHead(page) {
     `  <link rel="preload" href="${theme}/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>`,
     '',
     '  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->',
-    '  <link rel="stylesheet" href="css/tailwind.css?v=3">',
-    '  <link rel="stylesheet" href="css/theme.css?v=3">',
+    `  <link rel="stylesheet" href="css/tailwind.css?v=${assetVersion('css/tailwind.css')}">`,
+    `  <link rel="stylesheet" href="css/theme.css?v=${assetVersion('css/theme.css')}">`,
+    `  <link rel="stylesheet" href="${theme}/vendor/phosphor/style.css">`,
     css,
     '',
     '  <!-- Scripts (deferred — ONE bundle per page, minified) -->',
     `  <script defer src="${theme}/vendor/alpine.min.js"></script>`,
-    `  <script defer src="js/bundles/${page.bundle}.min.js"></script>`,
+    `  <script defer src="js/bundles/${page.bundle}.min.js?v=${assetVersion('js/bundles/' + page.bundle + '.min.js')}"></script>`,
   ].filter(Boolean).join('\n');
 }
 

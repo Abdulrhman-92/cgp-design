@@ -104,6 +104,17 @@
 /* ============ Count up ============ */
 /* cgp-count-up: JS-only (IntersectionObserver + rAF). No CSS needed. */
 
+/* ============ Float ============ */
+/* 6s ease-in-out — product cutout gentle hover (shop stage) */
+@keyframes cgp-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.cgp-float {
+  animation: cgp-float 6s ease-in-out infinite;
+}
+
 /* ============ Reduced motion ============ */
 /* Disable ALL animations, transitions and glows */
 @media (prefers-reduced-motion: reduce) {
@@ -117,6 +128,7 @@
   .cgp-stagger > *,
   .cgp-spin-slow,
   .cgp-scanline,
+  .cgp-float,
   .cgp-tilt,
   .cgp-magnetic,
   .animate-pulse {

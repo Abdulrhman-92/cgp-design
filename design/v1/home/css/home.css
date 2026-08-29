@@ -10,3 +10,39 @@
 
    Use tokens via var(--cgp-*) — never hardcode values.
    ============================================================ */
+
+/* ============ Shop — premium "Terminal Spec Sheet" cards ============ */
+/* Glass panel + terminal bar + image stage (spotlight) + spec panel.
+   Tilt handled by main.js via data-tilt (transform only, reduced-motion safe). */
+.cgp-shop-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cgp-shop-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Price glow on hover (subtle — max 2 glows per viewport rule) */
+.cgp-shop-card:hover .tabular-nums {
+  text-shadow: var(--cgp-glow-text);
+}
+
+/* ============ Shop — product stage (spotlight) ============ */
+/* The product sits on a lit stage — museum specimen, not inventory. */
+.cgp-card-stage {
+  background: var(--cgp-bg-elevated);
+}
+
+.cgp-card-spotlight {
+  position: absolute;
+  inset: 0;
+  background: var(--cgp-glow-spotlight);
+  opacity: 0.7;
+  transition: opacity var(--cgp-motion-fast) var(--cgp-ease-expo);
+  pointer-events: none;
+}
+
+.cgp-shop-card:hover .cgp-card-spotlight {
+  opacity: 1;
+}

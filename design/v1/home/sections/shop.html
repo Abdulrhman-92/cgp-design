@@ -1,44 +1,100 @@
 <!-- ============ SHOP — Hardware ============ -->
-<!-- WooCommerce-ready markup: rows will become product cards in WP. -->
+<!-- WooCommerce-ready markup. Premium "Terminal Spec Sheet" cards:
+     terminal bar + lit stage (spotlight) + nested spec panel + full-width CTA.
+     Tilt via data-tilt (main.js). Page-level styles in home/css/home.css. -->
 <section id="shop" class="py-24 bg-cgp-bg-page" aria-labelledby="shop-title">
   <div class="max-w-cgp-container-lg mx-auto px-4">
     <p class="text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent mb-4">Hardware</p>
     <h2 id="shop-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">The Shop</h2>
 
-    <div class="space-y-4">
-      <!-- Product row 1 -->
-      <a href="#" class="cgp-card-hover flex items-center justify-between gap-4 p-4 bg-cgp-bg-card border border-cgp-border rounded-lg hover:border-cgp-accent transition-colors cursor-pointer">
-        <div class="flex items-center gap-4">
-          <!-- REPLACE WITH CLIENT PHOTOS -->
-          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="CGP Custom Distro Plate — acrylic reservoir with D5 pump mount" class="w-14 h-14 rounded-lg object-cover" width="560" height="373" loading="lazy" decoding="async">
-          <div>
-            <h3 class="font-bold text-cgp-text-heading">CGP Custom Distro Plate</h3>
-            <p class="text-cgp-xs text-cgp-text-secondary">Acrylic / D5 Pump Mount</p>
-          </div>
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <!-- Product card 1: CGP Custom Distro Plate -->
+      <a href="#" class="cgp-shop-card group relative flex flex-col overflow-hidden rounded-2xl border border-cgp-border bg-cgp-bg-card-glass backdrop-blur-md transition-all duration-300 hover:border-cgp-accent hover:shadow-cgp-glow-soft" data-tilt>
+        <!-- Terminal bar: mono index + SYS_ label -->
+        <div class="flex items-center justify-between border-b border-cgp-border/60 px-5 py-2.5">
+          <span class="font-mono text-cgp-xs text-cgp-text-faint" aria-hidden="true">01</span>
+          <span class="font-mono text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent">SYS_DISTRO_PLATE</span>
         </div>
-        <div class="flex flex-col items-end gap-1.5">
-          <span class="font-mono text-cgp-xs text-cgp-accent">From 1,200 SAR</span>
-          <span class="text-cgp-accent font-mono text-cgp-xs">View Product</span>
+        <!-- Lit stage: spotlight + image + bottom fade -->
+        <div class="cgp-card-stage relative overflow-hidden">
+          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="CGP Custom Distro Plate — acrylic reservoir with D5 pump mount" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" width="560" height="373" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-card via-transparent to-transparent opacity-60" aria-hidden="true"></div>
+        </div>
+        <!-- Spec panel: nested card-within-card -->
+        <div class="relative flex flex-1 flex-col rounded-t-2xl border-t border-cgp-border bg-cgp-bg-card p-6">
+          <p class="font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-text-faint">// Hardware</p>
+          <h3 class="mt-1 text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">CGP Custom Distro Plate</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Acrylic / D5 Pump Mount</p>
+          <dl class="mt-4 space-y-2 border-t border-cgp-border-subtle pt-4">
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Material</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Medical Acrylic</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Pump</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">D5 Mount</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Tested</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">48h Pressure</dd>
+            </div>
+          </dl>
+          <div class="mt-auto flex items-end justify-between pt-5">
+            <div>
+              <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">From</p>
+              <p class="font-mono text-cgp-h4 font-bold text-cgp-accent tabular-nums">1,200 SAR</p>
+            </div>
+          </div>
+          <span class="cgp-btn-primary mt-5 w-full">Add to Cart</span>
         </div>
       </a>
 
-      <!-- Product row 2 -->
-      <a href="#" class="cgp-card-hover flex items-center justify-between gap-4 p-4 bg-cgp-bg-card border border-cgp-border rounded-lg hover:border-cgp-accent transition-colors cursor-pointer">
-        <div class="flex items-center gap-4">
-          <!-- REPLACE WITH CLIENT PHOTOS -->
-          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="Pre-Built: The Wraith — ready to ship custom system" class="w-14 h-14 rounded-lg object-cover" width="560" height="420" loading="lazy" decoding="async">
-          <div>
-            <h3 class="font-bold text-cgp-text-heading">Pre-Built: The Wraith</h3>
-            <p class="text-cgp-xs text-cgp-text-secondary">Ready to ship system</p>
-            <span class="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-cgp-accent/30 bg-cgp-accent/10 px-2 py-0.5 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">
-              <span class="h-1 w-1 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>
-              Only 2 remaining — ready to ship
-            </span>
-          </div>
+      <!-- Product card 2: Pre-Built: The Wraith -->
+      <a href="#" class="cgp-shop-card group relative flex flex-col overflow-hidden rounded-2xl border border-cgp-border bg-cgp-bg-card-glass backdrop-blur-md transition-all duration-300 hover:border-cgp-accent hover:shadow-cgp-glow-soft" data-tilt>
+        <!-- Terminal bar: mono index + SYS_ label -->
+        <div class="flex items-center justify-between border-b border-cgp-border/60 px-5 py-2.5">
+          <span class="font-mono text-cgp-xs text-cgp-text-faint" aria-hidden="true">02</span>
+          <span class="font-mono text-cgp-xs uppercase tracking-cgp-03em text-cgp-accent">SYS_THE_WRAITH</span>
         </div>
-        <div class="flex flex-col items-end gap-1.5">
-          <span class="font-mono text-cgp-xs text-cgp-accent">From 18,000 SAR</span>
-          <span class="text-cgp-accent font-mono text-cgp-xs">View Product</span>
+        <!-- Lit stage: spotlight + image + stock chip + bottom fade -->
+        <div class="cgp-card-stage relative overflow-hidden">
+          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="Pre-Built: The Wraith — ready to ship custom system" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" width="560" height="420" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-card via-transparent to-transparent opacity-60" aria-hidden="true"></div>
+          <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-cgp-accent/40 bg-cgp-bg-overlay/80 px-3 py-1 font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-accent backdrop-blur-md">
+            <span class="h-1 w-1 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>
+            Stock: 2 Units
+          </span>
+        </div>
+        <!-- Spec panel: nested card-within-card -->
+        <div class="relative flex flex-1 flex-col rounded-t-2xl border-t border-cgp-border bg-cgp-bg-card p-6">
+          <p class="font-mono text-cgp-xs uppercase tracking-cgp-04em text-cgp-text-faint">// Pre-Built</p>
+          <h3 class="mt-1 text-cgp-h4 font-bold text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Pre-Built: The Wraith</h3>
+          <p class="mt-1 text-cgp-xs text-cgp-text-secondary">Ready to ship system</p>
+          <dl class="mt-4 space-y-2 border-t border-cgp-border-subtle pt-4">
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Chassis</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Custom Forge</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Loop</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-text-secondary">Cryo-Loop</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">Status</dt>
+              <dd class="font-mono text-cgp-xs text-cgp-accent">Ready to Ship</dd>
+            </div>
+          </dl>
+          <div class="mt-auto flex items-end justify-between pt-5">
+            <div>
+              <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">From</p>
+              <p class="font-mono text-cgp-h4 font-bold text-cgp-accent tabular-nums">18,000 SAR</p>
+            </div>
+          </div>
+          <span class="cgp-btn-primary mt-5 w-full">Add to Cart</span>
         </div>
       </a>
     </div>

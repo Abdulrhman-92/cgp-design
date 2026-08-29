@@ -108,6 +108,8 @@
   --cgp-nav-scrolled-bg: rgba(5, 5, 5, 0.9);   /* nav bg on scroll (fixed-top variant) */
   --cgp-glow-ambient-cyan: rgba(22, 78, 99, 0.2);  /* cyan-900/20 radial blob */
   --cgp-glow-ambient-blue: rgba(30, 58, 138, 0.1); /* blue-900/10 radial blob */
+  --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
+  --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
   --cgp-glow-ambient-size: 700px;         /* blob diameter (600-800px range) */
   --cgp-glow-ambient-blur: 120px;         /* blob blur (120-150px range) */
   --cgp-image-fade: linear-gradient(to top, #050505 0%, transparent 100%);

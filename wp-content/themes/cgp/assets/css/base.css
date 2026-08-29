@@ -67,6 +67,13 @@ body {
   background-color: var(--cgp-bg-page);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden; /* marquee + ambient glows must never scroll horizontally */
+  padding-block-end: 96px; /* mobile: floating nav island (bottom-6) must not cover content */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-block-end: 0; /* desktop: nav island is top-anchored */
+  }
 }
 
 /* ============ Body texture overlay (breaks flat black — user idea) ============ */

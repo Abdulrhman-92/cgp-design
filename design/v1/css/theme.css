@@ -108,6 +108,8 @@
   --cgp-nav-scrolled-bg: rgba(5, 5, 5, 0.9);   /* nav bg on scroll (fixed-top variant) */
   --cgp-glow-ambient-cyan: rgba(22, 78, 99, 0.2);  /* cyan-900/20 radial blob */
   --cgp-glow-ambient-blue: rgba(30, 58, 138, 0.1); /* blue-900/10 radial blob */
+  --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
+  --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
   --cgp-glow-ambient-size: 700px;         /* blob diameter (600-800px range) */
   --cgp-glow-ambient-blur: 120px;         /* blob blur (120-150px range) */
   --cgp-image-fade: linear-gradient(to top, #050505 0%, transparent 100%);
@@ -251,6 +253,13 @@ body {
   background-color: var(--cgp-bg-page);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden; /* marquee + ambient glows must never scroll horizontally */
+  padding-block-end: 96px; /* mobile: floating nav island (bottom-6) must not cover content */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-block-end: 0; /* desktop: nav island is top-anchored */
+  }
 }
 
 /* ============ Body texture overlay (breaks flat black — user idea) ============ */
@@ -789,6 +798,17 @@ h6 {
 /* ============ Count up ============ */
 /* cgp-count-up: JS-only (IntersectionObserver + rAF). No CSS needed. */
 
+/* ============ Float ============ */
+/* 6s ease-in-out — product cutout gentle hover (shop stage) */
+@keyframes cgp-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.cgp-float {
+  animation: cgp-float 6s ease-in-out infinite;
+}
+
 /* ============ Reduced motion ============ */
 /* Disable ALL animations, transitions and glows */
 @media (prefers-reduced-motion: reduce) {
@@ -802,6 +822,7 @@ h6 {
   .cgp-stagger > *,
   .cgp-spin-slow,
   .cgp-scanline,
+  .cgp-float,
   .cgp-tilt,
   .cgp-magnetic,
   .animate-pulse {
