@@ -110,10 +110,10 @@
 | `--cgp-space-8` | 32px | section header gaps, form rows |
 | `--cgp-space-10` | 40px | configurator steps |
 | `--cgp-space-12` | 48px | hero sub margin |
-| `--cgp-space-16` | 64px | grid gaps, section header mb |
-| `--cgp-space-20` | 80px | showcase header mb |
-| `--cgp-space-24` | 96px | secondary section padding (py-24) |
-| `--cgp-space-32` | 128px | **major section padding (py-32)** |
+| `--cgp-space-16` | 64px | grid gaps, section header mb, secondary section padding (py-16) |
+| `--cgp-space-20` | 80px | showcase header mb, **major section padding (py-20)** |
+| `--cgp-space-24` | 96px | large gaps |
+| `--cgp-space-32` | 128px | legacy — superseded by the py-20/py-16 rhythm |
 
 ### Containers
 | Token | Value | Usage |
@@ -263,7 +263,7 @@ Open-Air Architecture · Mechanical Horology · Extreme Scale
 6. **Blue accent:** dropped — unify to cyan with opacity variants
 7. **Amber:** configurator/GPU selection states only
 8. **Button radius:** primary CTA `rounded-full`; form submit `rounded-sm`; cards `rounded-2xl`
-9. **Section rhythm:** `py-32` (128px) major, `py-24` (96px) secondary
+9. **Section rhythm:** `py-20` (80px) major (`.cgp-section`), `py-16` (64px) secondary (`.cgp-section-secondary`) — reduced from py-32/py-24 per user feedback
 10. **Terminal micro-type (8-11px):** configurator/compatibility pages only
 11. **Web Audio:** opt-in toggle, no autoplay
 12. **Section naming:** "The Archives" for gallery (client's own term)

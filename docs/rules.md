@@ -5,7 +5,7 @@
 - Primary colors: page `#050505`, section `#09090b` (zinc-950), card `#18181b` (zinc-900), text `#f4f4f5` / `#a1a1aa` (zinc-400), accent `#06b6d4` (cyan-500), hover `#22d3ee` (cyan-400), gradient `from-cyan-400 to-blue-600`, amber `#f59e0b` for GPU/configurator selection only (full token set in `design-system.md` §2)
 - Fonts: Inter (body) + Space Grotesk (display) + IBM Plex Sans Arabic fallback (future Arabic content)
 - General style: dark forge/atelier, terminal-as-luxury (mono labels `// NODE`, `SYS_*`, `RENDER_STAGE`), glass cards, ambient cyan glows, eyebrow → 2-line gradient headline → zinc-400 paragraph copy anatomy
-- Section rhythm: `py-32` (128px) major, `py-24` (96px) secondary; containers 768–1440px
+- Section rhythm: `py-20` (80px) major (`.cgp-section`), `py-16` (64px) secondary (`.cgp-section-secondary`); containers 768–1440px (superseded by AGENTS.md + design-system.md §12)
 - Radius: pills/buttons `rounded-full`, cards `rounded-2xl`, inputs `rounded-xl`, form submit `rounded-sm`
 
 ## Technical Decisions
