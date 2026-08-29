@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with the live sitemap URL before launch
+Sitemap: https://cgp.sa/sitemap.xml

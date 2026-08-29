@@ -73,7 +73,7 @@ const PAGES = {
       ],
     },
     css: ['home/css/home.css'],
-    js: [],
+    js: ['main.js'], // 'main.js' = theme assets/js/main.js; '<path>.js' = relative to design/v1
     sections: {
       header: 'shared',
       main: [
@@ -94,6 +94,8 @@ const PAGES = {
 
 // ---------------------------------------------------------------------------
 // Head generation — manifest owns title/description/canonical/ogImage/schema.
+// CSS is CONCATENATED into one theme.css (tokens+base+utilities+motion) to cut
+// render-blocking requests from 7 → 3 (tailwind + theme + page).
 // ---------------------------------------------------------------------------
 function buildHead(page) {
   const origin = page.canonical.replace(/\/$/, '');
@@ -113,6 +115,8 @@ function buildHead(page) {
     '  <meta name="theme-color" content="#050505">',
     '  <!-- TODO: replace with the live URL before launch -->',
     `  <link rel="canonical" href="${page.canonical}">`,
+    `  <link rel="alternate" hreflang="en" href="${page.canonical}">`,
+    `  <link rel="alternate" hreflang="x-default" href="${page.canonical}">`,
     '',
     '  <!-- Open Graph -->',
     '  <meta property="og:type" content="website">',
@@ -144,20 +148,73 @@ function buildHead(page) {
     `  <link rel="preload" href="${theme}/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>`,
     `  <link rel="preload" href="${theme}/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>`,
     '',
-    '  <!-- Styles -->',
-    '  <link rel="stylesheet" href="css/tailwind.css?v=2">',
-    `  <link rel="stylesheet" href="${theme}/css/tokens.css">`,
-    `  <link rel="stylesheet" href="${theme}/css/utilities.css">`,
-    `  <link rel="stylesheet" href="${theme}/css/base.css">`,
-    `  <link rel="stylesheet" href="${theme}/css/motion.css">`,
-    `  <link rel="stylesheet" href="${theme}/vendor/phosphor/style.css">`,
+    '  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->',
+    '  <link rel="stylesheet" href="css/tailwind.css?v=3">',
+    '  <link rel="stylesheet" href="css/theme.css?v=3">',
     css,
     '',
-    '  <!-- Scripts (deferred) -->',
+    '  <!-- Scripts (deferred — ONE bundle per page, minified) -->',
     `  <script defer src="${theme}/vendor/alpine.min.js"></script>`,
-    `  <script defer src="${theme}/js/main.js?v=2"></script>`,
-    js,
+    `  <script defer src="js/bundles/${page.bundle}.min.js"></script>`,
   ].filter(Boolean).join('\n');
+}
+
+// ---------------------------------------------------------------------------
+// JS bundle — concat the page's JS files (theme main.js + page js) into ONE
+// minified file per page. Rule: a page loads ONLY what it needs, as a single
+// bundle. 'main.js' resolves to theme assets/js/main.js; other entries are
+// paths relative to design/v1.
+// ---------------------------------------------------------------------------
+function buildJsBundle(name, page) {
+  const files = (page.js || []).map((f) =>
+    f === 'main.js' ? path.join(THEME_ASSETS_DIR, 'js', 'main.js') : path.join(DESIGN_DIR, f)
+  );
+  if (!files.length) return;
+  const raw = files.map((f) => fs.readFileSync(f, 'utf8')).join('\n\n');
+  // Lightweight minify (safe for our own code — no template literals with //):
+  // strip block comments, line comments, blank lines, trim each line.
+  const min = raw
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '')
+    .replace(/\n{2,}/g, '\n')
+    .replace(/^\s+|\s+$/gm, '')
+    .trim();
+  const outDir = path.join(DESIGN_DIR, 'js', 'bundles');
+  fs.mkdirSync(outDir, { recursive: true });
+  const outFile = path.join(outDir, name + '.min.js');
+  fs.writeFileSync(outFile, min, 'utf8');
+  console.log(`  ✓ js bundle → js/bundles/${name}.min.js (${(min.length / 1024).toFixed(1)} KB)`);
+}
+
+// ---------------------------------------------------------------------------
+// Concatenate theme CSS (tokens + base + utilities + motion) into one file.
+// Source stays in the theme (single source of truth); output is a build artifact.
+// ---------------------------------------------------------------------------
+function buildThemeCss() {
+  const parts = ['tokens.css', 'base.css', 'utilities.css', 'motion.css'];
+  const out = parts
+    .map((f) => fs.readFileSync(path.join(THEME_ASSETS_DIR, 'css', f), 'utf8'))
+    .join('\n\n')
+    // Fix relative font paths: theme CSS uses url('../fonts/...') (relative to
+    // assets/css/), but the concatenated file lives at design/v1/css/theme.css
+    // → re-resolve from the CSS dir (3 levels up), quote optional.
+    .replace(/url\(['"]?\.\.\/fonts\//g, `url('${path.relative(path.join(DESIGN_DIR, 'css'), THEME_ASSETS_DIR).split(path.sep).join('/')}/fonts/`);
+  fs.writeFileSync(path.join(DESIGN_DIR, 'css', 'theme.css'), out, 'utf8');
+}
+
+// ---------------------------------------------------------------------------
+// robots.txt — allow all + sitemap placeholder (SEO audit).
+// ---------------------------------------------------------------------------
+function buildRobotsTxt() {
+  const content = [
+    'User-agent: *',
+    'Allow: /',
+    '',
+    '# TODO: replace with the live sitemap URL before launch',
+    'Sitemap: https://cgp.sa/sitemap.xml',
+    '',
+  ].join('\n');
+  fs.writeFileSync(path.join(DESIGN_DIR, 'robots.txt'), content, 'utf8');
 }
 
 // ---------------------------------------------------------------------------
@@ -212,8 +269,12 @@ function lint(html, name) {
 // Build — marker replacement is idempotent (markers re-emitted).
 // ---------------------------------------------------------------------------
 function main() {
+  buildThemeCss();
+  buildRobotsTxt();
   const template = fs.readFileSync(path.join(DESIGN_DIR, 'index.html'), 'utf8');
   for (const [name, page] of Object.entries(PAGES)) {
+    page.bundle = name; // bundle filename = page name
+    buildJsBundle(name, page);
     const pageRoot = path.dirname(path.join(DESIGN_DIR, page.output));
     const header = resolveSection(page.sections.header === 'shared' ? 'shared/sections/header.html' : page.sections.header, pageRoot);
     const footer = resolveSection(page.sections.footer === 'shared' ? 'shared/sections/footer.html' : page.sections.footer, pageRoot);

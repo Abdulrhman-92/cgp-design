@@ -23,7 +23,7 @@ All shared code lives in **`wp-content/themes/cgp/assets/`** — NEVER duplicate
 | Typography/body/focus | `assets/css/base.css` |
 | Buttons/cards/forms/nav | `assets/css/utilities.css` |
 | Shared animations | `assets/css/motion.css` |
-| Shared JS (cursor, magnetic, tilt, reveals, count-up, nav) | `assets/js/main.js` |
+| Shared JS (cursor, magnetic, tilt, reveals, count-up, nav) | `assets/js/main.js` (bundled per page) |
 | Libraries (Alpine, Phosphor) | `assets/vendor/` |
 | Fonts (Inter, Space Grotesk, IBM Plex Arabic) | `assets/fonts/` |
 | Tailwind config | `tailwind.config.js` |
@@ -52,6 +52,11 @@ design/v1/
 | ALL pages | theme (`tokens/base/utilities/motion` + `tailwind.css`) | theme (`main.js`) |
 | One page (multiple sections) | `<page>/css/<page>.css` | `<page>/js/<page>.js` |
 | One section only | comment block in `<page>.css` | Alpine inline in the section file |
+
+**JS bundling rule (MANDATORY):** a page loads ONLY what it needs, as ONE minified bundle.
+- `build.js` concatenates the page's JS (theme `main.js` + `<page>.js` if any) into `js/bundles/<page>.min.js`
+- The page's `<head>` references ONLY its bundle (plus Alpine vendor) — never load page JS you don't need
+- Manifest: `js: ['main.js']` (theme) or `js: ['main.js', '<page>/js/<page>.js']`
 
 **Decision question:** "Who uses this?" → all = theme, page = page file, section = inline/block.
 

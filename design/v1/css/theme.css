@@ -1,0 +1,825 @@
+/* CGP Design Tokens — single source of truth.
+   Values are EXACT copies of docs/design-system.md (v1.0). Do not approximate.
+   Consumed by: base.css, utilities.css, tailwind.config.js, all components. */
+
+:root {
+  /* ============ 2. Colors — Backgrounds ============ */
+  --cgp-bg-page: #050505;            /* page background (canonical) */
+  --cgp-bg-section: #09090b;         /* zinc-950, alternating sections */
+  --cgp-bg-card: #18181b;            /* zinc-900, cards, panels */
+  --cgp-bg-card-glass: rgba(24, 24, 27, 0.5); /* glass cards + backdrop-blur */
+  --cgp-bg-elevated: #0a0a0a;        /* configurator dashboard */
+  --cgp-bg-overlay: rgba(0, 0, 0, 0.8); /* modal overlay, badges */
+
+  /* ============ 2. Colors — Text ============ */
+  --cgp-text-primary: #f4f4f5;       /* zinc-100, body default */
+  --cgp-text-heading: #ffffff;       /* headings, brand */
+  --cgp-text-secondary: #a1a1aa;     /* zinc-400, paragraphs, nav links */
+  --cgp-text-muted: #71717a;         /* zinc-500, dates, captions, labels */
+  --cgp-text-faint: #52525b;         /* zinc-600, footer tagline, icons */
+  --cgp-text-disabled: #3f3f46;      /* zinc-700, placeholders, disabled */
+
+  /* ============ 2. Colors — Accents ============ */
+  --cgp-accent: #06b6d4;             /* cyan-500, canonical brand accent */
+  --cgp-accent-bright: #22d3ee;      /* cyan-400, hover, active, glow */
+  --cgp-accent-deep: #0891b2;        /* cyan-600, active pills, badges */
+  --cgp-accent-warm: #f59e0b;        /* amber-500, GPU/configurator ONLY */
+  --cgp-accent-grad: linear-gradient(90deg, #22d3ee, #2563eb); /* hero gradient text */
+
+  /* ============ 2. Colors — Borders ============ */
+  --cgp-border: #27272a;             /* zinc-800, default card border */
+  --cgp-border-strong: #3f3f46;      /* zinc-700, badges, hotwheel ring */
+  --cgp-border-subtle: #18181b;      /* zinc-900, footer, dividers */
+  --cgp-border-accent: rgba(6, 182, 212, 0.3); /* accent borders */
+
+  /* ============ 2. Colors — Glows ============ */
+  --cgp-glow-text: 0 0 20px rgba(6, 182, 212, 0.5);   /* gradient headline glow */
+  --cgp-glow-soft: 0 0 15px rgba(34, 211, 238, 0.15); /* selected states */
+  --cgp-glow-strong: 0 0 20px rgba(34, 211, 238, 0.6); /* CTA hover */
+  --cgp-glow-black: 0 20px 40px rgba(0, 0, 0, 0.5);   /* depth shadows */
+
+  /* ============ 2. Colors — Selection ============ */
+  --cgp-selection-bg: #06b6d4;
+  --cgp-selection-text: #ffffff;
+
+  /* ============ 3. Typography — Families ============ */
+  --cgp-font-display: 'Space Grotesk', sans-serif; /* 400, 700 */
+  --cgp-font-body: 'Inter', sans-serif;            /* 300, 400, 600, 800 */
+  --cgp-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ============ 3. Typography — Scale (exact px) ============ */
+  --cgp-text-display-1: 72px;        /* hero h1 — 128px from md up (see media query) */
+  --cgp-text-display-2: 60px;        /* hero h1 (mobile alt) */
+  --cgp-text-display-3: 48px;        /* section titles (md) */
+  --cgp-text-display-4: 36px;        /* section titles */
+  --cgp-text-h2: 30px;               /* sub-section titles */
+  --cgp-text-h3: 24px;               /* card titles */
+  --cgp-text-h4: 20px;               /* card sub-titles */
+  --cgp-text-lg: 18px;               /* detail text, icons */
+  --cgp-text-base: 16px;             /* body */
+  --cgp-text-sm: 14px;               /* body alt, nav */
+  --cgp-text-xs: 12px;               /* eyebrows, labels, buttons */
+  --cgp-text-micro: 10px;            /* option labels, terminal */
+  --cgp-text-nano: 8px;              /* terminal only (configurator) */
+
+  /* ============ 3. Typography — Tracking ============ */
+  --cgp-tracking-tighter: -0.05em;   /* tracking-tighter */
+  --cgp-tracking-wide: 0.025em;      /* tracking-wide */
+  --cgp-tracking-wider: 0.05em;      /* tracking-wider */
+  --cgp-tracking-widest: 0.1em;      /* tracking-widest (buttons) */
+  --cgp-tracking-03em: 0.3em;        /* eyebrow signature */
+  --cgp-tracking-04em: 0.4em;        /* wide mono labels */
+
+  /* ============ 4. Spacing Scale (exact px) ============ */
+  --cgp-space-1: 4px;                /* micro gaps */
+  --cgp-space-2: 8px;                /* chips, icon gaps */
+  --cgp-space-3: 12px;               /* option gaps */
+  --cgp-space-4: 16px;               /* card gaps, form fields */
+  --cgp-space-6: 24px;               /* card padding, list gaps */
+  --cgp-space-8: 32px;               /* section header gaps, form rows */
+  --cgp-space-10: 40px;              /* configurator steps */
+  --cgp-space-12: 48px;              /* hero sub margin */
+  --cgp-space-16: 64px;              /* grid gaps, section header mb */
+  --cgp-space-20: 80px;              /* showcase header mb */
+  --cgp-space-24: 96px;              /* secondary section padding (py-24) */
+  --cgp-space-32: 128px;             /* major section padding (py-32) */
+
+  /* ============ 4. Containers ============ */
+  --cgp-container-sm: 768px;         /* max-w-3xl, inquiry form */
+  --cgp-container-md: 1152px;        /* max-w-6xl, philosophy, metrics, vision */
+  --cgp-container-lg: 1280px;        /* max-w-7xl, showcase, gallery, shop */
+  --cgp-container-xl: 1440px;        /* max-w-[90rem], commission, configurator */
+
+  /* ============ 5. Border Radius ============ */
+  --cgp-radius-full: 9999px;         /* pills, buttons, badges, nav island */
+  --cgp-radius-3xl: 24px;            /* summary panels, banners */
+  --cgp-radius-2xl: 16px;            /* cards, mode switcher, dashboard */
+  --cgp-radius-xl: 12px;             /* inputs, options, archive images */
+  --cgp-radius-lg: 8px;              /* chart card, gallery, shop rows */
+  --cgp-radius-sm: 2px;              /* form submit button */
+  --cgp-radius-none: 0;              /* underline inputs */
+
+  /* ============ 6. Effects ============ */
+  --cgp-glass-bg: rgba(24, 24, 27, 0.5);  /* glass surface */
+  --cgp-glass-blur: 12px;                 /* backdrop blur (4-12px range) */
+  --cgp-glass-border: 1px solid #27272a;  /* 1px zinc-800 border */
+  --cgp-nav-bg: rgba(24, 24, 27, 0.7);         /* floating island nav bg (home.html) */
+  --cgp-nav-border: rgba(255, 255, 255, 0.05); /* floating island nav border */
+  --cgp-nav-scrolled-bg: rgba(5, 5, 5, 0.9);   /* nav bg on scroll (fixed-top variant) */
+  --cgp-glow-ambient-cyan: rgba(22, 78, 99, 0.2);  /* cyan-900/20 radial blob */
+  --cgp-glow-ambient-blue: rgba(30, 58, 138, 0.1); /* blue-900/10 radial blob */
+  --cgp-glow-ambient-size: 700px;         /* blob diameter (600-800px range) */
+  --cgp-glow-ambient-blur: 120px;         /* blob blur (120-150px range) */
+  --cgp-image-fade: linear-gradient(to top, #050505 0%, transparent 100%);
+  --cgp-image-hover-scale: 1.05;          /* image hover zoom */
+  --cgp-archive-reveal-scale: 1.1;        /* archive reveal zoom */
+  --cgp-grid-size: 30px;                  /* terminal grid overlay cell */
+  --cgp-grid-line: rgba(34, 211, 238, 0.07); /* terminal grid line color */
+  --cgp-scrollbar-size: 3px;              /* custom scrollbar width */
+  --cgp-scrollbar-thumb: rgba(34, 211, 238, 0.3);   /* scrollbar thumb */
+  --cgp-scrollbar-thumb-hover: rgba(34, 211, 238, 0.6); /* thumb hover */
+
+  /* ============ 7. Breakpoints ============ */
+  --cgp-bp-sm: 640px;
+  --cgp-bp-md: 768px;
+  --cgp-bp-lg: 1024px;
+
+  /* ============ 9. Motion ============ */
+  --cgp-motion-fast: 0.3s;           /* hover states, transitions */
+  --cgp-motion-med: 0.5s;            /* panel swaps */
+  --cgp-motion-image: 0.7s;          /* image zoom, archive reveal */
+  --cgp-ease-expo: cubic-bezier(0.16, 1, 0.3, 1); /* entrances */
+}
+
+/* display-1 is responsive: 72px mobile, 128px from md up.
+   Media queries cannot use var(), so 768px is the literal --cgp-bp-md value. */
+@media (min-width: 768px) {
+  :root {
+    --cgp-text-display-1: 128px;
+  }
+}
+
+/* ============ Text selection ============ */
+::selection {
+  background: var(--cgp-selection-bg);
+  color: var(--cgp-selection-text);
+}
+
+/* ============ 9. Keyframes ============ */
+/* fadeIn: 0.6s expo, translateY 15px — hero/panel entrance */
+@keyframes cgp-fade-in {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* spin-slow: 60s linear — hotwheel inner ring */
+@keyframes cgp-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* breathe: 10s ease-in-out — ambient glows */
+@keyframes cgp-breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* scanline: 3s linear — terminal scanner */
+@keyframes cgp-scanline {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+/* reveal: 0.4s expo + 40ms stagger — list items (stagger via animation-delay) */
+@keyframes cgp-reveal {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* gear-spin: 25s linear — telemetry gear */
+@keyframes cgp-gear-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* CGP Base — typographic scale, body defaults, focus & selection.
+   Shared rules for every page. Values reference tokens.css ONLY (single source of truth).
+   Logical properties only. */
+
+/* ============ Fonts (self-hosted, font-display: swap) ============ */
+/* One file per weight — family-weight.woff2 convention. Critical weights are
+   preloaded in index.html; swap keeps text visible while fonts load. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/inter-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/inter-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/inter-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/space-grotesk-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2') format('woff2');
+}
+
+/* ============ Document ============ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--cgp-space-24); /* anchor offset for fixed nav island */
+}
+
+body {
+  font-family: var(--cgp-font-body);
+  font-size: var(--cgp-text-base);
+  line-height: 1.6;
+  color: var(--cgp-text-primary);
+  background-color: var(--cgp-bg-page);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* marquee + ambient glows must never scroll horizontally */
+}
+
+/* ============ Body texture overlay (breaks flat black — user idea) ============ */
+/* Subtle terminal grid + film-grain noise + vignette over the whole page.
+   Fixed, non-interactive. The noise is an inline SVG (feTurbulence) data URI. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--cgp-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cgp-grid-line) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: var(--cgp-grid-size) var(--cgp-grid-size), var(--cgp-grid-size) var(--cgp-grid-size), 160px 160px;
+  opacity: 0.9;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* ============ Typographic scale (h1-h6) ============ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--cgp-font-display);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+}
+
+/* h1 — hero: 72px mobile / 128px md+ (media query lives in tokens.css) */
+h1 {
+  font-size: var(--cgp-text-display-1);
+  text-transform: uppercase;
+  letter-spacing: var(--cgp-tracking-tighter);
+  line-height: 1.05;
+}
+
+/* h2 — section titles: 36px */
+h2 {
+  font-size: var(--cgp-text-display-4);
+  line-height: 1.1;
+}
+
+/* h3 — card titles: 24px */
+h3 {
+  font-size: var(--cgp-text-h3);
+}
+
+/* h4 — card sub-titles: 20px */
+h4 {
+  font-size: var(--cgp-text-h4);
+}
+
+/* h5 — detail headings: 18px */
+h5 {
+  font-size: var(--cgp-text-lg);
+}
+
+/* h6 — small headings: 16px */
+h6 {
+  font-size: var(--cgp-text-base);
+}
+
+/* ============ Selection ============ */
+::selection {
+  background: var(--cgp-selection-bg);
+  color: var(--cgp-selection-text);
+}
+
+/* ============ Focus ============ */
+:focus-visible {
+  outline: 2px solid var(--cgp-accent);
+  outline-offset: 2px;
+}
+
+/* ============ Skip link ============ */
+/* Visually hidden until keyboard focus */
+.cgp-skip-link {
+  position: absolute;
+  inset-block-start: var(--cgp-space-2);
+  inset-inline-start: var(--cgp-space-2);
+  z-index: 100;
+  padding-block: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  background: var(--cgp-accent);
+  color: #000000; /* black on cyan, matches .cgp-btn-primary */
+  border-radius: var(--cgp-radius-full);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ============ Utilities ============ */
+/* Alpine: hide elements until JS initializes. Also the no-JS fallback —
+   with scripts disabled, x-cloak elements stay hidden (boot overlay never shows). */
+[x-cloak] {
+  display: none !important;
+}
+
+/* Hero: full dynamic viewport height */
+.cgp-min-h-dvh {
+  min-height: 100dvh;
+}
+
+/* CGP Utilities — composed classes from docs/design-system.md section 8.
+   All values reference tokens.css (single source of truth).
+   Logical properties only (AGENTS.md rule 14). */
+
+/* ============ Eyebrow (signature pattern) ============ */
+.cgp-eyebrow {
+  display: block;
+  margin-block-end: var(--cgp-space-4);
+  font-size: var(--cgp-text-xs);
+  font-weight: 600;
+  letter-spacing: var(--cgp-tracking-03em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+/* ============ Glass ============ */
+.cgp-glass {
+  background: var(--cgp-glass-bg);
+  -webkit-backdrop-filter: blur(var(--cgp-glass-blur));
+  backdrop-filter: blur(var(--cgp-glass-blur));
+  border: var(--cgp-glass-border);
+}
+
+/* ============ Nav — floating island (canonical, home.html) ============ */
+.cgp-nav-island {
+  background: var(--cgp-nav-bg);
+  -webkit-backdrop-filter: blur(var(--cgp-glass-blur));
+  backdrop-filter: blur(var(--cgp-glass-blur));
+  border: 1px solid var(--cgp-nav-border);
+  box-shadow: var(--cgp-glow-black);
+}
+
+/* scrolled state: bg #050505 at 0.9 + blur 10px + bottom border (fixed-top variant) */
+.cgp-nav-scrolled {
+  background: var(--cgp-nav-scrolled-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-block-end: 1px solid var(--cgp-border);
+}
+
+/* ============ Glow text ============ */
+.cgp-glow-text {
+  text-shadow: var(--cgp-glow-text);
+}
+
+/* ============ Containers ============ */
+.cgp-container-sm {
+  max-width: var(--cgp-container-sm);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-md {
+  max-width: var(--cgp-container-md);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-lg {
+  max-width: var(--cgp-container-lg);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+.cgp-container-xl {
+  max-width: var(--cgp-container-xl);
+  margin-inline: auto;
+  padding-inline: var(--cgp-space-4);
+}
+
+/* ============ Sections ============ */
+.cgp-section {
+  padding-block: var(--cgp-space-20); /* py-20 (80px) — reduced from py-32 per user feedback */
+}
+
+.cgp-section-secondary {
+  padding-block: var(--cgp-space-16); /* py-16 (64px) — reduced from py-24 per user feedback */
+}
+
+/* ============ Buttons (one component, 5 variants) ============ */
+.cgp-btn-primary,
+.cgp-btn-outline,
+.cgp-btn-ghost,
+.cgp-btn-white,
+.cgp-btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cgp-space-2);
+  padding-block: var(--cgp-space-3);
+  padding-inline: var(--cgp-space-6);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--cgp-radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo),
+    transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* primary: filled cyan pill, black text, glow hover, -translate-y-1 */
+.cgp-btn-primary {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+.cgp-btn-primary:hover {
+  background: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-strong);
+  transform: translateY(-4px);
+}
+
+/* outline: cyan border, cyan text, hover fills cyan */
+.cgp-btn-outline {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent);
+}
+
+.cgp-btn-outline:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* ghost: bg-cyan-500/10 + cyan border/50, hover fills */
+.cgp-btn-ghost {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.5);
+  color: var(--cgp-accent);
+}
+
+.cgp-btn-ghost:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* white: filled white, hover fills cyan (form submit) */
+.cgp-btn-white {
+  background: #ffffff;
+  color: #000000;
+}
+
+.cgp-btn-white:hover {
+  background: var(--cgp-accent);
+  color: #000000;
+}
+
+/* link: underline border-b zinc-500, cyan hover */
+.cgp-btn-link {
+  padding: 0;
+  border-radius: 0;
+  border-block-end: 1px solid var(--cgp-text-muted);
+  color: var(--cgp-text-secondary);
+}
+
+.cgp-btn-link:hover {
+  border-block-end-color: var(--cgp-accent);
+  color: var(--cgp-accent);
+}
+
+/* ============ Cards ============ */
+.cgp-card {
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+}
+
+.cgp-card-hover {
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-card-hover:hover {
+  border-color: var(--cgp-accent);
+}
+
+/* ============ Forms — underline input ============ */
+.cgp-input-underline {
+  width: 100%;
+  padding-block: 10px;
+  background: transparent;
+  border: 0;
+  border-block-end: 1px solid var(--cgp-text-disabled);
+  border-radius: var(--cgp-radius-none);
+  color: var(--cgp-text-primary);
+}
+
+.cgp-input-underline:focus {
+  outline: none;
+  border-block-end-color: var(--cgp-accent);
+}
+
+/* ============ Mono label (// NODE 01 style) ============ */
+.cgp-mono-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-accent);
+}
+
+/* ============ Media — image container (canonical, home.html) ============ */
+.cgp-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.cgp-image-container img {
+  transition: transform var(--cgp-motion-image) ease;
+}
+
+.cgp-image-container:hover img {
+  transform: scale(var(--cgp-image-hover-scale));
+}
+
+.cgp-image-overlay {
+  background: var(--cgp-image-fade);
+  opacity: 0;
+  transition: opacity var(--cgp-motion-fast) ease;
+}
+
+.cgp-image-container:hover .cgp-image-overlay {
+  opacity: 1;
+}
+
+/* ============ Media — archive reveal (3.html) ============ */
+.cgp-archive-media {
+  opacity: 0.4;
+  mix-blend-mode: luminosity;
+  transition:
+    opacity var(--cgp-motion-image) ease,
+    mix-blend-mode var(--cgp-motion-image) ease,
+    transform var(--cgp-motion-image) ease;
+}
+
+.cgp-archive-card:hover .cgp-archive-media {
+  opacity: 1;
+  mix-blend-mode: normal;
+  transform: scale(var(--cgp-archive-reveal-scale));
+}
+
+/* Touch devices: no hover state, keep archive images visible */
+@media (hover: none) {
+  .cgp-archive-media {
+    opacity: 0.7;
+    mix-blend-mode: normal;
+  }
+}
+
+/* ============ Terminal — grid overlay (CGP configuration.html) ============ */
+.cgp-bg-grid {
+  background-size: var(--cgp-grid-size) var(--cgp-grid-size);
+  background-image:
+    linear-gradient(to right, var(--cgp-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cgp-grid-line) 1px, transparent 1px);
+}
+
+/* ============ Terminal — custom scrollbar (3px cyan) ============ */
+.cgp-scrollbar::-webkit-scrollbar {
+  width: var(--cgp-scrollbar-size);
+}
+
+.cgp-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cgp-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--cgp-scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.cgp-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--cgp-scrollbar-thumb-hover);
+}
+
+/* ============ Ambient glow blobs (3.html, CGP configuration.html) ============ */
+.cgp-ambient-glow {
+  position: fixed;
+  width: var(--cgp-glow-ambient-size);
+  height: var(--cgp-glow-ambient-size);
+  border-radius: 50%;
+  filter: blur(var(--cgp-glow-ambient-blur));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ Selection card state (3.html, 111.html) ============ */
+.cgp-selection-card {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* ============ Accessibility — screen reader only ============ */
+.cgp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* CGP Motion — ALL shared animations (single source of truth).
+   Every animation that repeats site-wide lives here. No duplication in sections.
+   Keyframes: values in tokens.css; classes here. Durations/easings from tokens. */
+
+/* ============ Entrance — fade in ============ */
+/* 0.6s expo, translateY 15px — hero/panel entrance */
+.cgp-fade-in {
+  animation: cgp-fade-in 0.6s var(--cgp-ease-expo) both;
+}
+
+/* ============ Entrance — reveal + stagger ============ */
+/* Hidden until .cgp-reveal-visible added by main.js (IntersectionObserver).
+   Stagger via inline transition-delay; .cgp-stagger below keeps keyframe stagger. */
+.cgp-reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 0.4s var(--cgp-ease-expo),
+    transform 0.4s var(--cgp-ease-expo);
+}
+
+.cgp-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cgp-stagger > * {
+  animation: cgp-reveal 0.4s var(--cgp-ease-expo) both;
+}
+
+.cgp-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.cgp-stagger > *:nth-child(2) { animation-delay: 40ms; }
+.cgp-stagger > *:nth-child(3) { animation-delay: 80ms; }
+.cgp-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.cgp-stagger > *:nth-child(5) { animation-delay: 160ms; }
+.cgp-stagger > *:nth-child(6) { animation-delay: 200ms; }
+
+/* ============ Spin — slow ============ */
+/* 60s linear — hotwheel inner ring */
+.cgp-spin-slow {
+  animation: cgp-spin-slow 60s linear infinite;
+}
+
+/* ============ Scanline ============ */
+/* 3s linear — terminal scanner */
+.cgp-scanline {
+  animation: cgp-scanline 3s linear infinite;
+}
+
+/* ============ Custom cursor ============ */
+/* Fixed, transform follow (--mx/--my set by JS), mix-blend-difference */
+.cgp-cursor-dot,
+.cgp-cursor-ring {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
+  transform: translate(calc(var(--mx, 0px) - 50%), calc(var(--my, 0px) - 50%));
+}
+
+.cgp-cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cgp-accent-bright);
+}
+
+.cgp-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--cgp-accent-bright);
+  transition:
+    width var(--cgp-motion-fast) var(--cgp-ease-expo),
+    height var(--cgp-motion-fast) var(--cgp-ease-expo),
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* Grow ring over interactive elements (a, button, [data-cursor]) */
+.cgp-cursor-ring-grow {
+  width: 56px;
+  height: 56px;
+}
+
+/* ============ 3D tilt ============ */
+/* Perspective + rotateX/rotateY via --tilt-x/--tilt-y (set by JS) */
+.cgp-tilt {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+  will-change: transform;
+}
+
+/* ============ Magnetic ============ */
+/* Translate via --mx/--my (set by JS) */
+.cgp-magnetic {
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform var(--cgp-motion-fast) var(--cgp-ease-expo);
+  will-change: transform;
+}
+
+/* ============ Count up ============ */
+/* cgp-count-up: JS-only (IntersectionObserver + rAF). No CSS needed. */
+
+/* ============ Reduced motion ============ */
+/* Disable ALL animations, transitions and glows */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cgp-fade-in,
+  .cgp-reveal,
+  .cgp-reveal-visible,
+  .cgp-stagger > *,
+  .cgp-spin-slow,
+  .cgp-scanline,
+  .cgp-tilt,
+  .cgp-magnetic,
+  .animate-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cgp-cursor-dot,
+  .cgp-cursor-ring {
+    display: none;
+  }
+
+  /* Glows off */
+  .cgp-glow-text,
+  .cgp-btn-primary:hover,
+  .cgp-btn-ghost:hover,
+  .cgp-btn-outline:hover {
+    text-shadow: none;
+    box-shadow: none;
+  }
+}

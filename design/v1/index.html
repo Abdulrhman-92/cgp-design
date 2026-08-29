@@ -11,6 +11,8 @@
   <meta name="theme-color" content="#050505">
   <!-- TODO: replace with the live URL before launch -->
   <link rel="canonical" href="https://cgp.sa/">
+  <link rel="alternate" hreflang="en" href="https://cgp.sa/">
+  <link rel="alternate" hreflang="x-default" href="https://cgp.sa/">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CGP">
@@ -94,17 +96,13 @@
   <!-- Fonts (self-hosted, preload critical weights — family-weight.woff2 convention) -->
   <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/tailwind.css?v=2">
-  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/tokens.css">
-  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/utilities.css">
-  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/base.css">
-  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/css/motion.css">
-  <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
+  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
+  <link rel="stylesheet" href="css/tailwind.css?v=3">
+  <link rel="stylesheet" href="css/theme.css?v=3">
   <link rel="stylesheet" href="home/css/home.css">
-  <!-- Scripts (deferred) -->
+  <!-- Scripts (deferred — ONE bundle per page, minified) -->
   <script defer src="../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
-  <script defer src="../../wp-content/themes/cgp/assets/js/main.js?v=2"></script>
+  <script defer src="js/bundles/home.min.js"></script>
   <!-- HEAD -->
 </head>
 <body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
