@@ -1,0 +1,286 @@
+/* ============================================================
+   CGP design/v1 — shop page-level styles
+   ------------------------------------------------------------
+   Shared rules (pills, stock colors, shop-card, card-stage,
+   card-spotlight, mobile-bar) live in the theme utilities.css.
+   Scope: shop-only — spec sheet card layout, filter bar,
+   featured unit, upsell band.
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   ============================================================ */
+
+/* ============ Hero ============ */
+.cgp-shop-hero-title {
+  font-size: clamp(44px, 11vw, 128px);
+}
+
+/* ============ Filter bar ============ */
+.cgp-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-4);
+  padding-block-end: var(--cgp-space-4);
+  border-block-end: 1px solid var(--cgp-border-subtle);
+}
+
+.cgp-filter-count {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+.cgp-filter-reset {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+  min-height: 44px;
+  padding-inline: var(--cgp-space-3);
+  transition: color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-filter-reset:hover {
+  color: var(--cgp-accent-bright);
+}
+
+/* ============ Spec sheet card (revived Terminal Spec Sheet) ============ */
+.cgp-spec-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  transition: border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+              transform var(--cgp-motion-fast) var(--cgp-ease-expo),
+              box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-spec-card:hover {
+  border-color: var(--cgp-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* image stage — museum specimen on a lit stage */
+.cgp-spec-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--cgp-bg-elevated);
+}
+
+.cgp-spec-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--cgp-motion-image) var(--cgp-ease-expo);
+}
+
+.cgp-spec-card:hover .cgp-spec-stage img {
+  transform: scale(1.05);
+}
+
+/* mono index + badge row over the stage */
+.cgp-spec-index {
+  position: absolute;
+  inset-block-start: var(--cgp-space-4);
+  inset-inline-start: var(--cgp-space-4);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  color: var(--cgp-text-muted);
+}
+
+.cgp-spec-badge {
+  position: absolute;
+  inset-block-start: var(--cgp-space-4);
+  inset-inline-end: var(--cgp-space-4);
+  padding-inline: var(--cgp-space-3);
+  padding-block: 4px;
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-overlay);
+  border: 1px solid var(--cgp-border-strong);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+/* body: name + subtitle + spec rows + price + CTA */
+.cgp-spec-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cgp-space-3);
+  padding: var(--cgp-space-6);
+  flex: 1;
+}
+
+.cgp-spec-name {
+  font-size: var(--cgp-text-lg);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+  line-height: 1.3;
+}
+
+.cgp-spec-subtitle {
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+}
+
+/* terminal spec rows (CPU / GPU / RAM / LOOP) */
+.cgp-spec-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cgp-space-2);
+  padding-block: var(--cgp-space-3);
+  border-block: 1px solid var(--cgp-border-subtle);
+}
+
+.cgp-spec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-3);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+}
+
+.cgp-spec-row-k {
+  color: var(--cgp-text-muted);
+}
+
+.cgp-spec-row-v {
+  color: var(--cgp-text-secondary);
+  text-align: end;
+}
+
+/* footer: price + stock + lead time + CTA */
+.cgp-spec-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-3);
+  margin-block-start: auto;
+}
+
+.cgp-spec-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-base);
+  font-weight: 700;
+  color: var(--cgp-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.cgp-spec-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+/* ============ Featured unit (flagship spotlight) ============ */
+.cgp-featured-unit {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  overflow: hidden;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-3xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+@media (min-width: 1024px) {
+  .cgp-featured-unit {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cgp-featured-stage {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--cgp-bg-elevated);
+}
+
+.cgp-featured-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cgp-featured-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--cgp-space-4);
+  padding: var(--cgp-space-8);
+}
+
+.cgp-featured-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+.cgp-featured-name {
+  font-size: var(--cgp-text-display-4);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+  line-height: 1.1;
+}
+
+.cgp-featured-desc {
+  font-size: var(--cgp-text-sm);
+  color: var(--cgp-text-secondary);
+  line-height: 1.6;
+}
+
+/* ============ Upsell band (bespoke floor) ============ */
+.cgp-upsell-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-6);
+  padding: var(--cgp-space-8);
+  text-align: center;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-3xl);
+}
+
+@media (min-width: 768px) {
+  .cgp-upsell-band {
+    flex-direction: row;
+    text-align: start;
+  }
+}
+
+.cgp-upsell-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}

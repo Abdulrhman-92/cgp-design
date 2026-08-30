@@ -1,0 +1,113 @@
+<!-- Catalog — filter pills + sort + spec-sheet grid (the full collection) -->
+<section id="catalog" class="cgp-section bg-cgp-bg-section" aria-labelledby="catalog-title" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">The Collection</p>
+        <h2 id="catalog-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">Fresh from the forge</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// RENDER_STAGE: ACTIVE</p>
+    </div>
+
+    <!-- ============ Featured unit (flagship spotlight) ============ -->
+    <div x-show="s.featured && s.category === 'all'" x-cloak x-transition.opacity.duration.200ms class="mb-12">
+      <div class="cgp-featured-unit">
+        <div class="cgp-featured-stage">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — legendary circular chassis build" width="1280" height="853" loading="lazy" decoding="async">
+          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+        </div>
+        <div class="cgp-featured-body">
+          <p class="cgp-featured-label">// FLAGSHIP UNIT</p>
+          <h3 class="cgp-featured-name" x-text="s.featured.name"></h3>
+          <p class="cgp-featured-desc" x-text="s.featured.subtitle"></p>
+          <div class="flex flex-wrap items-center gap-4">
+            <span class="cgp-spec-price" x-text="s.priceLabel(s.featured)"></span>
+            <span class="cgp-spec-meta">
+              <span :class="s.stockClass(s.featured.stock)" x-text="s.stockLabel(s.featured.stock)"></span>
+              <span x-text="'// FORGE TIME: ' + s.featured.leadTime.toUpperCase()"></span>
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <!-- TODO: real permalink -->
+            <a href="#" class="cgp-btn-primary cgp-magnetic" data-magnetic>View the Build</a>
+            <a href="{{CONFIG_URL}}" class="cgp-btn-ghost">Commission Your Own</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Filter bar ============ -->
+    <div class="cgp-filter-bar mb-8">
+      <div class="cgp-pill-scroll-wrap">
+        <div class="cgp-pill-row" role="group" aria-label="Filter by category">
+          <!-- REPEAT: category pill — loop over wc_get_product_categories() -->
+          <template x-for="cat in window.CGP_SHOP.categories" :key="cat.id">
+            <button type="button" @click="s.setCategory(cat.id)" :class="s.category === cat.id ? 'cgp-pill-active' : ''" class="cgp-pill" :aria-pressed="s.category === cat.id">
+              <span x-text="cat.name"></span>
+              <span class="cgp-pill-dot" x-show="s.counts[cat.id] > 0" x-text="s.counts[cat.id]" aria-hidden="true"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <label for="shop-sort" class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Sort</label>
+        <select id="shop-sort" @change="s.setSort($event.target.value)" class="cgp-input-underline">
+          <template x-for="opt in window.CGP_SHOP.sortOptions" :key="opt.id">
+            <option :value="opt.id" x-text="opt.name" :selected="s.sort === opt.id"></option>
+          </template>
+        </select>
+        <button type="button" @click="s.reset()" class="cgp-filter-reset" x-show="s.activeFilters > 0" x-cloak>// RESET</button>
+      </div>
+    </div>
+
+    <p class="cgp-filter-count mb-6" x-text="'// ' + s.filtered.length + ' UNITS' + (s.activeFilters > 0 ? ' · ' + s.activeFilters + ' FILTERS ACTIVE' : '')"></p>
+
+    <!-- ============ Product grid (spec-sheet cards) ============ -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <!-- REPEAT: product card — loop over wc_get_products() -->
+      <template x-for="(p, i) in s.filtered" :key="p.id">
+        <article class="cgp-spec-card group">
+          <div class="cgp-spec-stage">
+            <!-- REPLACE WITH CLIENT PHOTOS -->
+            <img :src="'{{PAGE_ASSETS}}/assets/images/' + p.image" :alt="p.name" width="560" height="420" loading="lazy" decoding="async">
+            <div class="cgp-card-spotlight" aria-hidden="true"></div>
+            <span class="cgp-spec-index" x-text="'UNIT ' + String(i + 1).padStart(2, '0')" aria-hidden="true"></span>
+            <span class="cgp-spec-badge" x-show="s.badgeLabel(p.badge)" x-text="s.badgeLabel(p.badge)"></span>
+          </div>
+          <div class="cgp-spec-body">
+            <div>
+              <h3 class="cgp-spec-name" x-text="p.name"></h3>
+              <p class="cgp-spec-subtitle" x-text="p.subtitle"></p>
+            </div>
+            <div class="cgp-spec-rows">
+              <!-- REPEAT: spec row — loop over product attributes -->
+              <template x-for="spec in p.specs" :key="spec.k">
+                <div class="cgp-spec-row">
+                  <span class="cgp-spec-row-k" x-text="spec.k"></span>
+                  <span class="cgp-spec-row-v" x-text="spec.v"></span>
+                </div>
+              </template>
+            </div>
+            <div class="cgp-spec-footer">
+              <span class="cgp-spec-price" x-text="s.priceLabel(p)"></span>
+              <span class="cgp-spec-meta">
+                <span :class="s.stockClass(p.stock)" x-text="s.stockLabel(p.stock)"></span>
+                <span x-text="'// FORGE TIME: ' + p.leadTime.toUpperCase()"></span>
+              </span>
+            </div>
+            <div class="flex gap-3">
+              <!-- TODO: real permalink -->
+              <a href="#" class="cgp-btn-ghost flex-1">View the Build</a>
+              <a href="{{CONFIG_URL}}" class="cgp-btn-link" x-show="p.type === 'prebuilt'">Commission Your Own</a>
+            </div>
+          </div>
+        </article>
+      </template>
+    </div>
+
+    <!-- Empty state -->
+    <p x-show="s.filtered.length === 0" x-cloak class="py-16 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// NO UNITS MATCH — RESET FILTERS</p>
+  </div>
+</section>

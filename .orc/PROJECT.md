@@ -14,13 +14,13 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 
 ## Current State
 
-- **Last completed:** Homepage ✅ (refactor 3cb7772) + Configurator ✅ (7113f89, pushed to GitHub)
-- **In progress:** — (configurator done, next page pending)
+- **Last completed:** Homepage ✅ (3cb7772) + Configurator ✅ (7113f89) + CSS de-dup cleanup ✅ (2d4f35c — shared classes moved to theme utilities.css, honeypot/submit bug fixed)
+- **In progress:** — (cleanup done, shop page pending)
 - **Blocked:** —
 
 ## Next Step
 
-> Build the Shop page (design/v1/shop/) — the homepage "Browse All Products" links to it. Then: product, archives, logbook, vision, contact.
+> Build the Shop page (design/v1/shop/) — consultation converged (Round 1): grid not slider, inquiry-first (no cart), revive Terminal Spec Sheet cards, pill filters, two zones (Pre-Built Systems / Signature Components), cross-link to configurator. Name: "The Shop" (user decision). Shared CSS already in theme (pills, stock, mobile-bar, shop-card).
 
 ## Configurator Consultation Decisions (2026-08-29, /go-cons Round 1 — converged)
 

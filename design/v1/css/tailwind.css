@@ -1819,6 +1819,10 @@ video {
     margin-top: 32px;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:h-64 {
     height: 16rem;
   }

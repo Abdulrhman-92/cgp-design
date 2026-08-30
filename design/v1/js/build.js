@@ -157,6 +157,64 @@ const PAGES = {
       footer: 'shared',
     },
   },
+  shop: {
+    output: 'shop/index.html',
+    title: 'CGP | The Shop — Pre-Built Systems & Signature Components | Riyadh',
+    description: 'Browse CGP pre-built water-cooled systems and signature components — The Bespoke Forge, Riyadh. Every unit pressure-tested and ready for its owner.',
+    canonical: 'https://cgp.sa/shop/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': 'ItemList',
+          '@id': 'https://cgp.sa/shop/#catalog',
+          name: 'CGP Pre-Built Systems & Signature Components',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'The Wraith' },
+            { '@type': 'ListItem', position: 2, name: 'The Hotwheel' },
+            { '@type': 'ListItem', position: 3, name: 'Titanium Core' },
+            { '@type': 'ListItem', position: 4, name: 'Neon Genesis' },
+            { '@type': 'ListItem', position: 5, name: 'Project Obsidian' },
+            { '@type': 'ListItem', position: 6, name: 'CGP Custom Distro Plate' },
+          ],
+        },
+      ],
+    },
+    css: ['shop/css/shop.css'],
+    js: ['main.js', 'shop/js/shop-data.js', 'shop/js/shop.js'],
+    sections: {
+      header: 'shop/sections/header.html', // page-specific (mirrors WP header-shop.php)
+      main: [
+        'shop/sections/hero.html',
+        'shop/sections/catalog.html',
+        'shop/sections/upsell.html',
+      ],
+      footer: 'shared',
+    },
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -307,18 +365,23 @@ function resolveSection(relPath, pageRoot) {
   const file = path.join(DESIGN_DIR, relPath);
   if (!fs.existsSync(file)) throw new Error(`missing section: ${relPath}`);
   const theme = path.relative(pageRoot, THEME_ASSETS_DIR).split(path.sep).join('/');
-  const page = path.relative(pageRoot, pageRoot).split(path.sep).join('/') || '.';
+  // PAGE_ASSETS = relative path from the OUTPUT page to design/v1 root
+  // ('.' for homepage, '..' for deep pages) — images live in design/v1/assets/
+  const page = path.relative(pageRoot, DESIGN_DIR).split(path.sep).join('/') || '.';
   // Cross-page link tokens: '' for the homepage itself, relative path otherwise
   const homeRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'index.html')).split(path.sep).join('/');
   const homeUrl = homeRel === 'index.html' ? '' : homeRel;
   const configRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'configurator', 'index.html')).split(path.sep).join('/');
   const configUrl = configRel === 'configurator/index.html' ? 'configurator/index.html' : configRel;
+  const shopRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'shop', 'index.html')).split(path.sep).join('/');
+  const shopUrl = shopRel === 'shop/index.html' ? 'shop/index.html' : shopRel;
   return fs
     .readFileSync(file, 'utf8')
     .replace(/\{\{THEME_ASSETS\}\}/g, theme)
     .replace(/\{\{PAGE_ASSETS\}\}/g, page)
     .replace(/\{\{HOME_URL\}\}/g, homeUrl)
-    .replace(/\{\{CONFIG_URL\}\}/g, configUrl);
+    .replace(/\{\{CONFIG_URL\}\}/g, configUrl)
+    .replace(/\{\{SHOP_URL\}\}/g, shopUrl);
 }
 
 // ---------------------------------------------------------------------------
