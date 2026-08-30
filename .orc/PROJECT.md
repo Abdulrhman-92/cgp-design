@@ -14,13 +14,13 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 
 ## Current State
 
-- **Last completed:** Phase 2 (sections) + Phase 3 (assembly) + Phase 4 (verification) ✅ + homepage refactor per designer-guide rules (commit 3cb7772)
-- **In progress:** Configurator page (design/v1/configurator/) — consultation done, implementation started
+- **Last completed:** Homepage ✅ (refactor 3cb7772) + Configurator ✅ (7113f89, pushed to GitHub)
+- **In progress:** — (configurator done, next page pending)
 - **Blocked:** —
 
 ## Next Step
 
-> Build the Configurator page per the consolidated consultation design (below). Then: shop, product, archives, logbook, vision, contact pages.
+> Build the Shop page (design/v1/shop/) — the homepage "Browse All Products" links to it. Then: product, archives, logbook, vision, contact.
 
 ## Configurator Consultation Decisions (2026-08-29, /go-cons Round 1 — converged)
 

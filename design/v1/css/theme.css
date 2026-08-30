@@ -109,7 +109,6 @@
   --cgp-glow-ambient-cyan: rgba(22, 78, 99, 0.2);  /* cyan-900/20 radial blob */
   --cgp-glow-ambient-blue: rgba(30, 58, 138, 0.1); /* blue-900/10 radial blob */
   --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
-  --cgp-glow-spotlight: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(6, 182, 212, 0.14), transparent 70%); /* product stage spotlight */
   --cgp-glow-ambient-size: 700px;         /* blob diameter (600-800px range) */
   --cgp-glow-ambient-blur: 120px;         /* blob blur (120-150px range) */
   --cgp-image-fade: linear-gradient(to top, #050505 0%, transparent 100%);
@@ -691,6 +690,183 @@ h6 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ============ Forms — honeypot + submit ============ */
+/* Honeypot: visually hidden off-screen (spam hygiene, no inline styles) */
+.cgp-honeypot {
+  position: absolute;
+  inset-inline-start: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Submit: 44px touch target + squared radius (form CTA, per design-system) */
+.cgp-btn-submit {
+  min-height: 44px;
+  border-radius: var(--cgp-radius-sm);
+}
+
+/* ============ Shop — premium "Terminal Spec Sheet" cards ============ */
+/* Glass panel + terminal bar + image stage (spotlight) + spec panel.
+   Tilt handled by main.js via data-tilt (transform only, reduced-motion safe). */
+.cgp-shop-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cgp-shop-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Price glow on hover (subtle — max 2 glows per viewport rule) */
+.cgp-shop-card:hover .tabular-nums {
+  text-shadow: var(--cgp-glow-text);
+}
+
+/* ============ Shop — product stage (spotlight) ============ */
+/* The product sits on a lit stage — museum specimen, not inventory. */
+.cgp-card-stage {
+  background: var(--cgp-bg-elevated);
+}
+
+.cgp-card-spotlight {
+  position: absolute;
+  inset: 0;
+  background: var(--cgp-glow-spotlight);
+  opacity: 0.7;
+  transition: opacity var(--cgp-motion-fast) var(--cgp-ease-expo);
+  pointer-events: none;
+}
+
+.cgp-shop-card:hover .cgp-card-spotlight {
+  opacity: 1;
+}
+
+/* ============ Category pills ============ */
+/* Mobile: horizontal scroll with fade edge (affordance). Desktop: wrap to 2 lines. */
+.cgp-pill-scroll-wrap {
+  position: relative;
+}
+
+.cgp-pill-scroll-wrap::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 48px;
+  background: linear-gradient(to left, var(--cgp-bg-elevated), transparent);
+  pointer-events: none;
+}
+
+.cgp-pill-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--cgp-space-3);
+  overflow-x: auto;
+  padding-block-end: var(--cgp-space-3);
+  scrollbar-width: none;
+}
+
+.cgp-pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .cgp-pill-scroll-wrap::after {
+    display: none;
+  }
+
+  .cgp-pill-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    /* Cap at 2 lines — if more categories exist, scroll vertically */
+    max-height: calc(44px * 2 + var(--cgp-space-3) * 2);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cgp-border-strong) transparent;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar {
+    display: block;
+    width: 4px;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar-thumb {
+    background: var(--cgp-border-strong);
+    border-radius: 9999px;
+  }
+
+  .cgp-pill-row::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.cgp-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-6);
+  min-height: 44px;
+  border-radius: var(--cgp-radius-full);
+  border: 1px solid var(--cgp-border);
+  background: var(--cgp-bg-card);
+  font-size: var(--cgp-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-text-secondary);
+  transition: all var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-pill:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-pill-active {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* GPU pill = amber */
+.cgp-pill-gpu.cgp-pill-active {
+  border-color: var(--cgp-accent-warm);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--cgp-accent-warm);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}
+
+/* selected dot on pill */
+.cgp-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--cgp-accent);
+}
+
+.cgp-pill-gpu .cgp-pill-dot {
+  background: var(--cgp-accent-warm);
+}
+
+/* ============ Stock status ============ */
+.cgp-stock-in { color: var(--cgp-accent); }
+.cgp-stock-low { color: var(--cgp-accent-warm); }
+.cgp-stock-order { color: var(--cgp-text-muted); }
+
+/* ============ Mobile sticky bar ============ */
+.cgp-mobile-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--cgp-bg-elevated);
+  border-block-start: 1px solid var(--cgp-border);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* CGP Motion — ALL shared animations (single source of truth).
