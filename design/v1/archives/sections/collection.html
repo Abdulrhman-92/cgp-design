@@ -1,0 +1,135 @@
+<!-- ============ ARCHIVES — The Collection (mosaic grid, home-gallery card style) ============ -->
+<!-- Cards reuse the theme .cgp-archive-card / .cgp-archive-media (luminosity
+     reveal). 3-col mosaic: two span-2 units + reserved CTA tile (7th cell). -->
+<section id="archives-collection" class="cgp-section bg-cgp-bg-section" aria-labelledby="archives-collection-title">
+  <div class="cgp-container-lg">
+    <!-- Section header -->
+    <div class="mb-cgp-12 max-w-2xl">
+      <p class="cgp-eyebrow">The Collection</p>
+      <h2 id="archives-collection-title" class="text-cgp-display-4 leading-tight md:text-cgp-display-3">
+        Six masterpieces,<br>
+        <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,var(--cgp-accent-bright),var(--cgp-accent-deep))]">zero compromises.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <!-- REPEAT: archive card — loop over CPT 'archives'; wrap in <a href="permalink"> -->
+      <!-- Card 1: The Hotwheel (large — real detail page exists) -->
+      <a href="{{PRODUCT_URL}}" class="block md:col-span-2">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — tilted 45-degree chassis with custom water cooling loop" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="1280" height="882" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">Open-Air Architecture</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">01</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">The Hotwheel</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">Tilted 45&deg; Chassis &amp; SFX Power</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Card 2: The Wraith -->
+      <!-- TODO: real permalink -->
+      <a href="#" class="block">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="The Wraith — silent full-load flagship in its signature dark chassis" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="560" height="420" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">Pre-Built Flagship</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">02</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">The Wraith</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">Silent Full-Load Flagship</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Card 3: Project Obsidian -->
+      <!-- TODO: real permalink -->
+      <a href="#" class="block">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/obsidian.webp" alt="Project Obsidian — dual loop workstation build" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="800" height="1200" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">Mechanical Horology</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">03</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Project Obsidian</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">Dual Loop / Workstation</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Card 4: Titanium Core -->
+      <!-- TODO: real permalink -->
+      <a href="#" class="block">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/titanium-core.webp" alt="Titanium Core — mini-ITX watercooled build" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="800" height="533" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">Extreme Scale</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">04</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Titanium Core</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">Mini-ITX Watercooled</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Card 5: Neon Genesis -->
+      <!-- TODO: real permalink -->
+      <a href="#" class="block">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/neon-genesis.webp" alt="Neon Genesis — UV reactive loop with glowing coolant" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="1280" height="720" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">UV Reactive</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">05</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">Neon Genesis</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">UV Reactive Loop</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Card 6: CGP Distro Plate (large) -->
+      <!-- TODO: real permalink -->
+      <a href="#" class="block md:col-span-2">
+        <article class="cgp-archive-card group relative h-96 overflow-hidden rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card transition-colors duration-300 hover:border-cgp-accent">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="CGP custom acrylic distribution plate with hand-routed coolant channels" class="cgp-archive-media absolute inset-0 h-full w-full object-cover" width="560" height="373" loading="lazy" decoding="async">
+          <div class="absolute inset-0 bg-gradient-to-t from-cgp-bg-page via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+          <span class="absolute start-4 top-4 rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+            <span class="font-bold uppercase tracking-cgp-03em text-cgp-micro text-cgp-accent">Component Art</span>
+          </span>
+          <span class="absolute end-4 top-4 font-mono text-cgp-xs text-cgp-text-muted transition-colors group-hover:text-cgp-accent" aria-hidden="true">06</span>
+          <div class="absolute inset-x-0 bottom-0 p-8">
+            <h3 class="mb-1 font-bold uppercase tracking-cgp-03em text-cgp-h3 text-cgp-text-heading transition-colors group-hover:text-cgp-accent-bright">CGP Distro Plate</h3>
+            <p class="uppercase tracking-wider text-cgp-micro text-cgp-accent">Hand-Routed Acrylic Distribution</p>
+          </div>
+        </article>
+      </a>
+
+      <!-- Reserved-slot CTA tile (7th grid cell — no image by design) -->
+      <a href="{{CONFIG_URL}}" class="cgp-card cgp-card-hover group flex flex-col justify-between p-cgp-6">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint" aria-hidden="true">UNIT_07 // RESERVED</p>
+        <div class="mt-cgp-4">
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Your Machine, Next.</h3>
+          <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Every archive starts the same way — one commission, one blueprint, one owner. Reserve the next file.</p>
+        </div>
+        <span class="cgp-btn-link mt-6 self-start">Start A Commission <span class="inline-block transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>

@@ -9,7 +9,7 @@
 
 - **Client:** CGP (cgp.sa) — Saudi luxury PC building atelier ("The Bespoke Forge")
 - **Scope:** Design-only HTML mockups (WordPress implementation comes later)
-- **Current focus:** Homepage (design/v1/home/) — then configurator, shop, product, archives, logbook, vision, contact
+- **Current focus:** Pages built: home, about, blog, archives — remaining: configurator, shop, product, contact
 - **Design system:** `design-system.md` (colors, type, spacing, components, motion — canonical)
 - **Client prototypes:** `reference/client-prototypes/` (READ-ONLY reference)
 
@@ -35,7 +35,7 @@ All shared code lives in **`wp-content/themes/cgp/assets/`** — NEVER duplicate
 ```
 design/v1/
 ├── shared/sections/          ← header.html + footer.html (used by ALL pages)
-├── <page>/                   ← one folder per page (home, configurator, shop, product, archives, logbook, vision, contact)
+├── <page>/                   ← one folder per page (home, configurator, shop, product, about, blog, archives, contact)
 │   ├── index.html            ← page template (built by build.js)
 │   ├── sections/             ← one file per section
 │   ├── css/<page>.css        ← page-level styles (shared between that page's sections)

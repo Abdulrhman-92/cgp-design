@@ -1,0 +1,71 @@
+<!-- The Ledger — mono build record (semantic <table>; REPEAT row = WP loop
+     over CPT 'archives', year/status from post meta). bg-cgp-bg-page:
+     alternates with the collection grid above. -->
+<section id="archives-ledger" class="cgp-section bg-cgp-bg-page" aria-labelledby="archives-ledger-title">
+  <div class="cgp-container-md">
+    <!-- Section header -->
+    <div class="mb-cgp-12 text-center">
+      <p class="cgp-eyebrow">The Ledger</p>
+      <h2 id="archives-ledger-title" class="text-cgp-display-4 leading-tight">
+        Every unit,<br>
+        <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,var(--cgp-accent-bright),var(--cgp-accent-deep))]">on the record.</span>
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+        Year of forging, architecture, and final status — the same log our masters sign before a unit ships.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card">
+      <table class="w-full min-w-[560px]">
+        <caption class="sr-only">Archive of CGP forged units — year, architecture, and status</caption>
+        <thead>
+          <tr class="border-b border-cgp-border font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+            <th scope="col" class="p-cgp-4 text-start font-medium">Unit</th>
+            <th scope="col" class="p-cgp-4 text-start font-medium">Year</th>
+            <th scope="col" class="hidden p-cgp-4 text-start font-medium sm:table-cell">Architecture</th>
+            <th scope="col" class="p-cgp-4 text-start font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody class="font-mono text-cgp-sm">
+          <!-- REPEAT: ledger row — loop over CPT 'archives'; unit/year/status from post fields -->
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">01</span> <span class="text-cgp-text-heading">The Hotwheel</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2025</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Open-Air &middot; Tilted 45&deg;</td>
+            <td class="p-cgp-4 uppercase text-cgp-accent">Shipped</td>
+          </tr>
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">02</span> <span class="text-cgp-text-heading">The Wraith</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2026</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Full-Tower &middot; Silent Loop</td>
+            <td class="p-cgp-4 uppercase text-cgp-accent-bright">In Stock</td>
+          </tr>
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">03</span> <span class="text-cgp-text-heading">Project Obsidian</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2025</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Workstation &middot; Dual Loop</td>
+            <td class="p-cgp-4 uppercase text-cgp-accent">Shipped</td>
+          </tr>
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">04</span> <span class="text-cgp-text-heading">Titanium Core</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2024</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Mini-ITX &middot; Compact Loop</td>
+            <td class="p-cgp-4 uppercase text-cgp-accent">Shipped</td>
+          </tr>
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">05</span> <span class="text-cgp-text-heading">Neon Genesis</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2026</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Mid-Tower &middot; UV Loop</td>
+            <td class="p-cgp-4 uppercase text-cgp-accent">Shipped</td>
+          </tr>
+          <tr class="border-b border-cgp-border-subtle transition-colors last:border-b-0 hover:bg-cgp-accent/5">
+            <td class="p-cgp-4"><span class="text-cgp-text-faint" aria-hidden="true">06</span> <span class="text-cgp-text-heading">CGP Distro Plate</span></td>
+            <td class="p-cgp-4 text-cgp-text-secondary">2026</td>
+            <td class="hidden p-cgp-4 text-cgp-text-secondary sm:table-cell">Component &middot; Acrylic</td>
+            <td class="p-cgp-4 uppercase text-cgp-text-muted">Made To Order</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

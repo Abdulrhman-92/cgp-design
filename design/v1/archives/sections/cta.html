@@ -1,0 +1,22 @@
+<!-- Closing CTA — "The Next File Could Be Yours." Links resolve via
+     {{CONFIG_URL}} / {{CONTACT_URL}} tokens (build.js). bg-cgp-bg-section:
+     alternates with the ledger section above. -->
+<section id="archives-cta" class="cgp-section relative overflow-hidden bg-cgp-bg-section" aria-labelledby="archives-cta-title">
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow start-1/2 top-[-40%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <div class="cgp-container-md relative z-10 text-center">
+    <p class="cgp-eyebrow">// SYS_COMMISSION</p>
+    <h2 id="archives-cta-title" class="mb-6 text-cgp-display-4 leading-tight md:text-cgp-display-3">
+      The Next File<br>
+      <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Could Be Yours.</span>
+    </h2>
+    <p class="mx-auto mb-10 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+      The archive is written one commission at a time. Open the configurator, and we will file your machine with the rest of them.
+    </p>
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="{{CONFIG_URL}}" class="cgp-btn-primary cgp-magnetic" data-magnetic>Start Your Commission</a>
+      <a href="{{CONTACT_URL}}" class="cgp-btn-outline cgp-magnetic" data-magnetic>Open A Channel</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<!-- Featured entry — split layout: framed image (LEFT) + narrative (RIGHT).
+     Image is a placeholder — REPLACE WITH CLIENT PHOTOS. bg-cgp-bg-section:
+     alternates with the hero above. -->
+<section id="blog-featured" class="cgp-section bg-cgp-bg-section" aria-labelledby="blog-featured-title">
+  <div class="cgp-container-lg">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      <!-- LEFT: featured image + floating mono badge -->
+      <div class="relative">
+        <div class="cgp-image-container rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="Hand-bent hardline tubing forming the Hotwheel's twin cryo loops" class="w-full" width="560" height="373" loading="lazy" decoding="async">
+        </div>
+        <p class="cgp-blog-badge font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">ENTRY_042 // FEATURED</p>
+      </div>
+
+      <!-- RIGHT: narrative + meta + read link -->
+      <div>
+        <p class="cgp-eyebrow">Featured Entry</p>
+        <h2 id="blog-featured-title" class="mb-6 text-cgp-display-4 leading-tight">
+          Behind The Build:<br>
+          <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">The Hotwheel&rsquo;s Twin Loops.</span>
+        </h2>
+        <p class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+          <time datetime="2026-08-20">Aug 20, 2026</time>
+          <span class="text-cgp-accent" aria-hidden="true">·</span>
+          <span>BUILD_DIARY</span>
+          <span class="text-cgp-accent" aria-hidden="true">·</span>
+          <span>6 MIN READ</span>
+        </p>
+        <p class="mb-4 text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+          Two independent cryo loops, one circular chassis, and zero room for error. This entry walks through how the Hotwheel&rsquo;s twin loops were mapped, bent, and pressure-tested — and why the second loop exists at all.
+        </p>
+        <p class="mb-8 text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+          From the first 3D-printed routing jig to the 48-hour thermal baptism, every decision on the Hotwheel earned its place the hard way.
+        </p>
+        <!-- TODO: real permalink -->
+        <a href="#" class="cgp-btn-link">Read The Entry <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>

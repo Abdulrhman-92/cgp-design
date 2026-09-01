@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Primary meta -->
+  <title>CGP Blog | Notes From The Bespoke Forge — Riyadh, Saudi Arabia</title>
+  <meta name="description" content="Field notes from CGP — The Bespoke Forge: build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.">
+  <!-- TODO: flip to index,follow before launch -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <!-- TODO: replace with the live URL before launch -->
+  <link rel="canonical" href="https://cgp.sa/blog/">
+  <link rel="alternate" hreflang="en" href="https://cgp.sa/blog/">
+  <link rel="alternate" hreflang="x-default" href="https://cgp.sa/blog/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CGP">
+  <meta property="og:title" content="CGP Blog | Notes From The Bespoke Forge — Riyadh, Saudi Arabia">
+  <meta property="og:description" content="Field notes from CGP — The Bespoke Forge: build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.">
+  <meta property="og:url" content="https://cgp.sa/blog/">
+  <meta property="og:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <meta property="og:locale" content="en_SA">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CGP Blog | Notes From The Bespoke Forge — Riyadh, Saudi Arabia">
+  <meta name="twitter:description" content="Field notes from CGP — The Bespoke Forge: build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.">
+  <meta name="twitter:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <!-- Geo (Saudi Arabia — Riyadh) -->
+  <meta name="geo.region" content="SA">
+  <meta name="geo.placename" content="Riyadh">
+  <meta name="geo.position" content="24.7136;46.6753">
+  <meta name="ICBM" content="24.7136, 46.6753">
+  <!-- Schema.org JSON-LD (Organization + LocalBusiness + Service) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cgp.sa/#organization",
+      "name": "CGP",
+      "url": "https://cgp.sa/",
+      "logo": "https://cgp.sa/logo.png",
+      "description": "CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.",
+      "sameAs": [
+        "https://x.com/cgp",
+        "https://instagram.com/cgp.sa",
+        "https://wa.me/966500000000"
+      ]
+    },
+    {
+      "@type": [
+        "ComputerStore",
+        "LocalBusiness"
+      ],
+      "@id": "https://cgp.sa/#store",
+      "name": "CGP",
+      "url": "https://cgp.sa/",
+      "image": "https://cgp.sa/assets/images/hotwheel.webp",
+      "description": "Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.",
+      "parentOrganization": {
+        "@id": "https://cgp.sa/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Riyadh",
+        "addressRegion": "Riyadh Province",
+        "addressCountry": "SA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.7136,
+        "longitude": 46.6753
+      },
+      "openingHours": "Su-Th 10:00-22:00",
+      "priceRange": "SAR 10,000 - 25,000+"
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://cgp.sa/blog/#blog",
+      "url": "https://cgp.sa/blog/",
+      "name": "CGP Blog — Notes From The Bespoke Forge",
+      "description": "Build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.",
+      "publisher": {
+        "@id": "https://cgp.sa/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://cgp.sa/blog/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cgp.sa/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cgp.sa/blog/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- Fonts (self-hosted, preload critical weights — family-weight.woff2 convention) -->
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
+  <link rel="stylesheet" href="../css/tailwind.css?v=1788295584">
+  <link rel="stylesheet" href="../css/theme.css?v=1788297175">
+  <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
+  <link rel="stylesheet" href="css/blog.css?v=1788294202">
+  <!-- Scripts (deferred — ONE bundle per page, minified) -->
+  <script defer src="../js/bundles/blog.min.js?v=1788297175"></script>
+  <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
+  <!-- HEAD -->
+</head>
+<body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
+  <a href="#main" class="cgp-skip-link">Skip to main content</a>
+
+  <!-- Unified site-wide header — single source of truth used by ALL pages.
+     Positioning via bottom-6 token; nav links + CTA href via page config tokens. -->
+<header>
+  <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+    <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
+      <!-- Logo: CGP. with cyan dot + divider -->
+      <a href="../index.html#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
+        CGP<span class="text-cgp-accent">.</span>
+      </a>
+      <!-- Desktop links: site-wide navigation -->
+      <div class="hidden gap-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+        <a href="../index.html#hero" class="transition-colors hover:text-cgp-accent-bright">Home</a>
+        <a href="../shop/index.html" class="transition-colors hover:text-cgp-accent-bright">Shop</a>
+        <a href="../configurator/index.html" class="transition-colors hover:text-cgp-accent-bright">Configurator</a>
+        <a href="../product/index.html" class="transition-colors hover:text-cgp-accent-bright">Product</a>
+        <a href="../about/index.html" class="transition-colors hover:text-cgp-accent-bright">About</a>
+        <a href="" class="transition-colors hover:text-cgp-accent-bright">Blog</a>
+        <a href="../contact/index.html" class="transition-colors hover:text-cgp-accent-bright">Contact</a>
+      </div>
+      <!-- Mobile hamburger toggle -->
+      <button @click="open = !open" class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden" aria-label="Toggle menu" :aria-expanded="open.toString()">
+        <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
+        <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
+      </button>
+      <!-- Inquire CTA -->
+      <a href="../index.html#inquiry" class="cgp-btn-primary cgp-magnetic ms-auto min-h-11 md:ms-0" data-magnetic>Inquire</a>
+    </nav>
+    <!-- Mobile dropdown -->
+    <div x-cloak x-show="open" x-transition.opacity.duration.200ms @click.outside="open = false" class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden">
+      <div class="flex flex-col gap-1">
+        <a href="../index.html#hero" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Home</a>
+        <a href="../shop/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
+        <a href="../configurator/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Configurator</a>
+        <a href="../product/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Product</a>
+        <a href="../about/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">About</a>
+        <a href="" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
+        <a href="../contact/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- HEADER -->
+  <main id="main">
+    <!-- Blog hero — "Notes From The Forge" (THE ONLY h1 on the page).
+     Centered layout (about-hero pattern) + CSS-only blueprint grid backdrop
+     (theme utilities.css — shared with about; reduced-motion safe). -->
+<section id="blog-hero" class="cgp-section relative overflow-hidden bg-cgp-bg-page" aria-labelledby="blog-hero-title">
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow start-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- Blueprint grid backdrop — shared decorative terminal grid (theme utilities.css) -->
+  <div class="cgp-blueprint-grid" aria-hidden="true"></div>
+
+  <div class="cgp-container-xl relative z-10 text-center">
+    <p class="cgp-eyebrow">// SYS_BLOG</p>
+    <h1 id="blog-hero-title" class="cgp-blog-hero-title mb-6">
+      Notes From<br>
+      <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">The Forge.</span>
+    </h1>
+    <p class="mx-auto mb-10 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+      Build diaries, coolant chemistry, and loop architecture — written by the hands that bend the tubes. No spec-sheet fluff, only what survived the forge floor.
+    </p>
+
+    <!-- Status strip (mono, same pattern as about hero) -->
+    <p class="mb-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      <span>FIELD NOTES</span>
+      <span class="text-cgp-accent" aria-hidden="true">·</span>
+      <span>BUILD DIARIES</span>
+      <span class="text-cgp-accent" aria-hidden="true">·</span>
+      <span>0 FLUFF</span>
+    </p>
+
+    <!-- Dual CTA -->
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="#blog-featured" class="cgp-btn-primary cgp-magnetic" data-magnetic>Read The Latest</a>
+      <a href="../configurator/index.html" class="cgp-btn-outline cgp-magnetic" data-magnetic>Commission a Build</a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured entry — split layout: framed image (LEFT) + narrative (RIGHT).
+     Image is a placeholder — REPLACE WITH CLIENT PHOTOS. bg-cgp-bg-section:
+     alternates with the hero above. -->
+<section id="blog-featured" class="cgp-section bg-cgp-bg-section" aria-labelledby="blog-featured-title">
+  <div class="cgp-container-lg">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      <!-- LEFT: featured image + floating mono badge -->
+      <div class="relative">
+        <div class="cgp-image-container rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/hotwheel.webp" alt="Hand-bent hardline tubing forming the Hotwheel's twin cryo loops" class="w-full" width="560" height="373" loading="lazy" decoding="async">
+        </div>
+        <p class="cgp-blog-badge font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">ENTRY_042 // FEATURED</p>
+      </div>
+
+      <!-- RIGHT: narrative + meta + read link -->
+      <div>
+        <p class="cgp-eyebrow">Featured Entry</p>
+        <h2 id="blog-featured-title" class="mb-6 text-cgp-display-4 leading-tight">
+          Behind The Build:<br>
+          <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">The Hotwheel&rsquo;s Twin Loops.</span>
+        </h2>
+        <p class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+          <time datetime="2026-08-20">Aug 20, 2026</time>
+          <span class="text-cgp-accent" aria-hidden="true">·</span>
+          <span>BUILD_DIARY</span>
+          <span class="text-cgp-accent" aria-hidden="true">·</span>
+          <span>6 MIN READ</span>
+        </p>
+        <p class="mb-4 text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+          Two independent cryo loops, one circular chassis, and zero room for error. This entry walks through how the Hotwheel&rsquo;s twin loops were mapped, bent, and pressure-tested — and why the second loop exists at all.
+        </p>
+        <p class="mb-8 text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+          From the first 3D-printed routing jig to the 48-hour thermal baptism, every decision on the Hotwheel earned its place the hard way.
+        </p>
+        <!-- TODO: real permalink -->
+        <a href="#" class="cgp-btn-link">Read The Entry <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Article grid — 3-col: five latest entries + one archives teaser card
+     (fills the 3×2 grid without duplicating images). bg-cgp-bg-page:
+     alternates with the featured section above. -->
+<section id="blog-grid" class="cgp-section bg-cgp-bg-page" aria-labelledby="blog-grid-title">
+  <div class="cgp-container-xl">
+    <!-- Section header + topic tags (static mockup — no JS filtering in v1) -->
+    <div class="mb-cgp-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-xl">
+        <p class="cgp-eyebrow">All Entries</p>
+        <h2 id="blog-grid-title" class="text-cgp-display-4 leading-tight">
+          The Forge,<br>
+          <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,var(--cgp-accent-bright),var(--cgp-accent-deep))]">documented.</span>
+        </h2>
+      </div>
+      <!-- REPEAT: topic tag — developer converts to WP category list -->
+      <ul class="flex flex-wrap gap-cgp-2" aria-label="Topics">
+        <li><span class="inline-block rounded-full border border-cgp-border-accent bg-cgp-accent/10 px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent-bright">ALL</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">COOLANTS</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">LOOP_ARCHITECTURE</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">SILICON</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">BUILD_DIARY</span></li>
+      </ul>
+    </div>
+
+    <div class="grid grid-cols-1 gap-cgp-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- REPEAT: article card — loop over WP_Query posts; wrap the card in <a href="permalink"> -->
+      <!-- Article 1 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/obsidian.webp" alt="Custom water cooling loop running inside a dark workstation build" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">COOLANTS</span>
+            <time datetime="2026-08-12" class="text-cgp-text-faint">Aug 12, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Coolant Chemistry: What Survives A Riyadh Summer</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">50&deg;C ambient changes everything. The fluids, additives, and change intervals we trust after two years of desert-load testing.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/distro-plate.webp" alt="Close-up of a hand-routed acrylic distribution plate with coolant channels" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">LOOP_ARCHITECTURE</span>
+            <time datetime="2026-07-30" class="text-cgp-text-faint">Jul 30, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Reading A Distro Plate Like An Engineer</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Every channel in a CGP distro plate is a deliberate decision. Here is how to trace flow order, predict service points, and spot shortcuts.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/titanium-core.webp" alt="Titanium Core build with flagship components under custom cooling" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">SILICON</span>
+            <time datetime="2026-07-18" class="text-cgp-text-faint">Jul 18, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Binning Day: How Silicon Makes The Cut</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">We test every chip before it earns a place in a commission. What 48 hours of stress runs reveals about silicon lottery odds.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/neon-genesis.webp" alt="Neon Genesis build with restrained accent lighting" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">BUILD_DIARY</span>
+            <time datetime="2026-07-02" class="text-cgp-text-faint">Jul 2, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Lighting The Neon Genesis — Without The Gamer Glow</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Light as architecture, not decoration. The palette, diffusion, and placement choices behind the build&rsquo;s signature glow.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 5 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="../assets/images/wraith.webp" alt="The Wraith pre-built system in its signature dark chassis" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">THERMALS</span>
+            <time datetime="2026-06-21" class="text-cgp-text-faint">Jun 21, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">The Wraith: Silence At Full Load</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Fan curves, radiator math, and flow rates — how the Wraith holds benchmark temperatures at a library-grade acoustic floor.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Archives teaser (6th grid slot — no image by design) -->
+      <a href="../archives/index.html" class="cgp-card cgp-card-hover group flex flex-col justify-between overflow-hidden p-cgp-6">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint" aria-hidden="true">SYS_ARCHIVE</p>
+          <h3 class="mb-2 mt-cgp-4 text-cgp-lg leading-snug text-cgp-text-heading">Every Machine, Photographed &amp; Filed</h3>
+          <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Each commission is documented before it ships — full galleries of past builds live in The Archives.</p>
+        </div>
+        <span class="cgp-btn-link mt-6 self-start">Browse The Archives <span class="inline-block transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Closing CTA — "Enough Reading". Links resolve via ../configurator/index.html /
+     ../contact/index.html tokens (build.js). bg-cgp-bg-section: alternates with the
+     grid section above. -->
+<section id="blog-cta" class="cgp-section relative overflow-hidden bg-cgp-bg-section" aria-labelledby="blog-cta-title">
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow start-1/2 top-[-40%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <div class="cgp-container-md relative z-10 text-center">
+    <p class="cgp-eyebrow">// SYS_COMMISSION</p>
+    <h2 id="blog-cta-title" class="mb-6 text-cgp-display-4 leading-tight md:text-cgp-display-3">
+      Enough Reading —<br>
+      <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Time To Forge Yours.</span>
+    </h2>
+    <p class="mx-auto mb-10 max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+      The next entry could be about your machine. Open the configurator and start the build diary of your own commission.
+    </p>
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="../configurator/index.html" class="cgp-btn-primary cgp-magnetic" data-magnetic>Start Your Commission</a>
+      <a href="../contact/index.html" class="cgp-btn-outline cgp-magnetic" data-magnetic>Open A Channel</a>
+    </div>
+  </div>
+</section>
+  <!-- SECTIONS -->
+  </main>
+
+  <!-- Footer — luxury redesign: giant watermark + CTA + 3 columns + bottom bar -->
+<footer class="relative overflow-hidden border-t border-cgp-border-subtle bg-cgp-bg-section">
+  <!-- Giant CGP. watermark (background text) with cyan glow overlay -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-10 select-none text-center font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.08] [text-shadow:0_0_40px_rgba(6,182,212,0.25),0_0_120px_rgba(6,182,212,0.15)]" aria-hidden="true">
+    CGP<span class="text-cgp-accent/[0.25] [text-shadow:0_0_30px_rgba(6,182,212,0.5)]">.</span>
+  </div>
+
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- CTA strip -->
+  <div class="relative border-b border-cgp-border-subtle">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-start">
+      <div>
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
+        <p class="mt-2 text-sm text-cgp-text-muted">Tell us your vision — our masters will engineer the rest.</p>
+      </div>
+      <!-- TODO: real permalink -->
+      <a href="../contact/index.html" class="cgp-btn-primary shrink-0" data-magnetic>Summon The Masters</a>
+    </div>
+  </div>
+
+  <!-- Footer content — 3-column luxury layout -->
+  <div class="cgp-container-lg relative grid grid-cols-1 gap-12 py-16 md:grid-cols-3">
+    <!-- Brand column -->
+    <div class="flex flex-col items-start gap-4">
+      <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
+      <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
+      <div class="flex items-center gap-3">
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: replace 9665XXXXXXXX with the real CGP WhatsApp number -->
+        <a href="https://wa.me/9665XXXXXXXX" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
+      <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <!-- RTL: mirror arrow direction (group-hover:translate-x-0.5) -->
+        <a href="../about/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>About The Forge
+        </a>
+        <a href="" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Blog
+        </a>
+        <a href="../index.html#showcase" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Hotwheel
+        </a>
+        <a href="../archives/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Archives
+        </a>
+        <a href="../shop/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Hardware
+        </a>
+        <a href="../configurator/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Commission a Build
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contact column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <!-- TODO: from site settings -->
+      <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
+      </a>
+      <!-- TODO: from site settings -->
+      <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
+      </a>
+      <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
+        <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
+      </p>
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-muted">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="relative border-t border-cgp-border-subtle py-6">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-start">
+      <p class="text-xs text-cgp-text-muted">© <!-- YEAR --> CGP. Precision Engineering. All rights reserved.</p>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
+    </div>
+  </div>
+</footer>
+  <!-- FOOTER -->
+</body>
+</html>

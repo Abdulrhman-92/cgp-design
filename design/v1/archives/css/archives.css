@@ -1,0 +1,29 @@
+/* ============================================================
+   CGP design/v1 — archives page-level styles ("Every Build,
+   Filed Forever.")
+   ------------------------------------------------------------
+   Shared rules live in the theme (tokens/base/utilities/motion).
+   Scope: archives-only — hero title + fixed-nav clearance.
+   (Archive cards + ledger reuse theme utilities + Tailwind;
+   the blueprint grid backdrop is shared → theme utilities.css.)
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   Layout-only values (clamp) MAY be hardcoded (rule 5 carve-out).
+   ============================================================ */
+
+/* ============ Hero — title ============ */
+/* clamp keeps 'FILED FOREVER.' on one line (2 lines total) at
+   375/768/1024/1440 — 14 chars × ~0.55em ≈ 7.7em → cap 96px. */
+.cgp-archives-hero-title {
+  font-size: clamp(40px, 10vw, 96px);
+}
+
+/* ============ Hero — fixed-nav clearance ============ */
+/* The shared nav island is fixed at top-8 on md+ and would cover the eyebrow
+   (.cgp-section pads 80px). Page CSS loads after theme.css, so this wins the
+   cascade over .cgp-section — do NOT use a Tailwind pt utility here. */
+@media (min-width: 768px) {
+  #archives-hero {
+    padding-block-start: var(--cgp-space-32); /* 128px — clears the fixed nav */
+  }
+}

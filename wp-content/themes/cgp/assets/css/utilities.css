@@ -499,6 +499,23 @@
 .cgp-stock-low { color: var(--cgp-accent-warm); }
 .cgp-stock-order { color: var(--cgp-text-muted); }
 
+/* ============ Blueprint grid backdrop (shared: about + blog heroes) ============ */
+/* CSS-only terminal grid fading out from the headline (radial mask).
+   Direction-neutral (centered) — no start/end flip needed. Static —
+   no animation, so reduced-motion needs no override here. */
+.cgp-blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--cgp-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cgp-grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 42%, black 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 42%, black 25%, transparent 75%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 /* ============ Mobile sticky bar ============ */
 .cgp-mobile-bar {
   position: fixed;

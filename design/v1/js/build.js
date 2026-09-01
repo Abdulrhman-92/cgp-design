@@ -301,6 +301,206 @@ const PAGES = {
       footer: 'shared',
     },
   },
+  about: {
+    output: 'about/index.html',
+    title: 'About CGP | The Bespoke Forge — Masters of Bespoke PC Architecture',
+    description: "Meet CGP — The Bespoke Forge. Riyadh's atelier for bespoke water-cooled PCs: our philosophy, our forging process, and the masters behind every machine.",
+    canonical: 'https://cgp.sa/about/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': 'AboutPage',
+          '@id': 'https://cgp.sa/about/#page',
+          url: 'https://cgp.sa/about/',
+          name: 'About CGP | The Bespoke Forge — Masters of Bespoke PC Architecture',
+          description: "Meet CGP — The Bespoke Forge. Riyadh's atelier for bespoke water-cooled PCs: our philosophy, our forging process, and the masters behind every machine.",
+          mainEntity: { '@id': 'https://cgp.sa/#store' },
+          about: { '@id': 'https://cgp.sa/#organization' },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/about/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'About', item: 'https://cgp.sa/about/' },
+          ],
+        },
+      ],
+    },
+    css: ['about/css/about.css'],
+    js: ['main.js'], // reveals/magnetic come from theme main.js — no page JS
+    sections: {
+      header: 'shared', // unified site-wide header
+      main: [
+        'about/sections/hero.html',
+        'about/sections/story.html',
+        'about/sections/pillars.html',
+        'about/sections/process.html',
+        'about/sections/masters.html',
+        'about/sections/cta.html',
+      ],
+      footer: 'shared',
+    },
+  },
+  blog: {
+    output: 'blog/index.html',
+    title: 'CGP Blog | Notes From The Bespoke Forge — Riyadh, Saudi Arabia',
+    description: 'Field notes from CGP — The Bespoke Forge: build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.',
+    canonical: 'https://cgp.sa/blog/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': 'Blog',
+          '@id': 'https://cgp.sa/blog/#blog',
+          url: 'https://cgp.sa/blog/',
+          name: 'CGP Blog — Notes From The Bespoke Forge',
+          description: 'Build diaries, coolant chemistry, loop architecture, and the engineering behind every bespoke water-cooled machine.',
+          publisher: { '@id': 'https://cgp.sa/#organization' },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/blog/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://cgp.sa/blog/' },
+          ],
+        },
+      ],
+    },
+    css: ['blog/css/blog.css'],
+    js: ['main.js'], // reveals/magnetic come from theme main.js — no page JS
+    sections: {
+      header: 'shared', // unified site-wide header
+      main: [
+        'blog/sections/hero.html',
+        'blog/sections/featured.html',
+        'blog/sections/grid.html',
+        'blog/sections/cta.html',
+      ],
+      footer: 'shared',
+    },
+  },
+  archives: {
+    output: 'archives/index.html',
+    title: 'CGP Archives | Previously Forged Masterpieces — Riyadh, Saudi Arabia',
+    description: 'Browse the CGP archive — every bespoke water-cooled PC forged in Riyadh, photographed and filed: The Hotwheel, Project Obsidian, Titanium Core, and more.',
+    canonical: 'https://cgp.sa/archives/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': ['CollectionPage', 'ImageGallery'],
+          '@id': 'https://cgp.sa/archives/#page',
+          url: 'https://cgp.sa/archives/',
+          name: 'CGP Archives | Previously Forged Masterpieces — Riyadh, Saudi Arabia',
+          description: 'The permanent record of The Bespoke Forge — every bespoke water-cooled machine, photographed and filed before it ships.',
+          about: { '@id': 'https://cgp.sa/#store' },
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'The Hotwheel' },
+              { '@type': 'ListItem', position: 2, name: 'The Wraith' },
+              { '@type': 'ListItem', position: 3, name: 'Project Obsidian' },
+              { '@type': 'ListItem', position: 4, name: 'Titanium Core' },
+              { '@type': 'ListItem', position: 5, name: 'Neon Genesis' },
+              { '@type': 'ListItem', position: 6, name: 'CGP Custom Distro Plate' },
+            ],
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/archives/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'Archives', item: 'https://cgp.sa/archives/' },
+          ],
+        },
+      ],
+    },
+    css: ['archives/css/archives.css'],
+    js: ['main.js'], // reveals/magnetic come from theme main.js — no page JS
+    sections: {
+      header: 'shared', // unified site-wide header
+      main: [
+        'archives/sections/hero.html',
+        'archives/sections/collection.html',
+        'archives/sections/ledger.html',
+        'archives/sections/cta.html',
+      ],
+      footer: 'shared',
+    },
+  },
   contact: {
     output: 'contact/index.html',
     title: 'Contact CGP | The Bespoke Forge — Riyadh, Saudi Arabia',
@@ -547,6 +747,12 @@ function resolveSection(relPath, page) {
   const productUrl = productRel === 'product/index.html' ? 'product/index.html' : productRel;
   const contactRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'contact', 'index.html')).split(path.sep).join('/');
   const contactUrl = contactRel === 'contact/index.html' ? 'contact/index.html' : contactRel;
+  const aboutRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'about', 'index.html')).split(path.sep).join('/');
+  const aboutUrl = aboutRel === 'index.html' ? '' : aboutRel; // self-link → '' (stays on /about/)
+  const blogRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'blog', 'index.html')).split(path.sep).join('/');
+  const blogUrl = blogRel === 'index.html' ? '' : blogRel; // self-link → '' (stays on /blog/)
+  const archivesRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'archives', 'index.html')).split(path.sep).join('/');
+  const archivesUrl = archivesRel === 'index.html' ? '' : archivesRel; // self-link → '' (stays on /archives/)
   // Token map — link tokens first; per-page header tokens resolve against them.
   const tokens = {
     THEME_ASSETS: theme,
@@ -556,6 +762,9 @@ function resolveSection(relPath, page) {
     SHOP_URL: shopUrl,
     PRODUCT_URL: productUrl,
     CONTACT_URL: contactUrl,
+    ABOUT_URL: aboutUrl,
+    BLOG_URL: blogUrl,
+    ARCHIVES_URL: archivesUrl,
     HEADER_MOBILE_POS: page.headerPos || 'bottom-6', // shared-header mobile island position
   };
   // CTA_HREF values may reference the link tokens above (e.g. '{{CONFIG_URL}}')

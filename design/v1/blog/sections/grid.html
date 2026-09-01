@@ -1,0 +1,128 @@
+<!-- Article grid — 3-col: five latest entries + one archives teaser card
+     (fills the 3×2 grid without duplicating images). bg-cgp-bg-page:
+     alternates with the featured section above. -->
+<section id="blog-grid" class="cgp-section bg-cgp-bg-page" aria-labelledby="blog-grid-title">
+  <div class="cgp-container-xl">
+    <!-- Section header + topic tags (static mockup — no JS filtering in v1) -->
+    <div class="mb-cgp-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-xl">
+        <p class="cgp-eyebrow">All Entries</p>
+        <h2 id="blog-grid-title" class="text-cgp-display-4 leading-tight">
+          The Forge,<br>
+          <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,var(--cgp-accent-bright),var(--cgp-accent-deep))]">documented.</span>
+        </h2>
+      </div>
+      <!-- REPEAT: topic tag — developer converts to WP category list -->
+      <ul class="flex flex-wrap gap-cgp-2" aria-label="Topics">
+        <li><span class="inline-block rounded-full border border-cgp-border-accent bg-cgp-accent/10 px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent-bright">ALL</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">COOLANTS</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">LOOP_ARCHITECTURE</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">SILICON</span></li>
+        <li><span class="inline-block rounded-full border border-cgp-border px-cgp-3 py-cgp-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-secondary">BUILD_DIARY</span></li>
+      </ul>
+    </div>
+
+    <div class="grid grid-cols-1 gap-cgp-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- REPEAT: article card — loop over WP_Query posts; wrap the card in <a href="permalink"> -->
+      <!-- Article 1 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/obsidian.webp" alt="Custom water cooling loop running inside a dark workstation build" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">COOLANTS</span>
+            <time datetime="2026-08-12" class="text-cgp-text-faint">Aug 12, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Coolant Chemistry: What Survives A Riyadh Summer</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">50&deg;C ambient changes everything. The fluids, additives, and change intervals we trust after two years of desert-load testing.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/distro-plate.webp" alt="Close-up of a hand-routed acrylic distribution plate with coolant channels" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">LOOP_ARCHITECTURE</span>
+            <time datetime="2026-07-30" class="text-cgp-text-faint">Jul 30, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Reading A Distro Plate Like An Engineer</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Every channel in a CGP distro plate is a deliberate decision. Here is how to trace flow order, predict service points, and spot shortcuts.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/titanium-core.webp" alt="Titanium Core build with flagship components under custom cooling" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">SILICON</span>
+            <time datetime="2026-07-18" class="text-cgp-text-faint">Jul 18, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Binning Day: How Silicon Makes The Cut</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">We test every chip before it earns a place in a commission. What 48 hours of stress runs reveals about silicon lottery odds.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/neon-genesis.webp" alt="Neon Genesis build with restrained accent lighting" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">BUILD_DIARY</span>
+            <time datetime="2026-07-02" class="text-cgp-text-faint">Jul 2, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Lighting The Neon Genesis — Without The Gamer Glow</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Light as architecture, not decoration. The palette, diffusion, and placement choices behind the build&rsquo;s signature glow.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Article 5 -->
+      <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
+        <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/wraith.webp" alt="The Wraith pre-built system in its signature dark chassis" class="h-full w-full object-cover" width="560" height="320" loading="lazy" decoding="async">
+        </div>
+        <div class="flex flex-1 flex-col p-cgp-6">
+          <p class="mb-2 flex items-center gap-x-3 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <span class="text-cgp-accent">THERMALS</span>
+            <time datetime="2026-06-21" class="text-cgp-text-faint">Jun 21, 2026</time>
+          </p>
+          <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">The Wraith: Silence At Full Load</h3>
+          <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Fan curves, radiator math, and flow rates — how the Wraith holds benchmark temperatures at a library-grade acoustic floor.</p>
+          <!-- TODO: real permalink -->
+          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Archives teaser (6th grid slot — no image by design) -->
+      <a href="{{ARCHIVES_URL}}" class="cgp-card cgp-card-hover group flex flex-col justify-between overflow-hidden p-cgp-6">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint" aria-hidden="true">SYS_ARCHIVE</p>
+          <h3 class="mb-2 mt-cgp-4 text-cgp-lg leading-snug text-cgp-text-heading">Every Machine, Photographed &amp; Filed</h3>
+          <p class="text-cgp-sm leading-relaxed text-cgp-text-secondary">Each commission is documented before it ships — full galleries of past builds live in The Archives.</p>
+        </div>
+        <span class="cgp-btn-link mt-6 self-start">Browse The Archives <span class="inline-block transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>

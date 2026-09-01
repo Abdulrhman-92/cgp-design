@@ -1,0 +1,45 @@
+/* ============================================================
+   CGP design/v1 — blog page-level styles ("Notes From The Forge")
+   ------------------------------------------------------------
+   Shared rules live in the theme (tokens/base/utilities/motion).
+   Scope: blog-only — hero title + featured floating badge.
+   (The blueprint grid backdrop is shared with about → theme
+   utilities.css, not here.)
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   Layout-only values (clamp, grid size) MAY be hardcoded
+   (AGENTS.md rule 5 carve-out). Logical properties only.
+   ============================================================ */
+
+/* ============ Hero — title ============ */
+/* clamp keeps 'THE FORGE.' on one line (2 lines total) at
+   375/768/1024/1440 — the span is shorter than about's, so the
+   cap is 128px (about's 96px cap is not needed here). */
+.cgp-blog-hero-title {
+  font-size: clamp(40px, 10vw, 128px);
+}
+
+/* ============ Featured — floating mono badge ============ */
+/* Anchored to the featured image's start/bottom corner
+   (same pattern as about's .cgp-story-badge — blog-scoped). */
+.cgp-blog-badge {
+  position: absolute;
+  inset-block-end: var(--cgp-space-4);
+  inset-inline-start: var(--cgp-space-4);
+  padding-block: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  border: 1px solid var(--cgp-border-strong);
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-overlay);
+  backdrop-filter: blur(8px);
+}
+
+/* ============ Hero — fixed-nav clearance ============ */
+/* The shared nav island is fixed at top-8 on md+ and would cover the eyebrow
+   (.cgp-section pads 80px). Page CSS loads after theme.css, so this wins the
+   cascade over .cgp-section — do NOT use a Tailwind pt utility here. */
+@media (min-width: 768px) {
+  #blog-hero {
+    padding-block-start: var(--cgp-space-32); /* 128px — clears the fixed nav */
+  }
+}
