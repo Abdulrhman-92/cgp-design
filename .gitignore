@@ -12,3 +12,6 @@ screenshots/
 
 # Playwright MCP artifacts
 .playwright-mcp/
+# Process consultation notes (not needed in repo)
+.orc/context/consultation-contact-*.md
+.orc/context/contact-fix-*.md

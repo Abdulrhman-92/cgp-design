@@ -1,0 +1,237 @@
+<!-- The Commission Desk — split layout: 3-step "what happens next" panel (LEFT) +
+     terminal-framed commission form (RIGHT). Inline Alpine validation (no page JS —
+     build.js manifest: js: ['main.js']). All IDs prefixed contact-. -->
+<section id="commission-desk" class="cgp-section bg-cgp-bg-section" aria-labelledby="commission-desk-title">
+  <div class="cgp-container-lg">
+    <!-- Section header -->
+    <div class="mb-12 text-center">
+      <p class="cgp-eyebrow">// SYS_COMMISSION_DESK</p>
+      <h2 id="commission-desk-title" class="text-cgp-display-4 mb-6">
+        The Commission<br>
+        <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Desk.</span>
+      </h2>
+      <p class="mx-auto max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+        One transmission is all it takes. Whether you dream of a custom water-cooled PC or a signature system from the archives, a master will review your brief and open a consultation within 24 hours.
+      </p>
+    </div>
+
+    <!-- Split layout: form first on mobile (primary conversion), steps panel first on lg -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+      <!-- LEFT: "what happens next" 3-step panel -->
+      <aside class="cgp-steps-panel order-2 lg:order-1" aria-label="What happens next">
+        <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+        <div class="p-6 md:p-8">
+          <p class="cgp-mono-label mb-6 tracking-cgp-04em">WHAT HAPPENS NEXT //</p>
+          <ol>
+            <li class="cgp-step">
+              <p class="cgp-step-num">01</p>
+              <h3 class="cgp-step-label">REVIEW</h3>
+              <p class="cgp-step-copy">A master reads your transmission and assesses the build.</p>
+            </li>
+            <li class="cgp-step">
+              <p class="cgp-step-num">02</p>
+              <h3 class="cgp-step-label">CONSULTATION</h3>
+              <p class="cgp-step-copy">A private channel opens to refine hardware, cooling, and materials.</p>
+            </li>
+            <li class="cgp-step">
+              <p class="cgp-step-num">03</p>
+              <h3 class="cgp-step-label">BLUEPRINT</h3>
+              <p class="cgp-step-copy">You receive the full blueprint — components, loop design, and exact pricing.</p>
+            </li>
+          </ol>
+
+          <!-- Direct lines — merged from the standalone section (SYS_DIRECT_LINES).
+               Compact list rows below the steps (one line per channel). -->
+          <div class="cgp-direct-lines">
+            <p class="cgp-mono-label tracking-cgp-04em">// DIRECT LINES</p>
+            <h3 class="cgp-direct-lines-title">The Direct Lines.</h3>
+            <ul class="cgp-direct-lines-list">
+              <!-- REPEAT: direct line row — loop over 3 channels (WhatsApp/Phone/Email) -->
+              <li class="cgp-direct-line">
+                <span class="cgp-direct-line-icon"><i class="ph ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
+                <div class="cgp-direct-line-body">
+                  <p class="cgp-mono-label tracking-cgp-04em">// CHANNEL_01 — WHATSAPP</p>
+                  <p class="cgp-num cgp-direct-line-value" dir="ltr"><!-- TODO: from site settings (WhatsApp number) --></p>
+                </div>
+                <span class="cgp-badge-chip">Fastest Response</span>
+              </li>
+
+              <li class="cgp-direct-line">
+                <span class="cgp-direct-line-icon"><i class="ph ph-fill ph-phone" aria-hidden="true"></i></span>
+                <div class="cgp-direct-line-body">
+                  <p class="cgp-mono-label tracking-cgp-04em">// CHANNEL_02 — PHONE</p>
+                  <p class="cgp-num cgp-direct-line-value" dir="ltr"><!-- TODO: from site settings (phone number) --></p>
+                </div>
+              </li>
+
+              <li class="cgp-direct-line">
+                <span class="cgp-direct-line-icon"><i class="ph ph-fill ph-envelope-simple" aria-hidden="true"></i></span>
+                <div class="cgp-direct-line-body">
+                  <p class="cgp-mono-label tracking-cgp-04em">// CHANNEL_03 — EMAIL</p>
+                  <p class="cgp-num cgp-direct-line-value" dir="ltr"><!-- TODO: from site settings (email address) --></p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: terminal-framed form -->
+      <div class="order-1 lg:order-2">
+        <!-- Mono trust strip (above form) -->
+        <p class="mb-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+          <span>Commissions from 10,000 SAR</span>
+          <span class="text-cgp-accent" aria-hidden="true">//</span>
+          <span>We respond within 24 hours</span>
+        </p>
+
+        <!-- Terminal frame -->
+        <div class="relative overflow-hidden rounded-cgp-2xl border border-cgp-border-accent bg-cgp-bg-card shadow-cgp-glow-black text-start">
+          <!-- Top accent bar -->
+          <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+
+          <!-- Header row -->
+          <div class="flex items-center justify-between border-b border-cgp-border px-6 py-4">
+            <span class="cgp-mono-label tracking-cgp-04em">// SYS_COMMISSION_DESK</span>
+            <span class="flex gap-1.5" aria-hidden="true">
+              <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+              <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+              <span class="h-2 w-2 rounded-full bg-cgp-text-faint"></span>
+            </span>
+          </div>
+
+          <!-- Scanline accent -->
+          <div class="cgp-scanline pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-cgp-accent/5 to-transparent" aria-hidden="true"></div>
+
+          <form
+            x-data="{
+              sent: false,
+              errors: {},
+              type: '',
+              channel: 'WhatsApp',
+              submit() {
+                this.errors = {};
+                const f = this.$refs.form;
+                if (!f.name.value.trim()) this.errors.name = 'Name is required.';
+                if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())) this.errors.email = 'A valid email is required.';
+                if (!f.details.value.trim()) this.errors.details = 'Tell us about the build you have in mind.';
+                if (Object.keys(this.errors).length) return;
+                this.sent = true;
+                this.$nextTick(() => this.$refs.success.focus());
+              },
+              reset() {
+                this.sent = false;
+                this.errors = {};
+                this.type = '';
+                this.channel = 'WhatsApp';
+                this.$refs.form.reset();
+              }
+            }"
+            @submit.prevent="submit"
+            x-ref="form"
+            class="relative space-y-8 p-6 md:p-8"
+          >
+            <!-- Honeypot (spam hygiene) -->
+            <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="cgp-honeypot">
+
+            <!-- Fields -->
+            <div x-show="!sent" class="space-y-8">
+              <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div>
+                  <label for="contact-name" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Name</label>
+                  <input id="contact-name" name="name" type="text" required autocomplete="name" placeholder="John Doe"
+                         :aria-invalid="errors.name ? 'true' : 'false'"
+                         :aria-describedby="errors.name ? 'contact-name-error' : null"
+                         class="cgp-input-underline">
+                  <p x-show="errors.name" x-cloak id="contact-name-error" class="cgp-form-error" x-text="errors.name"></p>
+                </div>
+                <div>
+                  <label for="contact-email" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Email</label>
+                  <input id="contact-email" name="email" type="email" required autocomplete="email" placeholder="john@example.com"
+                         :aria-invalid="errors.email ? 'true' : 'false'"
+                         :aria-describedby="errors.email ? 'contact-email-error' : null"
+                         class="cgp-input-underline">
+                  <p x-show="errors.email" x-cloak id="contact-email-error" class="cgp-form-error" x-text="errors.email"></p>
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-phone" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Phone / WhatsApp (Optional)</label>
+                <input id="contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX" class="cgp-input-underline">
+              </div>
+
+              <!-- Project type — tactile chips (not a select) -->
+              <fieldset>
+                <legend class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Project Type</legend>
+                <div class="flex flex-wrap gap-2">
+                  <!-- REPEAT: project type chip — loop over 4 options -->
+                  <button type="button" @click="type = 'Custom Water-Cooled Build'"
+                          :class="type === 'Custom Water-Cooled Build' ? 'cgp-chip cgp-chip-active' : 'cgp-chip'"
+                          :aria-pressed="type === 'Custom Water-Cooled Build'">Custom Water-Cooled Build</button>
+                  <button type="button" @click="type = 'Gaming Battlestation'"
+                          :class="type === 'Gaming Battlestation' ? 'cgp-chip cgp-chip-active' : 'cgp-chip'"
+                          :aria-pressed="type === 'Gaming Battlestation'">Gaming Battlestation</button>
+                  <button type="button" @click="type = 'Workstation / Creator'"
+                          :class="type === 'Workstation / Creator' ? 'cgp-chip cgp-chip-active' : 'cgp-chip'"
+                          :aria-pressed="type === 'Workstation / Creator'">Workstation / Creator</button>
+                  <button type="button" @click="type = 'Pre-Built System'"
+                          :class="type === 'Pre-Built System' ? 'cgp-chip cgp-chip-active' : 'cgp-chip'"
+                          :aria-pressed="type === 'Pre-Built System'">Pre-Built System</button>
+                </div>
+              </fieldset>
+
+              <div>
+                <label for="contact-budget" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Estimated Budget (SAR)</label>
+                <select id="contact-budget" name="budget" class="cgp-input-underline">
+                  <option>10,000 – 15,000 SAR</option>
+                  <option>15,000 – 25,000 SAR</option>
+                  <option>25,000 – 50,000 SAR</option>
+                  <option>50,000+ SAR</option>
+                </select>
+              </div>
+
+              <!-- Preferred channel — radio pills -->
+              <fieldset>
+                <legend class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Preferred Channel</legend>
+                <div class="flex flex-wrap gap-2">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="channel" value="WhatsApp" x-model="channel" class="cgp-sr-only">
+                    <span :class="channel === 'WhatsApp' ? 'cgp-radio-pill cgp-radio-pill-active' : 'cgp-radio-pill'">WhatsApp</span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="channel" value="Email" x-model="channel" class="cgp-sr-only">
+                    <span :class="channel === 'Email' ? 'cgp-radio-pill cgp-radio-pill-active' : 'cgp-radio-pill'">Email</span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="channel" value="Phone" x-model="channel" class="cgp-sr-only">
+                    <span :class="channel === 'Phone' ? 'cgp-radio-pill cgp-radio-pill-active' : 'cgp-radio-pill'">Phone</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div>
+                <label for="contact-details" class="mb-2 block text-xs uppercase tracking-wide text-cgp-text-muted">Project Details</label>
+                <textarea id="contact-details" name="details" rows="4" required placeholder="Describe the build you have in mind..."
+                          :aria-invalid="errors.details ? 'true' : 'false'"
+                          :aria-describedby="errors.details ? 'contact-details-error' : null"
+                          class="cgp-input-underline resize-none"></textarea>
+                <p x-show="errors.details" x-cloak id="contact-details-error" class="cgp-form-error" x-text="errors.details"></p>
+              </div>
+
+              <div>
+                <button type="submit" class="cgp-btn-white cgp-btn-submit w-full">Transmit Request</button>
+                <p class="mt-4 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">No obligation. No pressure.</p>
+              </div>
+            </div>
+
+            <!-- Success state (simple, one line — no echo summary, no 3-step success) -->
+            <div x-show="sent" x-cloak x-ref="success" tabindex="-1" aria-live="polite" class="space-y-6 py-8 text-center">
+              <p class="font-mono text-xs tracking-cgp-04em text-cgp-accent">// TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED</p>
+              <button type="button" @click="reset" class="cgp-btn-ghost">Return to Forge</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

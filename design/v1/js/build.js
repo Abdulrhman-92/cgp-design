@@ -295,6 +295,76 @@ const PAGES = {
       footer: 'shared',
     },
   },
+  contact: {
+    output: 'contact/index.html',
+    title: 'Contact CGP | The Bespoke Forge — Riyadh, Saudi Arabia',
+    description: 'Commission a bespoke water-cooled PC at CGP — The Bespoke Forge, Riyadh. Open a channel to our masters. We respond within 24 hours.',
+    canonical: 'https://cgp.sa/contact/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+          // ADDED for contact page (only change to #store):
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'sales',
+            telephone: '+966-5X-XXX-XXXX', // TODO: from site settings (real CGP sales number)
+            areaServed: 'SA',
+            availableLanguage: ['en', 'ar'],
+          },
+        },
+        {
+          '@type': 'ContactPage',
+          '@id': 'https://cgp.sa/contact/#page',
+          url: 'https://cgp.sa/contact/',
+          name: 'Contact CGP | The Bespoke Forge — Riyadh, Saudi Arabia',
+          description: 'Commission a bespoke water-cooled PC at CGP — The Bespoke Forge, Riyadh. Open a channel to our masters. We respond within 24 hours.',
+          mainEntity: { '@id': 'https://cgp.sa/#store' },
+          about: { '@id': 'https://cgp.sa/#store' },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/contact/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://cgp.sa/contact/' },
+          ],
+        },
+      ],
+    },
+    css: ['contact/css/contact.css'],
+    js: ['main.js'], // form is inline Alpine — no page JS
+    sections: {
+      header: 'contact/sections/header.html', // page-specific (mirrors WP header-contact.php)
+      main: [
+        'contact/sections/hero.html',
+        'contact/sections/desk.html',
+        'contact/sections/door.html',
+      ],
+      footer: 'shared',
+    },
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -465,6 +535,8 @@ function resolveSection(relPath, pageRoot) {
   const shopUrl = shopRel === 'shop/index.html' ? 'shop/index.html' : shopRel;
   const productRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'product', 'index.html')).split(path.sep).join('/');
   const productUrl = productRel === 'product/index.html' ? 'product/index.html' : productRel;
+  const contactRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'contact', 'index.html')).split(path.sep).join('/');
+  const contactUrl = contactRel === 'contact/index.html' ? 'contact/index.html' : contactRel;
   return fs
     .readFileSync(file, 'utf8')
     .replace(/\{\{THEME_ASSETS\}\}/g, theme)
@@ -472,7 +544,8 @@ function resolveSection(relPath, pageRoot) {
     .replace(/\{\{HOME_URL\}\}/g, homeUrl)
     .replace(/\{\{CONFIG_URL\}\}/g, configUrl)
     .replace(/\{\{SHOP_URL\}\}/g, shopUrl)
-    .replace(/\{\{PRODUCT_URL\}\}/g, productUrl);
+    .replace(/\{\{PRODUCT_URL\}\}/g, productUrl)
+    .replace(/\{\{CONTACT_URL\}\}/g, contactUrl);
 }
 
 // ---------------------------------------------------------------------------

@@ -14,13 +14,27 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 
 ## Current State
 
-- **Last completed:** Homepage ✅ (3cb7772) + Configurator ✅ (7113f89) + CSS de-dup cleanup ✅ (2d4f35c) + Shop ✅ (4dfbb70, a295c13, 6cf430d) + **Product page ✅ (The Build Dossier — NOT yet committed)**
-- **In progress:** — (product page built, awaiting user review + commit authorization)
+- **Last completed:** Homepage ✅ (3cb7772) + Configurator ✅ (7113f89) + CSS de-dup cleanup ✅ (2d4f35c) + Shop ✅ (4dfbb70, a295c13, 6cf430d) + Product page ✅ (10b9af6)
+- **In progress:** Contact page build (consultation ✅ 2026-09-01, build started — SEO content first per user)
 - **Blocked:** —
 
 ## Next Step
 
-> User review of the Product page → commit (authorization required) → Archives page (gallery "View Full Gallery" destination).
+> Contact page build → About page → Blog page. (Archives page DROPPED — user decision 2026-09-01.)
+
+## Contact Page Consultation Decisions (2026-09-01, /go-cons Round 1 — converged)
+
+- **Concept:** "Open A Channel" — Forge Comms Console. Voice sequence: boot (home) → matrix (configurator) → dossier (product) → channel (contact).
+- **Priority:** Contact → About → Blog (user decision; Archives dropped). User priority: SEO-appropriate marketing content FIRST.
+- **Structure (4 sections, user removed FAQ + detailed success):** hero (`// SYS_CONTACT`, "Open A Channel / To The Forge.", CSS signal rings, status strip FORGE OPERATIONAL · RESPONSE < 24H · RIYADH, dual CTA) → The Commission Desk (split: form + "what happens next" 3-step panel; fields: name/email/phone-WhatsApp optional/project-type chips/budget SAR select/preferred channel/details; honeypot; simple one-line success "TRANSMISSION RECEIVED — THE MASTERS HAVE BEEN SUMMONED" — NO echo summary) → The Direct Lines (3 channel cards: WhatsApp primary/phone/email, `<!-- TODO: from site settings -->`) → The Forge Door (Riyadh address, hours Su-Th 10:00-22:00, "Visits by appointment", stylized SVG map ~2KB, socials).
+- **Conversion:** form = ONE primary action (structured data); WhatsApp = secondary escape hatch with pre-filled `wa.me/<number>?text=` template (number behind site-settings TODO); email tertiary. Response promise "within 24 hours" in hero + form microcopy + success. No countdowns, no pressure.
+- **Form:** terminal frame evolution — label `// SYS_COMMISSION_DESK`, split layout, chips for project type + timeline feel tactile (budget stays select), ≤6 visible fields, honeypot mandatory, simulated success only.
+- **Schema:** ContactPage (@id /contact/#page, mainEntity→#store, about→#store) + ContactPoint on #store (contactType sales, telephone placeholder, areaServed SA, availableLanguage en/ar) + BreadcrumbList Home→Contact. Reuse #organization/#store verbatim. NO AggregateRating.
+- **SEO:** title 'Contact CGP | The Bespoke Forge — Riyadh, Saudi Arabia' (~55 chars); description ~155 chars (commission bespoke water-cooled PC, Riyadh, 24 hours); canonical https://cgp.sa/contact/; ogImage absolute; geo meta inherited from buildHead.
+- **Map:** stylized SVG (dark, cyan pin, ~2-5KB inline) in mockup — NO Google Maps embed (no-CDN + budget). WP: lazy iframe or keep SVG.
+- **Build:** PAGES entry `contact` (output contact/index.html, css ['contact/css/contact.css'], js ['main.js'] — form is inline Alpine, no page JS); NEW {{CONTACT_URL}} token in resolveSection; page-specific header contact/sections/header.html (configurator pattern); footer CTA fix: "Summon The Masters" href="#inquiry" → {{CONTACT_URL}} (pre-existing subpage bug — #inquiry anchor doesn't exist on subpages).
+- **A11y upgrades:** visible error messages (aria-describedby + aria-invalid), focus() to success panel, labels + autocomplete, x-cloak, single h1.
+- **WP migration:** Contact Form 7 (free, wpcf7mailsent → terminal success panel) + Customizer (get_theme_mod) for contact data + theme-owned JSON-LD in wp_head — $0 spent.
 
 ## Product Page Consultation Decisions (2026-09-01, /go-cons Round 1 — converged)
 
@@ -92,3 +106,6 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 - 2026-08-27 — build.js made idempotent (strips old sections before re-injecting — no duplication)
 - 2026-08-27 — Phosphor v2 requires base .ph class on icons (fixed all 8)
 - 2026-08-27 — Phosphor style.css linked directly in head (loader script removed — relative path broke on subpages)
+- 2026-09-01 — Archives page DROPPED (user decision); new page order: Contact → About → Blog
+- 2026-09-01 — Contact page concept "Open A Channel" approved (4 sections; FAQ + echo-summary success removed per user)
+- 2026-09-01 — Contact page build: SEO content & copy is the #1 priority (user instruction)

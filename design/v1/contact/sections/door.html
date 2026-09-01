@@ -1,0 +1,109 @@
+<!-- The Forge Door — address/hours/luxury line/appointment CTA/socials (LEFT) +
+     stylized inline SVG map (RIGHT, decorative, no Google Maps embed — no-CDN rule).
+     bg-cgp-bg-page: alternates with the desk panel above (lines.html was merged
+     into the desk panel, so door now sits directly after it). -->
+<section id="forge-door" class="cgp-section bg-cgp-bg-page" aria-labelledby="forge-door-title">
+  <div class="cgp-container-lg">
+    <!-- Section header -->
+    <div class="mb-12 text-center">
+      <p class="cgp-eyebrow">// SYS_FORGE_DOOR</p>
+      <h2 id="forge-door-title" class="text-cgp-display-4 mb-6">
+        The Forge<br>
+        <span class="cgp-glow-text bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Door.</span>
+      </h2>
+      <p class="mx-auto max-w-xl text-sm font-light leading-relaxed text-cgp-text-secondary md:text-base">
+        Some commissions are best discussed face to face — over the machine itself. As Riyadh's bespoke PC atelier, the forge door is open to serious clients, by appointment.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+      <!-- LEFT: address + hours + luxury line + CTA + socials -->
+      <div class="flex flex-col gap-6">
+        <div class="cgp-door-panel">
+          <p class="cgp-mono-label mb-2 tracking-cgp-04em">// THE FORGE</p>
+          <p class="text-lg font-semibold text-cgp-text-heading">Riyadh, Saudi Arabia</p>
+          <!-- TODO: from site settings (full street address) -->
+          <p class="mt-1 text-sm text-cgp-text-muted"><!-- TODO: from site settings (full street address) --></p>
+        </div>
+
+        <div class="cgp-door-panel">
+          <p class="cgp-mono-label mb-2 tracking-cgp-04em">// FORGE HOURS</p>
+          <p class="cgp-num text-lg font-semibold text-cgp-text-heading" dir="ltr">Su-Th · 10:00 — 22:00</p>
+        </div>
+
+        <p class="text-sm text-cgp-text-secondary">Visits by appointment — the forge floor is not a showroom.</p>
+
+        <a href="#commission-desk" class="cgp-btn-primary cgp-magnetic w-full sm:w-auto" data-magnetic>Request An Appointment</a>
+
+        <!-- Socials row (footer icon set) -->
+        <div class="mt-2 flex items-center gap-3">
+          <!-- TODO: from site settings -->
+          <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+            <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+          </a>
+          <!-- TODO: from site settings -->
+          <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+            <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+          </a>
+          <!-- TODO: from site settings -->
+          <a href="#" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+            <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: stylized inline SVG map (dark, cyan pin, grid overlay — decorative) -->
+      <div class="cgp-map-frame h-full">
+        <!-- REPLACE WITH CLIENT MAP -->
+        <svg viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice" role="presentation" aria-hidden="true" class="cgp-map-svg">
+          <defs>
+            <pattern id="cgp-map-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M30 0H0V30" fill="none" class="cgp-map-grid-line"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="480" class="cgp-map-bg"/>
+          <rect width="600" height="480" fill="url(#cgp-map-grid)"/>
+          <!-- Main avenues -->
+          <g class="cgp-map-street">
+            <path d="M0 140 H600"/>
+            <path d="M0 340 H600"/>
+            <path d="M180 0 V480"/>
+            <path d="M440 0 V480"/>
+          </g>
+          <!-- Diagonal avenue -->
+          <g class="cgp-map-street">
+            <path d="M0 60 L600 420"/>
+          </g>
+          <!-- Secondary streets -->
+          <g class="cgp-map-street-subtle">
+            <path d="M0 60 H600"/>
+            <path d="M0 220 H600"/>
+            <path d="M0 420 H600"/>
+            <path d="M60 0 V480"/>
+            <path d="M300 0 V480"/>
+            <path d="M520 0 V480"/>
+          </g>
+          <!-- City blocks -->
+          <g class="cgp-map-block">
+            <rect x="60" y="150" width="110" height="180" rx="4"/>
+            <rect x="190" y="150" width="100" height="60" rx="4"/>
+            <rect x="300" y="150" width="130" height="60" rx="4"/>
+            <rect x="190" y="220" width="100" height="110" rx="4"/>
+            <rect x="300" y="220" width="130" height="110" rx="4"/>
+            <rect x="450" y="150" width="60" height="180" rx="4"/>
+          </g>
+          <!-- Park -->
+          <g class="cgp-map-park">
+            <rect x="190" y="350" width="240" height="60" rx="4"/>
+          </g>
+          <!-- Cyan pin -->
+          <g>
+            <circle cx="300" cy="240" r="44" class="cgp-map-pin-halo"/>
+            <circle cx="300" cy="240" r="9" class="cgp-map-pin"/>
+            <circle cx="300" cy="240" r="3.5" class="cgp-map-pin-core"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,334 @@
+/* ============================================================
+   CGP design/v1 — contact page-level styles ("Open A Channel")
+   ------------------------------------------------------------
+   Shared rules live in the theme (tokens/base/utilities/motion).
+   Scope: contact-only — signal ring, hero title, chips, radio
+   pills, direct line rows, steps panel, door panels, map frame,
+   form errors, numeric readouts.
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   Logical properties only (AGENTS.md rule 14).
+   ============================================================ */
+
+/* ============ Numeric readouts (RTL safety) ============ */
+/* Isolates digits/serials from surrounding Arabic text direction.
+   Markup also carries dir="ltr" — this is the CSS-level guarantee. */
+.cgp-num {
+  unicode-bidi: isolate;
+}
+
+/* ============ Hero — title ============ */
+/* clamp keeps 'TO THE FORGE.' on one line (2 lines total) at 375/768/1024/1440. */
+.cgp-contact-hero-title {
+  font-size: clamp(44px, 11vw, 128px);
+}
+
+/* ============ Hero — signal ring (CSS-only, direction-neutral) ============ */
+/* Centered behind the headline (same pattern as the home hotwheel ring).
+   inset-inline-start + translateX(-50%) centers in BOTH LTR and RTL —
+   no start/end flip needed. Reduced-motion: animations off (below). */
+.cgp-signal-ring {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: min(560px, 92vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cgp-signal-ring-circle {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--cgp-grid-line);
+  border-radius: 50%;
+}
+
+.cgp-signal-ring-circle-2 { inset: 12%; }
+.cgp-signal-ring-circle-3 { inset: 24%; }
+
+/* Outermost ring — radar sweep (scale + fade) */
+.cgp-signal-ring-circle-1 {
+  animation: cgp-signal-sweep 3.2s var(--cgp-ease-expo) infinite;
+}
+
+/* Core — pulsing beacon dot */
+.cgp-signal-ring-core {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cgp-accent);
+  box-shadow: var(--cgp-glow-strong);
+  transform: translate(-50%, -50%);
+  animation: cgp-signal-pulse 2.4s var(--cgp-ease-expo) infinite;
+}
+
+@keyframes cgp-signal-sweep {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+@keyframes cgp-signal-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.7); opacity: 0.55; }
+}
+
+/* ============ Commission desk — steps panel ============ */
+.cgp-steps-panel {
+  position: relative;
+  overflow: hidden; /* clip the 1px cyan top accent bar to the radius */
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+.cgp-step {
+  padding-block: var(--cgp-space-6);
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+.cgp-step:first-child {
+  border-block-start: 0;
+}
+
+.cgp-step-num {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  letter-spacing: var(--cgp-tracking-04em);
+  color: var(--cgp-accent);
+}
+
+.cgp-step-label {
+  margin-block-start: var(--cgp-space-2);
+  font-family: var(--cgp-font-display);
+  font-size: var(--cgp-text-h3);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-wide);
+  text-transform: uppercase;
+  color: var(--cgp-text-heading);
+}
+
+.cgp-step-copy {
+  margin-block-start: var(--cgp-space-2);
+  font-size: var(--cgp-text-sm);
+  line-height: 1.6;
+  color: var(--cgp-text-secondary);
+}
+
+/* ============ Commission desk — project type chips ============ */
+/* Tactile buttons (not a select) — 44px touch targets. */
+.cgp-chip {
+  min-height: 44px;
+  padding-block: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-full);
+  background: transparent;
+  color: var(--cgp-text-secondary);
+  font-size: var(--cgp-text-xs);
+  font-weight: 600;
+  letter-spacing: var(--cgp-tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-chip:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-chip-active {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1); /* matches cgp-btn-ghost fill */
+  color: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* ============ Commission desk — preferred channel radio pills ============ */
+.cgp-radio-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-block: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-4);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-full);
+  color: var(--cgp-text-secondary);
+  font-size: var(--cgp-text-xs);
+  font-weight: 600;
+  letter-spacing: var(--cgp-tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    background-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-radio-pill:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-radio-pill-active {
+  border-color: var(--cgp-accent);
+  background: rgba(6, 182, 212, 0.1); /* matches cgp-btn-ghost fill */
+  color: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+/* ============ Commission desk — form validation errors ============ */
+/* red-400 — TODO: promote to tokens.css with orchestrator approval
+   (the design system has no error token yet). Passes 4.5:1 on #09090b. */
+.cgp-form-error {
+  margin-block-start: var(--cgp-space-2);
+  font-size: var(--cgp-text-xs);
+  color: #f87171;
+}
+
+/* ============ Direct lines — compact list rows ============ */
+/* One row per channel: icon + mono label/value + optional badge.
+   Replaces the tall channel cards (no sub-copy, no CTA buttons). */
+.cgp-direct-lines-list {
+  margin-block-start: var(--cgp-space-6);
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+.cgp-direct-line {
+  display: flex;
+  align-items: center;
+  gap: var(--cgp-space-4);
+  padding-block: var(--cgp-space-4);
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+.cgp-direct-line:first-child {
+  border-block-start: 0;
+}
+
+.cgp-direct-line-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-xl);
+  background: var(--cgp-bg-overlay);
+  color: var(--cgp-accent);
+  font-size: var(--cgp-text-lg);
+  transition: color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-direct-line-body {
+  flex: 1;
+  min-width: 0; /* truncate-safe for long values */
+}
+
+.cgp-direct-line-value {
+  margin-block-start: var(--cgp-space-1);
+  font-size: var(--cgp-text-base);
+  font-weight: 600;
+  color: var(--cgp-text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* Subtle hover accent — icon + value shift to bright cyan. */
+.cgp-direct-line:hover .cgp-direct-line-icon,
+.cgp-direct-line:hover .cgp-direct-line-value {
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-badge-chip {
+  padding-block: var(--cgp-space-1);
+  padding-inline: var(--cgp-space-3);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-overlay);
+  color: var(--cgp-accent);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-03em);
+  text-transform: uppercase;
+}
+
+/* ============ Commission desk — direct lines (merged into steps panel) ============ */
+/* Separator above the direct-lines block — divides it from the 3 steps. */
+.cgp-direct-lines {
+  margin-block-start: var(--cgp-space-6);
+  padding-block-start: var(--cgp-space-6);
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+/* Panel heading — matches .cgp-step-label anatomy (display font, uppercase). */
+.cgp-direct-lines-title {
+  margin-block-start: var(--cgp-space-3);
+  font-family: var(--cgp-font-display);
+  font-size: var(--cgp-text-h3);
+  font-weight: 700;
+  letter-spacing: var(--cgp-tracking-wide);
+  text-transform: uppercase;
+  color: var(--cgp-text-heading);
+}
+
+/* ============ Forge door — info panels ============ */
+.cgp-door-panel {
+  padding: var(--cgp-space-6);
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+}
+
+/* ============ Forge door — stylized map frame ============ */
+.cgp-map-frame {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  background: var(--cgp-bg-section);
+  box-shadow: var(--cgp-glow-black);
+}
+
+.cgp-map-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cgp-map-bg { fill: var(--cgp-bg-section); }
+.cgp-map-grid-line { stroke: var(--cgp-grid-line); stroke-width: 1; }
+.cgp-map-street { stroke: var(--cgp-border-strong); stroke-width: 2; }
+.cgp-map-street-subtle { stroke: var(--cgp-border); stroke-width: 1; }
+.cgp-map-block { fill: var(--cgp-bg-card); }
+.cgp-map-park { fill: var(--cgp-bg-elevated); }
+.cgp-map-pin-halo { fill: var(--cgp-border-accent); }
+.cgp-map-pin { fill: var(--cgp-accent); }
+.cgp-map-pin-core { fill: var(--cgp-bg-page); }
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  .cgp-signal-ring-circle-1,
+  .cgp-signal-ring-core {
+    animation: none !important;
+  }
+}
