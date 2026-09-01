@@ -2,8 +2,8 @@
    CGP design/v1 — product page-level styles (The Build Dossier)
    ------------------------------------------------------------
    Shared rules live in the theme (tokens/base/utilities/motion).
-   Scope: product-only — dossier card, gallery, lifecycle,
-   spec table, telemetry, forge log, bespoke band, blueprint
+   Scope: product-only — dossier card, gallery, spec table,
+   telemetry, forge log, bespoke band, blueprint
    (ported from configurator.css — do NOT edit the source).
 
    Tokens only via var(--cgp-*) — never hardcode values.
@@ -45,13 +45,6 @@
   font-size: var(--cgp-text-h3);
   font-weight: 700;
   color: var(--cgp-accent);
-}
-
-.cgp-dossier-trust {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--cgp-space-3);
 }
 
 /* ============ Hero image stage (full-bleed, LCP) ============ */
@@ -246,78 +239,6 @@
 
 .cgp-lightbox-nav-next {
   inset-inline-end: var(--cgp-space-4);
-}
-
-/* ============ Build lifecycle (3-node horizontal) ============ */
-.cgp-lifecycle {
-  display: flex;
-  align-items: center;
-  gap: var(--cgp-space-2);
-}
-
-.cgp-lifecycle-node {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--cgp-space-2);
-  text-align: center;
-}
-
-/* Static dot per node (done nodes have no dot span in markup) */
-.cgp-lifecycle-node::before {
-  content: '';
-  position: relative;
-  z-index: 1; /* paint above the connector hairline */
-  width: 8px;
-  height: 8px;
-  border-radius: var(--cgp-radius-full);
-  background: var(--cgp-border-strong);
-}
-
-/* Connector hairline: this node's dot center to the next node's dot
-   center (extends across the flex gap; hidden under the next dot). */
-.cgp-lifecycle-node:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  inset-block-start: 3px;
-  inset-inline-start: 50%;
-  inset-inline-end: calc(-50% - 8px);
-  height: 1px;
-  background: var(--cgp-border-strong);
-}
-
-.cgp-lifecycle-done::before {
-  background: var(--cgp-accent);
-}
-
-.cgp-lifecycle-done .cgp-lifecycle-label {
-  color: var(--cgp-accent);
-}
-
-/* Active node: pulsing dot span (Tailwind animate-pulse) replaces the
-   static ::before dot; motion.css kills the pulse under reduced motion. */
-.cgp-lifecycle-active::before {
-  display: none;
-}
-
-.cgp-lifecycle-active .cgp-lifecycle-label {
-  color: var(--cgp-accent-bright);
-}
-
-.cgp-lifecycle-dot {
-  position: relative;
-  z-index: 1; /* paint above the connector hairline */
-  box-shadow: var(--cgp-glow-soft);
-}
-
-.cgp-lifecycle-label {
-  font-family: var(--cgp-font-mono);
-  font-size: var(--cgp-text-micro);
-  letter-spacing: var(--cgp-tracking-03em);
-  text-transform: uppercase;
-  color: var(--cgp-text-muted);
 }
 
 /* ============ Spec table (The Blueprint) ============ */
