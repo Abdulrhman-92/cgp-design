@@ -1,6 +1,6 @@
 <!-- ============ POST — Next File (editorial nav — full-width rows, NOT cards) ============
      Deliberately different from every other page's footer-nav: oversized
-     typographic rows with slide-on-hover arrows. Prev/next target the index
+     typographic rows with slide-on-hover arrows. Prev/next target the post page ({{POST_URL}} self-token)
      in this mockup — real permalinks come from the WP loop. -->
 <section id="post-next" class="cgp-section bg-cgp-bg-page" aria-labelledby="post-next-title">
   <div class="cgp-container-md">
@@ -8,8 +8,8 @@
     <h2 id="post-next-title" class="sr-only">Next entries</h2>
 
     <nav aria-label="More entries" class="divide-y divide-cgp-border border-y border-cgp-border">
-      <!-- Previous entry -->
-      <a href="{{BLOG_URL}}" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+      <!-- Previous entry — TODO: real permalink (WP loop) -->
+      <a href="{{POST_URL}}" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
         <div>
           <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">&larr; Previous file</p>
           <p class="cgp-post-next-title mt-2">ENTRY_041 — Wraith: The Silent Tuning Log</p>
@@ -17,7 +17,7 @@
         <span class="shrink-0 text-cgp-h3 text-cgp-text-faint transition-all group-hover:-translate-x-1 group-hover:text-cgp-accent" aria-hidden="true">&larr;</span>
       </a>
       <!-- Next entry — TODO: real permalink (WP loop) -->
-      <a href="{{BLOG_URL}}" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+      <a href="{{POST_URL}}" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
         <div>
           <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">Next file &rarr;</p>
           <p class="cgp-post-next-title mt-2">ENTRY_043 — Neon Genesis: Wiring The UV Loop</p>

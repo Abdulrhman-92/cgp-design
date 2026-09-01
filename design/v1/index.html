@@ -99,11 +99,11 @@
   <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
   <link rel="stylesheet" href="css/tailwind.css?v=1788295584">
-  <link rel="stylesheet" href="css/theme.css?v=1788299154">
+  <link rel="stylesheet" href="css/theme.css?v=1788299596">
   <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
   <link rel="stylesheet" href="home/css/home.css?v=1788115902">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="js/bundles/home.min.js?v=1788299154"></script>
+  <script defer src="js/bundles/home.min.js?v=1788299596"></script>
   <script defer src="../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -723,8 +723,9 @@
     <h2 id="blog-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">Latest Articles</h2>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <!-- REPEAT: article card — loop over WP_Query posts; wrap in <a href="permalink"> -->
+      <!-- REPEAT: article card — loop over WP_Query posts; card wrapped in <a href="post/index.html"> (self-page token) -->
       <!-- Article 1 -->
+      <a href="post/index.html" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -733,8 +734,10 @@
         <time datetime="2026-08-20" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 20, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Choosing the right coolant for long-term loops</h3>
       </article>
+      </a>
 
       <!-- Article 2 -->
+      <a href="post/index.html" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -743,8 +746,10 @@
         <time datetime="2026-08-12" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 12, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Behind the build: Bending tubing for the Hotwheel</h3>
       </article>
+      </a>
 
       <!-- Article 3 -->
+      <a href="post/index.html" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -753,6 +758,7 @@
         <time datetime="2026-07-30" class="block text-cgp-xs text-cgp-text-muted mb-1">Jul 30, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Air vs. Custom Water Cooling in harsh climates</h3>
       </article>
+      </a>
     </div>
 
     <!-- Read the Blog → resolves via blog/index.html (build.js page tokens) -->

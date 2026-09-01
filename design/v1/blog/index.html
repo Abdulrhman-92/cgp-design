@@ -113,11 +113,11 @@
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
   <link rel="stylesheet" href="../css/tailwind.css?v=1788295584">
-  <link rel="stylesheet" href="../css/theme.css?v=1788299154">
+  <link rel="stylesheet" href="../css/theme.css?v=1788299596">
   <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
   <link rel="stylesheet" href="css/blog.css?v=1788294202">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="../js/bundles/blog.min.js?v=1788299154"></script>
+  <script defer src="../js/bundles/blog.min.js?v=1788299596"></script>
   <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -272,8 +272,9 @@
     </div>
 
     <div class="grid grid-cols-1 gap-cgp-6 md:grid-cols-2 lg:grid-cols-3">
-      <!-- REPEAT: article card — loop over WP_Query posts; wrap the card in <a href="permalink"> -->
+      <!-- REPEAT: article card — loop over WP_Query posts; card wrapped in <a href="../post/index.html"> (self-page token) -->
       <!-- Article 1 -->
+      <a href="../post/index.html" class="block">
       <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
         <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -286,12 +287,13 @@
           </p>
           <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Coolant Chemistry: What Survives A Riyadh Summer</h3>
           <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">50&deg;C ambient changes everything. The fluids, additives, and change intervals we trust after two years of desert-load testing.</p>
-          <!-- TODO: real permalink -->
-          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+          <span class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></span>
         </div>
       </article>
+      </a>
 
       <!-- Article 2 -->
+      <a href="../post/index.html" class="block">
       <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
         <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -304,12 +306,13 @@
           </p>
           <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Reading A Distro Plate Like An Engineer</h3>
           <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Every channel in a CGP distro plate is a deliberate decision. Here is how to trace flow order, predict service points, and spot shortcuts.</p>
-          <!-- TODO: real permalink -->
-          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+          <span class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></span>
         </div>
       </article>
+      </a>
 
       <!-- Article 3 -->
+      <a href="../post/index.html" class="block">
       <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
         <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -322,12 +325,13 @@
           </p>
           <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Binning Day: How Silicon Makes The Cut</h3>
           <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">We test every chip before it earns a place in a commission. What 48 hours of stress runs reveals about silicon lottery odds.</p>
-          <!-- TODO: real permalink -->
-          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+          <span class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></span>
         </div>
       </article>
+      </a>
 
       <!-- Article 4 -->
+      <a href="../post/index.html" class="block">
       <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
         <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -340,12 +344,13 @@
           </p>
           <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">Lighting The Neon Genesis — Without The Gamer Glow</h3>
           <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Light as architecture, not decoration. The palette, diffusion, and placement choices behind the build&rsquo;s signature glow.</p>
-          <!-- TODO: real permalink -->
-          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+          <span class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></span>
         </div>
       </article>
+      </a>
 
       <!-- Article 5 -->
+      <a href="../post/index.html" class="block">
       <article class="cgp-card cgp-card-hover group flex flex-col overflow-hidden">
         <div class="cgp-image-container h-44 border-b border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -358,10 +363,10 @@
           </p>
           <h3 class="mb-2 text-cgp-lg leading-snug text-cgp-text-heading">The Wraith: Silence At Full Load</h3>
           <p class="mb-6 text-cgp-sm leading-relaxed text-cgp-text-secondary">Fan curves, radiator math, and flow rates — how the Wraith holds benchmark temperatures at a library-grade acoustic floor.</p>
-          <!-- TODO: real permalink -->
-          <a href="#" class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></a>
+          <span class="cgp-btn-link mt-auto self-start">Read Entry <span aria-hidden="true">&rarr;</span></span>
         </div>
       </article>
+      </a>
 
       <!-- Archives teaser (6th grid slot — no image by design) -->
       <a href="../archives/index.html" class="cgp-card cgp-card-hover group flex flex-col justify-between overflow-hidden p-cgp-6">

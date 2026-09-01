@@ -105,11 +105,11 @@
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
   <link rel="stylesheet" href="../css/tailwind.css?v=1788295584">
-  <link rel="stylesheet" href="../css/theme.css?v=1788299154">
+  <link rel="stylesheet" href="../css/theme.css?v=1788299596">
   <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
   <link rel="stylesheet" href="css/post.css?v=1788298085">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="../js/bundles/post.min.js?v=1788299154"></script>
+  <script defer src="../js/bundles/post.min.js?v=1788299596"></script>
   <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -390,7 +390,7 @@
 
 <!-- ============ POST — Next File (editorial nav — full-width rows, NOT cards) ============
      Deliberately different from every other page's footer-nav: oversized
-     typographic rows with slide-on-hover arrows. Prev/next target the index
+     typographic rows with slide-on-hover arrows. Prev/next target the post page ( self-token)
      in this mockup — real permalinks come from the WP loop. -->
 <section id="post-next" class="cgp-section bg-cgp-bg-page" aria-labelledby="post-next-title">
   <div class="cgp-container-md">
@@ -398,8 +398,8 @@
     <h2 id="post-next-title" class="sr-only">Next entries</h2>
 
     <nav aria-label="More entries" class="divide-y divide-cgp-border border-y border-cgp-border">
-      <!-- Previous entry -->
-      <a href="../blog/index.html" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+      <!-- Previous entry — TODO: real permalink (WP loop) -->
+      <a href="" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
         <div>
           <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">&larr; Previous file</p>
           <p class="cgp-post-next-title mt-2">ENTRY_041 — Wraith: The Silent Tuning Log</p>
@@ -407,7 +407,7 @@
         <span class="shrink-0 text-cgp-h3 text-cgp-text-faint transition-all group-hover:-translate-x-1 group-hover:text-cgp-accent" aria-hidden="true">&larr;</span>
       </a>
       <!-- Next entry — TODO: real permalink (WP loop) -->
-      <a href="../blog/index.html" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+      <a href="" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
         <div>
           <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">Next file &rarr;</p>
           <p class="cgp-post-next-title mt-2">ENTRY_043 — Neon Genesis: Wiring The UV Loop</p>

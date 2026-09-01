@@ -6,8 +6,9 @@
     <h2 id="blog-title" class="text-cgp-display-4 font-bold text-cgp-text-heading leading-tight mb-8">Latest Articles</h2>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <!-- REPEAT: article card — loop over WP_Query posts; wrap in <a href="permalink"> -->
+      <!-- REPEAT: article card — loop over WP_Query posts; card wrapped in <a href="{{POST_URL}}"> (self-page token) -->
       <!-- Article 1 -->
+      <a href="{{POST_URL}}" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -16,8 +17,10 @@
         <time datetime="2026-08-20" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 20, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Choosing the right coolant for long-term loops</h3>
       </article>
+      </a>
 
       <!-- Article 2 -->
+      <a href="{{POST_URL}}" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -26,8 +29,10 @@
         <time datetime="2026-08-12" class="block text-cgp-xs text-cgp-text-muted mb-1">Aug 12, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Behind the build: Bending tubing for the Hotwheel</h3>
       </article>
+      </a>
 
       <!-- Article 3 -->
+      <a href="{{POST_URL}}" class="block">
       <article class="group cursor-pointer">
         <div class="cgp-image-container mb-4 h-40 rounded-xl border border-cgp-border bg-cgp-bg-card">
           <!-- REPLACE WITH CLIENT PHOTOS -->
@@ -36,6 +41,7 @@
         <time datetime="2026-07-30" class="block text-cgp-xs text-cgp-text-muted mb-1">Jul 30, 2026</time>
         <h3 class="text-cgp-lg font-bold text-cgp-text-heading group-hover:text-cgp-accent-bright transition-colors">Air vs. Custom Water Cooling in harsh climates</h3>
       </article>
+      </a>
     </div>
 
     <!-- Read the Blog → resolves via {{BLOG_URL}} (build.js page tokens) -->
