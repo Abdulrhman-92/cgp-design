@@ -1,0 +1,83 @@
+<!-- THE FORGE LOG — provenance timeline (ol + time), master signature, guarantee strip.
+     Classes for product.css (Agent 3): cgp-forge-log, cgp-forge-node, cgp-forge-node-dot,
+     cgp-forge-node-body, cgp-forge-node-label, cgp-forge-node-meta, cgp-forge-node-time,
+     cgp-forge-signature, cgp-num. -->
+<section id="forge-log" class="cgp-section bg-cgp-bg-page" aria-labelledby="forge-log-title">
+  <div class="cgp-container-md">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">Provenance</p>
+        <h2 id="forge-log-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">The forge log</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// SERIAL: <span class="cgp-num" dir="ltr">CGP-2026-004</span></p>
+    </div>
+
+    <!-- Timeline: FORGED → LEAK TEST → BURN-IN → SEALED -->
+    <ol class="cgp-forge-log">
+      <!-- REPEAT: forge log entry — loop over build log CPT -->
+      <li class="cgp-forge-node">
+        <span class="cgp-forge-node-dot" aria-hidden="true"></span>
+        <div class="cgp-forge-node-body">
+          <p class="cgp-forge-node-label">FORGED</p>
+          <p class="cgp-forge-node-meta">Chassis machined, components seated</p>
+        </div>
+        <time datetime="2026-08-14" class="cgp-forge-node-time cgp-num" dir="ltr">14 AUG 2026</time>
+      </li>
+      <li class="cgp-forge-node">
+        <span class="cgp-forge-node-dot" aria-hidden="true"></span>
+        <div class="cgp-forge-node-body">
+          <p class="cgp-forge-node-label">LEAK TEST</p>
+          <p class="cgp-forge-node-meta">Dual Cryo-Loop sealed — 100% leak verified</p>
+        </div>
+        <time datetime="2026-08-15" class="cgp-forge-node-time cgp-num" dir="ltr">15 AUG 2026</time>
+      </li>
+      <li class="cgp-forge-node">
+        <span class="cgp-forge-node-dot" aria-hidden="true"></span>
+        <div class="cgp-forge-node-body">
+          <p class="cgp-forge-node-label">BURN-IN</p>
+          <p class="cgp-forge-node-meta">48h pressure test — thermals on curve</p>
+        </div>
+        <time datetime="2026-08-16" class="cgp-forge-node-time cgp-num" dir="ltr">16 AUG 2026</time>
+      </li>
+      <li class="cgp-forge-node">
+        <span class="cgp-forge-node-dot" aria-hidden="true"></span>
+        <div class="cgp-forge-node-body">
+          <p class="cgp-forge-node-label">SEALED</p>
+          <p class="cgp-forge-node-meta">Signed &amp; sealed — ready to ship</p>
+        </div>
+        <time datetime="2026-08-18" class="cgp-forge-node-time cgp-num" dir="ltr">18 AUG 2026</time>
+      </li>
+    </ol>
+
+    <!-- Master signature line -->
+    <div class="cgp-forge-signature">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+        Assembled by <span class="text-cgp-accent"><!-- TODO: from site settings -->[Master Name]</span> — signed &amp; sealed
+      </p>
+    </div>
+
+    <!-- The CGP Guarantee (data points from home/guarantee.html) -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_TEST</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">48h</p>
+        <p class="mt-1 text-cgp-xs uppercase tracking-cgp-wider text-cgp-text-muted">Pressure Testing</p>
+      </div>
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_MATL</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">0.01mm</p>
+        <p class="mt-1 text-cgp-xs uppercase tracking-cgp-wider text-cgp-text-muted">Machining Tolerance</p>
+      </div>
+      <div class="cgp-card cgp-card-hover p-6 text-center">
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_ACRY</p>
+        <p class="mt-3 font-display text-3xl font-bold text-cgp-text-heading">100%</p>
+        <p class="mt-1 text-cgp-xs uppercase tracking-cgp-wider text-cgp-text-muted">Leak Tested</p>
+      </div>
+    </div>
+
+    <!-- Build-log promise -->
+    <p class="mt-10 border-t border-cgp-border pt-6 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      Every unit ships with a serialized build log — signed by the master who forged it
+    </p>
+  </div>
+</section>

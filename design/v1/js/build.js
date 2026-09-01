@@ -152,6 +152,7 @@ const PAGES = {
       main: [
         'configurator/sections/hero.html',
         'configurator/sections/matrix.html',
+        'configurator/sections/mobile-bar.html',
         'configurator/sections/commission.html',
       ],
       footer: 'shared',
@@ -209,8 +210,87 @@ const PAGES = {
       header: 'shop/sections/header.html', // page-specific (mirrors WP header-shop.php)
       main: [
         'shop/sections/hero.html',
-        'shop/sections/catalog.html',
+        'shop/sections/featured.html',
+        'shop/sections/filters.html',
+        'shop/sections/grid.html',
         'shop/sections/upsell.html',
+      ],
+      footer: 'shared',
+    },
+  },
+  product: {
+    output: 'product/index.html',
+    title: 'The Hotwheel | CGP Bespoke Water-Cooled PC — Riyadh',
+    description: 'The Hotwheel — CGP\'s legendary circular chassis. RTX 5090, Ryzen 9 9950X, dual cryo-loop. 25,000 SAR, forged in Riyadh. Inquire at The Bespoke Forge.',
+    canonical: 'https://cgp.sa/product/the-hotwheel/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives one level deep
+    ogType: 'product',
+    ogPrice: { amount: '25000', currency: 'SAR' },
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': ['ComputerStore', 'LocalBusiness'],
+          '@id': 'https://cgp.sa/#store',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          description: 'Bespoke water-cooled PC builds, handcrafted to order in Riyadh, Saudi Arabia.',
+          parentOrganization: { '@id': 'https://cgp.sa/#organization' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressRegion: 'Riyadh Province', addressCountry: 'SA' },
+          geo: { '@type': 'GeoCoordinates', latitude: 24.7136, longitude: 46.6753 },
+          openingHours: 'Su-Th 10:00-22:00',
+          priceRange: 'SAR 10,000 - 25,000+',
+        },
+        {
+          '@type': 'Product',
+          '@id': 'https://cgp.sa/product/the-hotwheel/#product',
+          name: 'The Hotwheel',
+          description: 'Legendary circular chassis — RTX 5090, Ryzen 9 9950X, dual cryo-loop.',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          sku: 'unit-hotwheel',
+          brand: { '@id': 'https://cgp.sa/#organization' },
+          offers: {
+            '@type': 'Offer',
+            url: 'https://cgp.sa/product/the-hotwheel/',
+            priceCurrency: 'SAR',
+            price: '25000',
+            availability: 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/NewCondition',
+            seller: { '@id': 'https://cgp.sa/#store' },
+            areaServed: { '@type': 'Country', name: 'Saudi Arabia' },
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/product/the-hotwheel/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'Shop', item: 'https://cgp.sa/shop/' },
+            { '@type': 'ListItem', position: 3, name: 'The Hotwheel', item: 'https://cgp.sa/product/the-hotwheel/' },
+          ],
+        },
+      ],
+    },
+    css: ['product/css/product.css'],
+    js: ['main.js', 'product/js/product.js'],
+    sections: {
+      header: 'product/sections/header.html', // page-specific (mirrors WP header-product.php)
+      main: [
+        'product/sections/hero.html',
+        'product/sections/sticky-cta.html',
+        'product/sections/specs.html',
+        'product/sections/forge-log.html',
+        'product/sections/related.html',
       ],
       footer: 'shared',
     },
@@ -224,6 +304,8 @@ const PAGES = {
 // ---------------------------------------------------------------------------
 function buildHead(page) {
   const origin = page.canonical.replace(/\/$/, '');
+  // og:type defaults to website; product pages emit og:price from ogPrice
+  const ogType = page.ogType || 'website';
   // ogImage may be absolute (deep pages) or relative (homepage root)
   const ogImage = /^https?:\/\//.test(page.ogImage) ? page.ogImage : origin + '/' + page.ogImage;
   // ALL asset paths resolve relative to the OUTPUT page's directory (pageRoot),
@@ -231,7 +313,7 @@ function buildHead(page) {
   const pageRoot = path.dirname(path.join(DESIGN_DIR, page.output));
   const rel = (p) => path.relative(pageRoot, p).split(path.sep).join('/');
   const theme = rel(THEME_ASSETS_DIR);
-  const css = page.css.map((c) => `  <link rel="stylesheet" href="${rel(path.join(DESIGN_DIR, c))}">`).join('\n');
+  const css = page.css.map((c) => `  <link rel="stylesheet" href="${rel(path.join(DESIGN_DIR, c))}?v=${assetVersion(c)}">`).join('\n');
   const js = page.js.map((s) => `  <script defer src="${rel(s === 'main.js' ? path.join(THEME_ASSETS_DIR, 'js', 'main.js') : path.join(DESIGN_DIR, s))}"></script>`).join('\n');
   const favicon = rel(path.join(DESIGN_DIR, 'favicon.svg'));
   const tailwindCss = rel(path.join(DESIGN_DIR, 'css', 'tailwind.css'));
@@ -254,13 +336,19 @@ function buildHead(page) {
     `  <link rel="alternate" hreflang="x-default" href="${page.canonical}">`,
     '',
     '  <!-- Open Graph -->',
-    '  <meta property="og:type" content="website">',
+    `  <meta property="og:type" content="${ogType}">`,
     '  <meta property="og:site_name" content="CGP">',
     `  <meta property="og:title" content="${page.title}">`,
     `  <meta property="og:description" content="${page.description}">`,
     `  <meta property="og:url" content="${page.canonical}">`,
     `  <meta property="og:image" content="${ogImage}">`,
     '  <meta property="og:locale" content="en_SA">',
+    ...(ogType === 'product' && page.ogPrice
+      ? [
+          `  <meta property="og:price:amount" content="${page.ogPrice.amount}">`,
+          `  <meta property="og:price:currency" content="${page.ogPrice.currency}">`,
+        ]
+      : []),
     '',
     '  <!-- Twitter -->',
     '  <meta name="twitter:card" content="summary_large_image">',
@@ -375,13 +463,16 @@ function resolveSection(relPath, pageRoot) {
   const configUrl = configRel === 'configurator/index.html' ? 'configurator/index.html' : configRel;
   const shopRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'shop', 'index.html')).split(path.sep).join('/');
   const shopUrl = shopRel === 'shop/index.html' ? 'shop/index.html' : shopRel;
+  const productRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'product', 'index.html')).split(path.sep).join('/');
+  const productUrl = productRel === 'product/index.html' ? 'product/index.html' : productRel;
   return fs
     .readFileSync(file, 'utf8')
     .replace(/\{\{THEME_ASSETS\}\}/g, theme)
     .replace(/\{\{PAGE_ASSETS\}\}/g, page)
     .replace(/\{\{HOME_URL\}\}/g, homeUrl)
     .replace(/\{\{CONFIG_URL\}\}/g, configUrl)
-    .replace(/\{\{SHOP_URL\}\}/g, shopUrl);
+    .replace(/\{\{SHOP_URL\}\}/g, shopUrl)
+    .replace(/\{\{PRODUCT_URL\}\}/g, productUrl);
 }
 
 // ---------------------------------------------------------------------------

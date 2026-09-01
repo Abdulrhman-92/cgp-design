@@ -1,0 +1,31 @@
+<!-- Filter bar + sort (catalog part 2/3 — continues the section bg) -->
+<section class="cgp-section cgp-section-continue" aria-label="Filter and sort" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
+    <!-- ============ Filter bar ============ -->
+    <div class="cgp-filter-bar mb-8">
+      <div class="cgp-pill-scroll-wrap">
+        <div class="cgp-pill-row" role="group" aria-label="Filter by category">
+          <!-- REPEAT: category pill — loop over wc_get_product_categories() -->
+          <template x-for="cat in window.CGP_SHOP.categories" :key="cat.id">
+            <button type="button" @click="s.setCategory(cat.id)" :class="s.category === cat.id ? 'cgp-pill-active' : ''" class="cgp-pill" :aria-pressed="s.category === cat.id">
+              <span x-text="cat.name"></span>
+              <span class="cgp-pill-count" x-show="s.counts[cat.id] > 0" x-text="s.counts[cat.id]" aria-hidden="true"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <label for="shop-sort" class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Sort</label>
+        <select id="shop-sort" @change="s.setSort($event.target.value)" class="cgp-input-underline">
+          <template x-for="opt in window.CGP_SHOP.sortOptions" :key="opt.id">
+            <option :value="opt.id" x-text="opt.name" :selected="s.sort === opt.id"></option>
+          </template>
+        </select>
+        <button type="button" @click="s.reset()" class="cgp-filter-reset" x-show="s.activeFilters > 0" x-cloak>// RESET</button>
+      </div>
+    </div>
+
+    <p class="cgp-filter-count mb-6" x-text="'// ' + s.filtered.length + ' UNITS' + (s.activeFilters > 0 ? ' · ' + s.activeFilters + ' FILTERS ACTIVE' : '')"></p>
+  </div>
+</section>

@@ -1,0 +1,575 @@
+/* ============================================================
+   CGP design/v1 — product page-level styles (The Build Dossier)
+   ------------------------------------------------------------
+   Shared rules live in the theme (tokens/base/utilities/motion).
+   Scope: product-only — dossier card, gallery, lifecycle,
+   spec table, telemetry, forge log, bespoke band, blueprint
+   (ported from configurator.css — do NOT edit the source).
+
+   Tokens only via var(--cgp-*) — never hardcode values.
+   Logical properties only (AGENTS.md rule 14).
+   ============================================================ */
+
+/* ============ Numeric readouts (RTL safety) ============ */
+/* Isolates digits/serials from surrounding Arabic text direction.
+   Markup also carries dir="ltr" — this is the CSS-level guarantee. */
+.cgp-num {
+  unicode-bidi: isolate;
+}
+
+/* ============ Dossier card (hero right panel) ============ */
+.cgp-dossier-card {
+  position: relative;
+  overflow: hidden; /* clip the 1px cyan top accent bar to the radius */
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+/* Smaller name: no display-5 token, so mobile uses a tighter clamp
+   (below display-4/36px); desktop drops display-3 → display-4. */
+.cgp-dossier-name {
+  font-size: clamp(26px, 6vw, 32px);
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .cgp-dossier-name {
+    font-size: var(--cgp-text-display-4);
+  }
+}
+
+.cgp-dossier-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-h3);
+  font-weight: 700;
+  color: var(--cgp-accent);
+}
+
+.cgp-dossier-trust {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--cgp-space-3);
+}
+
+/* ============ Hero image stage (full-bleed, LCP) ============ */
+.cgp-hero-stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--cgp-bg-elevated);
+}
+
+/* Main image fills the stage; opacity transition reserved for the
+   WP gallery fade-in (swap is click-driven — instant, no timers). */
+.cgp-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* Top scrim — breadcrumb contrast (page bg ≈ black, 40% via color-mix) */
+.cgp-hero-scrim-top {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--cgp-bg-page) 40%, transparent),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Bottom scrim — lets the dossier panel blend into the image edge */
+.cgp-hero-scrim-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--cgp-bg-page) 0%,
+    color-mix(in srgb, var(--cgp-bg-page) 40%, transparent) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Invisible full-stage click target → opens the lightbox */
+.cgp-hero-open {
+  cursor: pointer;
+}
+
+/* ============ Gallery thumbnails (bento grid below the hero image) ============ */
+.cgp-gallery-thumb {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* fill the grid cell — bento spans control the shape */
+  gap: var(--cgp-space-2);
+  padding: 0;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+/* Image fills the space above the label. flex-basis auto keeps the image's
+   intrinsic height on mobile (content-sized rows); on desktop the definite
+   auto-rows height + flex-shrink make it fill the cell. object-fit crops. */
+.cgp-gallery-thumb img {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cgp-gallery-thumb:hover {
+  border-color: var(--cgp-accent);
+}
+
+/* Active state driven by :aria-current (set in hero.html via s.active) */
+.cgp-gallery-thumb[aria-current='true'] {
+  border-color: var(--cgp-accent);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+.cgp-gallery-thumb[aria-current='true'] .cgp-gallery-thumb-label {
+  color: var(--cgp-accent);
+}
+
+/* Label sits BELOW the image (bento thumb grid) */
+.cgp-gallery-thumb-label {
+  padding-inline: var(--cgp-space-2);
+  padding-block-end: var(--cgp-space-2);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--cgp-text-secondary);
+}
+
+/* ============ Lightbox (native dialog) ============ */
+.cgp-lightbox {
+  width: min(90vw, 1100px);
+  max-width: min(90vw, 1100px);
+  margin: auto;
+  padding: var(--cgp-space-4);
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-2xl);
+  box-shadow: var(--cgp-glow-black);
+  color: var(--cgp-text-primary);
+}
+
+/* Dark backdrop — page bg at 85% via color-mix (no hardcoded hex) */
+.cgp-lightbox::backdrop {
+  background: color-mix(in srgb, var(--cgp-bg-page) 85%, transparent);
+  backdrop-filter: blur(var(--cgp-glass-blur));
+}
+
+.cgp-lightbox-stage {
+  position: relative;
+}
+
+.cgp-lightbox-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  margin-inline: auto;
+  object-fit: contain;
+  border-radius: var(--cgp-radius-xl);
+}
+
+.cgp-lightbox-caption {
+  margin-block-start: var(--cgp-space-3);
+  text-align: center;
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+/* Nav/close buttons — 44px touch targets (a11y) */
+.cgp-lightbox-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-full);
+  color: var(--cgp-text-secondary);
+  cursor: pointer;
+  transition:
+    border-color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    color var(--cgp-motion-fast) var(--cgp-ease-expo),
+    box-shadow var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.cgp-lightbox-btn:hover {
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+.cgp-lightbox-btn i {
+  font-size: var(--cgp-text-lg);
+}
+
+.cgp-lightbox-close {
+  position: absolute;
+  inset-block-start: var(--cgp-space-4);
+  inset-inline-end: var(--cgp-space-4);
+  z-index: 1;
+}
+
+.cgp-lightbox-nav {
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.cgp-lightbox-nav-prev {
+  inset-inline-start: var(--cgp-space-4);
+}
+
+.cgp-lightbox-nav-next {
+  inset-inline-end: var(--cgp-space-4);
+}
+
+/* ============ Build lifecycle (3-node horizontal) ============ */
+.cgp-lifecycle {
+  display: flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+}
+
+.cgp-lifecycle-node {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  text-align: center;
+}
+
+/* Static dot per node (done nodes have no dot span in markup) */
+.cgp-lifecycle-node::before {
+  content: '';
+  position: relative;
+  z-index: 1; /* paint above the connector hairline */
+  width: 8px;
+  height: 8px;
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-border-strong);
+}
+
+/* Connector hairline: this node's dot center to the next node's dot
+   center (extends across the flex gap; hidden under the next dot). */
+.cgp-lifecycle-node:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 3px;
+  inset-inline-start: 50%;
+  inset-inline-end: calc(-50% - 8px);
+  height: 1px;
+  background: var(--cgp-border-strong);
+}
+
+.cgp-lifecycle-done::before {
+  background: var(--cgp-accent);
+}
+
+.cgp-lifecycle-done .cgp-lifecycle-label {
+  color: var(--cgp-accent);
+}
+
+/* Active node: pulsing dot span (Tailwind animate-pulse) replaces the
+   static ::before dot; motion.css kills the pulse under reduced motion. */
+.cgp-lifecycle-active::before {
+  display: none;
+}
+
+.cgp-lifecycle-active .cgp-lifecycle-label {
+  color: var(--cgp-accent-bright);
+}
+
+.cgp-lifecycle-dot {
+  position: relative;
+  z-index: 1; /* paint above the connector hairline */
+  box-shadow: var(--cgp-glow-soft);
+}
+
+.cgp-lifecycle-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-03em);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+/* ============ Spec table (The Blueprint) ============ */
+/* Stays a table on mobile — keys are short (CPU/GPU/RAM...), no collapse needed. */
+.cgp-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--cgp-text-sm);
+}
+
+.cgp-spec-table th,
+.cgp-spec-table td {
+  padding-block: var(--cgp-space-3);
+  padding-inline: var(--cgp-space-4);
+  border-block-end: 1px solid var(--cgp-border-subtle);
+  text-align: start;
+  vertical-align: top;
+}
+
+/* Mono uppercase keys (th scope="row") */
+.cgp-spec-table th[scope='row'] {
+  width: 30%;
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+  white-space: nowrap;
+}
+
+.cgp-spec-table td {
+  color: var(--cgp-text-primary);
+}
+
+/* Group headers (th scope="rowgroup" colspan="2") */
+.cgp-spec-group th {
+  padding-block-start: var(--cgp-space-6);
+  border-block-end: 1px solid var(--cgp-border);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+.cgp-spec-group:first-child th {
+  padding-block-start: 0;
+}
+
+/* ============ Dossier panels (price breakdown + telemetry) ============ */
+.cgp-dossier-panel {
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+.cgp-sys-verified {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-04em);
+  text-transform: uppercase;
+  color: var(--cgp-accent);
+}
+
+/* ============ Thermal telemetry (static inline SVG) ============ */
+.cgp-telemetry {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cgp-telemetry-grid line {
+  stroke: var(--cgp-border);
+  stroke-width: 1;
+}
+
+.cgp-telemetry-line-idle {
+  fill: none;
+  stroke: var(--cgp-accent);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.cgp-telemetry-line-load {
+  fill: none;
+  stroke: var(--cgp-accent-bright);
+  stroke-width: 2;
+}
+
+.cgp-telemetry-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  fill: var(--cgp-text-muted);
+}
+
+/* ============ Forge log (vertical provenance timeline) ============ */
+.cgp-forge-log {
+  display: flex;
+  flex-direction: column;
+}
+
+.cgp-forge-node {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cgp-space-4);
+  padding-block: var(--cgp-space-4);
+}
+
+/* Connector hairline: this node's dot center to the next node's dot
+   center (hidden under the opaque dot, which paints above it). */
+.cgp-forge-node:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 4px; /* dot center (5px) minus half the hairline */
+  inset-block-start: 24px;  /* padding-top + dot margin + half dot */
+  inset-block-end: -24px;   /* reaches the next node's dot center */
+  width: 1px;
+  background: var(--cgp-border-strong);
+}
+
+.cgp-forge-node-dot {
+  position: relative;
+  z-index: 1; /* paint above the connector hairline */
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-block-start: 3px; /* center on the label's first line */
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-accent);
+  box-shadow: var(--cgp-glow-soft);
+}
+
+.cgp-forge-node-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cgp-forge-node-label {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-03em);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--cgp-text-primary);
+}
+
+.cgp-forge-node-meta {
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+}
+
+.cgp-forge-node-time {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-wider);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+  white-space: nowrap;
+}
+
+.cgp-forge-signature {
+  margin-block-start: var(--cgp-space-8);
+  padding-block-start: var(--cgp-space-6);
+  border-block-start: 1px solid var(--cgp-border);
+  text-align: center;
+}
+
+/* ============ Bespoke band ("This build, but yours") ============ */
+.cgp-bespoke-band {
+  padding: var(--cgp-space-8);
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border-accent);
+  border-radius: var(--cgp-radius-3xl);
+  box-shadow: var(--cgp-glow-black);
+}
+
+/* ============ The Blueprint (price breakdown — used by specs.html) ============ */
+.cgp-blueprint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cgp-space-3);
+  padding-block: var(--cgp-space-3);
+  border-block-end: 1px solid var(--cgp-border-subtle);
+}
+
+.cgp-blueprint-cat {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  letter-spacing: var(--cgp-tracking-widest);
+  text-transform: uppercase;
+  color: var(--cgp-text-muted);
+}
+
+.cgp-blueprint-name {
+  font-size: var(--cgp-text-sm);
+  font-weight: 600;
+  color: var(--cgp-text-primary);
+}
+
+.cgp-blueprint-price {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-xs);
+  color: var(--cgp-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cgp-blueprint-total {
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-display-4);
+  font-weight: 700;
+  color: var(--cgp-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============ Reduced motion ============ */
+/* Theme motion.css already kills .animate-pulse + all shared animations. */
+@media (prefers-reduced-motion: reduce) {
+  .cgp-hero-image {
+    transition: none;
+  }
+}
+
+/* ============ Sticky CTA bar (product) ============ */
+/* Distinct from the page: bg-card (#18181b) is clearly lighter than the
+   #050505 page bg, so the bar reads as a floating panel. Page-specific —
+   the shared .cgp-mobile-bar stays untouched for the configurator.
+   Solid bg (no backdrop-blur — the nav island owns the blur budget). */
+.cgp-sticky-cta {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--cgp-bg-card);
+  border-block-start: 1px solid var(--cgp-border-strong);
+  /* Stronger upward shadow — floats above the page (token via color-mix) */
+  box-shadow: 0 -12px 40px color-mix(in srgb, var(--cgp-bg-page) 60%, transparent);
+}
+
+/* Cyan accent hairline on top — the signature accent that makes the bar pop */
+.cgp-sticky-cta::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--cgp-accent), transparent);
+  pointer-events: none;
+}

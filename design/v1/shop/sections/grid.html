@@ -1,0 +1,49 @@
+<!-- Product grid + empty state (catalog part 3/3 — continues the section bg) -->
+<section class="cgp-section cgp-section-continue" aria-label="Product collection" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
+    <!-- ============ Product grid (spec-sheet cards) ============ -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <!-- REPEAT: product card — loop over wc_get_products() -->
+      <template x-for="(p, i) in s.filtered" :key="p.id">
+        <article class="cgp-spec-card group">
+          <div class="cgp-spec-stage">
+            <!-- REPLACE WITH CLIENT PHOTOS -->
+            <img :src="'{{PAGE_ASSETS}}/assets/images/' + p.image" :alt="p.name" width="560" height="420" loading="lazy" decoding="async">
+            <div class="cgp-card-spotlight" aria-hidden="true"></div>
+            <span class="cgp-spec-badge" x-show="s.badgeLabel(p.badge)" x-text="s.badgeLabel(p.badge)"></span>
+          </div>
+          <div class="cgp-spec-body">
+            <div>
+              <h3 class="cgp-spec-name" x-text="p.name"></h3>
+              <p class="cgp-spec-subtitle" x-text="p.subtitle"></p>
+            </div>
+            <div class="cgp-spec-rows">
+              <!-- REPEAT: spec row — loop over product attributes -->
+              <template x-for="spec in p.specs" :key="spec.k">
+                <div class="cgp-spec-row">
+                  <span class="cgp-spec-row-k" x-text="spec.k"></span>
+                  <span class="cgp-spec-row-v" x-text="spec.v"></span>
+                </div>
+              </template>
+            </div>
+            <div class="cgp-spec-footer">
+              <span class="cgp-spec-price" x-text="s.priceLabel(p)"></span>
+              <span class="cgp-spec-meta">
+                <span :class="s.stockClass(p.stock)" x-text="s.stockLabel(p.stock)"></span>
+                <span x-text="'// FORGE TIME: ' + p.leadTime.toUpperCase()"></span>
+              </span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <!-- TODO: real permalink -->
+              <a href="#" class="cgp-btn-outline w-full">View the Build</a>
+              <a href="{{CONFIG_URL}}" class="cgp-btn-link self-center" x-show="p.type === 'prebuilt'">Commission Your Own</a>
+            </div>
+          </div>
+        </article>
+      </template>
+    </div>
+
+    <!-- Empty state -->
+    <p x-show="s.filtered.length === 0" x-cloak class="py-16 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// NO UNITS MATCH — RESET FILTERS</p>
+  </div>
+</section>

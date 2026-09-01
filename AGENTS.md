@@ -83,7 +83,7 @@ design/v1/
 - **Copy anatomy:** eyebrow (cyan, tracked uppercase) → 2-line headline (gradient 2nd line) → zinc-400 paragraph
 - **Colors:** `#050505` bg, zinc grays, cyan `#06b6d4` accent (amber = configurator/GPU only)
 - **Fonts:** Space Grotesk (display) + Inter (body) + IBM Plex Sans Arabic (fallback)
-- **Icons:** Phosphor (vendored, local) in mockups — approved set only: `list, x, gear-six, snowflake, lightning, drop, cpu, arrow-up-right, caret-left, caret-right, instagram-logo, twitter-logo, whatsapp-logo, envelope-simple, map-pin`. At WordPress implementation, convert to an inline SVG sprite from the SAME Phosphor icons (~3KB) — never load a new icon font
+- **Icons:** Phosphor (vendored, local) in mockups — approved set only: `list, x, gear-six, snowflake, lightning, drop, cpu, arrow-up-right, caret-left, caret-right, instagram-logo, twitter-logo, facebook-logo, whatsapp-logo, envelope-simple, map-pin` (facebook-logo added 2026-09-01 — client request for share icons). At WordPress implementation, convert to an inline SVG sprite from the SAME Phosphor icons (~3KB) — never load a new icon font
 - **Buttons:** 5 variants from utilities.css (primary/outline/ghost/white/link) — never invent new; all ≥ 44px touch targets
 - **Section rhythm:** `.cgp-section` (py-20) / `.cgp-section-secondary` (py-16)
 - **Terminal voice:** mono labels (`// NODE`, `SYS_*`, `RENDER_STAGE`) — configurator pages only for nano type

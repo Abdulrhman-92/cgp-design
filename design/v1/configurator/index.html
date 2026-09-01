@@ -98,12 +98,12 @@
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
-  <link rel="stylesheet" href="../css/tailwind.css?v=1788254233">
-  <link rel="stylesheet" href="../css/theme.css?v=1788254613">
+  <link rel="stylesheet" href="../css/tailwind.css?v=1788271012">
+  <link rel="stylesheet" href="../css/theme.css?v=1788274095">
   <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
-  <link rel="stylesheet" href="css/configurator.css">
+  <link rel="stylesheet" href="css/configurator.css?v=1788115902">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="../js/bundles/configurator.min.js?v=1788254613"></script>
+  <script defer src="../js/bundles/configurator.min.js?v=1788274095"></script>
   <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -113,7 +113,7 @@
   <!-- Configurator header — page-specific (mirrors WP header-configurator.php).
      Links point back to the homepage (../index.html) + own-page anchors. -->
 <header>
-  <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+  <div class="fixed bottom-24 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
     <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
       <!-- Logo: CGP. with cyan dot + divider -->
       <a href="../index.html#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
@@ -383,38 +383,41 @@
     </div>
   </div>
 
-  <!-- Mobile sticky bar (the #1 mobile conversion fix) -->
-  <div class="cgp-mobile-bar lg:hidden" x-data>
-    <div class="cgp-container-sm flex items-center justify-between gap-3 px-4 py-3">
-      <div class="flex flex-col">
-        <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
-        <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
-      </div>
-      <div class="flex items-center gap-2">
-        <button type="button" @click="c.summaryOpen = !c.summaryOpen" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary" :aria-expanded="c.summaryOpen.toString()" aria-label="Toggle blueprint">
-          <i class="ph ph-fill ph-list" aria-hidden="true"></i>
-        </button>
-        <a href="#commission" class="cgp-btn-primary min-h-11">Summon</a>
-      </div>
+</section>
+
+<!-- Mobile sticky bar — standalone section (the #1 mobile conversion fix).
+     Reads the shared cgpConfig store via the cgpConfigurator proxy (registered
+     globally in configurator.js) — works outside the matrix section. -->
+<div class="cgp-mobile-bar lg:hidden" x-data="cgpConfigurator">
+  <div class="cgp-container-sm flex items-center justify-between gap-3 px-4 py-3">
+    <div class="flex flex-col">
+      <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
+      <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
     </div>
-    <!-- Expandable full summary -->
-    <div x-cloak x-show="c.summaryOpen" x-transition.opacity.duration.200ms class="max-h-[50vh] overflow-y-auto border-t border-cgp-border px-4 py-4">
-      <template x-for="row in c.selectedParts" :key="row.category">
-        <div class="cgp-blueprint-row">
-          <div class="flex flex-col">
-            <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
-            <span class="cgp-blueprint-name" x-text="row.part.name"></span>
-          </div>
-          <div class="flex items-center gap-1">
-            <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
-            <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
-          </div>
-        </div>
-      </template>
-      <p x-show="c.selectedParts.length === 0" class="py-3 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+    <div class="flex items-center gap-2">
+      <button type="button" @click="c.summaryOpen = !c.summaryOpen" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary" :aria-expanded="c.summaryOpen.toString()" aria-label="Toggle blueprint">
+        <i class="ph ph-fill ph-list" aria-hidden="true"></i>
+      </button>
+      <a href="#commission" class="cgp-btn-primary min-h-11">Summon</a>
     </div>
   </div>
-</section>
+  <!-- Expandable full summary -->
+  <div x-cloak x-show="c.summaryOpen" x-transition.opacity.duration.200ms class="max-h-[50vh] overflow-y-auto border-t border-cgp-border px-4 py-4">
+    <template x-for="row in c.selectedParts" :key="row.category">
+      <div class="cgp-blueprint-row">
+        <div class="flex flex-col">
+          <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
+          <span class="cgp-blueprint-name" x-text="row.part.name"></span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
+          <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
+        </div>
+      </div>
+    </template>
+    <p x-show="c.selectedParts.length === 0" class="py-3 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
+  </div>
+</div>
 
 <!-- Commission — blueprint handoff + inquiry form (the conversion point) -->
 <section id="commission" class="cgp-section bg-cgp-bg-section" aria-labelledby="commission-title" x-data="cgpConfigurator">

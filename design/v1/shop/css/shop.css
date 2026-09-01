@@ -282,3 +282,8 @@
   text-transform: uppercase;
   color: var(--cgp-accent);
 }
+
+/* Continues the previous section's background (multi-part sections) */
+.cgp-section-continue {
+  background: var(--cgp-bg-section);
+}

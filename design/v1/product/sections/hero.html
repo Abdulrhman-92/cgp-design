@@ -1,0 +1,153 @@
+<!-- THE DOSSIER HERO — full-bleed image stage + overlapping dossier panel + thumbnail grid + lightbox.
+     THE ONLY h1 on the page (lint: exactly 1).
+     Gallery + lightbox state lives in product.js (Agent 3): Alpine.data('cgpProduct', ...)
+     Interface: s.images = [{ src, alt, label }] (4 entries), s.active (0-3), s.setActive(i),
+     s.lightboxIndex, s.openLightbox(i), s.closeLightbox(), s.next(), s.prev().
+     Classes for product.css (Agent 3): cgp-hero-stage, cgp-hero-image, cgp-hero-scrim-top,
+     cgp-hero-scrim-bottom, cgp-dossier-card, cgp-dossier-name, cgp-dossier-price,
+     cgp-dossier-trust, cgp-gallery-thumb, cgp-gallery-thumb-label, cgp-lightbox,
+     cgp-lightbox-stage, cgp-lightbox-img, cgp-lightbox-caption, cgp-lightbox-btn,
+     cgp-lifecycle, cgp-lifecycle-node, cgp-lifecycle-done, cgp-lifecycle-active,
+     cgp-lifecycle-label, cgp-lifecycle-dot, cgp-num. -->
+<section id="product-hero" class="cgp-section relative overflow-hidden bg-cgp-bg-page" aria-labelledby="product-hero-title" x-data="cgpProduct">
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- ============ Full-bleed image stage (LCP — eager, fetchpriority high) ============ -->
+  <div class="cgp-hero-stage relative aspect-[4/3] overflow-hidden md:aspect-[21/9]">
+    <!-- REPLACE WITH CLIENT PHOTOS -->
+    <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" :src="s.images[s.active].src" alt="The Hotwheel — legendary circular chassis build" :alt="s.images[s.active].alt" width="1280" height="882" loading="eager" fetchpriority="high" decoding="async" class="cgp-hero-image">
+    <div class="cgp-card-spotlight" aria-hidden="true"></div>
+    <div class="cgp-hero-scrim-top" aria-hidden="true"></div>
+    <div class="cgp-hero-scrim-bottom" aria-hidden="true"></div>
+
+    <!-- Whole image clickable → lightbox (breadcrumb sits above via z-10) -->
+    <button type="button" @click="s.openLightbox(s.active)" aria-label="Open photo preview" class="cgp-hero-open absolute inset-0"></button>
+
+    <!-- Breadcrumb overlaid top-start — solid pill (no backdrop-blur: nav island owns the blur budget) -->
+    <nav aria-label="Breadcrumb" class="absolute top-0 start-0 z-10 p-6 pt-24 md:p-10">
+      <ol class="inline-flex flex-wrap items-center gap-2 rounded-full border border-cgp-border bg-cgp-bg-overlay px-4 py-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+        <li><a href="{{HOME_URL}}" class="text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">Home</a></li>
+        <li aria-hidden="true" class="text-cgp-accent">›</li>
+        <li><a href="{{SHOP_URL}}" class="text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">The Shop</a></li>
+        <li aria-hidden="true" class="text-cgp-accent">›</li>
+        <li aria-current="page" class="text-cgp-accent">The Hotwheel</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ============ Dossier panel — responsive v5.
+       Desktop (lg+): overlaps the image ~70% (lg:-mt-[30vw] ≈ 0.7 × image height),
+       end-anchored max-w-xl card. Mobile/tablet (< lg): flex column, NO overlap —
+       panel flows below the gallery as a full-width purchase card (order-2).
+       Thumbnails (order-1) render first on small screens. ============ -->
+  <div class="cgp-container-lg relative z-10 flex flex-col gap-6 lg:block lg:-mt-[30vw]">
+    <!-- Dossier panel — end-anchored, max-w-xl on desktop; full-width below gallery on mobile -->
+    <aside x-ref="dossierPanel" class="cgp-dossier-card order-2 lg:order-none lg:ms-auto lg:max-w-xl" aria-label="Build dossier">
+        <!-- 1px cyan top accent bar -->
+        <div class="h-1 bg-cgp-accent shadow-cgp-glow-soft" aria-hidden="true"></div>
+
+        <div class="p-5 pb-28 md:p-6 md:pb-6">
+          <!-- Serial identity -->
+          <p class="mb-2 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+            // DOSSIER: <span class="cgp-num" dir="ltr">CGP-2026-004</span>
+          </p>
+
+          <p class="cgp-eyebrow">// Flagship Unit</p>
+          <h1 id="product-hero-title" class="cgp-dossier-name font-display font-bold tracking-tighter text-cgp-text-heading">The Hotwheel</h1>
+          <p class="mt-3 text-sm font-light leading-relaxed text-cgp-text-secondary">
+            The legendary circular chassis — a 45° tilted frame, dual cryo-loop, and the RTX 5090 seated at its heart.
+          </p>
+
+          <!-- Price + stock (hairline divider) -->
+          <div class="mt-5 border-t border-cgp-border pt-5">
+            <div class="flex flex-wrap items-center gap-4">
+              <p class="cgp-dossier-price cgp-num tabular-nums" dir="ltr">25,000 SAR</p>
+              <span class="rounded-full border border-cgp-border-strong bg-cgp-bg-overlay px-3 py-1">
+                <span class="cgp-stock-in font-mono text-cgp-micro font-bold uppercase tracking-cgp-03em">READY — ships 3-5 days</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Forge-time lifecycle (CSS-only, reduced-motion safe) -->
+          <ol class="cgp-lifecycle mt-5" aria-label="Build lifecycle">
+            <li class="cgp-lifecycle-node cgp-lifecycle-done"><span class="cgp-lifecycle-label">FORGED</span></li>
+            <li class="cgp-lifecycle-node cgp-lifecycle-done"><span class="cgp-lifecycle-label">TESTED</span></li>
+            <li class="cgp-lifecycle-node cgp-lifecycle-active">
+              <span class="cgp-lifecycle-label">READY</span>
+              <span class="cgp-lifecycle-dot h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent motion-reduce:animate-none" aria-hidden="true"></span>
+            </li>
+          </ol>
+
+          <!-- CTAs -->
+          <div class="mt-6 flex flex-col gap-3">
+            <a href="{{CONFIG_URL}}" class="cgp-btn-primary cgp-magnetic w-full" data-magnetic>Commission This Build</a>
+            <!-- TODO: from site settings (WhatsApp number) -->
+            <a href="https://wa.me/?text=The%20Hotwheel%20%E2%80%94%20CGP%20Build%20Dossier%20CGP-2026-004%20%E2%80%94%2025%2C000%20SAR" target="_blank" rel="noopener" class="cgp-btn-link self-center">
+              <i class="ph ph-fill ph-whatsapp-logo" aria-hidden="true"></i>Share on WhatsApp
+            </a>
+          </div>
+
+          <!-- Compact trust strip -->
+          <div class="cgp-dossier-trust mt-6 border-t border-cgp-border pt-5">
+            <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_TEST: 48H PRESSURE TESTED</span>
+            <span class="h-1 w-1 rounded-full bg-cgp-accent" aria-hidden="true"></span>
+            <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_ACRY: 100% LEAK TESTED</span>
+          </div>
+        </div>
+      </aside>
+
+    <!-- ============ Gallery thumbnails — bento grid INSIDE the panel wrapper.
+         Mobile/tablet: order-1 (renders before the panel); desktop: after panel (lg:mt-14).
+         Desktop: 4-col auto-rows — thumb 1 large hero shot (2x2), thumb 2 wide (2x1),
+         thumbs 3-4 small (1x1). Mobile: 2-col with full-width first/last.
+         Images fill their cell (h-full w-full object-cover). ============ -->
+    <div class="order-1 lg:order-none mt-10 md:mt-14 lg:mt-14">
+      <div class="grid grid-cols-2 gap-3 md:grid-cols-4 md:auto-rows-[200px]" role="group" aria-label="Build photos">
+        <!-- REPEAT: gallery thumbnail — loop over product gallery images -->
+        <button type="button" @click="s.setActive(0); s.openLightbox(0)" :aria-current="s.active === 0 ? 'true' : 'false'" aria-label="View IMG_01 — front view" class="cgp-gallery-thumb col-span-2 md:col-span-2 md:row-span-2">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — front view" width="320" height="180" loading="lazy" decoding="async" class="h-full w-full object-cover">
+          <span class="cgp-gallery-thumb-label">IMG_01 // FRONT</span>
+        </button>
+        <button type="button" @click="s.setActive(1); s.openLightbox(1)" :aria-current="s.active === 1 ? 'true' : 'false'" aria-label="View IMG_02 — loop detail" class="cgp-gallery-thumb col-span-1 md:col-span-2">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — dual cryo-loop detail" width="320" height="180" loading="lazy" decoding="async" class="h-full w-full object-cover">
+          <span class="cgp-gallery-thumb-label">IMG_02 // LOOP DETAIL</span>
+        </button>
+        <button type="button" @click="s.setActive(2); s.openLightbox(2)" :aria-current="s.active === 2 ? 'true' : 'false'" aria-label="View IMG_03 — GPU seat" class="cgp-gallery-thumb col-span-1 md:col-span-1">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — RTX 5090 GPU seat" width="320" height="180" loading="lazy" decoding="async" class="h-full w-full object-cover">
+          <span class="cgp-gallery-thumb-label">IMG_03 // GPU SEAT</span>
+        </button>
+        <button type="button" @click="s.setActive(3); s.openLightbox(3)" :aria-current="s.active === 3 ? 'true' : 'false'" aria-label="View IMG_04 — rear view" class="cgp-gallery-thumb col-span-2 md:col-span-1">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — rear view" width="320" height="180" loading="lazy" decoding="async" class="h-full w-full object-cover">
+          <span class="cgp-gallery-thumb-label">IMG_04 // REAR</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Lightbox — native dialog. Backdrop click closes via @click.self
+       (backdrop clicks retarget to the dialog element); Escape is native.
+       @click.outside is NOT used — verified in browser: it fires on the opening
+       click (would close instantly) and never on backdrop clicks. ============ -->
+  <dialog x-ref="lightbox" class="cgp-lightbox" aria-label="Build photo preview" @click.self="s.closeLightbox()" @keydown.arrow-right.prevent="s.next()" @keydown.arrow-left.prevent="s.prev()">
+    <button type="button" @click="s.closeLightbox()" aria-label="Close preview" class="cgp-lightbox-btn cgp-lightbox-close">
+      <i class="ph ph-x" aria-hidden="true"></i>
+    </button>
+    <div class="cgp-lightbox-stage">
+      <!-- REPLACE WITH CLIENT PHOTOS -->
+      <img :src="s.images[s.lightboxIndex].src" :alt="s.images[s.lightboxIndex].alt" alt="The Hotwheel — legendary circular chassis build" width="1280" height="882" decoding="async" class="cgp-lightbox-img">
+      <button type="button" @click="s.prev()" aria-label="Previous photo" class="cgp-lightbox-btn cgp-lightbox-nav cgp-lightbox-nav-prev">
+        <i class="ph ph-caret-left" aria-hidden="true"></i>
+      </button>
+      <button type="button" @click="s.next()" aria-label="Next photo" class="cgp-lightbox-btn cgp-lightbox-nav cgp-lightbox-nav-next">
+        <i class="ph ph-caret-right" aria-hidden="true"></i>
+      </button>
+    </div>
+    <p class="cgp-lightbox-caption" x-text="s.images[s.lightboxIndex].label"></p>
+  </dialog>
+
+</section>

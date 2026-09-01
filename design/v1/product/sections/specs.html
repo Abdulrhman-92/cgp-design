@@ -1,0 +1,120 @@
+<!-- THE BLUEPRINT — full spec dossier table + price breakdown + static thermal telemetry.
+     Classes for product.css (Agent 3): cgp-spec-table, cgp-spec-group, cgp-dossier-panel,
+     cgp-sys-verified, cgp-telemetry, cgp-telemetry-grid, cgp-telemetry-line-idle,
+     cgp-telemetry-line-load, cgp-telemetry-label, cgp-num.
+     Ported pattern classes (currently in configurator.css — must be defined in product.css):
+     cgp-blueprint-row, cgp-blueprint-cat, cgp-blueprint-name, cgp-blueprint-price, cgp-blueprint-total. -->
+<section id="specs" class="cgp-section bg-cgp-bg-section" aria-labelledby="specs-title">
+  <div class="cgp-container-lg">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">Spec Dossier</p>
+        <h2 id="specs-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">The Blueprint</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// SYS_SPECS: VERIFIED</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <!-- ============ Spec table (7 cols) ============ -->
+      <div class="lg:col-span-7">
+        <table class="cgp-spec-table">
+          <caption class="cgp-sr-only">The Hotwheel — full specification dossier</caption>
+          <tbody>
+            <tr class="cgp-spec-group">
+              <th scope="rowgroup" colspan="2">CORE</th>
+            </tr>
+            <!-- REPEAT: spec row — loop over product attributes -->
+            <tr>
+              <th scope="row">CPU</th>
+              <td>AMD Ryzen 9 9950X</td>
+            </tr>
+            <tr>
+              <th scope="row">GPU</th>
+              <td>NVIDIA GeForce RTX 5090</td>
+            </tr>
+            <tr class="cgp-spec-group">
+              <th scope="rowgroup" colspan="2">MEMORY</th>
+            </tr>
+            <tr>
+              <th scope="row">RAM</th>
+              <td>64GB DDR5 6000MT/s</td>
+            </tr>
+            <tr class="cgp-spec-group">
+              <th scope="rowgroup" colspan="2">STORAGE</th>
+            </tr>
+            <tr>
+              <th scope="row">DRIVE</th>
+              <td>2TB NVMe Gen5</td>
+            </tr>
+            <tr class="cgp-spec-group">
+              <th scope="rowgroup" colspan="2">LOOP</th>
+            </tr>
+            <tr>
+              <th scope="row">COOLING</th>
+              <td>Dual Cryo-Loop — custom hardline</td>
+            </tr>
+            <tr class="cgp-spec-group">
+              <th scope="rowgroup" colspan="2">CHASSIS</th>
+            </tr>
+            <tr>
+              <th scope="row">FRAME</th>
+              <td>Circular Hotwheel Chassis — 45° tilt</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ============ Price breakdown + telemetry (5 cols) ============ -->
+      <div class="flex flex-col gap-8 lg:col-span-5">
+        <!-- Price breakdown (mirrors configurator blueprint rows) -->
+        <div class="cgp-dossier-panel p-6 md:p-8">
+          <p class="mb-6 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// PRICE BREAKDOWN</p>
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat">SYS_PARTS</span>
+              <span class="cgp-blueprint-name">Elite component selection</span>
+            </div>
+            <span class="cgp-blueprint-price cgp-num" dir="ltr">23,500 SAR</span>
+          </div>
+          <div class="cgp-blueprint-row">
+            <div class="flex flex-col">
+              <span class="cgp-blueprint-cat">LABOR</span>
+              <span class="cgp-blueprint-name">Precision Assembly + 48h Pressure Testing</span>
+            </div>
+            <span class="cgp-blueprint-price cgp-num" dir="ltr">1,500 SAR</span>
+          </div>
+          <div class="mt-6 border-t border-cgp-border pt-6">
+            <div class="flex items-end justify-between">
+              <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Total</span>
+              <span class="cgp-blueprint-total cgp-num tabular-nums" dir="ltr">25,000 SAR</span>
+            </div>
+          </div>
+          <p class="cgp-sys-verified mt-4">// SYS_VERIFIED</p>
+        </div>
+
+        <!-- Static thermal telemetry (NO Chart.js — inline SVG, aria-hidden + text alternative) -->
+        <div class="cgp-dossier-panel p-6 md:p-8">
+          <p class="mb-4 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// THERMAL TELEMETRY</p>
+          <svg class="cgp-telemetry" viewBox="0 0 320 150" aria-hidden="true">
+            <g class="cgp-telemetry-grid">
+              <line x1="0" y1="20" x2="320" y2="20"></line>
+              <line x1="0" y1="60" x2="320" y2="60"></line>
+              <line x1="0" y1="100" x2="320" y2="100"></line>
+              <line x1="0" y1="140" x2="320" y2="140"></line>
+            </g>
+            <polyline class="cgp-telemetry-line-idle" points="0,95 40,90 80,92 120,86 160,88 200,83 240,86 280,81 320,83"></polyline>
+            <polyline class="cgp-telemetry-line-load" points="0,58 40,50 80,54 120,42 160,46 200,36 240,43 280,32 320,39"></polyline>
+            <text class="cgp-telemetry-label" x="4" y="16">80°C</text>
+            <text class="cgp-telemetry-label" x="4" y="56">60°C</text>
+            <text class="cgp-telemetry-label" x="4" y="96">40°C</text>
+            <text class="cgp-telemetry-label" x="4" y="136">20°C</text>
+            <text class="cgp-telemetry-label" x="0" y="146">BOOT</text>
+            <text class="cgp-telemetry-label" x="280" y="146">1H</text>
+          </svg>
+          <p class="cgp-sr-only">Thermal telemetry: idle 35°C, sustained load 62°C — the dual cryo-loop holds the curve.</p>
+          <p class="mt-3 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// IDLE 35°C · LOAD 62°C — DUAL CRYO-LOOP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

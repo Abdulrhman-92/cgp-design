@@ -188,35 +188,4 @@
     </div>
   </div>
 
-  <!-- Mobile sticky bar (the #1 mobile conversion fix) -->
-  <div class="cgp-mobile-bar lg:hidden" x-data>
-    <div class="cgp-container-sm flex items-center justify-between gap-3 px-4 py-3">
-      <div class="flex flex-col">
-        <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">Estimated Commission</span>
-        <span class="font-mono text-cgp-sm font-bold text-cgp-accent tabular-nums" x-text="c.totals.total.toLocaleString() + ' SAR'"></span>
-      </div>
-      <div class="flex items-center gap-2">
-        <button type="button" @click="c.summaryOpen = !c.summaryOpen" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary" :aria-expanded="c.summaryOpen.toString()" aria-label="Toggle blueprint">
-          <i class="ph ph-fill ph-list" aria-hidden="true"></i>
-        </button>
-        <a href="#commission" class="cgp-btn-primary min-h-11">Summon</a>
-      </div>
-    </div>
-    <!-- Expandable full summary -->
-    <div x-cloak x-show="c.summaryOpen" x-transition.opacity.duration.200ms class="max-h-[50vh] overflow-y-auto border-t border-cgp-border px-4 py-4">
-      <template x-for="row in c.selectedParts" :key="row.category">
-        <div class="cgp-blueprint-row">
-          <div class="flex flex-col">
-            <span class="cgp-blueprint-cat" x-text="'SYS_' + row.category.toUpperCase()"></span>
-            <span class="cgp-blueprint-name" x-text="row.part.name"></span>
-          </div>
-          <div class="flex items-center gap-1">
-            <span class="cgp-blueprint-price" x-text="row.part.price.toLocaleString() + ' SAR'"></span>
-            <button type="button" @click="c.removePart(row.category)" class="cgp-blueprint-remove" :aria-label="'Remove ' + row.part.name">// CLEAR</button>
-          </div>
-        </div>
-      </template>
-      <p x-show="c.selectedParts.length === 0" class="py-3 text-center font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// PENDING — SELECT COMPONENTS</p>
-    </div>
-  </div>
 </section>

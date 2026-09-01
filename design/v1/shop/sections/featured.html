@@ -1,0 +1,39 @@
+<!-- Featured unit — flagship spotlight (catalog part 1/3) -->
+<section id="catalog" class="cgp-section bg-cgp-bg-section" aria-labelledby="catalog-title" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="cgp-eyebrow">The Collection</p>
+        <h2 id="catalog-title" class="text-cgp-display-4 font-bold leading-tight text-cgp-text-heading md:text-cgp-display-3">Fresh from the forge</h2>
+      </div>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">// RENDER_STAGE: ACTIVE</p>
+    </div>
+
+    <!-- ============ Featured unit (flagship spotlight) ============ -->
+    <div x-show="s.featured && s.category === 'all'" x-cloak x-transition.opacity.duration.200ms class="mb-12">
+      <div class="cgp-featured-unit">
+        <div class="cgp-featured-stage">
+          <!-- REPLACE WITH CLIENT PHOTOS -->
+          <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="The Hotwheel — legendary circular chassis build" width="1280" height="853" loading="lazy" decoding="async">
+          <div class="cgp-card-spotlight" aria-hidden="true"></div>
+        </div>
+        <div class="cgp-featured-body">
+          <p class="cgp-featured-label">// FLAGSHIP UNIT</p>
+          <h3 class="cgp-featured-name" x-text="s.featured.name"></h3>
+          <p class="cgp-featured-desc" x-text="s.featured.subtitle"></p>
+          <div class="flex flex-wrap items-center gap-4">
+            <span class="cgp-spec-price" x-text="s.priceLabel(s.featured)"></span>
+            <span class="cgp-spec-meta">
+              <span :class="s.stockClass(s.featured.stock)" x-text="s.stockLabel(s.featured.stock)"></span>
+              <span x-text="'// FORGE TIME: ' + s.featured.leadTime.toUpperCase()"></span>
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="{{PRODUCT_URL}}" class="cgp-btn-primary cgp-magnetic" data-magnetic>View the Build</a>
+            <a href="{{CONFIG_URL}}" class="cgp-btn-ghost">Commission Your Own</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

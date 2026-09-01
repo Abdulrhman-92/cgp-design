@@ -1,0 +1,27 @@
+<!-- Sticky CTA bar — appears only after scrolling past the purchase panel.
+     Standalone section: state lives in Alpine.store('cgpSticky') (product.js);
+     the hero's scroll logic writes showStickyBar, this bar reads it via $store. -->
+<div class="cgp-sticky-cta" x-data x-show="$store.cgpSticky.showStickyBar" x-cloak x-transition.opacity.duration.200ms>
+  <div class="cgp-container-lg flex items-center justify-between gap-4 px-4 py-3 md:px-6">
+    <!-- Price block -->
+    <div class="flex min-w-0 flex-col">
+      <span class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Hotwheel</span>
+      <span class="cgp-num font-mono text-cgp-sm font-bold tabular-nums text-cgp-accent" dir="ltr">25,000 SAR</span>
+    </div>
+    <!-- Right: share + CTA -->
+    <div class="flex shrink-0 items-center gap-3">
+      <!-- TODO: from site settings (WhatsApp number) -->
+      <a href="https://wa.me/?text=The%20Hotwheel%20%E2%80%94%20CGP%20Build%20Dossier%20CGP-2026-004%20%E2%80%94%2025%2C000%20SAR" target="_blank" rel="noopener" aria-label="Share on WhatsApp" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-colors hover:border-cgp-accent hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+      </a>
+      <!-- TODO: real permalink -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcgp.sa%2Fproduct%2Fthe-hotwheel%2F" target="_blank" rel="noopener" aria-label="Share on Facebook" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-colors hover:border-cgp-accent hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-facebook-logo text-lg" aria-hidden="true"></i>
+      </a>
+      <a href="{{CONFIG_URL}}" class="cgp-btn-primary cgp-magnetic shrink-0" data-magnetic>
+        <span class="sm:hidden">Commission</span>
+        <span class="hidden sm:inline">Commission This Build</span>
+      </a>
+    </div>
+  </div>
+</div>

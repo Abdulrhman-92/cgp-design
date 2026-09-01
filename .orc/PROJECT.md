@@ -14,13 +14,27 @@ CGP (cgp.sa) is a Saudi luxury PC building atelier ("The Bespoke Forge") — cus
 
 ## Current State
 
-- **Last completed:** Homepage ✅ (3cb7772) + Configurator ✅ (7113f89) + CSS de-dup cleanup ✅ (2d4f35c — shared classes moved to theme utilities.css, honeypot/submit bug fixed)
-- **In progress:** — (cleanup done, shop page pending)
+- **Last completed:** Homepage ✅ (3cb7772) + Configurator ✅ (7113f89) + CSS de-dup cleanup ✅ (2d4f35c) + Shop ✅ (4dfbb70, a295c13, 6cf430d) + **Product page ✅ (The Build Dossier — NOT yet committed)**
+- **In progress:** — (product page built, awaiting user review + commit authorization)
 - **Blocked:** —
 
 ## Next Step
 
-> Build the Shop page (design/v1/shop/) — consultation converged (Round 1): grid not slider, inquiry-first (no cart), revive Terminal Spec Sheet cards, pill filters, two zones (Pre-Built Systems / Signature Components), cross-link to configurator. Name: "The Shop" (user decision). Shared CSS already in theme (pills, stock, mobile-bar, shop-card).
+> User review of the Product page → commit (authorization required) → Archives page (gallery "View Full Gallery" destination).
+
+## Product Page Consultation Decisions (2026-09-01, /go-cons Round 1 — converged)
+
+- **Concept:** "The Build Dossier" — serial-numbered case file (CGP-2026-004), NOT a product listing. Anti-Amazon device: serial identity + provenance + forge log.
+- **Unit:** The Hotwheel (flagship, 25,000 SAR, RTX 5090, Ryzen 9 9950X, 64GB DDR5, Dual Cryo-Loop, stock 'in' → READY — ships 3-5 days)
+- **Structure:** dossier hero (gallery stage 7 cols + file-card panel 5 cols + forge-time lifecycle FORGED→TESTED→READY) → The Blueprint (spec table grouped CORE/MEMORY/STORAGE/LOOP/CHASSIS + price breakdown parts 23,500 + labor 1,500 = 25,000 + static SVG telemetry) → Forge Log (provenance timeline FORGED→LEAK TEST→BURN-IN→SEALED + master signature + CGP Guarantee strip) → From the Same Forge (3 related archive cards + "This Build, But Yours" bespoke band) → Commission This Build (pre-filled dossier blueprint + honeypot form + simulated success)
+- **Conversion:** transparency not pressure — exact SAR price, visible labor line, honest stock labels (READY/LAST UNIT/IN THE FORGE), no countdowns, no fake reviews
+- **CTA:** "Commission This Build" → #inquiry (pre-filled); secondary: Configure Your Own (configurator), WhatsApp share (wa.me/?text=, no phone)
+- **Schema:** Product + Offer (SAR, InStock, seller→#store, areaServed SA) + BreadcrumbList — NO AggregateRating, NO priceValidUntil; reuses existing @ids
+- **SEO:** og:type=product + og:price (buildHead extension, backward compatible); canonical /product/the-hotwheel/; eager hero image + fetchpriority=high (LCP)
+- **RTL:** .cgp-num (unicode-bidi: isolate) + dir="ltr" on all numeric readouts
+- **Mobile:** sticky bar (price + READY + Commission) + nav island lifted to bottom-24 (overlap fix — applied to configurator too)
+- **Data:** static HTML (crawler-visible) + product.js Alpine.data('cgpProduct') { s: { images[4], active, setActive } } — click-driven, no timers
+- **WP migration:** WooCommerce single-product template; REPEAT markers → wc_get_related_products() + product attributes; gallery → product_gallery; header override → header-product.php
 
 ## Configurator Consultation Decisions (2026-08-29, /go-cons Round 1 — converged)
 

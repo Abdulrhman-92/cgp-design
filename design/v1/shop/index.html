@@ -121,12 +121,12 @@
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
-  <link rel="stylesheet" href="../css/tailwind.css?v=1788254233">
-  <link rel="stylesheet" href="../css/theme.css?v=1788254613">
+  <link rel="stylesheet" href="../css/tailwind.css?v=1788271012">
+  <link rel="stylesheet" href="../css/theme.css?v=1788274095">
   <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
-  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/shop.css?v=1788272567">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="../js/bundles/shop.min.js?v=1788254613"></script>
+  <script defer src="../js/bundles/shop.min.js?v=1788274095"></script>
   <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -209,7 +209,7 @@
   </div>
 </section>
 
-<!-- Catalog — filter pills + sort + spec-sheet grid (the full collection) -->
+<!-- Featured unit — flagship spotlight (catalog part 1/3) -->
 <section id="catalog" class="cgp-section bg-cgp-bg-section" aria-labelledby="catalog-title" x-data="cgpShopPage">
   <div class="cgp-container-lg">
     <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
@@ -240,14 +240,18 @@
             </span>
           </div>
           <div class="flex flex-wrap gap-3">
-            <!-- TODO: real permalink -->
-            <a href="#" class="cgp-btn-primary cgp-magnetic" data-magnetic>View the Build</a>
+            <a href="../product/index.html" class="cgp-btn-primary cgp-magnetic" data-magnetic>View the Build</a>
             <a href="../configurator/index.html" class="cgp-btn-ghost">Commission Your Own</a>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- Filter bar + sort (catalog part 2/3 — continues the section bg) -->
+<section class="cgp-section cgp-section-continue" aria-label="Filter and sort" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
     <!-- ============ Filter bar ============ -->
     <div class="cgp-filter-bar mb-8">
       <div class="cgp-pill-scroll-wrap">
@@ -274,7 +278,12 @@
     </div>
 
     <p class="cgp-filter-count mb-6" x-text="'// ' + s.filtered.length + ' UNITS' + (s.activeFilters > 0 ? ' · ' + s.activeFilters + ' FILTERS ACTIVE' : '')"></p>
+  </div>
+</section>
 
+<!-- Product grid + empty state (catalog part 3/3 — continues the section bg) -->
+<section class="cgp-section cgp-section-continue" aria-label="Product collection" x-data="cgpShopPage">
+  <div class="cgp-container-lg">
     <!-- ============ Product grid (spec-sheet cards) ============ -->
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       <!-- REPEAT: product card — loop over wc_get_products() -->
