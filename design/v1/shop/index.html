@@ -122,11 +122,11 @@
   <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
   <link rel="stylesheet" href="../css/tailwind.css?v=1788116408">
-  <link rel="stylesheet" href="../css/theme.css?v=1788116457">
+  <link rel="stylesheet" href="../css/theme.css?v=1788254231">
   <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
   <link rel="stylesheet" href="css/shop.css">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="../js/bundles/shop.min.js?v=1788116457"></script>
+  <script defer src="../js/bundles/shop.min.js?v=1788254231"></script>
   <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
@@ -256,7 +256,7 @@
           <template x-for="cat in window.CGP_SHOP.categories" :key="cat.id">
             <button type="button" @click="s.setCategory(cat.id)" :class="s.category === cat.id ? 'cgp-pill-active' : ''" class="cgp-pill" :aria-pressed="s.category === cat.id">
               <span x-text="cat.name"></span>
-              <span class="cgp-pill-dot" x-show="s.counts[cat.id] > 0" x-text="s.counts[cat.id]" aria-hidden="true"></span>
+              <span class="cgp-pill-count" x-show="s.counts[cat.id] > 0" x-text="s.counts[cat.id]" aria-hidden="true"></span>
             </button>
           </template>
         </div>
@@ -308,10 +308,10 @@
                 <span x-text="'// FORGE TIME: ' + p.leadTime.toUpperCase()"></span>
               </span>
             </div>
-            <div class="flex gap-3">
+            <div class="flex flex-col gap-3">
               <!-- TODO: real permalink -->
-              <a href="#" class="cgp-btn-ghost flex-1">View the Build</a>
-              <a href="../configurator/index.html" class="cgp-btn-link" x-show="p.type === 'prebuilt'">Commission Your Own</a>
+              <a href="#" class="cgp-btn-outline w-full">View the Build</a>
+              <a href="../configurator/index.html" class="cgp-btn-link self-center" x-show="p.type === 'prebuilt'">Commission Your Own</a>
             </div>
           </div>
         </article>

@@ -26,11 +26,19 @@
 }
 
 .cgp-filter-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgp-space-2);
+  padding-inline: var(--cgp-space-3);
+  padding-block: 4px;
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-card);
+  border: 1px solid var(--cgp-border);
   font-family: var(--cgp-font-mono);
   font-size: var(--cgp-text-micro);
   letter-spacing: var(--cgp-tracking-04em);
   text-transform: uppercase;
-  color: var(--cgp-text-muted);
+  color: var(--cgp-text-secondary);
 }
 
 .cgp-filter-reset {

@@ -469,6 +469,31 @@
   background: var(--cgp-accent-warm);
 }
 
+/* count badge on pill (e.g. filter counts) — separate capsule, not a dot */
+.cgp-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: var(--cgp-space-1);
+  border-radius: var(--cgp-radius-full);
+  background: var(--cgp-bg-elevated);
+  border: 1px solid var(--cgp-border);
+  font-family: var(--cgp-font-mono);
+  font-size: var(--cgp-text-micro);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cgp-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cgp-pill-active .cgp-pill-count {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--cgp-accent);
+  color: var(--cgp-accent-bright);
+}
+
 /* ============ Stock status ============ */
 .cgp-stock-in { color: var(--cgp-accent); }
 .cgp-stock-low { color: var(--cgp-accent-warm); }
