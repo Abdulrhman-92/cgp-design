@@ -34,8 +34,8 @@
               </span>
             </div>
             <div class="flex flex-col gap-3">
-              <!-- TODO: real permalink -->
-              <a href="#" class="cgp-btn-outline w-full">View the Build</a>
+              <!-- TODO: real permalink — /product/<slug>/ per unit -->
+              <a :href="'{{PRODUCT_URL}}?unit=' + p.id" class="cgp-btn-outline w-full">View the Build</a>
               <a href="{{CONFIG_URL}}" class="cgp-btn-link self-center" x-show="p.type === 'prebuilt'">Commission Your Own</a>
             </div>
           </div>

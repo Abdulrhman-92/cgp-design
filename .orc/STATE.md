@@ -2,7 +2,7 @@
 
 - **Identity:** Orchestrator (go-orc v1.3.0) — CGP design/v1 mockups
 - **Phase:** Product page — BUILT ✅ (The Build Dossier)
-- **Last completed:** Product page ✅ (buy-box: CTA → "Reserve This Unit" + symmetric spacing 24px + share row below + trust line centered)
+- **Last completed:** Shop ✅ (grid card "View the Build" → {{PRODUCT_URL}}?unit=<id> — all 6 cards link to the product page)
 - **In progress:** —
 - **Blocked:** —
 - **Open issues:** Distro Plate price mismatch (1,200 shop vs 1,500 configurator); gallery thumbnails all reuse hotwheel.webp (REPLACE markers)
