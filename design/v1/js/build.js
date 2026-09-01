@@ -39,8 +39,9 @@ function assetVersion(relPath) {
 
 // ---------------------------------------------------------------------------
 // PAGES manifest — owns the <head> and section order per page.
-// sections.header/footer: 'shared' → shared/sections/<name>.html, or a
-// page-specific path (mirrors WP header-{slug}.php overrides).
+// sections.header/footer: 'shared' → shared/sections/<name>.html (the unified
+// site-wide header/footer), or a page-specific path (mirrors WP header-{slug}.php
+// overrides). Optional headerPos/ctaHref configure the shared header per page.
 // ---------------------------------------------------------------------------
 const PAGES = {
   home: {
@@ -147,8 +148,10 @@ const PAGES = {
     },
     css: ['configurator/css/configurator.css'],
     js: ['main.js', 'configurator/js/parts-data.js', 'configurator/js/configurator.js'],
+    headerPos: 'bottom-24', // mobile: clear the sticky commission summary bar
+    ctaHref: '#commission',
     sections: {
-      header: 'configurator/sections/header.html', // page-specific (mirrors WP header-configurator.php)
+      header: 'shared', // unified site-wide header
       main: [
         'configurator/sections/hero.html',
         'configurator/sections/matrix.html',
@@ -206,8 +209,9 @@ const PAGES = {
     },
     css: ['shop/css/shop.css'],
     js: ['main.js', 'shop/js/shop-data.js', 'shop/js/shop.js'],
+    ctaHref: '{{CONFIG_URL}}',
     sections: {
-      header: 'shop/sections/header.html', // page-specific (mirrors WP header-shop.php)
+      header: 'shared', // unified site-wide header
       main: [
         'shop/sections/hero.html',
         'shop/sections/featured.html',
@@ -283,8 +287,10 @@ const PAGES = {
     },
     css: ['product/css/product.css'],
     js: ['main.js', 'product/js/product.js'],
+    headerPos: 'top-4', // mobile: island pinned to the top above the hero
+    ctaHref: '{{CONFIG_URL}}',
     sections: {
-      header: 'product/sections/header.html', // page-specific (mirrors WP header-product.php)
+      header: 'shared', // unified site-wide header
       main: [
         'product/sections/hero.html',
         'product/sections/sticky-cta.html',
@@ -355,8 +361,10 @@ const PAGES = {
     },
     css: ['contact/css/contact.css'],
     js: ['main.js'], // form is inline Alpine — no page JS
+    headerPos: 'bottom-24', // mobile: clear the floating dock
+    ctaHref: '#commission-desk',
     sections: {
-      header: 'contact/sections/header.html', // page-specific (mirrors WP header-contact.php)
+      header: 'shared', // unified site-wide header
       main: [
         'contact/sections/hero.html',
         'contact/sections/desk.html',
@@ -518,14 +526,16 @@ function buildRobotsTxt() {
 // ---------------------------------------------------------------------------
 // Section resolution — tokens resolve relative to the OUTPUT page (sections
 // are injected into the page, so their relative paths must be page-relative).
+// `page` carries optional headerPos/ctaHref for the unified shared header.
 // ---------------------------------------------------------------------------
-function resolveSection(relPath, pageRoot) {
+function resolveSection(relPath, page) {
+  const pageRoot = path.dirname(path.join(DESIGN_DIR, page.output));
   const file = path.join(DESIGN_DIR, relPath);
   if (!fs.existsSync(file)) throw new Error(`missing section: ${relPath}`);
   const theme = path.relative(pageRoot, THEME_ASSETS_DIR).split(path.sep).join('/');
   // PAGE_ASSETS = relative path from the OUTPUT page to design/v1 root
   // ('.' for homepage, '..' for deep pages) — images live in design/v1/assets/
-  const page = path.relative(pageRoot, DESIGN_DIR).split(path.sep).join('/') || '.';
+  const pageAssets = path.relative(pageRoot, DESIGN_DIR).split(path.sep).join('/') || '.';
   // Cross-page link tokens: '' for the homepage itself, relative path otherwise
   const homeRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'index.html')).split(path.sep).join('/');
   const homeUrl = homeRel === 'index.html' ? '' : homeRel;
@@ -537,15 +547,27 @@ function resolveSection(relPath, pageRoot) {
   const productUrl = productRel === 'product/index.html' ? 'product/index.html' : productRel;
   const contactRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'contact', 'index.html')).split(path.sep).join('/');
   const contactUrl = contactRel === 'contact/index.html' ? 'contact/index.html' : contactRel;
-  return fs
-    .readFileSync(file, 'utf8')
-    .replace(/\{\{THEME_ASSETS\}\}/g, theme)
-    .replace(/\{\{PAGE_ASSETS\}\}/g, page)
-    .replace(/\{\{HOME_URL\}\}/g, homeUrl)
-    .replace(/\{\{CONFIG_URL\}\}/g, configUrl)
-    .replace(/\{\{SHOP_URL\}\}/g, shopUrl)
-    .replace(/\{\{PRODUCT_URL\}\}/g, productUrl)
-    .replace(/\{\{CONTACT_URL\}\}/g, contactUrl);
+  // Token map — link tokens first; per-page header tokens resolve against them.
+  const tokens = {
+    THEME_ASSETS: theme,
+    PAGE_ASSETS: pageAssets,
+    HOME_URL: homeUrl,
+    CONFIG_URL: configUrl,
+    SHOP_URL: shopUrl,
+    PRODUCT_URL: productUrl,
+    CONTACT_URL: contactUrl,
+    HEADER_MOBILE_POS: page.headerPos || 'bottom-6', // shared-header mobile island position
+  };
+  // CTA_HREF values may reference the link tokens above (e.g. '{{CONFIG_URL}}')
+  // — pre-resolve them before adding CTA_HREF to the map.
+  tokens.CTA_HREF = Object.entries(tokens).reduce(
+    (href, [key, val]) => href.split(`{{${key}}}`).join(val),
+    page.ctaHref || (homeUrl ? `${homeUrl}#inquiry` : '#inquiry') // shared-header CTA target
+  );
+  return Object.entries(tokens).reduce(
+    (html, [key, val]) => html.split(`{{${key}}}`).join(val),
+    fs.readFileSync(file, 'utf8')
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -592,9 +614,9 @@ function main() {
     page.bundle = name; // bundle filename = page name
     buildJsBundle(name, page);
     const pageRoot = path.dirname(path.join(DESIGN_DIR, page.output));
-    const header = resolveSection(page.sections.header === 'shared' ? 'shared/sections/header.html' : page.sections.header, pageRoot);
-    const footer = resolveSection(page.sections.footer === 'shared' ? 'shared/sections/footer.html' : page.sections.footer, pageRoot);
-    const main = page.sections.main.map((s) => resolveSection(s, pageRoot)).join('\n\n');
+    const header = resolveSection(page.sections.header === 'shared' ? 'shared/sections/header.html' : page.sections.header, page);
+    const footer = resolveSection(page.sections.footer === 'shared' ? 'shared/sections/footer.html' : page.sections.footer, page);
+    const main = page.sections.main.map((s) => resolveSection(s, page)).join('\n\n');
     lint([header, main, footer].join('\n\n'), name);
     // Cursor-based injection: each marker's region spans from the end of the
     // previous marker to the end of this marker. Static template text between

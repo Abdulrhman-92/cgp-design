@@ -99,74 +99,55 @@
   <link rel="preload" href="../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
   <link rel="stylesheet" href="css/tailwind.css?v=1788276407">
-  <link rel="stylesheet" href="css/theme.css?v=1788288322">
+  <link rel="stylesheet" href="css/theme.css?v=1788290635">
   <link rel="stylesheet" href="../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
   <link rel="stylesheet" href="home/css/home.css?v=1788115902">
   <!-- Scripts (deferred — ONE bundle per page, minified) -->
-  <script defer src="js/bundles/home.min.js?v=1788288322"></script>
+  <script defer src="js/bundles/home.min.js?v=1788290635"></script>
   <script defer src="../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
   <!-- HEAD -->
 </head>
 <body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
   <a href="#main" class="cgp-skip-link">Skip to main content</a>
 
-  <!-- Floating island navigation — canonical pattern from the client prototype (home.html).
-     Fixed bottom-6 on mobile / top-8 centered on desktop. Glass pill, CGP. + cyan dot,
-     links, Inquire CTA + MOBILE HAMBURGER MENU (Alpine toggle). -->
+  <!-- Unified site-wide header — single source of truth used by ALL pages.
+     Positioning via bottom-6 token; nav links + CTA href via page config tokens. -->
 <header>
   <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
     <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
-      <!-- Logo: CGP. with cyan dot + divider (home.html) -->
+      <!-- Logo: CGP. with cyan dot + divider -->
       <a href="#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
         CGP<span class="text-cgp-accent">.</span>
       </a>
-
-      <!-- Desktop links: hidden on mobile, visible md+ -->
+      <!-- Desktop links: site-wide navigation -->
       <div class="hidden gap-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
-        <a href="#vision" class="transition-colors hover:text-cgp-accent-bright">Vision</a>
-        <a href="#showcase" class="transition-colors hover:text-cgp-accent-bright">The Hotwheel</a>
-        <a href="#metrics" class="transition-colors hover:text-cgp-accent-bright">Metrics</a>
-        <a href="#gallery" class="transition-colors hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#hero" class="transition-colors hover:text-cgp-accent-bright">Home</a>
         <a href="shop/index.html" class="transition-colors hover:text-cgp-accent-bright">Shop</a>
-        <a href="#blog" class="transition-colors hover:text-cgp-accent-bright">Blog</a>
-        <a href="configurator/index.html" class="transition-colors hover:text-cgp-accent-bright">Commission</a>
+        <a href="configurator/index.html" class="transition-colors hover:text-cgp-accent-bright">Configurator</a>
+        <a href="product/index.html" class="transition-colors hover:text-cgp-accent-bright">Product</a>
+        <a href="contact/index.html" class="transition-colors hover:text-cgp-accent-bright">Contact</a>
       </div>
-
-      <!-- Mobile hamburger toggle (44px touch target) -->
-      <button
-        @click="open = !open"
-        class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden"
-        aria-label="Toggle menu"
-        :aria-expanded="open.toString()"
-      >
+      <!-- Mobile hamburger toggle -->
+      <button @click="open = !open" class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden" aria-label="Toggle menu" :aria-expanded="open.toString()">
         <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
         <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
       </button>
-
-      <!-- Inquire CTA: always visible, 44px touch target -->
+      <!-- Inquire CTA -->
       <a href="#inquiry" class="cgp-btn-primary cgp-magnetic ms-auto min-h-11 md:ms-0" data-magnetic>Inquire</a>
     </nav>
-
-    <!-- Mobile dropdown menu (glass, slides under the island) -->
-    <div
-      x-cloak
-      x-show="open"
-      x-transition.opacity.duration.200ms
-      @click.outside="open = false"
-      class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden"
-    >
+    <!-- Mobile dropdown -->
+    <div x-cloak x-show="open" x-transition.opacity.duration.200ms @click.outside="open = false" class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden">
       <div class="flex flex-col gap-1">
-        <a href="#vision" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Vision</a>
-        <a href="#showcase" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">The Hotwheel</a>
-        <a href="#metrics" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Metrics</a>
-        <a href="#gallery" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Gallery</a>
+        <a href="#hero" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Home</a>
         <a href="shop/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
-        <a href="#blog" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
-        <a href="configurator/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Commission</a>
+        <a href="configurator/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Configurator</a>
+        <a href="product/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Product</a>
+        <a href="contact/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Contact</a>
       </div>
     </div>
   </div>
 </header>
+
   <!-- HEADER -->
   <main id="main">
     <!-- Hero — Forge Boot Sequence + Hotwheel ring + dual CTA.
