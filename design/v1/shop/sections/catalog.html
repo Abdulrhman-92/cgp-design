@@ -73,7 +73,6 @@
             <!-- REPLACE WITH CLIENT PHOTOS -->
             <img :src="'{{PAGE_ASSETS}}/assets/images/' + p.image" :alt="p.name" width="560" height="420" loading="lazy" decoding="async">
             <div class="cgp-card-spotlight" aria-hidden="true"></div>
-            <span class="cgp-spec-index" x-text="'UNIT ' + String(i + 1).padStart(2, '0')" aria-hidden="true"></span>
             <span class="cgp-spec-badge" x-show="s.badgeLabel(p.badge)" x-text="s.badgeLabel(p.badge)"></span>
           </div>
           <div class="cgp-spec-body">

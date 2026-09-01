@@ -96,17 +96,7 @@
   transform: scale(1.05);
 }
 
-/* mono index + badge row over the stage */
-.cgp-spec-index {
-  position: absolute;
-  inset-block-start: var(--cgp-space-4);
-  inset-inline-start: var(--cgp-space-4);
-  font-family: var(--cgp-font-mono);
-  font-size: var(--cgp-text-micro);
-  letter-spacing: var(--cgp-tracking-04em);
-  color: var(--cgp-text-muted);
-}
-
+/* badge row over the stage */
 .cgp-spec-badge {
   position: absolute;
   inset-block-start: var(--cgp-space-4);
