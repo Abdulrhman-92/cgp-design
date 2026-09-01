@@ -428,6 +428,64 @@ const PAGES = {
       footer: 'shared',
     },
   },
+  post: {
+    output: 'post/index.html',
+    title: "Behind The Build: The Hotwheel's Twin Loops | CGP Field Notes",
+    description: 'ENTRY_042 — the full build diary of the Hotwheel: two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test that made it ship-worthy.',
+    canonical: 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/',
+    ogImage: 'https://cgp.sa/assets/images/hotwheel.webp', // absolute — page lives two levels deep
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://cgp.sa/#organization',
+          name: 'CGP',
+          url: 'https://cgp.sa/',
+          logo: 'https://cgp.sa/logo.png',
+          description: 'CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.',
+          sameAs: ['https://x.com/cgp', 'https://instagram.com/cgp.sa', 'https://wa.me/966500000000'],
+        },
+        {
+          '@type': 'BlogPosting',
+          '@id': 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/#post',
+          url: 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/',
+          headline: "Behind The Build: The Hotwheel's Twin Loops",
+          description: 'Two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test — the full diary of ENTRY_042.',
+          image: 'https://cgp.sa/assets/images/hotwheel.webp',
+          datePublished: '2026-08-20',
+          dateModified: '2026-08-20',
+          articleSection: 'Build Diary',
+          wordCount: 880,
+          inLanguage: 'en',
+          author: { '@id': 'https://cgp.sa/#organization' },
+          publisher: { '@id': 'https://cgp.sa/#organization' },
+          isPartOf: { '@id': 'https://cgp.sa/blog/#blog' },
+          mainEntityOfPage: 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/',
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/#breadcrumb',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://cgp.sa/' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://cgp.sa/blog/' },
+            { '@type': 'ListItem', position: 3, name: "Behind The Build: The Hotwheel's Twin Loops", item: 'https://cgp.sa/blog/entry-042-hotwheel-twin-loops/' },
+          ],
+        },
+      ],
+    },
+    css: ['post/css/post.css'],
+    js: ['main.js', 'post/js/post.js'], // main.js (reveals/magnetic) + dossier behaviors
+    sections: {
+      header: 'shared', // unified site-wide header
+      main: [
+        'post/sections/masthead.html',
+        'post/sections/dossier.html',
+        'post/sections/nextfile.html',
+      ],
+      footer: 'shared',
+    },
+  },
   archives: {
     output: 'archives/index.html',
     title: 'CGP Archives | Previously Forged Masterpieces — Riyadh, Saudi Arabia',
@@ -751,6 +809,8 @@ function resolveSection(relPath, page) {
   const aboutUrl = aboutRel === 'index.html' ? '' : aboutRel; // self-link → '' (stays on /about/)
   const blogRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'blog', 'index.html')).split(path.sep).join('/');
   const blogUrl = blogRel === 'index.html' ? '' : blogRel; // self-link → '' (stays on /blog/)
+  const postRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'post', 'index.html')).split(path.sep).join('/');
+  const postUrl = postRel === 'index.html' ? '' : postRel; // self-link → '' (stays on the post)
   const archivesRel = path.relative(pageRoot, path.join(DESIGN_DIR, 'archives', 'index.html')).split(path.sep).join('/');
   const archivesUrl = archivesRel === 'index.html' ? '' : archivesRel; // self-link → '' (stays on /archives/)
   // Token map — link tokens first; per-page header tokens resolve against them.
@@ -764,6 +824,7 @@ function resolveSection(relPath, page) {
     CONTACT_URL: contactUrl,
     ABOUT_URL: aboutUrl,
     BLOG_URL: blogUrl,
+    POST_URL: postUrl,
     ARCHIVES_URL: archivesUrl,
     HEADER_MOBILE_POS: page.headerPos || 'bottom-6', // shared-header mobile island position
   };

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Primary meta -->
+  <title>Behind The Build: The Hotwheel's Twin Loops | CGP Field Notes</title>
+  <meta name="description" content="ENTRY_042 — the full build diary of the Hotwheel: two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test that made it ship-worthy.">
+  <!-- TODO: flip to index,follow before launch -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <!-- TODO: replace with the live URL before launch -->
+  <link rel="canonical" href="https://cgp.sa/blog/entry-042-hotwheel-twin-loops/">
+  <link rel="alternate" hreflang="en" href="https://cgp.sa/blog/entry-042-hotwheel-twin-loops/">
+  <link rel="alternate" hreflang="x-default" href="https://cgp.sa/blog/entry-042-hotwheel-twin-loops/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CGP">
+  <meta property="og:title" content="Behind The Build: The Hotwheel's Twin Loops | CGP Field Notes">
+  <meta property="og:description" content="ENTRY_042 — the full build diary of the Hotwheel: two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test that made it ship-worthy.">
+  <meta property="og:url" content="https://cgp.sa/blog/entry-042-hotwheel-twin-loops/">
+  <meta property="og:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <meta property="og:locale" content="en_SA">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Behind The Build: The Hotwheel's Twin Loops | CGP Field Notes">
+  <meta name="twitter:description" content="ENTRY_042 — the full build diary of the Hotwheel: two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test that made it ship-worthy.">
+  <meta name="twitter:image" content="https://cgp.sa/assets/images/hotwheel.webp">
+  <!-- Geo (Saudi Arabia — Riyadh) -->
+  <meta name="geo.region" content="SA">
+  <meta name="geo.placename" content="Riyadh">
+  <meta name="geo.position" content="24.7136;46.6753">
+  <meta name="ICBM" content="24.7136, 46.6753">
+  <!-- Schema.org JSON-LD (Organization + LocalBusiness + Service) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cgp.sa/#organization",
+      "name": "CGP",
+      "url": "https://cgp.sa/",
+      "logo": "https://cgp.sa/logo.png",
+      "description": "CGP — The Bespoke Forge. Mastercrafted, water-cooled PC architecture engineered in Riyadh.",
+      "sameAs": [
+        "https://x.com/cgp",
+        "https://instagram.com/cgp.sa",
+        "https://wa.me/966500000000"
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cgp.sa/blog/entry-042-hotwheel-twin-loops/#post",
+      "url": "https://cgp.sa/blog/entry-042-hotwheel-twin-loops/",
+      "headline": "Behind The Build: The Hotwheel's Twin Loops",
+      "description": "Two independent cryo loops, a circular distro ring, 14 hardline bends, and the 48-hour leak test — the full diary of ENTRY_042.",
+      "image": "https://cgp.sa/assets/images/hotwheel.webp",
+      "datePublished": "2026-08-20",
+      "dateModified": "2026-08-20",
+      "articleSection": "Build Diary",
+      "wordCount": 880,
+      "inLanguage": "en",
+      "author": {
+        "@id": "https://cgp.sa/#organization"
+      },
+      "publisher": {
+        "@id": "https://cgp.sa/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://cgp.sa/blog/#blog"
+      },
+      "mainEntityOfPage": "https://cgp.sa/blog/entry-042-hotwheel-twin-loops/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://cgp.sa/blog/entry-042-hotwheel-twin-loops/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cgp.sa/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cgp.sa/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Behind The Build: The Hotwheel's Twin Loops",
+          "item": "https://cgp.sa/blog/entry-042-hotwheel-twin-loops/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- Fonts (self-hosted, preload critical weights — family-weight.woff2 convention) -->
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../wp-content/themes/cgp/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Styles (3 requests: tailwind + concatenated theme + page) -->
+  <link rel="stylesheet" href="../css/tailwind.css?v=1788295584">
+  <link rel="stylesheet" href="../css/theme.css?v=1788299154">
+  <link rel="stylesheet" href="../../../wp-content/themes/cgp/assets/vendor/phosphor/style.css">
+  <link rel="stylesheet" href="css/post.css?v=1788298085">
+  <!-- Scripts (deferred — ONE bundle per page, minified) -->
+  <script defer src="../js/bundles/post.min.js?v=1788299154"></script>
+  <script defer src="../../../wp-content/themes/cgp/assets/vendor/alpine.min.js"></script>
+  <!-- HEAD -->
+</head>
+<body class="bg-cgp-bg-page text-cgp-text-primary antialiased">
+  <a href="#main" class="cgp-skip-link">Skip to main content</a>
+
+  <!-- Unified site-wide header — single source of truth used by ALL pages.
+     Positioning via bottom-6 token; nav links + CTA href via page config tokens. -->
+<header>
+  <div class="fixed bottom-6 start-1/2 z-50 w-[90%] -translate-x-1/2 rtl:translate-x-1/2 md:bottom-auto md:top-8 md:w-auto" x-data="{ open: false }">
+    <nav class="cgp-nav-island flex items-center justify-between gap-4 rounded-full px-6 py-3 md:gap-8" data-nav-island aria-label="Main navigation">
+      <!-- Logo: CGP. with cyan dot + divider -->
+      <a href="../index.html#hero" class="border-e border-cgp-border-strong pe-4 font-display text-xl font-bold tracking-tighter text-white">
+        CGP<span class="text-cgp-accent">.</span>
+      </a>
+      <!-- Desktop links: site-wide navigation -->
+      <div class="hidden gap-6 text-xs font-semibold uppercase tracking-widest text-cgp-text-secondary md:flex">
+        <a href="../index.html#hero" class="transition-colors hover:text-cgp-accent-bright">Home</a>
+        <a href="../shop/index.html" class="transition-colors hover:text-cgp-accent-bright">Shop</a>
+        <a href="../configurator/index.html" class="transition-colors hover:text-cgp-accent-bright">Configurator</a>
+        <a href="../product/index.html" class="transition-colors hover:text-cgp-accent-bright">Product</a>
+        <a href="../about/index.html" class="transition-colors hover:text-cgp-accent-bright">About</a>
+        <a href="../blog/index.html" class="transition-colors hover:text-cgp-accent-bright">Blog</a>
+        <a href="../contact/index.html" class="transition-colors hover:text-cgp-accent-bright">Contact</a>
+      </div>
+      <!-- Mobile hamburger toggle -->
+      <button @click="open = !open" class="flex h-11 w-11 items-center justify-center rounded-full text-cgp-text-primary transition-colors hover:text-cgp-accent-bright md:hidden" aria-label="Toggle menu" :aria-expanded="open.toString()">
+        <i class="ph ph-fill ph-list text-xl" x-cloak x-show="!open" aria-hidden="true"></i>
+        <i class="ph ph-fill ph-x text-xl" x-cloak x-show="open" aria-hidden="true"></i>
+      </button>
+      <!-- Inquire CTA -->
+      <a href="../index.html#inquiry" class="cgp-btn-primary cgp-magnetic ms-auto min-h-11 md:ms-0" data-magnetic>Inquire</a>
+    </nav>
+    <!-- Mobile dropdown -->
+    <div x-cloak x-show="open" x-transition.opacity.duration.200ms @click.outside="open = false" class="cgp-nav-island mt-3 rounded-2xl p-3 md:hidden">
+      <div class="flex flex-col gap-1">
+        <a href="../index.html#hero" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Home</a>
+        <a href="../shop/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Shop</a>
+        <a href="../configurator/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Configurator</a>
+        <a href="../product/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Product</a>
+        <a href="../about/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">About</a>
+        <a href="../blog/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Blog</a>
+        <a href="../contact/index.html" @click="open = false" class="rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-widest text-cgp-text-primary transition-colors hover:bg-cgp-accent/10 hover:text-cgp-accent-bright">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- HEADER -->
+  <main id="main">
+    <!-- ============ POST — File masthead ("The Dossier" layout) ============
+     The single-post page intentionally breaks the stacked-section system used
+     on every other page: an editorial dossier with a sticky meta rail
+     (dossier.html), serif reading prose, and case-file chrome.
+     Serif = system stack — no CDN fonts (AGENTS rule 13). -->
+<section id="post-masthead" class="cgp-section bg-cgp-bg-page" aria-labelledby="post-title">
+  <!-- Reading progress — fixed hairline at the very top of the viewport,
+       scaleX driven by post/js/post.js (rAF-throttled). -->
+  <div id="post-progress" class="cgp-post-progress" aria-hidden="true">
+    <span id="post-progress-fill" class="cgp-post-progress-fill"></span>
+  </div>
+
+  <div class="cgp-container-md">
+    <!-- Breadcrumb — mono file strip (BreadcrumbList schema lives in build.js) -->
+    <nav aria-label="Breadcrumb" class="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      <a href="../index.html" class="transition-colors hover:text-cgp-accent-bright">Home</a>
+      <span class="text-cgp-accent" aria-hidden="true">/</span>
+      <a href="../blog/index.html" class="transition-colors hover:text-cgp-accent-bright">Field Notes</a>
+      <span class="text-cgp-accent" aria-hidden="true">/</span>
+      <span class="text-cgp-text-heading" aria-current="page">ENTRY_042</span>
+    </nav>
+
+    <!-- Case-file classification bar -->
+    <div class="cgp-post-filetab mb-8 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+      <span class="text-cgp-text-faint">FILE</span>
+      <span class="text-cgp-text-heading">ENTRY_042</span>
+      <span class="text-cgp-border-strong" aria-hidden="true">|</span>
+      <span class="text-cgp-text-faint">CLASS</span>
+      <span class="text-cgp-text-heading">BUILD_DIARY</span>
+      <span class="text-cgp-border-strong" aria-hidden="true">|</span>
+      <span class="text-cgp-text-faint">STATUS</span>
+      <span class="text-cgp-accent">FORGED &amp; FILED</span>
+    </div>
+
+    <!-- Headline — serif, editorial -->
+    <h1 id="post-title" class="cgp-post-h1 mb-6">
+      Behind The Build:<br>
+      <span class="text-cgp-accent">The Hotwheel&rsquo;s Twin&nbsp;Loops.</span>
+    </h1>
+
+    <!-- Standfirst -->
+    <p class="cgp-post-standfirst mb-10">
+      Two independent cryo loops, one circular chassis, and zero room for error — the full diary of ENTRY_042, from the first routing jig to the 48-hour thermal baptism.
+    </p>
+
+    <!-- Byline -->
+    <div class="mb-12 flex flex-wrap items-center gap-4">
+      <span class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border-strong bg-cgp-bg-card font-mono text-cgp-micro font-bold text-cgp-accent" aria-hidden="true">FC</span>
+      <div class="font-mono text-cgp-micro uppercase tracking-cgp-04em">
+        <p class="text-cgp-text-heading">The Forge Crew</p>
+        <p class="text-cgp-text-muted">
+          <time datetime="2026-08-20">Aug 20, 2026</time>
+          <span class="text-cgp-accent" aria-hidden="true"> · </span>
+          <span>6 min read</span>
+          <span class="text-cgp-accent" aria-hidden="true"> · </span>
+          <span>Riyadh // KSA</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Hero figure -->
+    <figure class="cgp-post-figure">
+      <!-- REPLACE WITH CLIENT PHOTOS -->
+      <img src="../assets/images/hotwheel.webp" alt="Hand-bent hardline tubing forming the Hotwheel's twin cryo loops" class="w-full" width="1280" height="882" decoding="async">
+      <figcaption class="cgp-post-figcaption font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+        FIG.01 — The wheel, fully plumbed. Both loops visible from either side.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ POST — The Dossier (sticky meta rail + serif article) ============
+     Layout exists only on this page: asymmetric lg grid — 260px sticky rail
+     (file data / reading progress / index with scrollspy / share) + article
+     column. Prose is serif (system stack) — unlike every other page. -->
+<section id="post-dossier" class="cgp-section bg-cgp-bg-section" aria-label="Entry dossier">
+  <div class="cgp-container-md grid grid-cols-1 gap-10 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-14">
+
+    <!-- LEFT: sticky meta rail (desktop only — collapses into masthead byline on mobile) -->
+    <aside class="hidden lg:block" aria-label="File index">
+      <div class="sticky top-28 space-y-10">
+        <!-- FILE data -->
+        <div class="border border-cgp-border bg-cgp-bg-card p-cgp-4">
+          <p class="cgp-post-rail-label font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">FILE</p>
+          <dl class="mt-3 space-y-2 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+            <div class="flex items-baseline justify-between gap-2">
+              <dt class="text-cgp-text-faint">NO.</dt>
+              <dd class="text-cgp-text-heading">ENTRY_042</dd>
+            </div>
+            <div class="flex items-baseline justify-between gap-2">
+              <dt class="text-cgp-text-faint">DATE</dt>
+              <dd class="text-cgp-text-heading"><time datetime="2026-08-20">AUG 20 2026</time></dd>
+            </div>
+            <div class="flex items-baseline justify-between gap-2">
+              <dt class="text-cgp-text-faint">STATUS</dt>
+              <dd class="text-cgp-accent">ARCHIVED</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Reading progress (% text mirrors the fixed top hairline) -->
+        <div>
+          <p class="cgp-post-rail-label font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">READING</p>
+          <p class="mt-3 font-mono text-cgp-sm uppercase tracking-cgp-04em text-cgp-text-heading">
+            <span id="post-progress-pct">0%</span>
+            <span class="text-cgp-text-faint">FILED</span>
+          </p>
+        </div>
+
+        <!-- Index — scrollspy via post/js/post.js (.is-active) -->
+        <nav aria-label="Entry sections">
+          <p class="cgp-post-rail-label font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">INDEX</p>
+          <ul data-post-toc class="mt-3 space-y-1 border-s border-cgp-border font-mono text-cgp-micro uppercase tracking-cgp-03em">
+            <li><a href="#the-brief" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">01 — The Brief</a></li>
+            <li><a href="#the-loops" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">02 — Why Two Loops</a></li>
+            <li><a href="#the-mapping" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">03 — Mapping The Wheel</a></li>
+            <li><a href="#the-ring" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">04 — The Distro Ring</a></li>
+            <li><a href="#the-baptism" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">05 — The 48-Hour Baptism</a></li>
+            <li><a href="#the-numbers" class="cgp-post-toc-link block border-s-2 border-transparent py-1 pe-2 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright">06 — Final Numbers</a></li>
+          </ul>
+        </nav>
+
+        <!-- Share -->
+        <div>
+          <p class="cgp-post-rail-label font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">SHARE</p>
+          <ul class="mt-3 space-y-1 font-mono text-cgp-micro uppercase tracking-cgp-03em">
+            <li><a href="https://x.com/intent/tweet?text=Behind%20The%20Build%3A%20The%20Hotwheel%27s%20Twin%20Loops" class="cgp-post-toc-link block border-s-2 border-transparent py-1 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright" rel="noopener">X / Twitter</a></li>
+            <li><a href="https://instagram.com/cgp.sa" class="cgp-post-toc-link block border-s-2 border-transparent py-1 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright" rel="noopener">Instagram</a></li>
+            <li><a href="https://wa.me/?text=Behind%20The%20Build%3A%20The%20Hotwheel%27s%20Twin%20Loops%20%E2%80%94%20CGP%20Field%20Notes" class="cgp-post-toc-link block border-s-2 border-transparent py-1 ps-4 text-cgp-text-muted transition-colors hover:text-cgp-accent-bright" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: the entry — serif prose -->
+    <article class="cgp-dossier-prose">
+      <p class="cgp-post-lead">
+        The brief arrived the way the best ones do — a sketch on a napkin, a circle with two lines through it, and one sentence: &ldquo;I want to see the water.&rdquo; No budget talk, no part list. Just a client who had decided a computer could be a kinetic sculpture, and a workshop that had decided to agree.
+      </p>
+
+      <h2 id="the-brief" class="cgp-post-h2"><span class="cgp-post-h2-no">§01</span> The Brief</h2>
+      <p>
+        The Hotwheel was commissioned as a render box first and a showpiece second — which changed everything about how we approached it. A display piece can run warm and quiet-hide its sins behind fan curves. A machine that renders eight hours a day cannot. So the wheel shape had to earn its keep thermally, not just visually, and every aesthetic decision had to survive a sustained-load argument.
+      </p>
+      <p>
+        The chassis would tilt at 45 degrees, the loops would run visible along the rim, and the whole assembly would hide nothing and apologize for nothing. From the shop floor, the napkin sketch got pinned above the bending bench — where it stayed for the eleven weeks that followed.
+      </p>
+
+      <h2 id="the-loops" class="cgp-post-h2"><span class="cgp-post-h2-no">§02</span> Why Two Loops</h2>
+      <p>
+        The second loop is this entry&rsquo;s real subject. A single loop through a CPU and a GPU is simpler, cheaper, and utterly a compromise: one coolant temperature means one component always runs warmer than it should. We split the circuits instead — LOOP_01 tuned silent for the CPU, LOOP_02 tuned aggressive for the GPU — each with its own pump, its own radiator bank, its own fill port.
+      </p>
+      <p>
+        The bonus nobody asks for until they need it: maintenance. Drain one loop and the other keeps the machine alive. During the Hotwheel&rsquo;s first service, the CPU loop was swapped, flushed, and refilled while a render ran — uninterrupted — on the GPU loop.
+      </p>
+
+      <blockquote class="cgp-post-quote">
+        <p>&ldquo;A single loop is a compromise. Two loops is a decision.&rdquo;</p>
+        <cite class="cgp-post-quote-cite font-mono text-cgp-micro uppercase tracking-cgp-04em">— Forge floor rule #3</cite>
+      </blockquote>
+
+      <h2 id="the-mapping" class="cgp-post-h2"><span class="cgp-post-h2-no">§03</span> Mapping The Wheel</h2>
+      <p>
+        Fourteen bends make the wheel, and every one of them was rehearsed. We printed a full-scale routing jig — the same discipline we bring to the compact builds — and bent each run against it before the tube ever saw the chassis. The rim radius stays constant for the entire circuit; the eye reads it as a drawn circle rather than plumbing, and that is the whole trick.
+      </p>
+      <p>
+        Eleven runs failed the jig. They sit in a drawer in the workshop, labeled and kept — a lesson in humility with a wall of successful builds above it.
+      </p>
+
+      <figure class="cgp-post-figure">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="../assets/images/titanium-core.webp" alt="Bend templates and routing jigs on the workshop bench" class="w-full" width="800" height="533" loading="lazy" decoding="async">
+        <figcaption class="cgp-post-figcaption font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+          FIG.02 — The jig run. Every bend rehearsed before it existed.
+        </figcaption>
+      </figure>
+
+      <h2 id="the-ring" class="cgp-post-h2"><span class="cgp-post-h2-no">§04</span> The Distro Ring</h2>
+      <p>
+        A circular chassis asks an uncomfortable question: where does the distribution plate go? The answer took three prototypes — a ring. CNC-cut acrylic, twin O-ring grooves, and channels that feed both loops from a single visible annulus at the hub. It is the part people photograph first and the part we machined last, after two failed glue-ups taught us where the leak paths really live.
+      </p>
+
+      <figure class="cgp-post-figure">
+        <!-- REPLACE WITH CLIENT PHOTOS -->
+        <img src="../assets/images/distro-plate.webp" alt="The CNC acrylic distribution ring at the hub of the Hotwheel chassis" class="w-full" width="560" height="373" loading="lazy" decoding="async">
+        <figcaption class="cgp-post-figcaption font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+          FIG.03 — Prototype III. The ring that survived.
+        </figcaption>
+      </figure>
+
+      <h2 id="the-baptism" class="cgp-post-h2"><span class="cgp-post-h2-no">§05</span> The 48-Hour Baptism</h2>
+      <p>
+        Every CGP machine serves a 48-hour leak test before it ships. The Hotwheel&rsquo;s first attempt died at hour thirty-one — a hairline fracture at bend eleven, weeping one drop every twenty minutes onto a paper towel nobody wanted to see. The run was scrapped, the bend re-made against the jig, and the clock restarted from zero. The second baptism closed at forty-eight hours with a pressure log flatter than the Riyadh horizon.
+      </p>
+
+      <h2 id="the-numbers" class="cgp-post-h2"><span class="cgp-post-h2-no">§06</span> Final Numbers</h2>
+      <p>
+        The numbers below are the ones the client cares about — and the ones we sign off before a unit leaves the forge.
+      </p>
+
+      <div class="overflow-x-auto rounded-cgp-2xl border border-cgp-border bg-cgp-bg-card">
+        <table class="w-full min-w-[420px]">
+          <caption class="sr-only">The Hotwheel — final specification and thermal sign-off</caption>
+          <tbody class="font-mono text-cgp-sm">
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">CHASSIS</th><td class="p-cgp-4 text-cgp-text-heading">Circular, 45&deg; tilted</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">CPU</th><td class="p-cgp-4 text-cgp-text-heading">Ryzen 9 — render class</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">GPU</th><td class="p-cgp-4 text-cgp-text-heading">Flagship — 24GB class</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">LOOP_01</th><td class="p-cgp-4 text-cgp-text-heading">CPU — silent tune</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">LOOP_02</th><td class="p-cgp-4 text-cgp-text-heading">GPU — performance tune</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">TUBING</th><td class="p-cgp-4 text-cgp-text-heading">14mm hardline &middot; 14 bends</td></tr>
+            <tr class="border-b border-cgp-border-subtle"><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">&Delta;T UNDER LOAD</th><td class="p-cgp-4 text-cgp-accent">4.2&deg;C sustained</td></tr>
+            <tr><th scope="row" class="p-cgp-4 text-start font-medium text-cgp-text-muted">48H LEAK TEST</th><td class="p-cgp-4 text-cgp-accent">PASS — 2ND RUN</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sign-off — stamp + signature -->
+      <div class="mt-12 flex flex-col items-start gap-6 border-t border-cgp-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">SIGNED BY THE HANDS THAT BUILT IT</p>
+          <p class="cgp-post-signature mt-2">The Forge Crew — Riyadh</p>
+        </div>
+        <span class="cgp-post-stamp font-mono text-cgp-micro font-bold uppercase tracking-cgp-04em" aria-hidden="true">Forged &amp; Filed &#10003;</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ POST — Next File (editorial nav — full-width rows, NOT cards) ============
+     Deliberately different from every other page's footer-nav: oversized
+     typographic rows with slide-on-hover arrows. Prev/next target the index
+     in this mockup — real permalinks come from the WP loop. -->
+<section id="post-next" class="cgp-section bg-cgp-bg-page" aria-labelledby="post-next-title">
+  <div class="cgp-container-md">
+    <p class="cgp-eyebrow">Continue The File</p>
+    <h2 id="post-next-title" class="sr-only">Next entries</h2>
+
+    <nav aria-label="More entries" class="divide-y divide-cgp-border border-y border-cgp-border">
+      <!-- Previous entry -->
+      <a href="../blog/index.html" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">&larr; Previous file</p>
+          <p class="cgp-post-next-title mt-2">ENTRY_041 — Wraith: The Silent Tuning Log</p>
+        </div>
+        <span class="shrink-0 text-cgp-h3 text-cgp-text-faint transition-all group-hover:-translate-x-1 group-hover:text-cgp-accent" aria-hidden="true">&larr;</span>
+      </a>
+      <!-- Next entry — TODO: real permalink (WP loop) -->
+      <a href="../blog/index.html" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">Next file &rarr;</p>
+          <p class="cgp-post-next-title mt-2">ENTRY_043 — Neon Genesis: Wiring The UV Loop</p>
+        </div>
+        <span class="shrink-0 text-cgp-h3 text-cgp-text-faint transition-all group-hover:translate-x-1 group-hover:text-cgp-accent" aria-hidden="true">&rarr;</span>
+      </a>
+      <!-- Index -->
+      <a href="../blog/index.html" class="group flex items-baseline justify-between gap-6 py-8 transition-colors">
+        <div>
+          <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-faint">The full index</p>
+          <p class="cgp-post-next-title mt-2">All Field Notes</p>
+        </div>
+        <span class="shrink-0 text-cgp-h3 text-cgp-text-faint transition-all group-hover:translate-x-1 group-hover:text-cgp-accent" aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
+  </div>
+</section>
+  <!-- SECTIONS -->
+  </main>
+
+  <!-- Footer — luxury redesign: giant watermark + CTA + 3 columns + bottom bar -->
+<footer class="relative overflow-hidden border-t border-cgp-border-subtle bg-cgp-bg-section">
+  <!-- Giant CGP. watermark (background text) with cyan glow overlay -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-10 select-none text-center font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.08] [text-shadow:0_0_40px_rgba(6,182,212,0.25),0_0_120px_rgba(6,182,212,0.15)]" aria-hidden="true">
+    CGP<span class="text-cgp-accent/[0.25] [text-shadow:0_0_30px_rgba(6,182,212,0.5)]">.</span>
+  </div>
+
+  <!-- Ambient glow (max 2 per viewport) -->
+  <div class="cgp-ambient-glow end-[-15%] top-[-30%] bg-cyan-900/20" aria-hidden="true"></div>
+
+  <!-- CTA strip -->
+  <div class="relative border-b border-cgp-border-subtle">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-6 py-14 text-center md:flex-row md:text-start">
+      <div>
+        <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// SYS_INQUIRY</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-cgp-text-heading md:text-3xl">Ready to forge your own masterpiece?</h2>
+        <p class="mt-2 text-sm text-cgp-text-muted">Tell us your vision — our masters will engineer the rest.</p>
+      </div>
+      <!-- TODO: real permalink -->
+      <a href="../contact/index.html" class="cgp-btn-primary shrink-0" data-magnetic>Summon The Masters</a>
+    </div>
+  </div>
+
+  <!-- Footer content — 3-column luxury layout -->
+  <div class="cgp-container-lg relative grid grid-cols-1 gap-12 py-16 md:grid-cols-3">
+    <!-- Brand column -->
+    <div class="flex flex-col items-start gap-4">
+      <a href="#hero" class="font-display text-3xl font-bold tracking-tighter text-white">CGP<span class="text-cgp-accent">.</span></a>
+      <p class="text-sm leading-relaxed text-cgp-text-muted">The Bespoke Forge. Mastercrafted PC architecture engineered in Riyadh — where extreme performance meets modern art.</p>
+      <div class="flex items-center gap-3">
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: from site settings -->
+        <a href="#" aria-label="CGP on Twitter" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-twitter-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <!-- TODO: replace 9665XXXXXXXX with the real CGP WhatsApp number -->
+        <a href="https://wa.me/9665XXXXXXXX" aria-label="CGP on WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border text-cgp-text-secondary transition-all hover:border-cgp-accent hover:text-cgp-accent-bright hover:shadow-cgp-glow-soft">
+          <i class="ph ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Navigate</p>
+      <nav aria-label="Footer navigation" class="flex flex-col items-start gap-2.5">
+        <!-- RTL: mirror arrow direction (group-hover:translate-x-0.5) -->
+        <a href="../about/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>About The Forge
+        </a>
+        <a href="../blog/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Blog
+        </a>
+        <a href="../index.html#showcase" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Hotwheel
+        </a>
+        <a href="../archives/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>The Archives
+        </a>
+        <a href="../shop/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Hardware
+        </a>
+        <a href="../configurator/index.html" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+          <span class="text-cgp-accent/0 transition-all group-hover:text-cgp-accent group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>Commission a Build
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contact column -->
+    <div class="flex flex-col items-start gap-4">
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-accent">// Contact</p>
+      <!-- TODO: from site settings -->
+      <a href="mailto:contact@cgp.sa" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-envelope-simple text-cgp-accent/60" aria-hidden="true"></i>contact@cgp.sa
+      </a>
+      <!-- TODO: from site settings -->
+      <a href="https://wa.me/9665XXXXXXXX" class="group flex items-center gap-2 text-sm text-cgp-text-secondary transition-colors hover:text-cgp-accent-bright">
+        <i class="ph ph-fill ph-whatsapp-logo text-cgp-accent/60" aria-hidden="true"></i>+966 5X XXX XXXX
+      </a>
+      <p class="flex items-center gap-2 text-sm text-cgp-text-muted">
+        <i class="ph ph-fill ph-map-pin text-cgp-accent/60" aria-hidden="true"></i>Riyadh, Saudi Arabia
+      </p>
+      <p class="mt-2 flex items-center gap-2 font-mono text-cgp-micro text-cgp-text-muted">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cgp-accent" aria-hidden="true"></span>SYS_STATUS: FORGE OPERATIONAL
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="relative border-t border-cgp-border-subtle py-6">
+    <div class="cgp-container-lg flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-start">
+      <p class="text-xs text-cgp-text-muted">© <!-- YEAR --> CGP. Precision Engineering. All rights reserved.</p>
+      <p class="font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">The Bespoke Forge // Riyadh</p>
+    </div>
+  </div>
+</footer>
+  <!-- FOOTER -->
+</body>
+</html>

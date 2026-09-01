@@ -1,0 +1,197 @@
+/* ============================================================
+   CGP design/v1 — single-post page styles ("The Dossier")
+   ------------------------------------------------------------
+   This page intentionally breaks the stacked-section system:
+   asymmetric rail + serif editorial prose + case-file chrome.
+   Serif = system stack (no CDN fonts). Tokens only via
+   var(--cgp-*) — layout-only values MAY be hardcoded (rule 5).
+   ============================================================ */
+
+/* ============ Reading progress — fixed top hairline ============ */
+.cgp-post-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 60; /* above the fixed nav island */
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.cgp-post-progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cgp-accent-bright), var(--cgp-accent-deep));
+  transform: scaleX(0); /* post/js/post.js drives scaleX via rAF */
+  transform-origin: left center;
+}
+
+/* ============ Case-file chrome ============ */
+.cgp-post-filetab {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--cgp-space-2) var(--cgp-space-3);
+  padding: var(--cgp-space-2) var(--cgp-space-4);
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-lg);
+  background: var(--cgp-bg-card);
+}
+
+/* ============ Editorial headline (serif — system stack) ============ */
+.cgp-post-h1 {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: clamp(42px, 8.5vw, 100px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+.cgp-post-standfirst {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--cgp-text-secondary);
+  max-width: 62ch;
+}
+
+/* ============ Dossier prose ============ */
+.cgp-dossier-prose {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: clamp(16px, 1vw + 12.5px, 18.5px);
+  line-height: 1.85;
+  color: var(--cgp-text-secondary);
+  min-width: 0; /* grid blowout guard */
+}
+
+/* Classic prose rhythm — vertical spacing between blocks */
+.cgp-dossier-prose > * + * {
+  margin-block-start: 1.25em;
+}
+
+/* Lead paragraph with drop cap — the editorial signature */
+.cgp-post-lead {
+  font-size: 1.15em;
+  line-height: 1.7;
+  color: var(--cgp-text-heading);
+}
+
+.cgp-post-lead::first-letter {
+  float: inline-start;
+  margin-inline-end: 0.12em;
+  padding-block-start: 0.08em;
+  font-size: 3.4em;
+  line-height: 0.78;
+  font-weight: 700;
+  color: var(--cgp-accent);
+}
+
+/* Numbered section header: mono "§01" + serif title + hairline rule */
+.cgp-post-h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--cgp-space-3);
+  margin-block-start: 2em; /* overrides prose rhythm — sections breathe */
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--cgp-text-heading);
+  scroll-margin-block-start: 7.5rem; /* clear the fixed nav island on anchor jumps */
+}
+
+.cgp-post-h2::after {
+  content: '';
+  flex: 1;
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+.cgp-post-h2-no {
+  font-family: var(--cgp-font-mono);
+  font-size: 0.5em;
+  color: var(--cgp-accent);
+  letter-spacing: 0.1em;
+}
+
+/* Pull quote */
+.cgp-post-quote {
+  border-inline-start: 2px solid var(--cgp-accent);
+  padding-inline-start: var(--cgp-space-6);
+  font-size: 1.3em;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--cgp-text-heading);
+}
+
+.cgp-post-quote-cite {
+  display: block;
+  margin-block-start: var(--cgp-space-3);
+  font-style: normal;
+  color: var(--cgp-text-muted);
+}
+
+/* Figures — framed like file exhibits */
+.cgp-post-figure {
+  overflow: hidden;
+  border: 1px solid var(--cgp-border);
+  border-radius: var(--cgp-radius-2xl);
+  background: var(--cgp-bg-card);
+}
+
+.cgp-post-figcaption {
+  padding: var(--cgp-space-3) var(--cgp-space-4);
+  border-block-start: 1px solid var(--cgp-border);
+}
+
+/* Signature + stamp */
+.cgp-post-signature {
+  font-size: 1.25em;
+  font-style: italic;
+  color: var(--cgp-text-heading);
+}
+
+.cgp-post-stamp {
+  padding: var(--cgp-space-2) var(--cgp-space-4);
+  border: 2px solid var(--cgp-accent);
+  border-radius: var(--cgp-radius-sm);
+  outline: 1px solid var(--cgp-accent);
+  outline-offset: 3px;
+  color: var(--cgp-accent);
+  transform: rotate(-6deg);
+}
+
+/* ============ Rail — labels + scrollspy state ============ */
+.cgp-post-rail-label {
+  display: block;
+  padding-block-end: var(--cgp-space-2);
+  border-block-end: 1px solid var(--cgp-border);
+}
+
+.cgp-post-toc-link.is-active {
+  border-color: var(--cgp-accent) !important; /* beats the transparent border utility */
+  color: var(--cgp-accent-bright);
+}
+
+/* ============ Next-file rows ============ */
+.cgp-post-next-title {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--cgp-text-heading);
+  transition: color var(--cgp-motion-fast) var(--cgp-ease-expo);
+}
+
+.group:hover .cgp-post-next-title {
+  color: var(--cgp-accent-bright);
+}
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  .cgp-post-next-title {
+    transition: none !important;
+  }
+  .cgp-post-stamp {
+    transform: none; /* keep the stamp straight — motion-free */
+  }
+}

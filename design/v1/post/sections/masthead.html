@@ -1,0 +1,70 @@
+<!-- ============ POST — File masthead ("The Dossier" layout) ============
+     The single-post page intentionally breaks the stacked-section system used
+     on every other page: an editorial dossier with a sticky meta rail
+     (dossier.html), serif reading prose, and case-file chrome.
+     Serif = system stack — no CDN fonts (AGENTS rule 13). -->
+<section id="post-masthead" class="cgp-section bg-cgp-bg-page" aria-labelledby="post-title">
+  <!-- Reading progress — fixed hairline at the very top of the viewport,
+       scaleX driven by post/js/post.js (rAF-throttled). -->
+  <div id="post-progress" class="cgp-post-progress" aria-hidden="true">
+    <span id="post-progress-fill" class="cgp-post-progress-fill"></span>
+  </div>
+
+  <div class="cgp-container-md">
+    <!-- Breadcrumb — mono file strip (BreadcrumbList schema lives in build.js) -->
+    <nav aria-label="Breadcrumb" class="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+      <a href="{{HOME_URL}}" class="transition-colors hover:text-cgp-accent-bright">Home</a>
+      <span class="text-cgp-accent" aria-hidden="true">/</span>
+      <a href="{{BLOG_URL}}" class="transition-colors hover:text-cgp-accent-bright">Field Notes</a>
+      <span class="text-cgp-accent" aria-hidden="true">/</span>
+      <span class="text-cgp-text-heading" aria-current="page">ENTRY_042</span>
+    </nav>
+
+    <!-- Case-file classification bar -->
+    <div class="cgp-post-filetab mb-8 font-mono text-cgp-micro uppercase tracking-cgp-04em">
+      <span class="text-cgp-text-faint">FILE</span>
+      <span class="text-cgp-text-heading">ENTRY_042</span>
+      <span class="text-cgp-border-strong" aria-hidden="true">|</span>
+      <span class="text-cgp-text-faint">CLASS</span>
+      <span class="text-cgp-text-heading">BUILD_DIARY</span>
+      <span class="text-cgp-border-strong" aria-hidden="true">|</span>
+      <span class="text-cgp-text-faint">STATUS</span>
+      <span class="text-cgp-accent">FORGED &amp; FILED</span>
+    </div>
+
+    <!-- Headline — serif, editorial -->
+    <h1 id="post-title" class="cgp-post-h1 mb-6">
+      Behind The Build:<br>
+      <span class="text-cgp-accent">The Hotwheel&rsquo;s Twin&nbsp;Loops.</span>
+    </h1>
+
+    <!-- Standfirst -->
+    <p class="cgp-post-standfirst mb-10">
+      Two independent cryo loops, one circular chassis, and zero room for error — the full diary of ENTRY_042, from the first routing jig to the 48-hour thermal baptism.
+    </p>
+
+    <!-- Byline -->
+    <div class="mb-12 flex flex-wrap items-center gap-4">
+      <span class="flex h-11 w-11 items-center justify-center rounded-full border border-cgp-border-strong bg-cgp-bg-card font-mono text-cgp-micro font-bold text-cgp-accent" aria-hidden="true">FC</span>
+      <div class="font-mono text-cgp-micro uppercase tracking-cgp-04em">
+        <p class="text-cgp-text-heading">The Forge Crew</p>
+        <p class="text-cgp-text-muted">
+          <time datetime="2026-08-20">Aug 20, 2026</time>
+          <span class="text-cgp-accent" aria-hidden="true"> · </span>
+          <span>6 min read</span>
+          <span class="text-cgp-accent" aria-hidden="true"> · </span>
+          <span>Riyadh // KSA</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Hero figure -->
+    <figure class="cgp-post-figure">
+      <!-- REPLACE WITH CLIENT PHOTOS -->
+      <img src="{{PAGE_ASSETS}}/assets/images/hotwheel.webp" alt="Hand-bent hardline tubing forming the Hotwheel's twin cryo loops" class="w-full" width="1280" height="882" decoding="async">
+      <figcaption class="cgp-post-figcaption font-mono text-cgp-micro uppercase tracking-cgp-04em text-cgp-text-muted">
+        FIG.01 — The wheel, fully plumbed. Both loops visible from either side.
+      </figcaption>
+    </figure>
+  </div>
+</section>
